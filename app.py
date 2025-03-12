@@ -107,15 +107,9 @@ elif section == "View & Download Full Dataset":
     csv = filtered_df.to_csv(index=False)
     st.download_button(label="Download CSV", data=csv, file_name="cola_survey_data.csv", mime="text/csv")
 
-# Apply Filters at the Bottom
-st.subheader("Apply Filters (for Mobile)")
-brand_mobile = st.selectbox("Brand", [None] + list(df["Brand_Preference"].dropna().unique()), key='brand_mobile')
-gender_mobile = st.selectbox("Gender", [None] + list(df["Gender"].dropna().unique()), key='gender_mobile')
-income_mobile = st.selectbox("Income Level", [None] + list(df["Income_Level"].dropna().unique()), key='income_mobile')
-cluster_mobile = st.selectbox("Cluster", [None] + list(df["Cluster_Name"].dropna().unique()), key='cluster_mobile')
-
+# Fix Bottom Filters
 if st.button("Apply Filter (for Mobile)"):
-    st.rerun()
+    st.experimental_rerun()
 
 if st.button("Clear Filters"):
-    st.rerun()
+    st.experimental_rerun()
