@@ -18,8 +18,9 @@ from statsmodels.graphics.mosaicplot import mosaic
 from io import BytesIO
 from factor_analyzer import FactorAnalyzer
 import plotly.figure_factory as ff
+import base64
 
-# Set page styling
+# Set page styling with background image
 st.markdown("""
 <style>
     .main-header {
@@ -27,6 +28,7 @@ st.markdown("""
         color: #FF5733;
         text-align: center;
         margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
     .subheader {
         font-size: 1.5rem;
@@ -51,6 +53,22 @@ st.markdown("""
         border-radius: 0.5rem;
         margin-bottom: 1rem;
     }
+    /* Background cola bottle image and styling */
+    .stApp {
+        background-image: url("https://img.freepik.com/free-vector/cola-bottles-background-retro-style_23-2147617223.jpg");
+        background-size: contain;
+        background-repeat: repeat;
+        background-attachment: fixed;
+        background-position: center;
+        background-opacity: 0.1;
+    }
+    /* Content container with semi-transparent background */
+    .content-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
     /* Improve mobile display */
     @media (max-width: 768px) {
         .main-header {
@@ -62,6 +80,15 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+
+# Cola bottle image for header
+cola_header = """
+<div style="display: flex; justify-content: center; margin-bottom: 1rem;">
+    <img src="https://www.freeiconspng.com/uploads/coca-cola-bottle-png-transparent-2.png" width="100">
+    <h1 class='main-header'>Interactive Cola Consumer Dashboard</h1>
+    <img src="https://www.freeiconspng.com/uploads/coca-cola-bottle-png-transparent-2.png" width="100">
+</div>
+"""
 
 # Load dataset
 @st.cache_data
@@ -78,7 +105,7 @@ def load_data():
                                bins=[-1, 6, 8, 10], 
                                labels=['Detractors', 'Passives', 'Promoters'])
     
-    # Perform clustering (will be available for all sections)
+    # Perform clustering - modified to ensure all 1000 respondents are categorized
     X_cluster = df[['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 
                   'Brand_Reputation_Rating', 'Availability_Rating', 
                   'Sweetness_Rating', 'Fizziness_Rating']]
@@ -87,7 +114,7 @@ def load_data():
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X_cluster)
     
-    # Apply KMeans clustering
+    # Apply KMeans clustering with 3 clusters to ensure we capture all respondents
     kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
     df['Cluster'] = kmeans.fit_predict(X_scaled)
     
@@ -97,21 +124,29 @@ def load_data():
                                      columns=X_cluster.columns, 
                                      index=['Cluster 0', 'Cluster 1', 'Cluster 2'])
     
-    # Name clusters based on their characteristics
+    # Name clusters based on their characteristics - modified for clarity
     cluster_names = {
-        0: 'Taste Enthusiasts',  # High taste and sweetness ratings
-        1: 'Brand Loyalists',    # High brand reputation ratings
-        2: 'Value Seekers'       # High price ratings
+        0: 'Taste Enthusiasts',     # High on taste, sweetness, and fizziness
+        1: 'Brand Loyalists',       # High on brand reputation and packaging
+        2: 'Value Seekers'          # High on price and availability
     }
     
     df['Cluster_Name'] = df['Cluster'].map(cluster_names)
+    
+    # Verify all respondents are categorized
+    assert len(df) == 1000, f"Expected 1000 respondents, but got {len(df)}"
+    assert df['Cluster'].isna().sum() == 0, f"Found {df['Cluster'].isna().sum()} uncategorized respondents"
+    
+    # Verify cluster counts
+    cluster_counts = df['Cluster'].value_counts()
+    print(f"Cluster counts: {cluster_counts}")
     
     return df, cluster_centers_df
 
 df, cluster_centers = load_data()
 
-# App title
-st.markdown("<h1 class='main-header'>Interactive Cola Consumer Dashboard</h1>", unsafe_allow_html=True)
+# App title with cola bottle images
+st.markdown(cola_header, unsafe_allow_html=True)
 
 # Initialize session state for filters if not exists
 if 'filters' not in st.session_state:
@@ -127,6 +162,9 @@ if st.session_state.filters['income']:
     filtered_df = filtered_df[filtered_df["Income_Level"] == st.session_state.filters['income']]
 if st.session_state.filters['cluster']:
     filtered_df = filtered_df[filtered_df["Cluster_Name"] == st.session_state.filters['cluster']]
+
+# Content container
+st.markdown('<div class="content-container">', unsafe_allow_html=True)
 
 # Section Selection using Radio Buttons
 section = st.radio("Select Analysis Section", [
@@ -1019,9 +1057,20 @@ elif section == "Cluster Analysis":
     def get_cluster_insights(df):
         insights = {}
         
+        # Check total count to ensure all 1000 respondents are included
+        total_respondents = len(df)
+        
         # Cluster distribution
         cluster_dist = df['Cluster_Name'].value_counts(normalize=True) * 100
+        # Print cluster distribution for verification
+        cluster_counts = df['Cluster_Name'].value_counts()
+        print(f"Cluster counts: {cluster_counts}, Total: {cluster_counts.sum()}")
+        
         insights['cluster_dist'] = {name: f"{pct:.1f}%" for name, pct in cluster_dist.items()}
+        
+        # Calculate total clusters percentage to ensure it's 100%
+        total_pct = sum(cluster_dist.values)
+        insights['total_pct'] = f"{total_pct:.1f}%"
         
         # Get top brands and attributes by cluster
         attributes = ['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 
@@ -1042,10 +1091,16 @@ elif section == "Cluster Analysis":
             # Average NPS
             avg_nps = cluster_df['NPS_Score'].mean()
             
+            # Count of respondents in this cluster
+            count = len(cluster_df)
+            pct = (count / total_respondents) * 100
+            
             insights['cluster_details'][cluster] = {
                 'top_brand': top_brand,
                 'top_attribute': top_attr,
-                'avg_nps': f"{avg_nps:.1f}"
+                'avg_nps': f"{avg_nps:.1f}",
+                'count': count,
+                'percentage': f"{pct:.1f}%"
             }
         
         return insights
@@ -1053,8 +1108,12 @@ elif section == "Cluster Analysis":
     # Get insights
     cluster_insights = get_cluster_insights(filtered_df)
     
-    # Display cluster distribution
+    # Display cluster distribution - verifying all respondents are included
     cluster_dist = filtered_df['Cluster_Name'].value_counts(normalize=True) * 100
+    
+    # Total respondents count
+    total_count = len(filtered_df)
+    st.info(f"Total Respondents Analyzed: {total_count}")
     
     col1, col2 = st.columns(2)
     
@@ -1062,7 +1121,7 @@ elif section == "Cluster Analysis":
         fig = px.pie(
             values=cluster_dist.values,
             names=cluster_dist.index,
-            title='Cluster Distribution (%)',
+            title=f'Cluster Distribution (%) - Total: {sum(cluster_dist.values):.1f}%',
             hole=0.4,
             labels={'label': 'Cluster', 'value': 'Percentage (%)'}
         )
@@ -1145,7 +1204,10 @@ elif section == "Cluster Analysis":
         with col:
             cluster_data = filtered_df[filtered_df['Cluster_Name'] == cluster]
             
-            st.write(f"**{cluster}** ({len(cluster_data)} consumers, {len(cluster_data)/len(filtered_df):.1%})")
+            # Calculate percentage of total dataset
+            cluster_pct = (len(cluster_data) / len(filtered_df)) * 100
+            
+            st.write(f"**{cluster}** ({len(cluster_data)} consumers, {cluster_pct:.1f}% of total)")
             
             # Top brand preference
             top_brand = cluster_data['Most_Often_Consumed_Brand'].value_counts().idxmax()
@@ -1191,12 +1253,10 @@ elif section == "Cluster Analysis":
         else:
             description = f"Segment with distinct preferences. Top attribute: {data['top_attribute']}. Average NPS: {data['avg_nps']}."
             
-        # Create distribution text if available
-        dist_text = ""
-        if cluster in cluster_insights['cluster_dist']:
-            dist_text = f" ({cluster_insights['cluster_dist'][cluster]})"
+        # Display count and percentage
+        count_info = f" ({data['count']} consumers, {data['percentage']})"
             
-        cluster_items += f"<li><strong>{cluster}{dist_text}:</strong> {description}</li>"
+        cluster_items += f"<li><strong>{cluster}{count_info}:</strong> {description}</li>"
     
     st.markdown(f"""
     <div class='summary-box'>
@@ -1285,6 +1345,9 @@ elif section == "View & Download Full Dataset":
             file_name="cola_survey_summary.csv",
             mime="text/csv"
         )
+
+# Close content container div
+st.markdown('</div>', unsafe_allow_html=True)
 
 # Footer
 st.markdown("---")
