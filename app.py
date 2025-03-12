@@ -68,11 +68,35 @@ elif section == "Brand Metrics":
     brand_counts = filtered_df['Most_Often_Consumed_Brand'].value_counts(normalize=True) * 100
     fig = px.bar(x=brand_counts.index, y=brand_counts.values.round(2), text=brand_counts.values.round(2), title='Most Often Used Brand')
     st.plotly_chart(fig)
-    occasions_counts = filtered_df['Occasions_of_Buying'].value_counts(normalize=True) * 100
-    fig = px.bar(x=occasions_counts.index, y=occasions_counts.values.round(2), text=occasions_counts.values.round(2), title='Occasions of Buying')
+
+elif section == "Basic Attribute Scores":
+    st.subheader("Basic Attribute Scores")
+    attributes = ['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 'Brand_Reputation_Rating', 'Availability_Rating', 'Sweetness_Rating', 'Fizziness_Rating']
+    avg_scores = filtered_df[attributes].mean()
+    fig = px.bar(x=avg_scores.index, y=avg_scores.values, text=avg_scores.values.round(2), title='Basic Attribute Scores')
     st.plotly_chart(fig)
-    freq_counts = filtered_df['Frequency_of_Consumption'].value_counts(normalize=True) * 100
-    fig = px.bar(x=freq_counts.index, y=freq_counts.values.round(2), text=freq_counts.values.round(2), title='Frequency of Consumption')
+
+elif section == "Regression Analysis":
+    st.subheader("Regression Analysis")
+    X = filtered_df[['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 'Brand_Reputation_Rating', 'Availability_Rating', 'Sweetness_Rating', 'Fizziness_Rating']]
+    y = filtered_df['NPS_Score']
+    model = sm.OLS(y, sm.add_constant(X)).fit()
+    st.text(model.summary())
+
+elif section == "Decision Tree Analysis":
+    st.subheader("Decision Tree Analysis")
+    X_tree = filtered_df[['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 'Brand_Reputation_Rating', 'Availability_Rating', 'Sweetness_Rating', 'Fizziness_Rating']]
+    y_tree = filtered_df['NPS_Score'].apply(lambda x: 1 if x >= 9 else 0)
+    clf = DecisionTreeClassifier(max_depth=3, random_state=42)
+    clf.fit(X_tree, y_tree)
+    fig, ax = plt.subplots(figsize=(12, 6))
+    tree.plot_tree(clf, feature_names=X_tree.columns, class_names=['Detractor/Passive', 'Promoter'], filled=True, fontsize=8, ax=ax)
+    st.pyplot(fig)
+
+elif section == "Cluster Analysis":
+    st.subheader("Customer Segmentation")
+    cluster_counts = filtered_df['Cluster_Name'].value_counts(normalize=True) * 100
+    fig = px.bar(x=cluster_counts.index, y=cluster_counts.values.round(2), text=cluster_counts.values.round(2), title='Cluster Distribution (%)')
     st.plotly_chart(fig)
 
 elif section == "View & Download Full Dataset":
@@ -85,11 +109,7 @@ elif section == "View & Download Full Dataset":
 col1, col2 = st.columns(2)
 with col1:
     if st.button("Apply Filter (for Mobile)"):
-        brand = st.selectbox("Select a Brand", [None] + list(df["Brand_Preference"].unique()), key='brand_mobile')
-        gender = st.selectbox("Select Gender", [None] + list(df["Gender"].unique()), key='gender_mobile')
-        income = st.selectbox("Select Income Level", [None] + list(df["Income_Level"].unique()), key='income_mobile')
-        cluster = st.selectbox("Select Cluster", [None] + list(df["Cluster_Name"].unique()), key='cluster_mobile')
-
+        st.experimental_rerun()
 with col2:
     if st.button("Clear Filters"):
         st.experimental_rerun()
