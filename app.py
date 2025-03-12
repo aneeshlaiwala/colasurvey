@@ -1,5 +1,5 @@
 import streamlit as st  # Import Streamlit first
-st.set_page_config(layout="wide")  # Then set the page configuration
+st.set_page_config(layout="wide", page_title="Cola Consumer Dashboard", page_icon="🥤")  # Then set the page configuration
 
 import pandas as pd
 import numpy as np
@@ -19,12 +19,34 @@ from io import BytesIO
 from factor_analyzer import FactorAnalyzer
 import plotly.figure_factory as ff
 
-# Set page title and favicon
-st.set_page_config(
-    page_title="Cola Consumer Dashboard",
-    page_icon="🥤",
-    layout="wide",
-)
+# Set page styling
+st.markdown("""
+<style>
+    .main-header {
+        font-size: 2.5rem;
+        color: #FF5733;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    .subheader {
+        font-size: 1.5rem;
+        color: #3366FF;
+        margin-bottom: 0.5rem;
+    }
+    .summary-box {
+        background-color: #f8f9fa;
+        border-left: 5px solid #007bff;
+        padding: 1rem;
+        margin: 1rem 0;
+        border-radius: 0.5rem;
+    }
+    .summary-title {
+        font-weight: bold;
+        color: #007bff;
+        margin-bottom: 0.5rem;
+    }
+</style>
+""", unsafe_allow_html=True)
 
 # Load dataset
 @st.cache_data
@@ -73,35 +95,7 @@ def load_data():
 
 df, cluster_centers = load_data()
 
-# Streamlit App Title with styling
-st.markdown("""
-<style>
-    .main-header {
-        font-size: 2.5rem;
-        color: #FF5733;
-        text-align: center;
-        margin-bottom: 1rem;
-    }
-    .subheader {
-        font-size: 1.5rem;
-        color: #3366FF;
-        margin-bottom: 0.5rem;
-    }
-    .summary-box {
-        background-color: #f8f9fa;
-        border-left: 5px solid #007bff;
-        padding: 1rem;
-        margin: 1rem 0;
-        border-radius: 0.5rem;
-    }
-    .summary-title {
-        font-weight: bold;
-        color: #007bff;
-        margin-bottom: 0.5rem;
-    }
-</style>
-""", unsafe_allow_html=True)
-
+# App title
 st.markdown("<h1 class='main-header'>Interactive Cola Consumer Dashboard</h1>", unsafe_allow_html=True)
 
 # Sidebar Filters
@@ -182,8 +176,8 @@ if section == "Executive Dashboard Summary":
     with col3:
         # Top attribute
         attributes = ['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 
-                    'Brand_Reputation_Rating', 'Availability_Rating', 
-                    'Sweetness_Rating', 'Fizziness_Rating']
+                     'Brand_Reputation_Rating', 'Availability_Rating', 
+                     'Sweetness_Rating', 'Fizziness_Rating']
         
         top_attr = filtered_df[attributes].mean().idxmax()
         top_attr_score = filtered_df[attributes].mean().max()
@@ -336,54 +330,6 @@ elif section == "Demographic Profile":
         )
         fig.update_traces(textposition='outside')
         st.plotly_chart(fig)
-    
-    # Executive summary for attribute scores section
-    st.markdown("""
-    <div class='summary-box'>
-        <div class='summary-title'>ATTRIBUTE SCORES - EXECUTIVE SUMMARY</div>
-        <p>The analysis of product attribute ratings reveals priorities and satisfaction drivers:</p>
-        
-        <p><strong>Key Findings:</strong></p>
-        <ul>
-            <li>The highest-rated attributes are [top attributes from filtered data]</li>
-            <li>The lowest-rated attributes are [bottom attributes from filtered data]</li>
-            <li>NPS scores vary significantly across demographic segments</li>
-            <li>Gender and age show notable influence on attribute preferences</li>
-        </ul>
-        
-        <p><strong>Strategic Implications:</strong></p>
-        <ul>
-            <li>Focus product improvement efforts on lower-rated attributes</li>
-            <li>Leverage strengths in marketing communications</li>
-            <li>Address NPS variations with targeted loyalty initiatives</li>
-            <li>Consider segment-specific product variants to address preference variations</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
-        
-    # Executive summary for brand metrics section
-    st.markdown("""
-    <div class='summary-box'>
-        <div class='summary-title'>BRAND METRICS - EXECUTIVE SUMMARY</div>
-        <p>The analysis of brand metrics provides insights into consumer preferences and consumption patterns:</p>
-        
-        <p><strong>Key Findings:</strong></p>
-        <ul>
-            <li>Market share is dominated by [dominant brands from filtered data]</li>
-            <li>Primary consumption occasions include [main occasions from filtered data]</li>
-            <li>Consumption frequency patterns reveal [frequency patterns from filtered data]</li>
-            <li>Overall satisfaction levels indicate [satisfaction trends from filtered data]</li>
-        </ul>
-        
-        <p><strong>Strategic Implications:</strong></p>
-        <ul>
-            <li>Focus marketing on key consumption occasions to maximize relevance</li>
-            <li>Address frequency patterns in product packaging and distribution</li>
-            <li>Leverage satisfaction drivers to strengthen brand positioning</li>
-            <li>Consider occasion-specific product variants or marketing campaigns</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
         
         # Income Level Distribution
         income_counts = filtered_df['Income_Level'].value_counts(normalize=True) * 100
@@ -513,6 +459,30 @@ elif section == "Brand Metrics":
         )
         fig.update_traces(textposition='outside')
         st.plotly_chart(fig)
+        
+    # Executive summary for brand metrics section
+    st.markdown("""
+    <div class='summary-box'>
+        <div class='summary-title'>BRAND METRICS - EXECUTIVE SUMMARY</div>
+        <p>The analysis of brand metrics provides insights into consumer preferences and consumption patterns:</p>
+        
+        <p><strong>Key Findings:</strong></p>
+        <ul>
+            <li>Market share is dominated by [dominant brands from filtered data]</li>
+            <li>Primary consumption occasions include [main occasions from filtered data]</li>
+            <li>Consumption frequency patterns reveal [frequency patterns from filtered data]</li>
+            <li>Overall satisfaction levels indicate [satisfaction trends from filtered data]</li>
+        </ul>
+        
+        <p><strong>Strategic Implications:</strong></p>
+        <ul>
+            <li>Focus marketing on key consumption occasions to maximize relevance</li>
+            <li>Address frequency patterns in product packaging and distribution</li>
+            <li>Leverage satisfaction drivers to strengthen brand positioning</li>
+            <li>Consider occasion-specific product variants or marketing campaigns</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
 
 elif section == "Basic Attribute Scores":
     st.markdown("<h2 class='subheader'>Basic Attribute Scores</h2>", unsafe_allow_html=True)
@@ -608,6 +578,30 @@ elif section == "Basic Attribute Scores":
         )
         fig.update_traces(textposition='outside')
         st.plotly_chart(fig)
+    
+    # Executive summary for attribute scores section
+    st.markdown("""
+    <div class='summary-box'>
+        <div class='summary-title'>ATTRIBUTE SCORES - EXECUTIVE SUMMARY</div>
+        <p>The analysis of product attribute ratings reveals priorities and satisfaction drivers:</p>
+        
+        <p><strong>Key Findings:</strong></p>
+        <ul>
+            <li>The highest-rated attributes are [top attributes from filtered data]</li>
+            <li>The lowest-rated attributes are [bottom attributes from filtered data]</li>
+            <li>NPS scores vary significantly across demographic segments</li>
+            <li>Gender and age show notable influence on attribute preferences</li>
+        </ul>
+        
+        <p><strong>Strategic Implications:</strong></p>
+        <ul>
+            <li>Focus product improvement efforts on lower-rated attributes</li>
+            <li>Leverage strengths in marketing communications</li>
+            <li>Address NPS variations with targeted loyalty initiatives</li>
+            <li>Consider segment-specific product variants to address preference variations</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
 
 elif section == "Regression Analysis":
     st.markdown("<h2 class='subheader'>Regression Analysis</h2>", unsafe_allow_html=True)
@@ -696,7 +690,7 @@ elif section == "Regression Analysis":
         else:
             st.write("No significant negative factors found.")
     
-    # Overall summary in a more structured format
+    # Formal Executive Summary Box
     st.markdown("""
     <div class='summary-box'>
         <div class='summary-title'>REGRESSION ANALYSIS - EXECUTIVE SUMMARY</div>
@@ -1043,7 +1037,7 @@ elif section == "Cluster Analysis":
         
         <p>Each segment has distinct demographic characteristics and consumption patterns, offering opportunities for targeted marketing and product development strategies.</p>
     </div>
-    """)
+    """, unsafe_allow_html=True)
 
 elif section == "View & Download Full Dataset":
     st.markdown("<h2 class='subheader'>View & Download Dataset</h2>", unsafe_allow_html=True)
@@ -1074,7 +1068,7 @@ elif section == "View & Download Full Dataset":
             <li>Analyze raw data to identify additional insights</li>
         </ul>
     </div>
-    """)
+    """, unsafe_allow_html=True)
     
     # Download options
     col1, col2 = st.columns(2)
@@ -1120,3 +1114,5 @@ with col2:
 # Footer
 st.markdown("---")
 st.markdown("**Cola Survey Dashboard** | Created with Streamlit")
+
+    
