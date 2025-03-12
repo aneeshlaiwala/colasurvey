@@ -70,12 +70,18 @@ elif section == "Brand Metrics":
     brand_counts = filtered_df['Most_Often_Consumed_Brand'].value_counts(normalize=True) * 100
     fig = px.bar(x=brand_counts.index, y=brand_counts.values.round(2), text=brand_counts.values.round(2), title='Most Often Used Brand')
     st.plotly_chart(fig)
+    occasions_counts = filtered_df['Occasions_Of_Buying'].value_counts()
+    fig = px.pie(occasions_counts, names=occasions_counts.index, title='Buying Occasions Distribution')
+    st.plotly_chart(fig)
 
 elif section == "Basic Attribute Scores":
     st.subheader("Basic Attribute Scores")
     attributes = ['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 'Brand_Reputation_Rating', 'Availability_Rating', 'Sweetness_Rating', 'Fizziness_Rating']
     avg_scores = filtered_df[attributes].mean()
     fig = px.bar(x=avg_scores.index, y=avg_scores.values, text=avg_scores.values.round(2), title='Basic Attribute Scores')
+    st.plotly_chart(fig)
+    nps_avg = filtered_df.groupby('Age_Group')['NPS_Score'].mean()
+    fig = px.bar(x=nps_avg.index, y=nps_avg.values, text=nps_avg.values.round(2), title='NPS Score by Age Group')
     st.plotly_chart(fig)
 
 elif section == "Regression Analysis":
@@ -100,16 +106,12 @@ elif section == "Cluster Analysis":
     cluster_counts = filtered_df['Cluster_Name'].value_counts(normalize=True) * 100
     fig = px.bar(x=cluster_counts.index, y=cluster_counts.values, text=cluster_counts.values.round(2), title='Cluster Distribution (%)')
     st.plotly_chart(fig)
+    st.write("### Cluster Descriptions")
+    for cluster_name in df['Cluster_Name'].unique():
+        st.write(f"**{cluster_name}:**", df[df['Cluster_Name'] == cluster_name].describe())
 
 elif section == "View & Download Full Dataset":
     st.subheader("Full Dataset")
     st.dataframe(filtered_df)
     csv = filtered_df.to_csv(index=False)
     st.download_button(label="Download CSV", data=csv, file_name="cola_survey_data.csv", mime="text/csv")
-
-# Fix Bottom Filters
-if st.button("Apply Filter (for Mobile)"):
-    st.experimental_rerun()
-
-if st.button("Clear Filters"):
-    st.experimental_rerun()
