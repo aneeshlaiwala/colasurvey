@@ -1,0 +1,1001 @@
+Respondent_ID,Age,Gender,Income_Level,Frequency_of_Consumption,Brand_Preference,Satisfaction_Level,Purchase_Location,Reason_for_Choice,Occasions_of_Buying,Most_Often_Consumed_Brand,Consumed_With,NPS_Score,Taste_Rating,Price_Rating,Packaging_Rating,Brand_Reputation_Rating,Availability_Rating,Sweetness_Rating,Fizziness_Rating
+1,64,Female,Middle,Daily,Coke,Very Satisfied,Other,Other,Parties,Pepsi,Other,9,4,5,5,5,5,1,3
+2,61,Male,Low,Monthly,Coke,Very Dissatisfied,Other,Brand Loyalty,Travel,Coke,With Family,7,1,5,2,5,4,2,1
+3,32,Non-Binary,Middle,Monthly,Pepsi,Very Satisfied,Convenience Store,Price,Work,RC Cola,With Friends,3,4,3,1,1,2,1,4
+4,50,Non-Binary,High,Daily,Coke,Neutral,Supermarket,Taste,Home,Other,With Friends,2,1,2,2,2,5,1,1
+5,63,Female,Low,Monthly,Pepsi,Very Dissatisfied,Other,Price,Restaurants,RC Cola,Other,0,2,2,5,3,5,4,4
+6,32,Female,High,Weekly,Pepsi,Very Satisfied,Online,Other,Work,Coke,Other,10,5,3,1,2,5,2,3
+7,30,Non-Binary,High,Rarely,Store Brand,Satisfied,Other,Price,Sports Events,Store Brand,With Friends,4,1,4,3,4,5,4,1
+8,35,Prefer Not to Say,Middle,Rarely,Pepsi,Very Dissatisfied,Vending Machine,Other,Other,Other,With Family,7,2,2,4,1,3,1,1
+9,33,Female,Low,Monthly,Other,Dissatisfied,Vending Machine,Availability,Travel,Other,Alone,1,2,5,3,2,3,4,1
+10,64,Non-Binary,Middle,Never,Store Brand,Satisfied,Convenience Store,Taste,Home,Store Brand,With Friends,8,4,4,5,4,2,1,2
+11,35,Non-Binary,High,Weekly,RC Cola,Very Dissatisfied,Supermarket,Taste,Work,RC Cola,With Colleagues,7,3,5,1,2,5,3,5
+12,51,Male,Middle,Weekly,Store Brand,Satisfied,Convenience Store,Price,Restaurants,Store Brand,Alone,9,5,2,1,2,2,4,4
+13,24,Prefer Not to Say,High,Never,Coke,Dissatisfied,Other,Price,Other,RC Cola,Alone,0,2,3,2,1,4,5,1
+14,46,Non-Binary,Low,Weekly,Coke,Dissatisfied,Convenience Store,Taste,Home,Other,Other,9,5,5,4,5,3,4,4
+15,54,Male,High,Weekly,Pepsi,Very Satisfied,Convenience Store,Other,Parties,Store Brand,With Family,3,1,2,1,5,5,5,5
+16,29,Non-Binary,Middle,Monthly,RC Cola,Dissatisfied,Other,Taste,Restaurants,Pepsi,With Friends,4,3,5,2,1,4,4,1
+17,56,Non-Binary,High,Monthly,Store Brand,Very Satisfied,Online,Brand Loyalty,Work,Other,With Friends,9,3,2,5,4,4,2,5
+18,36,Non-Binary,Middle,Daily,Store Brand,Neutral,Other,Availability,Other,Pepsi,Other,5,3,3,2,4,3,1,5
+19,45,Non-Binary,Middle,Never,RC Cola,Dissatisfied,Other,Other,Sports Events,Other,With Family,8,1,4,4,2,5,4,4
+20,57,Female,Middle,Daily,Other,Very Dissatisfied,Convenience Store,Other,Restaurants,Coke,Other,7,4,4,5,3,4,3,1
+21,21,Non-Binary,High,Daily,RC Cola,Dissatisfied,Convenience Store,Availability,Parties,Other,With Colleagues,2,5,4,2,3,4,4,4
+22,50,Non-Binary,Middle,Weekly,Pepsi,Very Satisfied,Vending Machine,Availability,Sports Events,Store Brand,With Friends,5,5,2,5,4,3,1,1
+23,34,Female,Low,Weekly,Store Brand,Very Dissatisfied,Online,Availability,Restaurants,Store Brand,Alone,9,2,3,3,4,5,3,3
+24,36,Non-Binary,High,Never,Store Brand,Very Dissatisfied,Online,Brand Loyalty,Home,Store Brand,With Colleagues,7,5,4,3,4,4,5,2
+25,20,Female,Low,Weekly,Store Brand,Dissatisfied,Online,Price,Work,Store Brand,With Colleagues,9,3,3,4,4,4,5,2
+26,54,Prefer Not to Say,Middle,Monthly,Coke,Very Satisfied,Vending Machine,Other,Home,Store Brand,With Colleagues,7,3,5,3,3,5,5,1
+27,20,Male,Middle,Daily,Other,Very Dissatisfied,Vending Machine,Price,Parties,RC Cola,With Family,1,4,3,2,1,5,3,5
+28,56,Prefer Not to Say,Middle,Monthly,Other,Very Satisfied,Vending Machine,Price,Parties,Store Brand,With Colleagues,9,1,1,2,2,5,1,3
+29,23,Prefer Not to Say,Middle,Weekly,Pepsi,Neutral,Convenience Store,Availability,Other,Coke,With Family,2,5,1,5,5,1,3,4
+30,64,Female,Low,Weekly,Pepsi,Satisfied,Online,Taste,Restaurants,Pepsi,With Family,8,1,5,1,5,2,5,2
+31,36,Prefer Not to Say,High,Daily,Store Brand,Satisfied,Online,Price,Other,Other,With Colleagues,5,3,1,5,3,5,4,1
+32,64,Prefer Not to Say,High,Monthly,Coke,Very Dissatisfied,Online,Availability,Travel,Pepsi,Other,3,3,3,1,2,2,2,2
+33,50,Non-Binary,Low,Daily,RC Cola,Very Dissatisfied,Supermarket,Availability,Other,Store Brand,With Family,2,2,5,2,1,5,3,2
+34,49,Female,Low,Weekly,Pepsi,Very Satisfied,Convenience Store,Brand Loyalty,Restaurants,Store Brand,With Friends,5,3,4,5,1,1,2,4
+35,63,Prefer Not to Say,High,Daily,Pepsi,Very Satisfied,Vending Machine,Other,Work,Coke,Alone,4,5,2,4,5,2,1,3
+36,19,Female,High,Rarely,Other,Very Satisfied,Supermarket,Availability,Home,Other,With Colleagues,9,4,1,4,4,5,4,5
+37,58,Prefer Not to Say,Middle,Never,Store Brand,Very Satisfied,Vending Machine,Brand Loyalty,Sports Events,Store Brand,With Family,1,4,3,5,4,1,3,4
+38,34,Non-Binary,Middle,Daily,Pepsi,Satisfied,Supermarket,Brand Loyalty,Travel,Other,With Friends,5,4,5,2,3,3,1,1
+39,22,Prefer Not to Say,High,Weekly,Coke,Satisfied,Online,Availability,Restaurants,Coke,With Family,0,1,5,2,5,4,2,3
+40,58,Female,Middle,Monthly,Coke,Dissatisfied,Supermarket,Brand Loyalty,Restaurants,Other,Other,5,2,1,2,4,1,1,2
+41,31,Prefer Not to Say,High,Rarely,RC Cola,Satisfied,Other,Brand Loyalty,Sports Events,RC Cola,With Family,2,5,1,4,1,4,1,4
+42,27,Male,High,Never,RC Cola,Dissatisfied,Convenience Store,Taste,Restaurants,Other,With Colleagues,3,4,2,1,5,3,2,4
+43,54,Non-Binary,Low,Weekly,Other,Very Satisfied,Supermarket,Price,Home,Coke,Alone,7,2,1,2,5,5,5,1
+44,47,Male,Low,Weekly,Pepsi,Very Satisfied,Supermarket,Availability,Other,RC Cola,Alone,2,4,4,5,5,2,2,5
+45,27,Non-Binary,Middle,Rarely,Pepsi,Dissatisfied,Convenience Store,Brand Loyalty,Home,Store Brand,With Colleagues,8,4,3,3,4,2,2,2
+46,34,Prefer Not to Say,High,Monthly,Other,Neutral,Supermarket,Brand Loyalty,Sports Events,Pepsi,Alone,3,5,4,3,2,1,2,2
+47,58,Male,Low,Monthly,Store Brand,Very Dissatisfied,Other,Price,Work,Pepsi,Other,2,2,2,3,4,2,1,2
+48,39,Prefer Not to Say,Low,Monthly,Other,Satisfied,Vending Machine,Availability,Travel,Pepsi,With Family,5,1,5,2,3,5,5,1
+49,60,Prefer Not to Say,Low,Rarely,Coke,Satisfied,Convenience Store,Brand Loyalty,Sports Events,RC Cola,With Friends,6,1,5,4,1,2,5,3
+50,55,Male,High,Monthly,Coke,Neutral,Other,Availability,Restaurants,RC Cola,With Friends,6,4,5,4,4,1,3,4
+51,37,Prefer Not to Say,High,Rarely,Other,Dissatisfied,Vending Machine,Other,Travel,Store Brand,With Family,10,3,3,4,2,5,2,3
+52,51,Male,Middle,Rarely,Store Brand,Very Satisfied,Convenience Store,Other,Parties,Coke,Alone,7,3,5,5,4,5,1,2
+53,29,Female,Low,Rarely,Other,Satisfied,Online,Price,Travel,Other,With Family,7,2,4,2,5,4,5,4
+54,40,Non-Binary,Middle,Never,Other,Dissatisfied,Supermarket,Taste,Travel,Pepsi,Other,1,2,4,2,1,3,4,5
+55,27,Prefer Not to Say,High,Rarely,Store Brand,Very Dissatisfied,Supermarket,Price,Parties,RC Cola,With Family,7,5,1,4,3,4,2,3
+56,34,Male,High,Monthly,Pepsi,Very Satisfied,Convenience Store,Taste,Parties,Pepsi,With Family,2,5,4,1,2,5,1,1
+57,45,Male,High,Weekly,Pepsi,Satisfied,Supermarket,Availability,Other,Other,Alone,1,5,2,1,1,2,5,2
+58,23,Male,Low,Weekly,Coke,Very Dissatisfied,Vending Machine,Brand Loyalty,Other,Other,With Friends,10,1,3,3,2,3,1,4
+59,30,Female,Middle,Daily,Other,Dissatisfied,Vending Machine,Brand Loyalty,Restaurants,Coke,With Family,7,5,2,2,4,3,5,3
+60,27,Female,High,Rarely,Coke,Dissatisfied,Convenience Store,Other,Home,Coke,Alone,7,2,3,3,3,5,5,4
+61,46,Prefer Not to Say,Low,Rarely,RC Cola,Very Dissatisfied,Vending Machine,Other,Travel,Pepsi,Other,0,3,4,5,5,4,5,4
+62,42,Non-Binary,Middle,Weekly,Coke,Neutral,Online,Other,Restaurants,Coke,With Friends,8,2,1,3,2,5,1,1
+63,50,Female,Middle,Daily,Store Brand,Neutral,Vending Machine,Availability,Restaurants,Other,With Colleagues,8,4,4,1,2,1,5,4
+64,46,Non-Binary,Middle,Daily,Coke,Neutral,Online,Brand Loyalty,Sports Events,RC Cola,Alone,9,1,2,2,3,3,2,3
+65,26,Male,Middle,Never,Store Brand,Satisfied,Convenience Store,Price,Parties,Pepsi,Other,7,4,1,4,2,2,1,4
+66,53,Prefer Not to Say,High,Monthly,Coke,Very Dissatisfied,Online,Availability,Work,Store Brand,With Family,6,5,3,3,1,1,3,5
+67,40,Female,Low,Weekly,Coke,Neutral,Convenience Store,Price,Travel,Pepsi,With Friends,8,5,4,4,2,4,3,2
+68,60,Prefer Not to Say,Low,Monthly,Store Brand,Very Dissatisfied,Supermarket,Availability,Sports Events,Other,Alone,10,1,2,4,3,4,2,5
+69,24,Male,High,Rarely,Other,Very Dissatisfied,Other,Price,Parties,Pepsi,With Colleagues,10,1,3,1,3,4,5,3
+70,45,Male,Low,Rarely,Coke,Very Satisfied,Supermarket,Brand Loyalty,Other,RC Cola,With Friends,1,3,4,4,4,4,3,4
+71,43,Male,Middle,Never,Pepsi,Very Satisfied,Convenience Store,Brand Loyalty,Home,RC Cola,Other,8,1,3,3,4,4,1,5
+72,30,Female,High,Daily,Store Brand,Neutral,Vending Machine,Other,Parties,Store Brand,With Friends,8,5,4,5,1,2,5,2
+73,34,Non-Binary,High,Never,Coke,Very Satisfied,Supermarket,Price,Work,RC Cola,Alone,9,5,4,1,3,5,2,3
+74,48,Female,Middle,Rarely,Other,Dissatisfied,Online,Brand Loyalty,Sports Events,RC Cola,With Family,5,1,5,3,5,3,4,1
+75,20,Male,Low,Weekly,Coke,Dissatisfied,Other,Brand Loyalty,Travel,Other,Other,0,4,2,4,2,5,1,1
+76,64,Non-Binary,Low,Never,Coke,Satisfied,Vending Machine,Taste,Sports Events,Coke,With Colleagues,1,3,4,5,5,4,2,1
+77,54,Female,High,Rarely,Coke,Neutral,Other,Price,Restaurants,RC Cola,Other,8,4,5,1,5,3,2,1
+78,29,Male,Middle,Never,Other,Neutral,Other,Other,Restaurants,Store Brand,With Colleagues,5,2,1,4,2,2,2,1
+79,43,Male,Low,Daily,Pepsi,Neutral,Supermarket,Brand Loyalty,Restaurants,Store Brand,Alone,0,3,5,1,3,1,2,1
+80,59,Non-Binary,Low,Rarely,Coke,Dissatisfied,Supermarket,Availability,Restaurants,RC Cola,With Friends,6,3,2,4,1,3,3,3
+81,55,Prefer Not to Say,Middle,Daily,Store Brand,Neutral,Convenience Store,Availability,Parties,Store Brand,Alone,9,3,3,1,1,1,5,5
+82,34,Male,High,Monthly,RC Cola,Neutral,Convenience Store,Price,Work,Other,Other,7,3,4,1,4,1,2,2
+83,29,Non-Binary,High,Weekly,Store Brand,Very Dissatisfied,Supermarket,Taste,Parties,Pepsi,With Friends,1,1,4,3,3,5,4,5
+84,37,Non-Binary,Middle,Daily,Coke,Neutral,Online,Brand Loyalty,Sports Events,Coke,Alone,5,2,4,2,4,3,5,2
+85,25,Non-Binary,High,Rarely,Store Brand,Dissatisfied,Supermarket,Taste,Home,Pepsi,Other,9,4,5,3,1,1,5,5
+86,28,Male,Low,Rarely,Other,Dissatisfied,Online,Price,Other,Pepsi,With Family,5,1,5,1,5,5,5,3
+87,33,Prefer Not to Say,Middle,Never,Coke,Very Satisfied,Other,Other,Work,Other,Alone,8,4,1,5,3,5,5,4
+88,31,Female,High,Rarely,Coke,Satisfied,Convenience Store,Availability,Restaurants,Store Brand,With Friends,0,4,5,2,4,2,3,1
+89,43,Male,Middle,Never,RC Cola,Satisfied,Online,Availability,Restaurants,Coke,With Friends,5,4,4,2,3,1,2,2
+90,48,Non-Binary,Low,Monthly,Coke,Neutral,Supermarket,Taste,Sports Events,Coke,With Family,0,5,2,3,3,4,2,4
+91,38,Male,High,Rarely,Store Brand,Dissatisfied,Convenience Store,Taste,Sports Events,Other,With Family,7,4,5,3,4,4,3,3
+92,56,Male,Low,Never,RC Cola,Dissatisfied,Vending Machine,Price,Sports Events,Pepsi,With Colleagues,3,2,4,1,5,1,3,1
+93,47,Female,High,Weekly,Pepsi,Dissatisfied,Online,Price,Sports Events,Pepsi,With Colleagues,4,3,5,4,1,1,2,3
+94,43,Male,Low,Rarely,Pepsi,Very Satisfied,Supermarket,Other,Work,Pepsi,With Family,4,3,5,5,3,1,2,4
+95,18,Prefer Not to Say,Low,Weekly,Coke,Very Dissatisfied,Other,Other,Other,Other,With Family,9,5,5,2,5,4,2,5
+96,52,Female,High,Weekly,Coke,Dissatisfied,Online,Price,Restaurants,Other,Other,6,3,3,2,4,2,5,4
+97,36,Female,Low,Never,Pepsi,Neutral,Online,Availability,Sports Events,Pepsi,With Friends,3,1,3,5,3,3,4,2
+98,56,Male,Low,Rarely,Other,Satisfied,Supermarket,Taste,Home,Store Brand,With Colleagues,7,1,3,4,4,1,4,5
+99,42,Non-Binary,Low,Weekly,Pepsi,Neutral,Other,Taste,Other,Store Brand,With Friends,9,2,3,4,2,2,5,3
+100,24,Male,High,Rarely,Pepsi,Very Satisfied,Supermarket,Brand Loyalty,Other,RC Cola,Other,5,4,2,4,5,3,3,1
+101,58,Prefer Not to Say,Middle,Rarely,Coke,Very Satisfied,Other,Price,Home,Pepsi,With Friends,9,2,2,4,1,2,5,2
+102,42,Female,High,Daily,Store Brand,Dissatisfied,Vending Machine,Availability,Sports Events,Other,Other,7,2,3,3,5,1,2,5
+103,37,Female,Middle,Rarely,Coke,Very Dissatisfied,Other,Price,Work,Other,With Friends,7,4,3,4,1,3,3,4
+104,60,Non-Binary,High,Monthly,RC Cola,Very Satisfied,Other,Price,Parties,Store Brand,With Colleagues,3,4,4,3,2,5,5,5
+105,59,Non-Binary,Low,Monthly,Store Brand,Neutral,Vending Machine,Other,Restaurants,Coke,With Colleagues,5,2,5,1,3,1,3,1
+106,44,Female,High,Daily,Other,Neutral,Vending Machine,Taste,Sports Events,Coke,With Friends,6,4,2,5,3,5,5,3
+107,43,Female,High,Monthly,RC Cola,Very Satisfied,Convenience Store,Other,Work,Coke,Alone,1,5,1,1,5,5,1,2
+108,51,Non-Binary,High,Rarely,Other,Satisfied,Supermarket,Other,Work,Coke,Other,10,1,1,1,1,5,5,4
+109,40,Male,Low,Monthly,Coke,Neutral,Supermarket,Taste,Travel,Coke,With Colleagues,2,4,4,2,5,4,2,4
+110,62,Male,Middle,Monthly,Other,Very Satisfied,Other,Brand Loyalty,Work,Coke,With Friends,8,5,2,2,1,1,2,4
+111,63,Male,High,Rarely,Store Brand,Very Dissatisfied,Vending Machine,Price,Restaurants,Other,With Friends,4,2,1,4,1,2,2,2
+112,33,Male,Low,Weekly,Other,Neutral,Convenience Store,Brand Loyalty,Home,Store Brand,Alone,10,3,1,3,3,5,2,3
+113,40,Female,Low,Daily,RC Cola,Satisfied,Convenience Store,Price,Parties,Other,Other,6,1,4,5,2,4,3,1
+114,23,Non-Binary,Low,Rarely,Other,Very Satisfied,Supermarket,Availability,Travel,Other,With Friends,4,3,1,3,5,1,1,4
+115,39,Male,Low,Daily,Store Brand,Dissatisfied,Other,Availability,Travel,RC Cola,Alone,5,4,5,1,3,1,5,4
+116,36,Female,High,Weekly,Store Brand,Very Dissatisfied,Vending Machine,Availability,Other,Store Brand,Alone,7,4,5,3,3,5,3,3
+117,50,Prefer Not to Say,Low,Rarely,Other,Very Dissatisfied,Online,Taste,Other,RC Cola,With Family,5,3,1,2,1,4,4,1
+118,61,Male,Low,Never,Pepsi,Dissatisfied,Vending Machine,Brand Loyalty,Parties,Store Brand,With Colleagues,0,5,1,3,4,4,3,5
+119,56,Male,High,Weekly,Pepsi,Satisfied,Online,Brand Loyalty,Work,Store Brand,With Friends,9,2,3,4,1,2,5,2
+120,48,Non-Binary,Low,Weekly,Coke,Very Dissatisfied,Other,Brand Loyalty,Other,Store Brand,Alone,0,2,1,2,3,5,4,5
+121,38,Male,High,Rarely,Coke,Dissatisfied,Vending Machine,Other,Work,RC Cola,Alone,0,3,2,5,4,1,4,2
+122,61,Male,Low,Daily,Pepsi,Satisfied,Supermarket,Other,Travel,RC Cola,With Family,10,4,1,1,4,3,3,3
+123,19,Prefer Not to Say,Low,Never,RC Cola,Satisfied,Online,Price,Other,Other,With Family,4,1,3,1,2,1,4,3
+124,48,Female,High,Weekly,Store Brand,Very Satisfied,Convenience Store,Availability,Travel,RC Cola,Other,4,3,1,5,5,5,4,5
+125,30,Prefer Not to Say,Middle,Daily,Store Brand,Satisfied,Online,Brand Loyalty,Restaurants,Coke,Alone,5,3,1,3,3,1,2,3
+126,37,Female,High,Never,Other,Satisfied,Vending Machine,Availability,Home,Coke,With Family,5,2,3,5,4,2,5,4
+127,22,Prefer Not to Say,High,Daily,RC Cola,Very Dissatisfied,Convenience Store,Price,Sports Events,Coke,With Family,0,1,4,3,2,1,5,1
+128,18,Female,High,Monthly,Pepsi,Very Dissatisfied,Other,Price,Travel,Store Brand,With Friends,3,2,2,5,5,3,1,3
+129,20,Prefer Not to Say,High,Monthly,RC Cola,Satisfied,Convenience Store,Availability,Work,Other,With Family,0,2,4,5,2,2,1,2
+130,54,Male,Low,Monthly,Other,Very Satisfied,Supermarket,Brand Loyalty,Travel,Coke,Alone,7,4,2,3,4,1,5,5
+131,50,Non-Binary,Middle,Daily,Store Brand,Very Satisfied,Online,Taste,Work,Store Brand,With Friends,10,2,3,3,3,4,5,4
+132,44,Male,Low,Weekly,RC Cola,Neutral,Vending Machine,Price,Other,Pepsi,Alone,4,1,5,4,2,4,2,4
+133,55,Female,High,Rarely,Coke,Very Satisfied,Online,Brand Loyalty,Sports Events,Pepsi,With Family,0,2,4,3,5,1,2,3
+134,52,Non-Binary,Middle,Never,Coke,Dissatisfied,Vending Machine,Other,Home,Other,With Family,4,3,1,3,3,3,5,1
+135,30,Prefer Not to Say,Low,Monthly,Coke,Very Dissatisfied,Convenience Store,Availability,Travel,Coke,Other,9,5,2,1,2,4,4,1
+136,61,Prefer Not to Say,High,Never,Pepsi,Very Satisfied,Other,Brand Loyalty,Parties,Other,With Colleagues,8,3,4,2,3,4,4,2
+137,63,Non-Binary,Low,Never,Pepsi,Neutral,Convenience Store,Price,Home,RC Cola,Alone,6,4,1,5,2,2,5,2
+138,46,Female,High,Rarely,Pepsi,Dissatisfied,Other,Price,Travel,RC Cola,Other,4,4,4,5,2,5,1,1
+139,57,Male,Low,Weekly,Coke,Very Dissatisfied,Online,Brand Loyalty,Travel,Pepsi,With Colleagues,4,4,4,2,2,5,4,2
+140,38,Prefer Not to Say,Low,Daily,Store Brand,Neutral,Supermarket,Taste,Restaurants,Coke,With Friends,7,1,1,3,5,1,2,2
+141,53,Non-Binary,Middle,Monthly,Store Brand,Satisfied,Convenience Store,Price,Work,Pepsi,With Colleagues,3,4,1,3,1,4,2,3
+142,64,Male,Middle,Monthly,RC Cola,Neutral,Online,Other,Work,Other,With Family,3,1,5,4,4,5,4,5
+143,49,Non-Binary,High,Rarely,Pepsi,Very Satisfied,Convenience Store,Price,Other,RC Cola,Other,10,1,5,4,3,5,5,5
+144,55,Female,Low,Monthly,Coke,Very Dissatisfied,Other,Price,Sports Events,Coke,Alone,9,1,5,4,2,1,2,4
+145,34,Non-Binary,Low,Rarely,Coke,Dissatisfied,Supermarket,Brand Loyalty,Other,Coke,With Friends,7,1,5,1,4,5,1,2
+146,62,Prefer Not to Say,Low,Never,Pepsi,Dissatisfied,Online,Availability,Parties,Store Brand,Alone,8,4,5,2,4,2,2,1
+147,40,Male,Middle,Daily,Store Brand,Very Satisfied,Other,Taste,Other,Pepsi,Other,9,2,1,2,2,2,5,1
+148,37,Non-Binary,Middle,Weekly,RC Cola,Satisfied,Other,Other,Travel,RC Cola,With Friends,9,1,5,5,5,1,5,2
+149,55,Female,High,Daily,Coke,Dissatisfied,Online,Price,Work,Store Brand,Other,9,3,5,5,5,3,5,5
+150,47,Non-Binary,High,Daily,Store Brand,Very Dissatisfied,Supermarket,Brand Loyalty,Home,Other,With Family,5,2,3,2,4,1,2,2
+151,22,Non-Binary,Low,Daily,Coke,Very Dissatisfied,Online,Price,Travel,Pepsi,Alone,8,5,2,3,2,5,3,3
+152,21,Female,Middle,Weekly,Coke,Very Dissatisfied,Online,Taste,Sports Events,Pepsi,With Friends,4,2,5,3,5,4,2,4
+153,38,Female,Low,Weekly,Other,Neutral,Supermarket,Taste,Parties,RC Cola,With Colleagues,10,3,2,3,2,3,4,5
+154,61,Female,Low,Weekly,Coke,Very Satisfied,Online,Taste,Sports Events,Coke,Alone,5,3,3,1,4,4,5,3
+155,29,Male,Middle,Rarely,Other,Very Satisfied,Convenience Store,Availability,Other,Coke,With Friends,8,4,5,5,3,3,3,5
+156,53,Prefer Not to Say,High,Never,Coke,Very Satisfied,Other,Availability,Sports Events,Store Brand,With Family,8,2,2,5,1,3,4,3
+157,40,Non-Binary,Middle,Monthly,Store Brand,Dissatisfied,Other,Brand Loyalty,Work,Pepsi,With Colleagues,1,4,3,1,3,4,1,2
+158,24,Non-Binary,Low,Weekly,Coke,Very Dissatisfied,Vending Machine,Other,Home,Coke,Alone,0,1,2,1,3,1,5,5
+159,27,Non-Binary,Middle,Never,Store Brand,Dissatisfied,Vending Machine,Availability,Other,RC Cola,With Colleagues,8,1,4,5,5,2,3,2
+160,61,Non-Binary,Low,Monthly,Store Brand,Very Dissatisfied,Online,Brand Loyalty,Restaurants,Other,Alone,10,1,1,3,1,3,5,1
+161,55,Female,Low,Monthly,RC Cola,Neutral,Online,Availability,Work,Store Brand,With Family,7,2,4,2,1,1,4,1
+162,51,Non-Binary,Low,Daily,Coke,Neutral,Vending Machine,Other,Restaurants,Coke,With Friends,4,5,4,2,2,2,3,5
+163,21,Prefer Not to Say,Low,Daily,RC Cola,Very Satisfied,Convenience Store,Taste,Travel,Store Brand,With Friends,0,2,3,4,1,2,4,1
+164,50,Non-Binary,Low,Daily,Store Brand,Neutral,Vending Machine,Brand Loyalty,Travel,RC Cola,Alone,8,3,3,3,1,5,2,5
+165,50,Female,High,Never,Other,Very Dissatisfied,Vending Machine,Price,Other,RC Cola,With Family,2,5,4,5,4,2,3,2
+166,50,Male,High,Never,Coke,Neutral,Vending Machine,Other,Other,Other,With Colleagues,8,4,5,1,4,1,5,5
+167,22,Prefer Not to Say,Middle,Daily,Coke,Neutral,Vending Machine,Other,Parties,Store Brand,Other,7,4,4,1,1,2,5,4
+168,38,Female,High,Never,Pepsi,Dissatisfied,Convenience Store,Availability,Other,Coke,With Colleagues,4,2,2,4,4,3,4,1
+169,37,Non-Binary,Middle,Never,RC Cola,Neutral,Convenience Store,Brand Loyalty,Restaurants,Other,With Friends,2,2,3,4,4,3,2,4
+170,35,Female,Middle,Rarely,Store Brand,Very Dissatisfied,Convenience Store,Taste,Restaurants,Coke,With Family,6,4,3,3,5,1,4,1
+171,26,Prefer Not to Say,Middle,Daily,Other,Neutral,Vending Machine,Price,Travel,Pepsi,With Family,8,2,3,5,2,5,2,1
+172,46,Prefer Not to Say,High,Rarely,Coke,Dissatisfied,Convenience Store,Availability,Work,RC Cola,Other,3,3,1,3,4,2,5,2
+173,61,Non-Binary,Low,Daily,Pepsi,Dissatisfied,Online,Brand Loyalty,Other,RC Cola,Other,4,1,4,2,4,3,5,1
+174,27,Prefer Not to Say,High,Weekly,RC Cola,Neutral,Convenience Store,Other,Other,Pepsi,Other,4,3,2,1,3,4,4,4
+175,42,Male,Middle,Weekly,Other,Satisfied,Other,Availability,Travel,RC Cola,With Family,6,5,1,3,1,3,4,3
+176,23,Prefer Not to Say,Low,Daily,Pepsi,Dissatisfied,Convenience Store,Taste,Work,Other,With Friends,10,4,5,2,1,4,3,1
+177,57,Female,Low,Monthly,RC Cola,Very Dissatisfied,Other,Other,Restaurants,RC Cola,With Family,4,3,3,5,4,5,1,4
+178,52,Non-Binary,Middle,Rarely,Pepsi,Dissatisfied,Supermarket,Availability,Travel,Store Brand,Alone,2,2,2,5,5,1,4,2
+179,39,Female,High,Never,Pepsi,Very Dissatisfied,Supermarket,Brand Loyalty,Parties,Store Brand,With Friends,2,1,4,5,5,5,1,1
+180,43,Prefer Not to Say,High,Never,Pepsi,Very Dissatisfied,Convenience Store,Taste,Sports Events,Pepsi,Alone,4,1,5,5,5,1,1,2
+181,43,Female,Middle,Daily,Coke,Satisfied,Online,Availability,Restaurants,Other,With Family,1,1,2,1,2,2,5,3
+182,58,Non-Binary,Low,Never,Coke,Dissatisfied,Supermarket,Price,Work,Store Brand,With Friends,5,3,3,4,4,1,4,5
+183,57,Male,Middle,Daily,RC Cola,Very Satisfied,Supermarket,Other,Travel,Store Brand,Alone,3,3,2,5,3,5,3,2
+184,53,Prefer Not to Say,Middle,Never,Other,Very Dissatisfied,Vending Machine,Price,Restaurants,Other,With Family,8,1,5,2,3,3,1,1
+185,49,Non-Binary,Middle,Rarely,Store Brand,Dissatisfied,Convenience Store,Other,Other,Coke,With Family,2,1,5,3,1,1,3,4
+186,50,Non-Binary,Middle,Monthly,Store Brand,Dissatisfied,Convenience Store,Brand Loyalty,Work,Store Brand,Other,6,3,4,2,5,4,2,4
+187,47,Non-Binary,Middle,Weekly,Store Brand,Neutral,Convenience Store,Price,Parties,Coke,Other,6,2,1,2,3,5,2,3
+188,39,Female,High,Rarely,Pepsi,Very Satisfied,Vending Machine,Brand Loyalty,Restaurants,Pepsi,Other,1,5,5,1,1,5,3,3
+189,46,Prefer Not to Say,Middle,Daily,Other,Very Satisfied,Supermarket,Brand Loyalty,Sports Events,Store Brand,With Friends,8,4,3,3,1,2,2,3
+190,38,Prefer Not to Say,Low,Weekly,Store Brand,Neutral,Vending Machine,Availability,Sports Events,Other,With Family,5,2,4,3,3,4,2,1
+191,62,Female,High,Weekly,Pepsi,Neutral,Online,Availability,Sports Events,Pepsi,Other,3,1,5,3,4,5,2,3
+192,37,Non-Binary,Low,Never,Coke,Neutral,Supermarket,Price,Parties,RC Cola,With Family,7,5,5,4,5,1,3,2
+193,19,Female,High,Never,Coke,Neutral,Vending Machine,Availability,Sports Events,Other,With Colleagues,2,5,3,2,3,1,4,4
+194,63,Male,High,Weekly,Coke,Neutral,Convenience Store,Availability,Parties,Pepsi,With Colleagues,10,3,2,1,4,2,4,3
+195,18,Non-Binary,Middle,Weekly,Coke,Very Satisfied,Online,Taste,Restaurants,RC Cola,Other,10,4,4,2,4,4,3,3
+196,20,Prefer Not to Say,Low,Daily,Store Brand,Dissatisfied,Convenience Store,Price,Home,Other,Alone,0,3,3,5,4,4,4,5
+197,57,Non-Binary,Middle,Weekly,Pepsi,Neutral,Supermarket,Other,Sports Events,Coke,With Colleagues,6,2,1,3,5,4,3,3
+198,19,Prefer Not to Say,Middle,Monthly,Other,Satisfied,Online,Price,Restaurants,Pepsi,With Colleagues,6,2,1,1,5,4,3,2
+199,41,Prefer Not to Say,High,Monthly,Coke,Satisfied,Vending Machine,Taste,Sports Events,Coke,Alone,5,5,2,3,2,2,3,3
+200,41,Female,Middle,Rarely,Store Brand,Dissatisfied,Online,Brand Loyalty,Parties,RC Cola,Other,5,4,4,4,2,4,2,3
+201,56,Non-Binary,Low,Daily,Coke,Satisfied,Convenience Store,Price,Other,Store Brand,With Friends,5,4,3,5,5,3,5,5
+202,45,Male,Low,Monthly,Coke,Satisfied,Vending Machine,Price,Home,Store Brand,With Family,8,5,4,3,5,5,4,1
+203,25,Non-Binary,Middle,Monthly,Other,Neutral,Supermarket,Brand Loyalty,Parties,Store Brand,Other,4,5,5,3,1,4,1,2
+204,46,Female,High,Weekly,RC Cola,Neutral,Vending Machine,Brand Loyalty,Parties,Pepsi,Alone,2,3,2,3,3,5,5,3
+205,42,Prefer Not to Say,Middle,Monthly,RC Cola,Neutral,Other,Price,Parties,Coke,Alone,4,3,5,2,5,2,1,1
+206,48,Prefer Not to Say,Middle,Monthly,Other,Satisfied,Other,Brand Loyalty,Travel,Store Brand,With Friends,6,1,1,2,2,3,2,5
+207,58,Prefer Not to Say,High,Never,Other,Satisfied,Vending Machine,Taste,Other,RC Cola,Alone,7,5,2,1,1,5,1,4
+208,60,Prefer Not to Say,Low,Monthly,RC Cola,Very Dissatisfied,Supermarket,Other,Other,RC Cola,With Friends,4,5,1,4,3,2,4,3
+209,44,Prefer Not to Say,Low,Monthly,Coke,Neutral,Other,Price,Work,RC Cola,Alone,8,1,4,2,5,2,5,1
+210,52,Male,Middle,Daily,Coke,Very Satisfied,Supermarket,Availability,Sports Events,Other,With Friends,8,2,4,4,3,2,1,5
+211,32,Prefer Not to Say,Middle,Rarely,Pepsi,Dissatisfied,Other,Other,Work,RC Cola,Other,3,5,4,5,5,2,5,2
+212,47,Prefer Not to Say,Middle,Monthly,Coke,Neutral,Other,Price,Home,Other,With Family,7,4,5,1,5,3,4,4
+213,18,Prefer Not to Say,Middle,Rarely,Store Brand,Neutral,Vending Machine,Taste,Other,Store Brand,With Family,4,2,3,5,1,4,5,5
+214,45,Non-Binary,Middle,Rarely,Coke,Very Dissatisfied,Vending Machine,Price,Restaurants,Pepsi,Other,7,2,2,5,1,5,1,5
+215,51,Prefer Not to Say,Low,Never,Store Brand,Very Satisfied,Convenience Store,Brand Loyalty,Work,Coke,Other,3,1,1,3,4,4,4,2
+216,39,Female,High,Rarely,Pepsi,Dissatisfied,Convenience Store,Taste,Work,RC Cola,With Family,3,4,4,3,5,4,2,4
+217,50,Female,Low,Weekly,Pepsi,Neutral,Convenience Store,Availability,Restaurants,RC Cola,With Family,10,5,3,1,1,3,5,4
+218,58,Female,High,Rarely,Store Brand,Very Dissatisfied,Supermarket,Taste,Work,Other,With Family,10,1,2,3,4,2,5,2
+219,49,Female,Low,Rarely,Other,Dissatisfied,Convenience Store,Taste,Sports Events,Coke,Other,6,2,1,5,3,5,3,4
+220,59,Female,Low,Never,Store Brand,Neutral,Vending Machine,Price,Sports Events,Store Brand,Other,1,3,5,4,4,1,3,5
+221,54,Female,Low,Daily,Store Brand,Dissatisfied,Supermarket,Brand Loyalty,Sports Events,Pepsi,With Family,6,3,5,1,1,1,5,4
+222,25,Female,Low,Daily,RC Cola,Very Satisfied,Vending Machine,Other,Restaurants,Store Brand,Other,9,5,5,4,5,1,2,2
+223,28,Prefer Not to Say,High,Never,Coke,Neutral,Convenience Store,Other,Travel,Store Brand,Other,0,4,5,1,5,2,1,5
+224,57,Prefer Not to Say,Low,Monthly,Pepsi,Very Dissatisfied,Convenience Store,Taste,Home,Pepsi,Alone,5,3,3,1,3,2,5,2
+225,24,Female,Middle,Weekly,Store Brand,Dissatisfied,Supermarket,Taste,Parties,Pepsi,Other,2,1,2,2,1,4,4,3
+226,36,Prefer Not to Say,Low,Daily,Other,Dissatisfied,Online,Taste,Other,Other,With Family,10,5,5,1,3,1,2,3
+227,54,Female,High,Monthly,Store Brand,Very Satisfied,Convenience Store,Brand Loyalty,Travel,RC Cola,Alone,3,2,2,2,1,2,2,2
+228,35,Male,Middle,Monthly,Pepsi,Neutral,Online,Availability,Home,Other,With Family,4,5,2,4,1,1,1,5
+229,40,Prefer Not to Say,Middle,Weekly,Coke,Satisfied,Convenience Store,Price,Home,RC Cola,With Colleagues,4,4,1,1,4,4,1,1
+230,22,Male,High,Monthly,Pepsi,Very Satisfied,Online,Availability,Parties,Store Brand,With Colleagues,10,3,3,3,3,5,2,4
+231,27,Female,Low,Daily,RC Cola,Very Satisfied,Convenience Store,Price,Travel,RC Cola,With Family,2,1,5,5,4,2,3,1
+232,53,Non-Binary,Low,Daily,Other,Satisfied,Convenience Store,Taste,Sports Events,Pepsi,With Family,4,1,2,4,2,5,1,1
+233,41,Prefer Not to Say,Middle,Monthly,Store Brand,Dissatisfied,Online,Price,Sports Events,Pepsi,Alone,9,2,5,2,3,1,2,1
+234,51,Male,Low,Daily,Pepsi,Satisfied,Supermarket,Brand Loyalty,Work,Coke,With Colleagues,10,4,5,5,4,1,3,5
+235,56,Female,High,Rarely,RC Cola,Very Dissatisfied,Vending Machine,Other,Restaurants,Pepsi,With Colleagues,0,4,2,3,4,3,2,2
+236,21,Female,Low,Daily,Other,Neutral,Other,Other,Work,RC Cola,Alone,2,2,5,2,3,3,2,1
+237,43,Male,Middle,Monthly,Store Brand,Very Satisfied,Supermarket,Other,Parties,Pepsi,With Friends,3,2,3,1,4,3,1,2
+238,53,Female,High,Weekly,RC Cola,Very Dissatisfied,Supermarket,Brand Loyalty,Work,Pepsi,With Family,5,4,4,4,1,5,2,4
+239,43,Female,Middle,Never,Pepsi,Neutral,Other,Brand Loyalty,Other,Pepsi,Other,9,3,2,1,2,3,3,2
+240,41,Female,Low,Rarely,RC Cola,Neutral,Other,Taste,Home,Pepsi,With Friends,8,2,3,4,4,2,3,2
+241,43,Prefer Not to Say,High,Never,Pepsi,Satisfied,Other,Availability,Sports Events,Coke,With Family,3,3,5,4,5,2,5,2
+242,28,Non-Binary,Middle,Daily,Store Brand,Satisfied,Online,Taste,Restaurants,RC Cola,With Friends,10,4,2,3,1,5,1,4
+243,22,Female,Low,Daily,RC Cola,Satisfied,Convenience Store,Brand Loyalty,Restaurants,Store Brand,Other,9,3,3,1,2,3,1,1
+244,51,Female,Middle,Daily,Other,Very Satisfied,Supermarket,Price,Travel,Coke,With Family,5,1,2,4,5,2,3,2
+245,32,Prefer Not to Say,Middle,Rarely,Other,Very Dissatisfied,Convenience Store,Availability,Restaurants,Store Brand,With Colleagues,7,4,1,3,1,5,4,3
+246,57,Prefer Not to Say,High,Weekly,Other,Very Dissatisfied,Supermarket,Availability,Parties,Coke,With Friends,9,1,2,1,3,3,4,3
+247,63,Male,High,Weekly,Coke,Dissatisfied,Convenience Store,Availability,Sports Events,Other,Other,5,1,3,3,1,1,1,3
+248,43,Male,Middle,Daily,Pepsi,Very Satisfied,Other,Taste,Home,Store Brand,With Friends,4,2,2,5,3,4,1,1
+249,39,Female,Middle,Monthly,Coke,Dissatisfied,Online,Taste,Travel,Other,With Family,0,1,5,2,1,1,5,1
+250,54,Non-Binary,High,Monthly,Coke,Very Dissatisfied,Online,Taste,Home,Store Brand,Alone,5,4,3,3,1,4,1,5
+251,22,Male,Middle,Daily,Coke,Neutral,Online,Other,Sports Events,Other,With Family,5,2,2,1,1,1,2,4
+252,59,Male,Middle,Monthly,RC Cola,Very Dissatisfied,Other,Price,Restaurants,Other,With Friends,10,2,5,5,2,3,2,5
+253,39,Prefer Not to Say,Middle,Rarely,RC Cola,Very Dissatisfied,Supermarket,Other,Sports Events,Pepsi,Alone,1,5,3,3,2,3,1,4
+254,54,Prefer Not to Say,Middle,Never,Store Brand,Very Satisfied,Supermarket,Other,Restaurants,Other,Other,4,1,4,1,4,4,3,2
+255,36,Female,Low,Rarely,Pepsi,Very Dissatisfied,Other,Brand Loyalty,Restaurants,Other,With Family,1,2,1,3,1,3,2,5
+256,54,Female,High,Rarely,RC Cola,Dissatisfied,Supermarket,Price,Travel,RC Cola,With Family,0,1,4,2,3,4,4,1
+257,64,Non-Binary,High,Rarely,Store Brand,Satisfied,Other,Other,Sports Events,Coke,With Friends,7,3,3,3,2,3,4,4
+258,52,Prefer Not to Say,Middle,Monthly,Pepsi,Very Satisfied,Vending Machine,Price,Parties,Other,With Family,10,5,1,3,5,4,5,3
+259,39,Female,High,Weekly,Store Brand,Very Dissatisfied,Other,Availability,Parties,Pepsi,With Friends,5,3,3,2,2,1,5,4
+260,20,Non-Binary,High,Weekly,Store Brand,Dissatisfied,Convenience Store,Price,Travel,Store Brand,Alone,6,3,1,3,5,1,2,4
+261,56,Prefer Not to Say,Low,Rarely,Pepsi,Very Satisfied,Vending Machine,Taste,Sports Events,Coke,With Family,2,3,3,4,1,4,4,1
+262,53,Prefer Not to Say,High,Weekly,Pepsi,Neutral,Supermarket,Price,Home,Store Brand,Alone,2,4,3,1,1,4,2,4
+263,49,Male,Low,Weekly,RC Cola,Very Satisfied,Supermarket,Availability,Parties,RC Cola,With Colleagues,1,3,2,4,2,3,2,4
+264,20,Prefer Not to Say,Middle,Never,Store Brand,Neutral,Online,Price,Restaurants,Store Brand,With Family,1,4,4,5,2,3,3,4
+265,56,Non-Binary,High,Rarely,Coke,Satisfied,Convenience Store,Taste,Sports Events,Other,With Family,3,3,5,1,1,1,5,3
+266,41,Male,Low,Rarely,Store Brand,Very Dissatisfied,Other,Availability,Restaurants,Coke,With Family,1,3,5,5,2,4,4,4
+267,27,Non-Binary,Low,Monthly,RC Cola,Very Dissatisfied,Supermarket,Taste,Sports Events,Coke,With Friends,6,3,3,1,1,2,3,5
+268,38,Female,High,Weekly,Pepsi,Satisfied,Other,Price,Restaurants,Store Brand,With Friends,4,4,5,2,5,3,3,3
+269,20,Prefer Not to Say,High,Rarely,Pepsi,Satisfied,Vending Machine,Other,Restaurants,Coke,With Colleagues,8,3,4,2,1,2,5,4
+270,25,Male,Middle,Daily,RC Cola,Satisfied,Vending Machine,Price,Parties,Store Brand,Other,7,1,2,3,3,5,1,3
+271,49,Female,Middle,Daily,Pepsi,Very Dissatisfied,Vending Machine,Other,Other,Pepsi,With Family,2,4,3,5,1,3,1,3
+272,34,Non-Binary,High,Daily,RC Cola,Very Dissatisfied,Supermarket,Brand Loyalty,Parties,Coke,With Family,0,5,1,1,3,5,4,4
+273,25,Non-Binary,Low,Weekly,Other,Very Dissatisfied,Online,Brand Loyalty,Travel,Store Brand,With Friends,5,3,3,3,2,4,4,1
+274,24,Non-Binary,High,Monthly,Store Brand,Very Dissatisfied,Online,Brand Loyalty,Travel,Pepsi,With Colleagues,5,2,3,3,4,3,4,2
+275,21,Non-Binary,High,Monthly,Pepsi,Neutral,Online,Availability,Travel,Other,Other,8,1,1,3,1,1,3,4
+276,31,Prefer Not to Say,High,Rarely,Pepsi,Neutral,Convenience Store,Brand Loyalty,Parties,RC Cola,With Friends,7,3,1,4,5,5,4,4
+277,28,Male,Middle,Rarely,RC Cola,Satisfied,Convenience Store,Price,Other,Coke,With Friends,8,3,3,4,4,5,4,5
+278,50,Prefer Not to Say,Low,Never,Coke,Dissatisfied,Other,Other,Home,Coke,Other,5,4,3,4,5,4,3,5
+279,38,Prefer Not to Say,High,Weekly,Pepsi,Very Satisfied,Other,Brand Loyalty,Parties,Pepsi,With Friends,5,4,3,4,1,3,1,5
+280,31,Prefer Not to Say,Middle,Never,Coke,Dissatisfied,Vending Machine,Taste,Work,Store Brand,With Friends,3,5,2,5,5,2,3,4
+281,63,Female,Low,Daily,Other,Satisfied,Convenience Store,Brand Loyalty,Travel,Pepsi,With Family,4,4,4,1,4,2,3,1
+282,18,Non-Binary,Low,Daily,Pepsi,Very Satisfied,Convenience Store,Brand Loyalty,Home,Store Brand,With Colleagues,6,5,1,3,4,2,1,2
+283,56,Non-Binary,High,Weekly,Coke,Dissatisfied,Supermarket,Brand Loyalty,Restaurants,Other,With Family,4,3,5,1,4,1,4,2
+284,57,Male,Middle,Monthly,Coke,Very Satisfied,Online,Other,Sports Events,Other,With Family,8,3,2,3,4,5,3,5
+285,31,Male,Middle,Never,Other,Dissatisfied,Online,Availability,Sports Events,Other,With Colleagues,1,1,1,4,1,4,4,2
+286,47,Non-Binary,Middle,Weekly,Pepsi,Dissatisfied,Convenience Store,Price,Home,Store Brand,With Friends,2,4,4,1,3,2,5,2
+287,63,Female,Low,Monthly,Store Brand,Satisfied,Online,Availability,Sports Events,Pepsi,Alone,0,5,4,4,1,3,1,3
+288,40,Female,High,Rarely,Other,Very Dissatisfied,Online,Taste,Parties,Coke,With Family,0,4,2,1,3,2,4,2
+289,34,Male,Low,Rarely,Store Brand,Very Satisfied,Supermarket,Brand Loyalty,Other,Pepsi,With Family,10,1,5,4,4,4,4,2
+290,61,Non-Binary,Middle,Rarely,Coke,Neutral,Other,Other,Parties,Other,With Colleagues,5,3,4,1,3,5,3,3
+291,52,Male,Low,Daily,Coke,Dissatisfied,Vending Machine,Availability,Parties,Coke,Other,8,1,4,2,4,1,5,3
+292,50,Non-Binary,High,Monthly,Store Brand,Neutral,Vending Machine,Taste,Home,Other,Other,10,3,3,1,2,2,4,2
+293,46,Prefer Not to Say,High,Monthly,Store Brand,Very Satisfied,Other,Other,Travel,Coke,With Friends,1,5,3,1,4,4,3,2
+294,43,Prefer Not to Say,Low,Never,RC Cola,Neutral,Online,Other,Home,RC Cola,Other,8,3,1,4,5,1,2,1
+295,21,Male,Low,Daily,Pepsi,Dissatisfied,Convenience Store,Availability,Sports Events,Store Brand,With Friends,1,5,2,3,3,1,3,1
+296,23,Non-Binary,Middle,Rarely,Coke,Satisfied,Other,Other,Home,Coke,Other,2,4,1,4,3,5,2,2
+297,46,Non-Binary,Middle,Weekly,Store Brand,Neutral,Online,Taste,Parties,RC Cola,Alone,5,1,5,5,3,3,2,5
+298,41,Female,High,Daily,Coke,Dissatisfied,Other,Other,Sports Events,Other,With Family,2,3,5,2,5,5,1,5
+299,41,Female,High,Daily,RC Cola,Dissatisfied,Online,Brand Loyalty,Travel,RC Cola,With Family,0,1,1,3,5,5,3,3
+300,42,Prefer Not to Say,High,Monthly,Other,Satisfied,Convenience Store,Price,Parties,Pepsi,With Colleagues,2,2,3,1,1,4,4,2
+301,18,Prefer Not to Say,High,Never,Other,Very Dissatisfied,Convenience Store,Taste,Sports Events,Store Brand,With Colleagues,0,2,4,1,3,5,2,3
+302,54,Prefer Not to Say,Middle,Monthly,Store Brand,Very Dissatisfied,Other,Taste,Sports Events,Other,Alone,4,1,4,3,5,5,1,5
+303,45,Female,Middle,Monthly,Store Brand,Satisfied,Supermarket,Availability,Work,RC Cola,With Friends,10,3,2,1,4,4,5,3
+304,50,Prefer Not to Say,Middle,Weekly,Store Brand,Very Satisfied,Supermarket,Taste,Home,Other,Alone,7,2,2,3,1,4,2,3
+305,45,Male,High,Weekly,RC Cola,Very Satisfied,Supermarket,Taste,Restaurants,RC Cola,With Colleagues,10,2,1,4,1,3,5,5
+306,46,Female,Middle,Monthly,Store Brand,Very Dissatisfied,Convenience Store,Brand Loyalty,Other,RC Cola,Alone,9,3,5,1,4,2,2,5
+307,46,Female,High,Monthly,Store Brand,Very Satisfied,Other,Availability,Restaurants,Other,Other,7,4,2,2,5,3,2,3
+308,58,Non-Binary,High,Weekly,Coke,Very Satisfied,Online,Other,Travel,Coke,Alone,10,5,1,3,5,4,2,5
+309,31,Prefer Not to Say,Middle,Daily,Store Brand,Satisfied,Other,Other,Parties,Coke,With Friends,2,1,2,5,3,2,1,1
+310,35,Male,Low,Never,RC Cola,Very Dissatisfied,Online,Price,Other,Coke,With Colleagues,3,1,2,2,1,1,3,2
+311,20,Male,Middle,Monthly,RC Cola,Very Satisfied,Other,Taste,Restaurants,Store Brand,With Friends,10,4,2,5,2,1,3,3
+312,64,Female,Low,Weekly,Coke,Neutral,Other,Availability,Home,Coke,With Friends,9,1,5,1,4,2,1,2
+313,20,Prefer Not to Say,High,Monthly,Pepsi,Neutral,Other,Price,Sports Events,Other,With Family,8,1,4,5,2,2,4,4
+314,58,Male,Low,Daily,RC Cola,Very Dissatisfied,Other,Availability,Home,Pepsi,With Colleagues,4,4,2,3,5,5,5,5
+315,23,Prefer Not to Say,Middle,Never,RC Cola,Dissatisfied,Other,Taste,Parties,Other,Other,2,4,3,1,3,2,2,1
+316,59,Female,Low,Monthly,Pepsi,Very Satisfied,Vending Machine,Taste,Home,Coke,Other,9,2,5,2,4,4,1,4
+317,48,Prefer Not to Say,High,Never,Pepsi,Very Satisfied,Supermarket,Price,Home,Store Brand,With Colleagues,7,1,5,2,1,2,2,1
+318,42,Female,High,Never,Pepsi,Neutral,Vending Machine,Other,Restaurants,RC Cola,With Friends,6,1,5,5,1,5,4,2
+319,63,Non-Binary,High,Weekly,RC Cola,Very Satisfied,Supermarket,Price,Parties,Coke,Other,9,3,2,5,4,2,1,2
+320,18,Non-Binary,Middle,Rarely,Other,Satisfied,Other,Price,Home,Pepsi,Alone,9,4,2,1,5,1,4,2
+321,30,Female,Middle,Never,Pepsi,Satisfied,Convenience Store,Brand Loyalty,Other,Coke,With Family,8,1,1,5,5,2,5,1
+322,51,Female,High,Daily,Pepsi,Satisfied,Other,Availability,Travel,Coke,With Family,8,5,2,3,1,5,4,3
+323,44,Non-Binary,High,Weekly,Other,Very Satisfied,Online,Price,Home,Pepsi,With Friends,5,2,5,4,1,1,3,1
+324,23,Non-Binary,Low,Weekly,Store Brand,Very Satisfied,Online,Price,Parties,Pepsi,Alone,3,3,5,4,4,5,3,3
+325,62,Prefer Not to Say,Middle,Weekly,Coke,Dissatisfied,Convenience Store,Price,Restaurants,Pepsi,With Colleagues,5,2,3,5,5,1,5,3
+326,18,Male,High,Weekly,Pepsi,Dissatisfied,Convenience Store,Taste,Other,RC Cola,Other,6,4,2,1,3,2,5,4
+327,30,Prefer Not to Say,Low,Never,Other,Very Satisfied,Vending Machine,Brand Loyalty,Parties,Other,With Family,9,2,5,4,4,4,2,5
+328,57,Prefer Not to Say,Middle,Weekly,RC Cola,Satisfied,Supermarket,Taste,Restaurants,Store Brand,Other,1,3,2,3,5,2,2,2
+329,58,Female,Low,Rarely,Coke,Very Dissatisfied,Vending Machine,Price,Other,Coke,Alone,7,1,5,5,3,3,2,4
+330,31,Prefer Not to Say,Low,Monthly,RC Cola,Dissatisfied,Online,Taste,Travel,Coke,With Family,8,5,4,5,4,2,3,3
+331,41,Non-Binary,Middle,Monthly,Other,Dissatisfied,Vending Machine,Brand Loyalty,Sports Events,Pepsi,Other,5,5,2,3,3,3,3,1
+332,37,Non-Binary,Low,Rarely,Coke,Neutral,Supermarket,Brand Loyalty,Sports Events,Pepsi,Other,10,4,2,4,4,4,4,5
+333,35,Non-Binary,Low,Never,Store Brand,Dissatisfied,Other,Price,Restaurants,Other,Alone,4,3,1,1,2,2,5,4
+334,53,Prefer Not to Say,Low,Rarely,Coke,Satisfied,Other,Price,Parties,Coke,Alone,3,2,3,4,2,3,5,5
+335,47,Male,Low,Monthly,Store Brand,Very Satisfied,Supermarket,Other,Other,Other,Alone,7,2,5,1,5,2,1,1
+336,43,Prefer Not to Say,High,Weekly,Other,Satisfied,Convenience Store,Taste,Parties,Pepsi,Alone,3,1,5,2,4,2,5,3
+337,38,Non-Binary,High,Monthly,Pepsi,Very Satisfied,Vending Machine,Other,Other,RC Cola,With Family,7,3,5,4,1,3,1,2
+338,61,Prefer Not to Say,Middle,Monthly,RC Cola,Dissatisfied,Online,Taste,Other,Coke,Alone,7,2,1,4,3,1,1,4
+339,52,Male,Low,Rarely,Coke,Very Dissatisfied,Supermarket,Price,Work,Pepsi,Alone,6,5,4,2,1,2,1,5
+340,50,Male,Middle,Daily,Pepsi,Dissatisfied,Vending Machine,Price,Other,Pepsi,With Friends,8,4,3,2,2,3,2,1
+341,55,Prefer Not to Say,Middle,Rarely,Other,Very Satisfied,Convenience Store,Taste,Parties,Pepsi,Other,5,2,4,4,5,4,2,1
+342,20,Male,Middle,Monthly,RC Cola,Very Satisfied,Other,Taste,Other,Pepsi,With Friends,8,4,3,1,1,3,4,4
+343,19,Prefer Not to Say,High,Weekly,Store Brand,Very Satisfied,Supermarket,Price,Work,RC Cola,Alone,2,4,4,3,2,4,2,4
+344,59,Non-Binary,Middle,Rarely,Store Brand,Neutral,Supermarket,Availability,Sports Events,Other,Other,2,5,5,2,5,4,1,1
+345,50,Male,Middle,Monthly,Coke,Neutral,Other,Price,Other,RC Cola,Alone,1,2,3,4,3,1,3,4
+346,36,Prefer Not to Say,Middle,Daily,Store Brand,Satisfied,Convenience Store,Price,Restaurants,Pepsi,Other,5,3,2,5,1,3,1,3
+347,64,Male,Low,Never,Other,Very Satisfied,Other,Other,Work,Coke,Other,9,1,3,4,1,4,4,4
+348,46,Prefer Not to Say,Low,Daily,Coke,Very Satisfied,Other,Availability,Parties,RC Cola,Other,3,1,3,1,1,4,3,4
+349,42,Prefer Not to Say,Middle,Weekly,Other,Satisfied,Online,Brand Loyalty,Sports Events,RC Cola,With Friends,0,1,1,1,2,1,2,1
+350,20,Female,High,Daily,Pepsi,Very Satisfied,Convenience Store,Price,Work,Pepsi,Alone,1,3,4,2,1,2,1,3
+351,54,Female,Low,Monthly,Store Brand,Dissatisfied,Supermarket,Price,Home,RC Cola,Alone,1,5,2,5,5,3,3,5
+352,50,Prefer Not to Say,Low,Rarely,RC Cola,Very Dissatisfied,Other,Availability,Sports Events,Coke,With Friends,5,2,5,3,5,4,4,5
+353,28,Prefer Not to Say,High,Weekly,RC Cola,Neutral,Online,Price,Work,Pepsi,Alone,4,4,1,4,2,3,2,2
+354,25,Non-Binary,Low,Weekly,Other,Neutral,Other,Brand Loyalty,Parties,Other,With Family,1,3,4,4,2,1,3,3
+355,19,Male,Middle,Never,Coke,Dissatisfied,Vending Machine,Availability,Restaurants,Coke,With Family,0,2,2,4,2,5,1,3
+356,33,Female,High,Daily,Pepsi,Very Dissatisfied,Vending Machine,Price,Sports Events,Store Brand,With Colleagues,9,3,1,1,4,3,2,5
+357,39,Female,High,Never,Store Brand,Very Satisfied,Other,Taste,Work,Pepsi,With Colleagues,7,2,4,5,5,3,2,4
+358,30,Female,Middle,Weekly,Store Brand,Very Dissatisfied,Other,Other,Other,Coke,With Family,5,5,5,3,4,1,1,3
+359,26,Male,Low,Daily,Store Brand,Dissatisfied,Other,Availability,Parties,Store Brand,With Colleagues,5,5,2,2,2,4,5,2
+360,61,Male,Low,Daily,Coke,Neutral,Supermarket,Availability,Other,Store Brand,Alone,10,3,3,2,1,1,5,1
+361,43,Non-Binary,Middle,Monthly,Pepsi,Very Satisfied,Online,Price,Restaurants,Store Brand,With Colleagues,3,4,1,5,3,5,2,3
+362,55,Non-Binary,Middle,Rarely,Pepsi,Neutral,Other,Brand Loyalty,Work,Store Brand,Alone,7,2,5,5,5,2,2,4
+363,24,Female,Low,Rarely,Store Brand,Very Satisfied,Other,Brand Loyalty,Other,Coke,Alone,7,3,1,3,1,3,5,5
+364,38,Prefer Not to Say,Middle,Weekly,RC Cola,Very Dissatisfied,Supermarket,Brand Loyalty,Restaurants,Store Brand,With Colleagues,8,1,1,4,2,1,3,5
+365,48,Female,High,Monthly,RC Cola,Very Satisfied,Convenience Store,Taste,Home,RC Cola,With Friends,0,1,1,3,4,4,1,2
+366,43,Male,Middle,Daily,Coke,Dissatisfied,Other,Other,Travel,Pepsi,With Colleagues,2,3,5,4,3,5,5,3
+367,22,Prefer Not to Say,Low,Never,RC Cola,Dissatisfied,Other,Other,Home,Other,With Friends,7,5,3,3,4,4,3,5
+368,49,Female,Middle,Monthly,RC Cola,Dissatisfied,Online,Availability,Home,Coke,With Friends,8,3,5,3,5,1,3,4
+369,58,Female,Low,Rarely,Store Brand,Satisfied,Convenience Store,Price,Restaurants,Coke,With Colleagues,9,2,3,4,4,2,2,3
+370,35,Female,High,Weekly,Store Brand,Very Dissatisfied,Convenience Store,Brand Loyalty,Home,Pepsi,Other,10,1,4,4,3,3,4,1
+371,42,Male,Low,Never,Store Brand,Neutral,Other,Availability,Work,RC Cola,Alone,9,4,5,1,5,3,4,2
+372,46,Non-Binary,Middle,Weekly,RC Cola,Satisfied,Convenience Store,Brand Loyalty,Parties,Other,With Friends,7,1,1,2,5,1,2,1
+373,59,Non-Binary,High,Weekly,Coke,Dissatisfied,Vending Machine,Availability,Restaurants,Other,With Family,0,3,4,2,3,2,2,4
+374,51,Male,Low,Weekly,Store Brand,Neutral,Other,Other,Home,Store Brand,With Friends,0,4,5,1,1,1,3,3
+375,41,Non-Binary,Low,Daily,Coke,Very Satisfied,Vending Machine,Taste,Restaurants,Store Brand,With Family,1,5,4,5,5,5,2,4
+376,27,Male,Low,Daily,Pepsi,Very Satisfied,Convenience Store,Other,Work,RC Cola,Other,8,5,5,1,3,1,4,2
+377,63,Male,Low,Rarely,Store Brand,Very Satisfied,Online,Other,Parties,RC Cola,With Colleagues,10,4,3,1,5,5,5,1
+378,35,Male,Low,Weekly,Store Brand,Satisfied,Supermarket,Availability,Sports Events,Pepsi,Alone,10,2,3,1,4,1,4,2
+379,21,Non-Binary,Middle,Never,Other,Satisfied,Convenience Store,Price,Other,Other,With Friends,5,3,4,1,1,5,2,2
+380,50,Prefer Not to Say,High,Weekly,RC Cola,Satisfied,Convenience Store,Price,Sports Events,Pepsi,With Colleagues,10,3,3,3,2,4,4,3
+381,63,Male,Middle,Monthly,RC Cola,Neutral,Convenience Store,Price,Work,Store Brand,With Friends,7,4,3,3,2,5,4,4
+382,29,Prefer Not to Say,Low,Rarely,RC Cola,Dissatisfied,Online,Brand Loyalty,Work,Other,Alone,9,3,4,4,2,3,3,5
+383,53,Non-Binary,Low,Rarely,Store Brand,Very Satisfied,Other,Price,Home,Other,With Friends,9,5,5,1,2,5,2,4
+384,55,Prefer Not to Say,Middle,Daily,RC Cola,Very Dissatisfied,Convenience Store,Availability,Home,RC Cola,Other,2,3,3,2,2,2,2,5
+385,25,Prefer Not to Say,Low,Monthly,Pepsi,Very Satisfied,Online,Taste,Sports Events,Other,With Colleagues,4,1,4,3,2,1,3,1
+386,33,Prefer Not to Say,High,Never,Pepsi,Very Dissatisfied,Online,Taste,Work,Store Brand,With Family,5,5,2,4,5,2,2,1
+387,33,Non-Binary,Low,Monthly,Coke,Very Satisfied,Other,Other,Work,Store Brand,With Colleagues,9,2,3,2,2,2,5,1
+388,54,Male,Low,Weekly,Store Brand,Very Dissatisfied,Vending Machine,Price,Travel,Pepsi,Other,5,5,5,3,1,2,1,4
+389,49,Prefer Not to Say,Low,Weekly,Other,Very Satisfied,Online,Taste,Travel,RC Cola,Other,9,4,2,5,3,1,1,1
+390,41,Prefer Not to Say,High,Weekly,Coke,Very Satisfied,Other,Taste,Parties,RC Cola,Other,7,5,3,1,2,1,1,3
+391,48,Female,Low,Monthly,Store Brand,Neutral,Other,Price,Restaurants,Pepsi,Other,2,4,5,3,1,4,1,4
+392,57,Non-Binary,Middle,Daily,RC Cola,Dissatisfied,Supermarket,Availability,Work,RC Cola,With Friends,2,2,1,2,1,1,4,5
+393,43,Non-Binary,Middle,Never,Store Brand,Neutral,Convenience Store,Availability,Parties,RC Cola,With Colleagues,0,4,1,1,4,1,5,4
+394,40,Female,Low,Weekly,RC Cola,Very Dissatisfied,Supermarket,Availability,Work,Coke,With Family,0,1,1,3,4,5,3,2
+395,27,Non-Binary,Low,Rarely,Store Brand,Dissatisfied,Other,Price,Home,RC Cola,Other,2,1,2,3,3,4,3,2
+396,29,Non-Binary,Low,Weekly,Coke,Neutral,Other,Brand Loyalty,Other,Store Brand,With Colleagues,8,3,2,5,2,4,2,4
+397,51,Prefer Not to Say,Middle,Daily,Other,Neutral,Supermarket,Availability,Work,RC Cola,Other,6,1,5,3,2,5,2,5
+398,62,Female,Middle,Daily,Other,Dissatisfied,Vending Machine,Price,Travel,Store Brand,Alone,6,2,2,4,1,1,1,2
+399,49,Prefer Not to Say,Middle,Weekly,Store Brand,Neutral,Supermarket,Other,Travel,Pepsi,With Colleagues,0,2,3,4,5,2,4,2
+400,36,Male,Middle,Weekly,Pepsi,Dissatisfied,Online,Brand Loyalty,Work,Store Brand,With Friends,4,3,5,1,2,1,5,1
+401,23,Female,Middle,Daily,Pepsi,Very Dissatisfied,Supermarket,Availability,Parties,Other,With Family,6,1,2,3,3,3,3,1
+402,28,Prefer Not to Say,Low,Monthly,Pepsi,Neutral,Convenience Store,Taste,Home,Other,Alone,7,1,5,3,3,2,2,1
+403,21,Non-Binary,High,Weekly,Coke,Neutral,Convenience Store,Brand Loyalty,Other,Coke,With Colleagues,9,1,1,4,4,3,4,3
+404,51,Female,Middle,Weekly,Other,Neutral,Vending Machine,Other,Sports Events,RC Cola,With Friends,0,4,2,4,5,3,5,4
+405,36,Female,Low,Rarely,Store Brand,Dissatisfied,Vending Machine,Brand Loyalty,Work,RC Cola,With Colleagues,4,5,1,1,5,5,4,2
+406,49,Non-Binary,Middle,Never,Coke,Very Dissatisfied,Other,Availability,Parties,Store Brand,With Colleagues,1,5,3,4,5,3,3,5
+407,44,Male,Low,Daily,Other,Satisfied,Supermarket,Price,Home,Pepsi,Alone,4,4,2,2,5,4,4,5
+408,63,Prefer Not to Say,High,Monthly,Store Brand,Dissatisfied,Online,Brand Loyalty,Work,Store Brand,With Family,5,5,3,3,5,4,5,3
+409,31,Male,High,Weekly,Store Brand,Very Dissatisfied,Other,Brand Loyalty,Work,Store Brand,Alone,3,2,4,1,5,5,4,1
+410,29,Female,Low,Monthly,RC Cola,Very Dissatisfied,Online,Taste,Sports Events,Other,Alone,5,2,1,2,1,3,2,3
+411,59,Prefer Not to Say,High,Rarely,Coke,Neutral,Convenience Store,Taste,Work,RC Cola,With Family,7,1,1,3,5,3,3,2
+412,51,Female,Low,Monthly,RC Cola,Very Satisfied,Supermarket,Price,Sports Events,Other,With Friends,0,2,4,1,1,5,1,3
+413,58,Non-Binary,Low,Monthly,Other,Very Satisfied,Convenience Store,Brand Loyalty,Other,Store Brand,Other,6,2,1,4,2,3,4,5
+414,21,Non-Binary,High,Daily,Other,Satisfied,Supermarket,Price,Travel,Pepsi,With Friends,4,3,2,2,1,1,5,5
+415,40,Male,Low,Monthly,Other,Satisfied,Convenience Store,Taste,Travel,Other,With Friends,6,1,4,1,3,1,2,2
+416,38,Non-Binary,Low,Daily,Coke,Neutral,Convenience Store,Brand Loyalty,Other,RC Cola,With Family,1,1,1,1,2,5,1,3
+417,41,Female,Middle,Monthly,Store Brand,Very Satisfied,Online,Price,Home,Other,With Friends,7,5,2,4,3,4,3,5
+418,50,Prefer Not to Say,Middle,Daily,Coke,Very Satisfied,Supermarket,Price,Travel,Pepsi,Other,2,3,1,4,4,4,1,4
+419,47,Male,Middle,Weekly,Store Brand,Satisfied,Convenience Store,Taste,Home,RC Cola,With Colleagues,6,5,2,4,4,3,4,4
+420,64,Female,Middle,Never,RC Cola,Dissatisfied,Other,Taste,Work,Pepsi,Other,1,4,2,1,2,5,3,4
+421,47,Non-Binary,Low,Rarely,Coke,Very Satisfied,Supermarket,Other,Travel,Store Brand,Other,5,4,5,5,4,4,4,5
+422,59,Male,High,Weekly,RC Cola,Satisfied,Other,Price,Other,Store Brand,With Friends,4,3,3,3,2,5,5,3
+423,59,Non-Binary,Low,Rarely,Store Brand,Very Dissatisfied,Convenience Store,Taste,Work,Store Brand,With Colleagues,2,4,1,5,3,5,1,5
+424,29,Prefer Not to Say,High,Daily,Pepsi,Dissatisfied,Other,Availability,Travel,Coke,With Colleagues,10,4,4,1,3,2,1,1
+425,25,Female,High,Never,Store Brand,Very Satisfied,Convenience Store,Availability,Home,Store Brand,With Friends,7,1,1,5,4,3,5,5
+426,34,Non-Binary,Low,Daily,Store Brand,Very Satisfied,Supermarket,Availability,Other,RC Cola,With Colleagues,1,3,5,4,3,3,4,2
+427,37,Male,Middle,Daily,Coke,Satisfied,Vending Machine,Other,Parties,Pepsi,With Friends,0,4,5,1,2,4,5,3
+428,25,Male,High,Daily,Store Brand,Neutral,Convenience Store,Taste,Parties,Store Brand,With Family,7,4,2,4,5,5,1,3
+429,39,Prefer Not to Say,Low,Daily,Coke,Satisfied,Convenience Store,Taste,Parties,Coke,With Friends,5,3,4,3,3,2,2,4
+430,47,Male,High,Rarely,RC Cola,Dissatisfied,Online,Brand Loyalty,Restaurants,Store Brand,Alone,1,3,4,5,2,4,3,5
+431,44,Male,Middle,Weekly,Other,Very Dissatisfied,Other,Price,Parties,Other,Alone,5,2,2,5,5,5,2,3
+432,40,Prefer Not to Say,Low,Rarely,Coke,Very Satisfied,Other,Availability,Other,Pepsi,With Colleagues,10,2,5,1,5,3,1,2
+433,53,Non-Binary,High,Never,Coke,Neutral,Online,Other,Sports Events,Store Brand,With Family,8,2,2,4,5,3,4,2
+434,24,Female,High,Monthly,Other,Very Dissatisfied,Online,Availability,Other,Other,With Colleagues,8,5,4,1,1,3,2,4
+435,19,Non-Binary,High,Rarely,RC Cola,Satisfied,Supermarket,Brand Loyalty,Work,Coke,Alone,0,4,4,4,1,1,3,2
+436,26,Male,High,Monthly,Coke,Neutral,Online,Brand Loyalty,Travel,Coke,Alone,10,3,5,4,4,3,5,4
+437,53,Prefer Not to Say,Low,Never,Other,Very Dissatisfied,Supermarket,Other,Other,Other,Other,8,3,2,2,2,4,5,3
+438,40,Non-Binary,High,Monthly,Store Brand,Very Satisfied,Other,Price,Home,Coke,With Colleagues,7,2,3,4,3,4,4,2
+439,47,Prefer Not to Say,High,Weekly,Coke,Very Satisfied,Other,Price,Home,Store Brand,Other,2,2,2,1,2,1,1,3
+440,19,Non-Binary,High,Weekly,Coke,Neutral,Other,Taste,Restaurants,Other,With Friends,7,1,2,1,1,4,4,3
+441,47,Non-Binary,High,Daily,Coke,Neutral,Supermarket,Brand Loyalty,Parties,Coke,With Colleagues,7,3,1,1,5,3,3,2
+442,56,Male,Low,Rarely,RC Cola,Very Dissatisfied,Online,Taste,Travel,Store Brand,With Family,7,3,2,4,2,4,2,2
+443,45,Non-Binary,Low,Daily,Store Brand,Dissatisfied,Vending Machine,Taste,Parties,Pepsi,With Friends,0,1,5,5,5,1,2,1
+444,26,Prefer Not to Say,Middle,Monthly,Pepsi,Satisfied,Convenience Store,Price,Work,Pepsi,Other,9,2,4,2,4,5,4,1
+445,47,Non-Binary,High,Daily,Other,Dissatisfied,Supermarket,Price,Sports Events,Store Brand,Alone,6,1,4,3,3,1,2,1
+446,47,Non-Binary,Middle,Weekly,Coke,Satisfied,Supermarket,Brand Loyalty,Parties,Pepsi,With Family,3,2,4,2,2,2,2,2
+447,36,Female,High,Never,Coke,Dissatisfied,Supermarket,Price,Parties,Coke,With Friends,5,2,1,1,4,2,1,1
+448,25,Non-Binary,Middle,Never,Pepsi,Very Satisfied,Vending Machine,Availability,Sports Events,RC Cola,With Colleagues,1,5,2,4,2,4,3,1
+449,56,Female,High,Rarely,RC Cola,Very Satisfied,Supermarket,Availability,Restaurants,Other,With Family,6,3,1,4,5,2,5,1
+450,23,Female,High,Daily,Pepsi,Neutral,Vending Machine,Brand Loyalty,Parties,Coke,With Family,1,1,3,3,4,1,1,3
+451,26,Male,Low,Monthly,Store Brand,Neutral,Supermarket,Availability,Work,Other,With Colleagues,0,5,4,1,1,1,4,5
+452,36,Non-Binary,Low,Rarely,Store Brand,Very Dissatisfied,Other,Taste,Work,Pepsi,Alone,4,1,5,3,1,3,3,1
+453,59,Male,Middle,Rarely,Pepsi,Satisfied,Convenience Store,Taste,Work,Other,Alone,9,2,3,2,5,5,3,5
+454,51,Male,High,Rarely,Other,Very Satisfied,Other,Price,Home,Coke,With Friends,10,1,3,5,1,4,5,2
+455,51,Male,High,Rarely,Pepsi,Very Satisfied,Online,Other,Sports Events,Coke,With Friends,0,5,4,3,3,2,4,4
+456,55,Prefer Not to Say,Low,Monthly,Other,Satisfied,Convenience Store,Other,Other,Other,With Colleagues,7,1,2,3,3,2,1,3
+457,37,Non-Binary,High,Daily,Other,Very Dissatisfied,Supermarket,Price,Travel,RC Cola,Other,6,1,2,1,4,1,1,2
+458,38,Male,Middle,Weekly,Store Brand,Dissatisfied,Supermarket,Availability,Travel,Other,Alone,6,1,5,5,1,1,4,5
+459,37,Female,High,Rarely,Coke,Satisfied,Convenience Store,Availability,Home,Pepsi,With Friends,3,3,4,5,1,5,5,4
+460,59,Non-Binary,Low,Weekly,Coke,Neutral,Online,Other,Other,Other,With Family,8,3,4,2,2,4,2,5
+461,18,Female,Middle,Rarely,Other,Very Dissatisfied,Other,Availability,Restaurants,Other,Other,5,3,5,1,5,2,3,1
+462,54,Male,Low,Daily,RC Cola,Satisfied,Online,Price,Parties,RC Cola,Alone,10,2,1,2,3,4,5,1
+463,31,Male,Middle,Weekly,Other,Neutral,Other,Taste,Travel,Other,With Friends,10,1,5,5,3,3,4,1
+464,35,Non-Binary,Middle,Weekly,Other,Satisfied,Online,Price,Work,Other,With Friends,9,1,4,2,5,2,4,5
+465,51,Female,Middle,Monthly,Store Brand,Very Satisfied,Vending Machine,Brand Loyalty,Work,Other,Other,10,4,3,2,5,3,1,4
+466,60,Female,Low,Weekly,Store Brand,Satisfied,Supermarket,Other,Work,Other,With Friends,6,3,2,1,1,4,4,2
+467,52,Non-Binary,Low,Weekly,Other,Dissatisfied,Convenience Store,Taste,Work,Pepsi,With Friends,10,3,1,1,3,4,4,2
+468,55,Non-Binary,Low,Monthly,RC Cola,Very Dissatisfied,Vending Machine,Taste,Work,Coke,Other,3,1,1,1,2,2,2,1
+469,30,Non-Binary,High,Rarely,Other,Dissatisfied,Vending Machine,Taste,Other,Pepsi,With Colleagues,6,1,2,5,5,1,3,4
+470,53,Prefer Not to Say,High,Weekly,RC Cola,Neutral,Supermarket,Availability,Restaurants,Other,With Colleagues,2,4,3,5,4,2,4,2
+471,27,Female,Low,Daily,Pepsi,Very Satisfied,Supermarket,Brand Loyalty,Parties,RC Cola,With Friends,3,5,4,1,1,4,5,3
+472,55,Female,Low,Never,RC Cola,Satisfied,Vending Machine,Availability,Home,Store Brand,Alone,4,1,2,2,3,4,4,4
+473,40,Female,Low,Weekly,Other,Neutral,Supermarket,Taste,Travel,Pepsi,With Family,9,1,3,5,5,1,2,5
+474,37,Male,Middle,Rarely,RC Cola,Neutral,Vending Machine,Other,Other,Other,Other,8,2,1,4,2,4,5,2
+475,50,Non-Binary,Middle,Monthly,Coke,Dissatisfied,Other,Availability,Other,Store Brand,With Family,2,1,3,1,2,3,1,4
+476,39,Female,High,Weekly,Pepsi,Dissatisfied,Convenience Store,Price,Sports Events,RC Cola,Alone,7,3,1,2,5,5,1,2
+477,45,Male,High,Weekly,Pepsi,Satisfied,Supermarket,Brand Loyalty,Other,Coke,Alone,3,3,4,4,1,3,1,3
+478,34,Female,High,Monthly,RC Cola,Dissatisfied,Convenience Store,Brand Loyalty,Parties,RC Cola,With Friends,0,5,2,5,3,2,1,1
+479,57,Non-Binary,High,Weekly,Store Brand,Very Dissatisfied,Supermarket,Availability,Other,Pepsi,With Family,2,5,3,3,4,1,1,1
+480,37,Female,Middle,Monthly,Other,Dissatisfied,Supermarket,Other,Travel,Other,With Family,10,3,3,4,5,4,4,2
+481,47,Male,Middle,Never,Coke,Neutral,Convenience Store,Taste,Other,Store Brand,With Family,0,2,2,2,4,5,1,4
+482,18,Non-Binary,High,Monthly,Coke,Satisfied,Convenience Store,Availability,Other,Other,Other,0,2,5,1,2,5,2,4
+483,60,Female,Middle,Monthly,Pepsi,Satisfied,Convenience Store,Price,Sports Events,Coke,With Family,8,2,1,5,1,5,2,4
+484,57,Non-Binary,Low,Never,Store Brand,Dissatisfied,Online,Availability,Parties,Store Brand,Other,6,5,5,3,4,1,5,2
+485,44,Male,High,Monthly,Coke,Dissatisfied,Other,Availability,Work,RC Cola,Other,2,5,1,4,1,4,2,4
+486,30,Male,Low,Weekly,Pepsi,Very Satisfied,Online,Taste,Home,RC Cola,Alone,1,4,4,4,5,3,5,3
+487,41,Prefer Not to Say,Middle,Weekly,Store Brand,Dissatisfied,Supermarket,Other,Work,Other,Other,0,1,5,3,5,1,4,4
+488,47,Non-Binary,Middle,Monthly,RC Cola,Neutral,Supermarket,Brand Loyalty,Sports Events,Store Brand,Other,8,3,2,1,2,1,2,2
+489,43,Male,High,Rarely,Store Brand,Very Dissatisfied,Other,Taste,Restaurants,Pepsi,With Friends,2,5,2,3,2,5,2,5
+490,32,Male,Low,Daily,Coke,Dissatisfied,Convenience Store,Availability,Sports Events,RC Cola,With Friends,9,4,5,5,3,4,2,2
+491,56,Male,Middle,Never,Pepsi,Very Satisfied,Other,Brand Loyalty,Sports Events,RC Cola,With Colleagues,4,5,2,4,3,3,1,4
+492,20,Prefer Not to Say,High,Daily,Coke,Very Satisfied,Convenience Store,Other,Sports Events,RC Cola,With Friends,2,4,5,1,5,4,5,2
+493,20,Prefer Not to Say,Low,Monthly,RC Cola,Very Dissatisfied,Vending Machine,Brand Loyalty,Work,RC Cola,With Friends,4,5,3,5,3,5,4,1
+494,38,Male,Low,Daily,Coke,Very Dissatisfied,Vending Machine,Taste,Home,Pepsi,Alone,2,3,2,4,3,1,5,2
+495,34,Non-Binary,Low,Monthly,Other,Very Dissatisfied,Other,Availability,Sports Events,Pepsi,Other,7,4,3,3,5,1,3,3
+496,57,Male,Middle,Rarely,Store Brand,Dissatisfied,Other,Taste,Parties,Other,With Family,1,4,1,2,1,5,1,3
+497,42,Female,Middle,Daily,Coke,Dissatisfied,Convenience Store,Price,Parties,Store Brand,Alone,6,4,4,4,5,5,3,2
+498,50,Female,Middle,Monthly,Pepsi,Very Satisfied,Other,Other,Work,Coke,With Friends,10,4,5,5,4,1,5,3
+499,56,Female,Middle,Weekly,Store Brand,Very Satisfied,Convenience Store,Other,Restaurants,Pepsi,Other,1,1,3,5,5,4,3,1
+500,37,Male,Low,Weekly,Other,Satisfied,Vending Machine,Brand Loyalty,Parties,Other,Other,1,3,1,5,4,5,1,5
+501,55,Male,Low,Daily,Other,Dissatisfied,Vending Machine,Other,Restaurants,Other,With Colleagues,1,5,3,1,5,2,1,3
+502,49,Male,Middle,Daily,Pepsi,Satisfied,Online,Taste,Home,Other,Alone,8,5,2,1,4,3,3,1
+503,48,Non-Binary,High,Rarely,Coke,Satisfied,Vending Machine,Other,Work,Other,With Friends,6,4,4,1,1,2,1,1
+504,27,Prefer Not to Say,Low,Rarely,Coke,Very Dissatisfied,Online,Brand Loyalty,Work,Pepsi,With Friends,2,2,5,5,1,4,2,5
+505,51,Non-Binary,Low,Weekly,RC Cola,Neutral,Other,Price,Travel,Other,With Friends,3,5,4,3,5,4,1,1
+506,31,Male,Low,Daily,Coke,Satisfied,Supermarket,Other,Sports Events,RC Cola,Other,5,2,5,2,4,4,4,5
+507,44,Male,Low,Monthly,RC Cola,Very Dissatisfied,Supermarket,Taste,Sports Events,Other,With Colleagues,10,5,4,3,4,5,2,2
+508,34,Female,Low,Weekly,RC Cola,Very Satisfied,Vending Machine,Brand Loyalty,Sports Events,Coke,Alone,6,4,1,2,1,1,4,1
+509,31,Prefer Not to Say,Low,Daily,Store Brand,Very Dissatisfied,Vending Machine,Availability,Travel,Store Brand,Other,0,1,4,2,1,5,1,2
+510,28,Female,High,Never,Other,Dissatisfied,Convenience Store,Other,Work,Pepsi,Alone,1,5,2,2,2,1,5,2
+511,31,Female,High,Weekly,Store Brand,Dissatisfied,Convenience Store,Availability,Other,RC Cola,Other,9,4,2,2,4,2,3,5
+512,53,Male,High,Monthly,Pepsi,Satisfied,Supermarket,Price,Work,Coke,With Colleagues,5,1,5,4,2,3,3,5
+513,20,Male,Middle,Daily,Other,Neutral,Online,Price,Travel,Pepsi,Other,4,1,4,3,5,4,3,4
+514,57,Female,Middle,Weekly,Coke,Neutral,Other,Other,Parties,Pepsi,With Family,7,2,5,3,3,5,3,2
+515,54,Female,High,Monthly,RC Cola,Very Satisfied,Vending Machine,Taste,Work,RC Cola,Alone,4,3,1,5,1,3,3,4
+516,49,Prefer Not to Say,Middle,Weekly,Coke,Neutral,Convenience Store,Other,Work,Other,Alone,2,4,1,3,1,5,2,1
+517,51,Non-Binary,High,Daily,Coke,Neutral,Online,Availability,Other,Other,Alone,3,1,3,5,4,1,3,4
+518,22,Prefer Not to Say,Middle,Monthly,Coke,Neutral,Online,Price,Other,Store Brand,With Friends,6,2,1,2,2,1,3,2
+519,56,Male,Low,Daily,Other,Dissatisfied,Other,Price,Restaurants,Coke,Other,3,2,4,2,1,4,4,3
+520,51,Female,High,Weekly,Store Brand,Very Satisfied,Other,Taste,Home,Store Brand,Alone,4,5,2,2,1,1,5,5
+521,29,Female,Middle,Daily,Pepsi,Dissatisfied,Online,Other,Sports Events,Store Brand,With Colleagues,4,2,4,4,2,1,2,2
+522,30,Female,High,Weekly,Other,Very Dissatisfied,Convenience Store,Other,Sports Events,RC Cola,With Friends,6,3,5,5,1,1,3,5
+523,29,Female,Middle,Daily,Pepsi,Dissatisfied,Supermarket,Price,Travel,Pepsi,Other,3,5,2,5,3,3,4,4
+524,25,Prefer Not to Say,Low,Monthly,Pepsi,Neutral,Vending Machine,Taste,Sports Events,Pepsi,With Family,0,3,5,2,4,5,1,4
+525,50,Female,High,Rarely,RC Cola,Very Dissatisfied,Convenience Store,Availability,Restaurants,Pepsi,With Family,8,1,5,5,4,3,5,2
+526,58,Male,Low,Never,Pepsi,Very Satisfied,Supermarket,Taste,Work,Store Brand,With Friends,6,5,2,1,1,2,3,3
+527,50,Non-Binary,Low,Daily,Other,Satisfied,Convenience Store,Brand Loyalty,Parties,Coke,With Family,4,5,1,4,5,3,3,3
+528,39,Male,Low,Monthly,Coke,Neutral,Online,Brand Loyalty,Sports Events,Coke,With Friends,0,1,2,3,1,1,4,1
+529,37,Male,Low,Weekly,Coke,Satisfied,Online,Brand Loyalty,Sports Events,Store Brand,With Colleagues,8,3,4,5,1,3,4,1
+530,45,Female,High,Monthly,Coke,Very Dissatisfied,Vending Machine,Brand Loyalty,Work,Other,Alone,6,4,2,5,3,3,3,2
+531,49,Prefer Not to Say,Middle,Daily,Store Brand,Satisfied,Online,Availability,Travel,Coke,With Colleagues,7,3,5,3,1,2,5,4
+532,53,Male,Low,Daily,Pepsi,Satisfied,Supermarket,Other,Sports Events,Store Brand,With Friends,6,3,4,5,2,3,1,1
+533,52,Female,High,Rarely,RC Cola,Very Satisfied,Online,Taste,Work,Pepsi,With Colleagues,1,1,3,3,2,5,5,1
+534,30,Prefer Not to Say,High,Rarely,RC Cola,Neutral,Convenience Store,Availability,Work,Other,With Colleagues,8,1,2,3,1,5,4,3
+535,34,Non-Binary,Middle,Daily,Store Brand,Neutral,Other,Brand Loyalty,Work,Store Brand,With Friends,1,4,2,3,1,3,5,4
+536,31,Male,High,Rarely,Store Brand,Very Satisfied,Convenience Store,Price,Parties,RC Cola,With Colleagues,2,1,2,5,3,3,5,4
+537,41,Male,Middle,Weekly,Store Brand,Neutral,Other,Availability,Restaurants,Store Brand,Other,0,4,3,4,3,1,5,1
+538,35,Prefer Not to Say,Low,Weekly,Coke,Dissatisfied,Online,Taste,Work,RC Cola,Other,7,4,4,3,1,1,2,1
+539,45,Non-Binary,Middle,Never,Other,Neutral,Other,Price,Work,Store Brand,With Family,10,4,3,3,5,5,4,2
+540,49,Prefer Not to Say,Low,Monthly,RC Cola,Very Dissatisfied,Online,Taste,Other,Store Brand,With Colleagues,9,2,2,1,4,1,1,5
+541,27,Prefer Not to Say,Middle,Never,Other,Very Satisfied,Vending Machine,Price,Home,Store Brand,With Colleagues,1,4,1,2,5,1,1,4
+542,23,Female,Low,Never,Other,Very Satisfied,Convenience Store,Other,Travel,RC Cola,Other,5,3,1,5,3,1,4,1
+543,24,Female,Low,Daily,Pepsi,Neutral,Other,Other,Restaurants,RC Cola,With Colleagues,6,1,4,1,1,3,1,5
+544,21,Male,Low,Daily,Store Brand,Neutral,Convenience Store,Availability,Restaurants,Pepsi,With Family,9,5,5,5,4,5,2,4
+545,29,Prefer Not to Say,Middle,Rarely,Other,Satisfied,Convenience Store,Price,Travel,Coke,Other,9,5,5,2,1,2,5,4
+546,34,Female,Low,Never,Coke,Dissatisfied,Vending Machine,Brand Loyalty,Restaurants,Coke,With Friends,5,4,2,2,1,5,4,2
+547,45,Female,High,Daily,Other,Very Satisfied,Vending Machine,Other,Travel,Pepsi,Alone,7,4,2,4,4,4,2,2
+548,33,Prefer Not to Say,Middle,Never,RC Cola,Very Dissatisfied,Supermarket,Price,Other,Other,With Friends,1,1,5,1,1,2,2,4
+549,34,Prefer Not to Say,High,Rarely,RC Cola,Neutral,Supermarket,Availability,Other,Coke,Alone,7,1,4,2,1,2,2,5
+550,35,Male,Low,Monthly,Store Brand,Very Satisfied,Online,Price,Work,Other,With Friends,2,5,1,4,3,2,4,2
+551,35,Male,Low,Rarely,RC Cola,Dissatisfied,Vending Machine,Other,Sports Events,Pepsi,With Friends,8,4,5,1,5,4,1,1
+552,21,Non-Binary,High,Daily,RC Cola,Very Satisfied,Online,Taste,Parties,Other,Alone,10,3,3,4,5,3,3,5
+553,49,Female,Low,Never,Pepsi,Satisfied,Other,Brand Loyalty,Work,Other,With Family,2,5,4,1,3,2,1,4
+554,38,Female,High,Daily,Store Brand,Neutral,Supermarket,Taste,Restaurants,Store Brand,With Friends,3,5,5,4,4,1,4,4
+555,35,Non-Binary,Middle,Weekly,Other,Satisfied,Supermarket,Availability,Other,RC Cola,With Friends,2,2,1,1,4,4,3,2
+556,64,Female,Middle,Rarely,Store Brand,Very Dissatisfied,Convenience Store,Other,Home,RC Cola,With Colleagues,5,3,3,2,1,3,2,1
+557,20,Prefer Not to Say,Middle,Daily,Pepsi,Very Dissatisfied,Online,Price,Travel,RC Cola,With Family,2,2,2,1,3,3,3,5
+558,64,Non-Binary,Low,Weekly,Other,Neutral,Other,Taste,Parties,Coke,Alone,9,2,3,4,5,4,3,5
+559,58,Prefer Not to Say,Low,Rarely,Coke,Very Dissatisfied,Online,Brand Loyalty,Work,Other,Other,3,5,3,2,3,1,1,1
+560,60,Non-Binary,Middle,Never,Other,Neutral,Convenience Store,Taste,Travel,Store Brand,With Family,4,2,2,4,2,3,5,3
+561,61,Female,Middle,Weekly,Coke,Neutral,Other,Price,Sports Events,Other,Other,0,4,3,3,3,2,2,3
+562,46,Female,High,Weekly,Other,Neutral,Online,Price,Home,Pepsi,With Family,8,4,4,2,2,5,5,2
+563,49,Prefer Not to Say,High,Monthly,Store Brand,Dissatisfied,Vending Machine,Price,Restaurants,Other,Other,4,5,5,5,1,2,3,5
+564,63,Female,High,Rarely,RC Cola,Very Dissatisfied,Online,Brand Loyalty,Other,Other,With Friends,9,1,1,5,5,5,3,2
+565,55,Prefer Not to Say,Middle,Weekly,Coke,Dissatisfied,Vending Machine,Brand Loyalty,Other,Store Brand,With Family,0,2,2,3,2,5,3,3
+566,42,Female,Middle,Weekly,Pepsi,Neutral,Supermarket,Availability,Sports Events,Other,With Friends,5,1,2,4,3,4,5,1
+567,53,Male,Middle,Weekly,Other,Very Dissatisfied,Other,Other,Work,Store Brand,Other,8,4,3,1,4,4,5,3
+568,62,Male,Middle,Weekly,Other,Satisfied,Other,Other,Parties,Other,Alone,1,3,3,4,4,5,4,4
+569,50,Female,Low,Never,Store Brand,Satisfied,Online,Availability,Travel,RC Cola,With Friends,7,4,4,4,1,1,3,4
+570,37,Female,High,Daily,Pepsi,Dissatisfied,Other,Taste,Sports Events,Other,With Friends,8,4,1,2,1,3,3,3
+571,22,Prefer Not to Say,High,Weekly,Coke,Neutral,Vending Machine,Other,Sports Events,Coke,Other,10,4,3,4,2,5,4,5
+572,54,Female,Low,Daily,Store Brand,Dissatisfied,Other,Availability,Travel,Pepsi,Alone,0,2,3,2,5,3,5,4
+573,29,Prefer Not to Say,High,Never,Other,Neutral,Vending Machine,Brand Loyalty,Work,Store Brand,With Colleagues,2,1,5,2,3,1,4,1
+574,42,Prefer Not to Say,High,Rarely,Pepsi,Neutral,Other,Other,Travel,RC Cola,With Family,2,2,4,4,3,5,3,1
+575,35,Male,High,Monthly,Other,Very Dissatisfied,Supermarket,Taste,Home,Pepsi,With Colleagues,3,1,4,3,2,2,5,1
+576,33,Prefer Not to Say,High,Monthly,Pepsi,Very Satisfied,Online,Taste,Other,Pepsi,Alone,5,4,5,3,5,3,4,2
+577,49,Male,Middle,Monthly,Other,Dissatisfied,Supermarket,Price,Home,Pepsi,With Family,5,4,3,3,5,1,5,5
+578,45,Male,Low,Never,Other,Dissatisfied,Vending Machine,Taste,Restaurants,Coke,With Family,0,3,2,2,1,2,2,5
+579,34,Female,High,Never,Pepsi,Dissatisfied,Online,Brand Loyalty,Parties,Pepsi,With Colleagues,2,3,1,5,4,3,5,1
+580,21,Non-Binary,Middle,Daily,Coke,Neutral,Supermarket,Availability,Other,Pepsi,With Friends,2,3,2,5,1,3,3,1
+581,19,Female,High,Monthly,Store Brand,Very Dissatisfied,Convenience Store,Availability,Restaurants,Other,With Colleagues,0,4,2,5,2,4,5,2
+582,45,Non-Binary,Low,Never,Other,Neutral,Other,Availability,Sports Events,Store Brand,Other,7,3,2,5,5,3,3,5
+583,56,Male,Middle,Rarely,Coke,Very Dissatisfied,Other,Brand Loyalty,Restaurants,Store Brand,Alone,4,2,4,1,3,4,4,3
+584,46,Female,High,Monthly,Store Brand,Very Satisfied,Other,Taste,Parties,Store Brand,Alone,9,4,1,2,2,4,5,4
+585,39,Non-Binary,High,Weekly,RC Cola,Dissatisfied,Online,Other,Work,Pepsi,Other,6,3,2,3,5,3,2,5
+586,29,Female,Middle,Never,Other,Dissatisfied,Vending Machine,Price,Home,RC Cola,With Family,6,4,2,3,3,3,4,5
+587,27,Prefer Not to Say,Low,Weekly,RC Cola,Very Dissatisfied,Supermarket,Taste,Travel,Pepsi,With Family,6,5,5,4,4,5,1,2
+588,46,Non-Binary,Low,Daily,Other,Dissatisfied,Convenience Store,Other,Work,Store Brand,With Colleagues,3,2,1,3,1,1,3,4
+589,43,Non-Binary,High,Weekly,Pepsi,Satisfied,Vending Machine,Taste,Sports Events,RC Cola,Other,8,5,4,2,1,1,3,3
+590,42,Male,High,Never,RC Cola,Very Dissatisfied,Online,Taste,Parties,Store Brand,With Colleagues,10,1,2,3,2,1,2,5
+591,53,Non-Binary,High,Never,RC Cola,Satisfied,Vending Machine,Taste,Parties,Store Brand,With Colleagues,0,2,3,2,2,3,4,4
+592,44,Female,Middle,Daily,RC Cola,Satisfied,Vending Machine,Availability,Other,RC Cola,With Friends,7,3,3,5,4,1,2,2
+593,44,Male,Middle,Monthly,Pepsi,Satisfied,Convenience Store,Availability,Home,Other,With Friends,7,4,2,5,4,4,4,5
+594,49,Female,High,Weekly,Other,Neutral,Other,Taste,Sports Events,Other,Alone,7,3,4,1,1,5,4,5
+595,58,Non-Binary,Middle,Weekly,Coke,Satisfied,Supermarket,Availability,Work,Other,With Friends,8,3,5,2,1,4,2,4
+596,44,Non-Binary,Middle,Weekly,RC Cola,Very Satisfied,Supermarket,Price,Restaurants,Store Brand,With Family,8,2,1,5,1,1,5,4
+597,38,Male,High,Monthly,Other,Very Dissatisfied,Convenience Store,Other,Work,Store Brand,Alone,9,4,5,2,2,4,2,5
+598,41,Non-Binary,Low,Monthly,Store Brand,Dissatisfied,Online,Taste,Home,Pepsi,With Family,7,3,3,3,1,4,4,1
+599,46,Female,Low,Weekly,Store Brand,Dissatisfied,Online,Taste,Restaurants,Pepsi,With Friends,9,5,3,2,1,2,1,2
+600,53,Prefer Not to Say,Low,Daily,Other,Very Satisfied,Convenience Store,Taste,Restaurants,Coke,With Family,6,1,2,2,2,5,1,5
+601,59,Prefer Not to Say,High,Daily,Other,Dissatisfied,Other,Price,Travel,Coke,With Colleagues,8,1,4,4,2,1,2,2
+602,24,Prefer Not to Say,High,Weekly,Other,Very Satisfied,Other,Price,Home,Store Brand,Other,1,5,5,1,2,3,1,1
+603,20,Prefer Not to Say,High,Daily,Other,Satisfied,Supermarket,Price,Sports Events,Store Brand,With Colleagues,1,3,4,3,4,5,2,2
+604,30,Male,High,Monthly,Store Brand,Satisfied,Other,Price,Work,Coke,With Friends,5,4,3,2,2,5,2,3
+605,40,Prefer Not to Say,Middle,Monthly,Other,Neutral,Online,Price,Other,Store Brand,Alone,3,5,2,1,5,3,1,2
+606,44,Non-Binary,Low,Daily,RC Cola,Neutral,Supermarket,Other,Other,RC Cola,Alone,5,5,5,3,5,3,5,1
+607,28,Prefer Not to Say,High,Never,Store Brand,Dissatisfied,Supermarket,Price,Sports Events,Store Brand,With Colleagues,10,1,1,3,5,3,2,1
+608,36,Prefer Not to Say,High,Weekly,Pepsi,Dissatisfied,Other,Other,Sports Events,Coke,With Colleagues,10,1,3,2,5,2,4,3
+609,43,Non-Binary,Middle,Rarely,RC Cola,Neutral,Supermarket,Taste,Restaurants,Pepsi,With Family,9,2,2,5,2,1,2,1
+610,34,Female,Low,Weekly,RC Cola,Very Dissatisfied,Other,Availability,Other,RC Cola,With Friends,4,5,4,1,3,3,5,2
+611,58,Prefer Not to Say,High,Daily,Coke,Dissatisfied,Other,Brand Loyalty,Travel,Store Brand,With Friends,9,4,2,4,1,4,1,1
+612,20,Prefer Not to Say,Low,Monthly,Store Brand,Very Satisfied,Other,Other,Work,RC Cola,With Colleagues,6,4,4,2,2,1,1,1
+613,26,Male,Low,Daily,Other,Neutral,Supermarket,Taste,Other,RC Cola,With Colleagues,9,3,3,3,1,2,2,5
+614,42,Female,Middle,Rarely,Store Brand,Dissatisfied,Vending Machine,Brand Loyalty,Other,Store Brand,With Friends,3,2,4,3,1,1,4,2
+615,43,Female,Middle,Never,Pepsi,Dissatisfied,Other,Taste,Travel,Other,Other,0,1,1,3,4,5,3,2
+616,29,Female,Low,Never,Other,Neutral,Online,Price,Parties,Store Brand,Alone,4,3,4,4,3,5,5,1
+617,51,Male,Middle,Never,Store Brand,Very Dissatisfied,Other,Price,Travel,Other,With Friends,7,3,3,2,3,5,1,3
+618,30,Non-Binary,Low,Weekly,Store Brand,Dissatisfied,Vending Machine,Brand Loyalty,Work,Pepsi,With Family,5,1,1,5,4,3,5,4
+619,53,Non-Binary,Low,Never,Other,Very Satisfied,Vending Machine,Brand Loyalty,Restaurants,Coke,With Colleagues,1,5,4,4,3,4,5,3
+620,35,Prefer Not to Say,Middle,Monthly,Pepsi,Dissatisfied,Convenience Store,Availability,Work,RC Cola,Other,5,3,1,4,5,1,1,3
+621,46,Female,High,Monthly,Store Brand,Very Satisfied,Online,Brand Loyalty,Other,RC Cola,With Colleagues,10,3,2,4,1,1,3,3
+622,62,Male,Middle,Monthly,Pepsi,Neutral,Vending Machine,Taste,Home,Pepsi,With Family,0,5,1,5,4,1,3,4
+623,22,Male,High,Monthly,Pepsi,Very Dissatisfied,Other,Other,Restaurants,Coke,Alone,8,5,2,4,4,2,4,5
+624,35,Female,High,Daily,Other,Very Satisfied,Supermarket,Taste,Restaurants,Other,With Friends,10,3,1,5,2,3,2,5
+625,36,Male,Low,Daily,RC Cola,Satisfied,Vending Machine,Price,Parties,Store Brand,Alone,8,1,4,5,4,5,5,5
+626,38,Female,High,Weekly,Other,Neutral,Vending Machine,Other,Parties,Pepsi,Other,9,1,3,5,5,2,4,5
+627,32,Prefer Not to Say,Low,Monthly,Other,Satisfied,Vending Machine,Taste,Other,Other,Other,3,2,2,1,5,1,4,4
+628,57,Non-Binary,Middle,Monthly,Store Brand,Very Dissatisfied,Other,Brand Loyalty,Home,Coke,Other,10,2,2,5,5,1,4,4
+629,20,Female,Low,Weekly,Coke,Very Satisfied,Other,Availability,Work,RC Cola,Other,7,4,3,5,5,2,4,4
+630,56,Male,Low,Never,Coke,Very Satisfied,Supermarket,Availability,Restaurants,RC Cola,With Family,7,5,5,5,5,1,3,4
+631,25,Non-Binary,Low,Rarely,Store Brand,Neutral,Vending Machine,Price,Restaurants,Store Brand,With Family,3,5,1,4,1,3,4,4
+632,49,Male,High,Monthly,Pepsi,Very Satisfied,Vending Machine,Other,Parties,Store Brand,Alone,4,1,2,3,1,1,2,5
+633,54,Female,High,Monthly,Pepsi,Very Dissatisfied,Vending Machine,Brand Loyalty,Travel,Pepsi,Alone,0,5,1,5,2,1,3,5
+634,62,Female,Low,Never,Store Brand,Satisfied,Vending Machine,Other,Sports Events,RC Cola,Other,1,5,2,1,3,5,5,1
+635,24,Male,Middle,Daily,Coke,Very Dissatisfied,Supermarket,Taste,Other,Pepsi,Other,1,3,3,1,1,2,3,1
+636,55,Female,Low,Never,Coke,Very Dissatisfied,Vending Machine,Other,Sports Events,Pepsi,Alone,6,1,1,4,3,4,3,3
+637,59,Male,High,Rarely,Coke,Very Satisfied,Vending Machine,Other,Work,Pepsi,With Colleagues,10,5,2,4,3,4,1,4
+638,57,Male,High,Weekly,Coke,Satisfied,Supermarket,Other,Restaurants,Coke,With Family,6,4,3,5,2,5,2,2
+639,39,Female,Low,Rarely,Pepsi,Very Dissatisfied,Vending Machine,Taste,Sports Events,Pepsi,With Colleagues,3,3,1,5,2,5,3,2
+640,25,Male,High,Never,Store Brand,Very Satisfied,Supermarket,Price,Home,Other,With Family,0,3,1,3,2,1,2,1
+641,52,Female,Middle,Rarely,Other,Very Dissatisfied,Convenience Store,Brand Loyalty,Restaurants,Coke,With Colleagues,8,5,4,2,3,5,5,4
+642,52,Female,High,Daily,Store Brand,Satisfied,Other,Availability,Other,Pepsi,Alone,6,2,3,4,5,2,5,5
+643,47,Prefer Not to Say,Low,Daily,Pepsi,Satisfied,Online,Price,Travel,RC Cola,With Family,0,4,1,1,1,5,3,4
+644,51,Prefer Not to Say,Middle,Daily,RC Cola,Very Satisfied,Supermarket,Taste,Sports Events,Pepsi,Other,7,3,4,3,3,4,2,1
+645,54,Female,Middle,Daily,Store Brand,Neutral,Supermarket,Taste,Travel,RC Cola,Alone,4,5,5,4,5,5,1,3
+646,48,Prefer Not to Say,High,Daily,Other,Very Satisfied,Convenience Store,Availability,Home,Other,With Friends,7,2,1,1,2,2,4,2
+647,23,Male,High,Never,Pepsi,Dissatisfied,Other,Taste,Home,Store Brand,Alone,5,4,4,1,5,1,3,4
+648,21,Female,Low,Rarely,Store Brand,Neutral,Convenience Store,Price,Other,Pepsi,Other,7,2,1,3,5,3,3,3
+649,57,Prefer Not to Say,Low,Weekly,Store Brand,Neutral,Vending Machine,Taste,Sports Events,Coke,Alone,6,4,4,3,2,3,2,4
+650,28,Prefer Not to Say,Middle,Monthly,Coke,Dissatisfied,Other,Other,Home,Other,Other,0,3,5,4,5,5,2,1
+651,39,Non-Binary,High,Monthly,Pepsi,Satisfied,Vending Machine,Taste,Work,RC Cola,With Family,10,2,3,5,5,2,4,3
+652,53,Female,Middle,Weekly,Other,Very Satisfied,Online,Brand Loyalty,Travel,Store Brand,With Family,1,2,4,5,3,3,3,2
+653,53,Female,High,Daily,Pepsi,Dissatisfied,Convenience Store,Other,Travel,Coke,Other,2,5,2,4,5,5,5,2
+654,26,Prefer Not to Say,Middle,Never,Coke,Satisfied,Other,Brand Loyalty,Home,Store Brand,Other,0,2,1,3,5,2,2,5
+655,42,Non-Binary,Low,Daily,RC Cola,Very Satisfied,Other,Taste,Home,Other,With Colleagues,9,3,3,5,1,3,2,1
+656,51,Non-Binary,Middle,Monthly,Pepsi,Very Dissatisfied,Vending Machine,Taste,Parties,Pepsi,With Colleagues,9,1,3,3,2,1,1,1
+657,47,Non-Binary,High,Weekly,Store Brand,Dissatisfied,Vending Machine,Price,Sports Events,Store Brand,With Colleagues,9,1,5,1,2,2,5,5
+658,31,Female,High,Rarely,RC Cola,Neutral,Other,Brand Loyalty,Travel,Coke,Alone,6,2,2,1,5,5,5,5
+659,40,Female,High,Never,Store Brand,Dissatisfied,Other,Availability,Work,Coke,With Colleagues,3,3,1,1,2,3,2,2
+660,64,Non-Binary,Middle,Monthly,Pepsi,Very Satisfied,Online,Price,Home,Store Brand,With Family,3,3,1,5,5,4,4,2
+661,31,Male,Low,Rarely,Coke,Very Dissatisfied,Other,Availability,Parties,Store Brand,With Family,3,3,4,1,4,2,4,5
+662,38,Non-Binary,Low,Weekly,Store Brand,Very Satisfied,Convenience Store,Brand Loyalty,Work,Coke,With Colleagues,7,1,1,5,1,2,3,3
+663,46,Prefer Not to Say,Low,Rarely,Store Brand,Satisfied,Online,Availability,Travel,Store Brand,Alone,9,1,5,1,5,4,3,3
+664,45,Non-Binary,High,Never,Store Brand,Very Satisfied,Convenience Store,Taste,Sports Events,Other,Alone,2,4,2,3,5,4,1,1
+665,44,Male,Middle,Rarely,Pepsi,Very Satisfied,Convenience Store,Price,Home,Pepsi,With Family,1,5,4,4,2,1,3,3
+666,46,Non-Binary,Middle,Rarely,RC Cola,Very Dissatisfied,Vending Machine,Brand Loyalty,Parties,Coke,With Friends,4,2,3,4,1,5,2,4
+667,31,Female,Low,Never,Other,Very Dissatisfied,Convenience Store,Taste,Work,Other,Alone,1,2,2,1,3,3,2,4
+668,49,Female,Middle,Monthly,RC Cola,Very Dissatisfied,Supermarket,Other,Travel,Other,Other,4,3,2,5,1,2,4,1
+669,45,Female,High,Monthly,Store Brand,Satisfied,Convenience Store,Availability,Home,Other,With Friends,10,1,5,3,5,1,5,1
+670,46,Non-Binary,Low,Rarely,Store Brand,Very Dissatisfied,Convenience Store,Other,Sports Events,Pepsi,Alone,2,1,1,1,4,1,3,1
+671,18,Non-Binary,Middle,Monthly,Pepsi,Satisfied,Other,Price,Work,Other,Alone,3,3,2,5,1,1,3,1
+672,42,Prefer Not to Say,Low,Weekly,RC Cola,Satisfied,Supermarket,Price,Sports Events,Coke,With Family,6,2,3,3,3,3,2,4
+673,40,Male,Low,Weekly,Other,Very Dissatisfied,Online,Brand Loyalty,Travel,RC Cola,Alone,2,5,1,2,2,2,5,2
+674,57,Prefer Not to Say,High,Never,RC Cola,Neutral,Online,Availability,Work,Other,With Friends,6,1,4,3,5,1,1,3
+675,37,Prefer Not to Say,High,Monthly,Other,Dissatisfied,Supermarket,Brand Loyalty,Parties,RC Cola,Other,0,2,5,1,2,5,3,5
+676,38,Female,Middle,Monthly,Other,Dissatisfied,Vending Machine,Taste,Home,Store Brand,With Family,9,3,5,3,1,5,2,3
+677,64,Prefer Not to Say,Low,Daily,RC Cola,Satisfied,Vending Machine,Availability,Travel,Coke,With Colleagues,0,1,2,2,3,5,3,3
+678,38,Prefer Not to Say,Low,Daily,RC Cola,Neutral,Supermarket,Brand Loyalty,Restaurants,Other,Other,10,2,4,1,5,4,1,2
+679,25,Female,High,Daily,Pepsi,Dissatisfied,Vending Machine,Taste,Other,Other,With Family,3,5,2,5,4,5,5,2
+680,30,Female,High,Weekly,Coke,Very Satisfied,Other,Price,Home,Coke,With Friends,8,2,4,2,5,1,5,2
+681,45,Non-Binary,High,Weekly,Pepsi,Satisfied,Convenience Store,Availability,Parties,Pepsi,Other,9,1,1,4,1,4,2,4
+682,24,Non-Binary,Low,Daily,Store Brand,Very Satisfied,Vending Machine,Brand Loyalty,Travel,Coke,With Friends,8,1,3,4,4,5,2,3
+683,49,Non-Binary,Middle,Monthly,Coke,Dissatisfied,Vending Machine,Taste,Home,Store Brand,With Family,5,1,3,1,4,3,5,4
+684,63,Prefer Not to Say,Middle,Monthly,RC Cola,Dissatisfied,Other,Other,Work,RC Cola,With Family,7,4,5,3,4,3,5,5
+685,21,Non-Binary,Middle,Daily,Other,Very Satisfied,Online,Other,Restaurants,Pepsi,Alone,0,5,5,3,2,5,1,4
+686,32,Prefer Not to Say,High,Never,Store Brand,Very Satisfied,Other,Other,Home,Coke,With Friends,9,1,4,3,3,4,1,1
+687,28,Male,Low,Rarely,Store Brand,Very Dissatisfied,Supermarket,Price,Travel,Other,With Friends,0,5,3,4,1,1,5,3
+688,21,Female,Low,Never,Store Brand,Very Satisfied,Vending Machine,Taste,Sports Events,Coke,Other,1,2,4,1,1,2,1,5
+689,35,Prefer Not to Say,Middle,Rarely,RC Cola,Dissatisfied,Vending Machine,Price,Restaurants,Coke,With Friends,3,4,2,1,5,4,4,3
+690,46,Male,High,Rarely,Other,Dissatisfied,Convenience Store,Brand Loyalty,Travel,RC Cola,With Friends,3,1,3,1,4,5,4,1
+691,47,Non-Binary,Low,Weekly,Coke,Dissatisfied,Vending Machine,Availability,Home,RC Cola,Alone,4,3,5,1,1,5,2,5
+692,21,Prefer Not to Say,Low,Weekly,Coke,Satisfied,Other,Brand Loyalty,Travel,Coke,Other,10,2,4,3,5,5,3,2
+693,56,Prefer Not to Say,Middle,Daily,Store Brand,Dissatisfied,Other,Price,Other,Pepsi,Other,0,3,5,2,2,1,2,2
+694,29,Female,Middle,Never,Store Brand,Neutral,Vending Machine,Taste,Other,RC Cola,With Friends,8,2,3,1,5,3,1,1
+695,29,Male,High,Daily,Other,Dissatisfied,Supermarket,Price,Restaurants,Other,Alone,4,1,5,3,5,1,4,2
+696,52,Non-Binary,Low,Daily,Store Brand,Dissatisfied,Online,Other,Other,Coke,With Colleagues,0,4,1,3,1,4,1,5
+697,50,Male,Middle,Daily,Store Brand,Very Satisfied,Supermarket,Taste,Sports Events,Store Brand,With Colleagues,5,5,1,5,2,1,3,5
+698,37,Prefer Not to Say,High,Rarely,Other,Neutral,Online,Availability,Work,RC Cola,With Colleagues,7,5,3,1,2,4,2,2
+699,37,Female,Middle,Never,Other,Neutral,Online,Other,Work,Store Brand,With Friends,6,1,1,1,3,4,3,1
+700,36,Non-Binary,Low,Daily,RC Cola,Very Satisfied,Online,Other,Work,Coke,With Colleagues,1,3,1,2,1,5,3,2
+701,41,Female,Low,Never,Store Brand,Very Satisfied,Other,Availability,Restaurants,Pepsi,Alone,7,3,2,3,3,4,4,5
+702,41,Female,High,Daily,Pepsi,Satisfied,Other,Price,Work,Pepsi,With Colleagues,2,2,3,1,1,3,2,1
+703,53,Male,High,Daily,Store Brand,Satisfied,Convenience Store,Other,Restaurants,Store Brand,Alone,2,5,2,5,3,3,4,5
+704,44,Non-Binary,Middle,Daily,RC Cola,Neutral,Vending Machine,Other,Home,Store Brand,With Family,8,5,2,5,5,5,2,2
+705,45,Non-Binary,High,Rarely,RC Cola,Dissatisfied,Vending Machine,Availability,Home,Store Brand,With Family,9,5,1,5,2,3,3,2
+706,61,Prefer Not to Say,Low,Rarely,Coke,Satisfied,Other,Other,Parties,Other,With Colleagues,9,2,2,4,2,1,1,5
+707,50,Prefer Not to Say,Middle,Rarely,Pepsi,Satisfied,Other,Brand Loyalty,Other,Other,With Family,8,2,3,1,5,4,5,2
+708,54,Prefer Not to Say,High,Never,Other,Very Dissatisfied,Supermarket,Price,Home,Store Brand,With Colleagues,1,2,4,1,1,4,2,5
+709,45,Male,High,Daily,Store Brand,Dissatisfied,Other,Taste,Sports Events,Store Brand,With Family,7,3,2,5,4,2,2,3
+710,37,Non-Binary,High,Monthly,Other,Dissatisfied,Other,Price,Restaurants,Coke,With Colleagues,3,3,2,4,2,4,4,3
+711,60,Non-Binary,Low,Never,RC Cola,Very Dissatisfied,Vending Machine,Other,Other,Store Brand,With Colleagues,4,1,5,1,1,1,4,2
+712,50,Male,Middle,Never,Pepsi,Neutral,Supermarket,Taste,Other,Coke,Alone,8,1,4,5,3,5,2,2
+713,47,Non-Binary,High,Daily,Coke,Satisfied,Convenience Store,Availability,Other,Coke,With Friends,3,5,1,2,4,1,3,3
+714,25,Prefer Not to Say,High,Never,Pepsi,Satisfied,Convenience Store,Price,Work,Pepsi,With Colleagues,10,3,4,5,5,1,2,3
+715,64,Prefer Not to Say,Low,Monthly,Pepsi,Very Satisfied,Online,Price,Restaurants,Other,With Friends,7,5,4,4,5,5,5,5
+716,21,Male,Low,Daily,Other,Very Dissatisfied,Other,Other,Parties,Coke,With Family,0,2,1,2,4,1,5,5
+717,51,Male,High,Weekly,Store Brand,Satisfied,Other,Other,Restaurants,Pepsi,With Colleagues,2,1,5,5,5,4,3,4
+718,51,Prefer Not to Say,High,Daily,Pepsi,Very Satisfied,Vending Machine,Other,Work,RC Cola,With Colleagues,6,1,4,5,5,2,3,3
+719,48,Non-Binary,High,Monthly,RC Cola,Dissatisfied,Supermarket,Other,Restaurants,Coke,With Colleagues,10,3,1,5,3,3,5,1
+720,56,Prefer Not to Say,High,Never,Coke,Satisfied,Vending Machine,Brand Loyalty,Sports Events,Coke,With Family,0,3,1,5,4,1,2,4
+721,18,Prefer Not to Say,Low,Never,Store Brand,Dissatisfied,Online,Taste,Travel,RC Cola,With Family,4,1,1,5,1,4,3,5
+722,19,Female,Low,Never,RC Cola,Satisfied,Other,Availability,Work,Pepsi,With Family,5,3,1,4,4,5,2,2
+723,30,Prefer Not to Say,High,Weekly,Store Brand,Satisfied,Online,Other,Parties,Store Brand,With Friends,0,4,5,3,3,1,1,4
+724,62,Female,High,Never,Coke,Very Dissatisfied,Other,Other,Restaurants,Pepsi,With Family,2,4,4,4,5,3,4,1
+725,30,Prefer Not to Say,High,Weekly,Other,Dissatisfied,Other,Other,Home,Other,With Family,6,1,1,4,3,1,3,2
+726,36,Prefer Not to Say,High,Weekly,Pepsi,Very Satisfied,Other,Price,Parties,Pepsi,Other,6,2,4,5,3,5,5,4
+727,44,Male,Middle,Monthly,Pepsi,Very Satisfied,Convenience Store,Price,Travel,RC Cola,With Colleagues,0,5,2,1,5,2,4,2
+728,27,Female,Low,Rarely,RC Cola,Dissatisfied,Online,Availability,Home,RC Cola,With Friends,10,5,5,3,1,4,1,1
+729,63,Prefer Not to Say,High,Weekly,Other,Dissatisfied,Vending Machine,Other,Home,Coke,With Colleagues,2,2,1,3,3,1,5,2
+730,34,Non-Binary,High,Daily,Other,Dissatisfied,Other,Price,Parties,Other,Other,4,5,2,3,4,4,3,3
+731,21,Non-Binary,Low,Monthly,Other,Neutral,Other,Availability,Other,Store Brand,With Colleagues,0,4,4,5,5,3,5,4
+732,29,Prefer Not to Say,Middle,Weekly,RC Cola,Very Satisfied,Supermarket,Other,Sports Events,Pepsi,With Colleagues,5,1,1,4,5,5,5,5
+733,51,Male,High,Monthly,Pepsi,Dissatisfied,Supermarket,Brand Loyalty,Work,Store Brand,Alone,10,1,2,3,2,4,3,4
+734,60,Prefer Not to Say,High,Weekly,Pepsi,Very Dissatisfied,Supermarket,Taste,Restaurants,Store Brand,With Colleagues,6,2,3,2,5,3,4,3
+735,22,Prefer Not to Say,Low,Rarely,Coke,Very Satisfied,Vending Machine,Taste,Travel,RC Cola,With Family,0,4,3,3,4,4,2,2
+736,40,Non-Binary,High,Daily,Coke,Very Satisfied,Supermarket,Price,Travel,Other,Other,10,1,1,1,2,1,3,5
+737,20,Non-Binary,Low,Monthly,Store Brand,Very Satisfied,Vending Machine,Availability,Other,Coke,With Friends,3,5,2,1,3,5,1,3
+738,22,Prefer Not to Say,High,Monthly,Coke,Dissatisfied,Convenience Store,Taste,Other,Store Brand,Alone,2,5,3,2,2,2,4,2
+739,25,Male,Middle,Weekly,RC Cola,Neutral,Supermarket,Other,Work,Pepsi,With Family,9,4,4,2,5,3,4,3
+740,60,Male,Middle,Never,RC Cola,Satisfied,Online,Availability,Restaurants,Coke,With Colleagues,1,1,5,3,5,2,3,4
+741,49,Female,High,Daily,RC Cola,Dissatisfied,Supermarket,Other,Home,Pepsi,With Family,0,3,2,2,2,4,1,1
+742,61,Male,Low,Daily,Other,Satisfied,Online,Price,Home,RC Cola,Alone,2,2,2,4,3,4,5,3
+743,40,Non-Binary,High,Monthly,Pepsi,Very Satisfied,Other,Price,Other,RC Cola,With Family,1,1,5,1,5,3,1,2
+744,46,Prefer Not to Say,Middle,Weekly,Coke,Very Dissatisfied,Other,Other,Parties,Pepsi,Other,2,4,4,5,2,5,3,5
+745,45,Male,Low,Never,Other,Very Satisfied,Convenience Store,Taste,Other,Other,Alone,7,5,4,2,4,1,2,3
+746,59,Prefer Not to Say,Middle,Rarely,Store Brand,Very Dissatisfied,Supermarket,Brand Loyalty,Travel,Pepsi,Other,7,3,5,5,3,1,3,2
+747,47,Female,High,Rarely,Other,Dissatisfied,Vending Machine,Price,Sports Events,Pepsi,Alone,0,3,5,3,3,1,4,5
+748,36,Prefer Not to Say,High,Monthly,Store Brand,Very Dissatisfied,Online,Other,Parties,RC Cola,With Family,5,3,1,3,1,1,5,2
+749,56,Male,Low,Rarely,Store Brand,Dissatisfied,Other,Other,Home,Pepsi,Other,9,2,4,3,3,5,5,5
+750,31,Prefer Not to Say,Low,Weekly,RC Cola,Very Satisfied,Vending Machine,Price,Sports Events,Store Brand,Other,4,4,2,2,1,2,1,5
+751,28,Male,High,Weekly,Pepsi,Dissatisfied,Vending Machine,Availability,Sports Events,Coke,With Family,0,3,4,4,2,1,2,1
+752,32,Female,Low,Daily,Store Brand,Dissatisfied,Online,Price,Home,Other,With Family,9,3,5,5,1,4,3,2
+753,62,Male,Low,Never,Coke,Very Dissatisfied,Other,Taste,Travel,Coke,Other,8,2,3,1,2,5,4,5
+754,37,Female,Low,Never,Store Brand,Satisfied,Convenience Store,Taste,Home,Other,With Friends,9,2,5,1,2,2,3,5
+755,60,Female,Low,Daily,Coke,Neutral,Supermarket,Brand Loyalty,Other,Other,Other,9,5,4,5,2,5,3,3
+756,30,Male,High,Rarely,Store Brand,Very Dissatisfied,Supermarket,Price,Work,Coke,Alone,1,3,2,3,4,3,1,2
+757,31,Female,Low,Weekly,Pepsi,Very Dissatisfied,Supermarket,Price,Other,Coke,Alone,4,1,3,3,4,5,4,4
+758,45,Prefer Not to Say,Low,Never,Other,Neutral,Other,Availability,Other,Coke,Other,6,3,2,5,4,4,4,1
+759,22,Male,Middle,Daily,Store Brand,Very Satisfied,Supermarket,Price,Other,RC Cola,With Family,0,4,1,3,3,3,4,2
+760,32,Female,Middle,Daily,RC Cola,Satisfied,Supermarket,Price,Restaurants,RC Cola,Other,5,5,4,3,4,5,1,4
+761,45,Non-Binary,Low,Rarely,RC Cola,Dissatisfied,Online,Availability,Restaurants,RC Cola,With Friends,6,5,1,1,5,5,5,4
+762,30,Non-Binary,High,Rarely,Pepsi,Neutral,Online,Taste,Sports Events,Other,Other,3,5,2,5,5,1,1,4
+763,37,Female,Low,Daily,RC Cola,Satisfied,Vending Machine,Price,Other,RC Cola,With Family,1,4,3,1,1,3,2,5
+764,21,Non-Binary,High,Weekly,RC Cola,Dissatisfied,Supermarket,Availability,Home,Pepsi,Alone,3,4,5,5,2,5,2,1
+765,23,Prefer Not to Say,Low,Daily,Coke,Dissatisfied,Vending Machine,Taste,Parties,Other,With Family,6,4,5,4,1,4,3,4
+766,54,Female,Low,Weekly,RC Cola,Dissatisfied,Online,Price,Parties,Coke,With Friends,4,4,2,4,2,3,1,5
+767,57,Female,Middle,Monthly,Store Brand,Dissatisfied,Supermarket,Other,Parties,RC Cola,Alone,6,1,2,1,1,5,5,1
+768,64,Prefer Not to Say,High,Weekly,Coke,Satisfied,Vending Machine,Other,Home,Pepsi,With Colleagues,10,1,2,2,5,1,3,2
+769,58,Non-Binary,High,Daily,Other,Very Satisfied,Online,Price,Restaurants,Store Brand,Other,2,5,2,5,5,2,2,3
+770,40,Male,High,Weekly,Pepsi,Very Dissatisfied,Supermarket,Availability,Home,Store Brand,With Colleagues,2,2,2,2,1,5,5,1
+771,56,Prefer Not to Say,Low,Daily,Store Brand,Very Dissatisfied,Other,Other,Home,Pepsi,Alone,5,1,3,1,2,1,5,5
+772,61,Female,Low,Monthly,RC Cola,Neutral,Online,Brand Loyalty,Sports Events,Store Brand,With Family,8,4,3,4,4,1,5,3
+773,19,Female,Middle,Daily,Other,Very Dissatisfied,Supermarket,Other,Parties,Pepsi,With Friends,7,4,2,3,2,3,3,3
+774,56,Prefer Not to Say,Middle,Daily,RC Cola,Very Dissatisfied,Online,Taste,Other,Other,Other,1,5,2,4,4,1,4,5
+775,44,Non-Binary,Middle,Never,Pepsi,Dissatisfied,Convenience Store,Other,Home,Coke,With Friends,10,5,3,1,4,3,3,3
+776,61,Non-Binary,Middle,Daily,Coke,Very Satisfied,Vending Machine,Taste,Other,Other,With Family,1,1,3,1,5,4,2,3
+777,35,Male,High,Monthly,Other,Very Satisfied,Convenience Store,Other,Restaurants,Other,With Friends,10,2,4,4,1,2,2,4
+778,23,Prefer Not to Say,Low,Weekly,Other,Neutral,Other,Availability,Restaurants,RC Cola,With Family,8,4,3,2,4,1,4,3
+779,51,Female,Low,Rarely,RC Cola,Neutral,Other,Availability,Travel,RC Cola,With Colleagues,7,4,3,2,3,5,4,2
+780,30,Female,High,Rarely,Pepsi,Neutral,Online,Taste,Home,RC Cola,With Friends,0,5,3,3,4,2,4,2
+781,22,Prefer Not to Say,Middle,Never,Coke,Very Satisfied,Supermarket,Other,Parties,Coke,Alone,3,5,3,1,3,3,5,4
+782,49,Female,Middle,Weekly,Other,Satisfied,Convenience Store,Availability,Other,Coke,With Colleagues,8,2,3,4,3,1,2,1
+783,32,Female,High,Monthly,RC Cola,Very Dissatisfied,Supermarket,Brand Loyalty,Sports Events,Other,With Colleagues,3,2,3,3,5,4,4,2
+784,36,Male,Middle,Daily,Other,Very Satisfied,Other,Brand Loyalty,Restaurants,Coke,Alone,9,1,1,2,4,2,1,3
+785,36,Female,Middle,Monthly,Store Brand,Satisfied,Online,Other,Travel,Other,Alone,10,3,3,4,1,2,1,2
+786,63,Male,Low,Rarely,Other,Very Satisfied,Vending Machine,Other,Work,Pepsi,Other,7,1,4,3,2,4,5,2
+787,40,Non-Binary,Middle,Monthly,RC Cola,Dissatisfied,Other,Brand Loyalty,Sports Events,Other,Other,1,1,5,4,2,4,4,2
+788,20,Prefer Not to Say,High,Monthly,Pepsi,Very Satisfied,Online,Other,Sports Events,Coke,Other,4,5,5,2,5,4,2,2
+789,60,Non-Binary,High,Monthly,Pepsi,Dissatisfied,Convenience Store,Taste,Sports Events,Store Brand,With Family,3,4,4,5,3,1,5,3
+790,63,Male,High,Weekly,Coke,Very Satisfied,Supermarket,Availability,Restaurants,Store Brand,Other,8,3,5,4,3,4,2,5
+791,27,Male,Middle,Never,RC Cola,Dissatisfied,Other,Availability,Other,RC Cola,Alone,5,4,2,1,4,3,1,1
+792,25,Female,High,Daily,Store Brand,Very Satisfied,Convenience Store,Availability,Parties,RC Cola,With Colleagues,10,3,2,4,1,2,3,5
+793,23,Male,Middle,Weekly,Pepsi,Very Dissatisfied,Vending Machine,Price,Restaurants,Pepsi,With Family,8,3,2,5,2,4,3,5
+794,64,Prefer Not to Say,Low,Monthly,Pepsi,Dissatisfied,Other,Brand Loyalty,Work,Pepsi,With Colleagues,7,3,5,2,4,4,2,5
+795,54,Non-Binary,Middle,Monthly,Pepsi,Dissatisfied,Other,Other,Other,Pepsi,Other,9,1,5,3,1,2,5,1
+796,27,Female,Low,Daily,RC Cola,Very Satisfied,Convenience Store,Other,Home,RC Cola,With Family,10,2,3,2,2,2,3,3
+797,26,Female,Middle,Monthly,Store Brand,Satisfied,Online,Other,Restaurants,Coke,With Friends,9,2,3,5,2,2,3,2
+798,28,Non-Binary,High,Rarely,Coke,Dissatisfied,Supermarket,Brand Loyalty,Travel,Other,With Family,10,4,4,3,5,1,1,3
+799,22,Female,High,Rarely,Store Brand,Neutral,Supermarket,Brand Loyalty,Restaurants,RC Cola,Alone,9,1,5,4,5,3,3,5
+800,48,Male,High,Weekly,Coke,Very Dissatisfied,Other,Other,Travel,RC Cola,With Family,9,1,2,2,5,1,1,2
+801,50,Prefer Not to Say,High,Weekly,Pepsi,Dissatisfied,Supermarket,Price,Restaurants,Store Brand,With Family,5,2,4,3,1,5,2,2
+802,43,Female,Low,Monthly,RC Cola,Satisfied,Online,Other,Travel,Store Brand,With Friends,9,5,3,2,3,5,1,1
+803,23,Male,Middle,Never,Other,Satisfied,Vending Machine,Price,Home,RC Cola,With Colleagues,9,5,3,4,3,1,1,4
+804,43,Male,Middle,Rarely,Other,Very Satisfied,Supermarket,Price,Other,RC Cola,Alone,6,2,4,2,5,4,3,4
+805,26,Male,High,Weekly,Other,Dissatisfied,Supermarket,Taste,Restaurants,RC Cola,Other,9,3,5,3,2,4,5,1
+806,49,Prefer Not to Say,Low,Never,RC Cola,Very Dissatisfied,Convenience Store,Taste,Other,Coke,Other,3,3,2,3,2,3,4,1
+807,34,Non-Binary,High,Daily,Pepsi,Very Satisfied,Supermarket,Taste,Sports Events,Other,Other,4,5,3,1,1,2,5,4
+808,31,Male,Middle,Monthly,Coke,Dissatisfied,Convenience Store,Price,Other,RC Cola,With Colleagues,3,3,4,4,3,1,1,5
+809,63,Female,Middle,Rarely,Coke,Dissatisfied,Vending Machine,Brand Loyalty,Travel,RC Cola,Alone,6,5,5,1,4,1,2,5
+810,26,Non-Binary,Low,Rarely,Coke,Dissatisfied,Other,Brand Loyalty,Parties,Other,With Colleagues,2,3,3,3,2,1,1,4
+811,51,Non-Binary,Middle,Weekly,RC Cola,Dissatisfied,Online,Price,Restaurants,Store Brand,With Friends,4,4,3,1,1,1,2,2
+812,28,Female,Low,Rarely,Pepsi,Dissatisfied,Other,Availability,Home,Other,With Colleagues,10,2,2,1,5,1,4,1
+813,20,Non-Binary,Low,Rarely,Pepsi,Neutral,Online,Other,Parties,Coke,With Colleagues,8,5,4,1,4,1,1,3
+814,44,Female,Low,Rarely,Other,Neutral,Other,Taste,Home,RC Cola,With Colleagues,7,3,3,1,2,2,4,2
+815,61,Non-Binary,High,Rarely,RC Cola,Dissatisfied,Vending Machine,Brand Loyalty,Travel,Other,With Family,6,1,3,4,2,5,4,2
+816,44,Prefer Not to Say,Low,Daily,Other,Very Satisfied,Convenience Store,Other,Restaurants,Pepsi,Alone,7,5,1,1,3,2,5,3
+817,40,Female,Middle,Weekly,Other,Very Satisfied,Supermarket,Other,Parties,Other,With Family,2,4,3,1,4,4,4,1
+818,62,Male,Middle,Rarely,RC Cola,Neutral,Other,Price,Travel,Coke,Alone,9,5,4,1,3,1,2,5
+819,38,Male,Middle,Never,Pepsi,Very Satisfied,Online,Brand Loyalty,Work,Coke,With Family,10,2,2,5,5,1,2,5
+820,55,Prefer Not to Say,High,Weekly,Store Brand,Very Dissatisfied,Supermarket,Brand Loyalty,Restaurants,Coke,Alone,2,1,2,4,2,2,4,2
+821,40,Male,High,Weekly,Other,Very Dissatisfied,Supermarket,Other,Parties,Coke,Alone,3,1,2,4,4,4,3,4
+822,33,Prefer Not to Say,High,Rarely,RC Cola,Very Dissatisfied,Online,Brand Loyalty,Work,Store Brand,With Family,10,3,2,2,3,1,2,5
+823,35,Male,Low,Daily,Store Brand,Very Satisfied,Vending Machine,Other,Other,Other,With Family,6,1,3,1,4,5,4,1
+824,50,Female,High,Weekly,Other,Neutral,Supermarket,Brand Loyalty,Other,Coke,Alone,4,3,4,1,3,2,5,5
+825,30,Prefer Not to Say,High,Never,RC Cola,Very Dissatisfied,Supermarket,Brand Loyalty,Parties,RC Cola,Alone,6,5,4,3,1,4,2,2
+826,31,Male,High,Monthly,Store Brand,Dissatisfied,Supermarket,Availability,Work,Pepsi,Other,4,3,4,3,2,1,5,4
+827,39,Non-Binary,Middle,Rarely,Coke,Very Dissatisfied,Other,Availability,Work,Store Brand,With Family,1,1,4,4,2,4,1,2
+828,36,Non-Binary,High,Rarely,Coke,Very Dissatisfied,Supermarket,Price,Other,Other,With Colleagues,8,4,4,3,5,5,2,5
+829,52,Female,Middle,Rarely,Pepsi,Dissatisfied,Vending Machine,Availability,Restaurants,Store Brand,With Colleagues,4,2,4,2,4,3,2,1
+830,62,Male,Middle,Daily,Other,Very Satisfied,Vending Machine,Availability,Travel,Coke,With Colleagues,2,4,1,3,5,4,4,3
+831,63,Male,High,Never,Pepsi,Neutral,Convenience Store,Taste,Home,Store Brand,With Family,3,3,2,2,5,2,4,4
+832,64,Non-Binary,Low,Monthly,RC Cola,Dissatisfied,Convenience Store,Brand Loyalty,Work,Other,With Colleagues,7,4,5,5,4,1,4,4
+833,21,Female,High,Rarely,Pepsi,Very Satisfied,Online,Price,Parties,Store Brand,Alone,7,2,3,5,5,5,4,4
+834,29,Non-Binary,Middle,Rarely,Store Brand,Very Satisfied,Vending Machine,Availability,Parties,Pepsi,With Family,1,3,5,3,5,3,5,1
+835,62,Non-Binary,Low,Daily,Store Brand,Very Satisfied,Supermarket,Taste,Other,Store Brand,With Colleagues,10,3,3,3,4,5,4,1
+836,42,Non-Binary,Low,Weekly,Pepsi,Very Satisfied,Online,Other,Parties,Coke,With Family,7,1,5,1,5,2,1,4
+837,36,Male,Middle,Monthly,RC Cola,Dissatisfied,Convenience Store,Availability,Other,Store Brand,Other,7,4,4,3,4,2,1,1
+838,59,Non-Binary,Low,Monthly,Other,Neutral,Online,Availability,Restaurants,RC Cola,Alone,7,2,2,5,1,4,2,1
+839,18,Female,High,Monthly,Coke,Neutral,Other,Price,Travel,Pepsi,Alone,9,2,1,5,5,4,4,2
+840,25,Non-Binary,Middle,Never,RC Cola,Neutral,Supermarket,Taste,Home,RC Cola,With Colleagues,6,2,4,3,3,3,4,4
+841,19,Male,High,Weekly,RC Cola,Neutral,Supermarket,Price,Travel,Coke,Alone,7,5,1,1,1,3,5,4
+842,18,Male,Middle,Weekly,Other,Very Satisfied,Convenience Store,Availability,Parties,Coke,Alone,9,3,3,3,5,5,4,1
+843,44,Female,High,Daily,Coke,Dissatisfied,Online,Other,Travel,Other,Alone,9,1,2,4,3,2,4,1
+844,28,Prefer Not to Say,Low,Never,Coke,Dissatisfied,Other,Other,Sports Events,RC Cola,With Family,8,1,2,1,4,1,1,4
+845,54,Non-Binary,Low,Never,Coke,Neutral,Vending Machine,Brand Loyalty,Travel,Other,Other,2,2,1,4,3,1,1,1
+846,36,Male,High,Monthly,Other,Very Satisfied,Convenience Store,Other,Restaurants,Other,With Friends,3,4,3,1,3,2,3,3
+847,22,Non-Binary,Middle,Monthly,Store Brand,Very Dissatisfied,Other,Price,Sports Events,Store Brand,With Family,8,3,5,3,5,4,1,4
+848,25,Non-Binary,Middle,Daily,Store Brand,Very Dissatisfied,Online,Other,Sports Events,Store Brand,Alone,8,4,1,4,4,3,3,5
+849,22,Female,Low,Daily,Pepsi,Very Dissatisfied,Supermarket,Other,Work,Pepsi,With Family,4,5,3,5,2,2,4,2
+850,47,Male,High,Never,Store Brand,Very Dissatisfied,Online,Price,Restaurants,Coke,With Family,5,4,5,4,5,4,3,2
+851,55,Female,Middle,Weekly,Store Brand,Satisfied,Online,Price,Other,Coke,With Friends,10,3,3,5,4,5,2,2
+852,29,Female,Low,Never,Other,Dissatisfied,Supermarket,Taste,Restaurants,RC Cola,With Colleagues,3,1,4,2,5,3,3,2
+853,31,Female,High,Rarely,Other,Dissatisfied,Supermarket,Availability,Work,Store Brand,With Friends,10,1,4,2,4,1,4,5
+854,26,Non-Binary,High,Monthly,Coke,Dissatisfied,Online,Availability,Parties,RC Cola,With Friends,1,1,4,3,5,2,4,2
+855,20,Female,Low,Never,RC Cola,Very Dissatisfied,Vending Machine,Availability,Other,RC Cola,With Friends,5,1,1,1,5,4,1,5
+856,27,Prefer Not to Say,Low,Never,Coke,Dissatisfied,Other,Taste,Home,Store Brand,With Friends,3,3,4,3,1,1,4,3
+857,30,Non-Binary,Low,Daily,Other,Very Satisfied,Vending Machine,Other,Restaurants,RC Cola,With Colleagues,10,2,5,4,3,1,2,2
+858,26,Non-Binary,Low,Weekly,Store Brand,Satisfied,Supermarket,Taste,Sports Events,Other,Other,6,3,5,3,3,3,4,1
+859,62,Non-Binary,High,Rarely,RC Cola,Satisfied,Supermarket,Availability,Restaurants,Other,Other,8,1,4,5,5,5,4,1
+860,57,Prefer Not to Say,High,Never,RC Cola,Satisfied,Online,Other,Home,Coke,Other,0,5,4,3,1,3,2,3
+861,34,Male,High,Weekly,Coke,Satisfied,Supermarket,Other,Home,Pepsi,With Friends,8,2,4,5,3,1,3,2
+862,47,Female,High,Monthly,Store Brand,Neutral,Other,Other,Sports Events,Other,With Family,2,2,3,1,1,4,3,2
+863,18,Prefer Not to Say,High,Never,Store Brand,Very Dissatisfied,Convenience Store,Brand Loyalty,Travel,Pepsi,With Family,7,1,3,5,1,2,5,2
+864,54,Male,Middle,Rarely,RC Cola,Satisfied,Online,Brand Loyalty,Work,Store Brand,Other,0,3,5,4,2,5,2,1
+865,57,Female,High,Monthly,Other,Very Satisfied,Online,Taste,Home,Pepsi,Alone,3,2,3,1,4,5,1,2
+866,29,Non-Binary,Middle,Rarely,RC Cola,Satisfied,Vending Machine,Availability,Travel,RC Cola,With Family,2,2,3,1,4,3,5,4
+867,60,Non-Binary,High,Daily,Coke,Satisfied,Supermarket,Price,Other,Other,Other,10,3,3,3,3,4,5,4
+868,25,Non-Binary,Middle,Daily,Other,Satisfied,Other,Brand Loyalty,Travel,Pepsi,Alone,3,4,3,4,2,1,4,1
+869,32,Female,High,Never,Coke,Very Satisfied,Online,Availability,Travel,Store Brand,With Family,7,5,5,1,4,2,1,4
+870,29,Female,High,Weekly,Coke,Very Dissatisfied,Online,Taste,Work,Other,With Colleagues,1,4,5,2,2,1,5,2
+871,46,Non-Binary,Middle,Daily,RC Cola,Very Dissatisfied,Online,Price,Home,RC Cola,Other,2,5,3,2,5,2,4,1
+872,24,Female,Middle,Rarely,Pepsi,Neutral,Other,Taste,Restaurants,Coke,Alone,0,5,4,5,3,3,5,3
+873,56,Prefer Not to Say,High,Daily,Coke,Very Dissatisfied,Online,Price,Other,Other,Alone,2,1,5,3,4,1,1,3
+874,53,Non-Binary,High,Monthly,Pepsi,Very Dissatisfied,Other,Price,Travel,Store Brand,Other,6,4,1,2,4,3,4,3
+875,49,Male,High,Daily,Coke,Very Dissatisfied,Vending Machine,Price,Other,Coke,With Friends,4,5,1,4,5,4,4,2
+876,58,Male,Low,Weekly,Store Brand,Neutral,Convenience Store,Price,Restaurants,Other,With Family,10,3,1,4,1,5,2,3
+877,40,Prefer Not to Say,Middle,Daily,Store Brand,Dissatisfied,Supermarket,Availability,Work,Other,With Colleagues,10,5,5,4,1,2,2,5
+878,36,Female,Middle,Daily,Other,Very Satisfied,Convenience Store,Availability,Work,Store Brand,With Family,1,5,2,1,4,1,2,5
+879,25,Non-Binary,Middle,Rarely,Other,Dissatisfied,Online,Price,Other,Coke,With Colleagues,0,1,5,4,4,3,5,4
+880,46,Female,Low,Monthly,Pepsi,Neutral,Convenience Store,Availability,Restaurants,Pepsi,Other,3,3,4,1,5,3,3,5
+881,38,Female,Middle,Rarely,Other,Dissatisfied,Supermarket,Taste,Home,Other,With Family,8,5,4,4,4,3,2,3
+882,41,Male,High,Monthly,Store Brand,Neutral,Supermarket,Brand Loyalty,Travel,Store Brand,Alone,6,1,2,4,1,2,5,4
+883,21,Non-Binary,High,Rarely,Pepsi,Neutral,Supermarket,Other,Parties,Store Brand,Alone,1,3,3,5,3,5,4,1
+884,63,Female,Middle,Never,Store Brand,Neutral,Other,Price,Work,Other,Other,2,5,4,2,2,4,2,3
+885,45,Male,Middle,Never,Coke,Very Satisfied,Convenience Store,Availability,Sports Events,Other,With Colleagues,5,3,1,1,3,4,1,5
+886,54,Female,Middle,Rarely,Other,Dissatisfied,Convenience Store,Taste,Sports Events,RC Cola,With Friends,7,3,4,3,2,2,2,1
+887,51,Prefer Not to Say,Low,Daily,RC Cola,Neutral,Vending Machine,Taste,Sports Events,Coke,With Family,3,3,3,1,2,2,1,1
+888,51,Male,Middle,Rarely,Coke,Dissatisfied,Online,Brand Loyalty,Work,RC Cola,With Friends,0,3,2,3,1,2,4,5
+889,42,Non-Binary,Low,Monthly,Other,Very Dissatisfied,Convenience Store,Taste,Parties,Coke,With Colleagues,2,5,3,4,1,3,2,2
+890,32,Non-Binary,High,Weekly,RC Cola,Very Satisfied,Online,Availability,Work,Store Brand,Alone,8,4,1,3,2,1,1,4
+891,59,Non-Binary,Middle,Rarely,Pepsi,Dissatisfied,Other,Brand Loyalty,Home,Other,With Colleagues,7,5,4,2,2,5,4,5
+892,50,Non-Binary,Middle,Weekly,Store Brand,Very Dissatisfied,Convenience Store,Price,Other,Other,With Family,9,3,4,3,5,2,2,1
+893,51,Male,Middle,Daily,Pepsi,Very Dissatisfied,Other,Availability,Parties,Pepsi,With Family,4,4,1,2,2,1,1,2
+894,49,Male,High,Rarely,Pepsi,Dissatisfied,Online,Taste,Sports Events,RC Cola,With Family,5,3,2,3,1,5,5,4
+895,53,Male,Low,Daily,Store Brand,Dissatisfied,Convenience Store,Brand Loyalty,Home,Other,With Colleagues,6,5,2,3,3,5,2,5
+896,50,Male,Middle,Daily,Other,Neutral,Online,Price,Other,Other,Other,5,4,1,5,5,5,2,2
+897,32,Non-Binary,Low,Monthly,RC Cola,Neutral,Vending Machine,Other,Restaurants,RC Cola,Other,4,4,3,3,4,4,5,1
+898,37,Prefer Not to Say,Low,Daily,Pepsi,Dissatisfied,Other,Taste,Travel,Coke,With Colleagues,1,3,2,1,1,5,5,4
+899,56,Prefer Not to Say,Low,Daily,Other,Dissatisfied,Supermarket,Taste,Travel,Coke,With Colleagues,3,5,4,5,3,4,3,1
+900,24,Male,Low,Daily,Coke,Neutral,Other,Taste,Restaurants,Coke,With Family,6,2,4,1,2,5,1,3
+901,35,Prefer Not to Say,Middle,Monthly,RC Cola,Very Dissatisfied,Convenience Store,Brand Loyalty,Home,Pepsi,With Family,1,2,2,3,1,3,1,1
+902,48,Female,Low,Daily,Coke,Very Satisfied,Other,Other,Sports Events,Other,With Friends,2,4,4,5,5,3,4,5
+903,54,Non-Binary,Low,Rarely,Coke,Very Satisfied,Online,Brand Loyalty,Home,Other,With Colleagues,5,4,2,4,3,1,2,1
+904,44,Male,High,Monthly,Other,Neutral,Other,Taste,Home,Coke,With Colleagues,6,1,5,1,1,3,1,3
+905,55,Male,High,Daily,Other,Satisfied,Convenience Store,Availability,Home,Pepsi,With Family,0,5,5,2,1,3,5,2
+906,64,Female,High,Never,Other,Neutral,Convenience Store,Availability,Other,RC Cola,With Friends,8,3,4,5,3,2,5,5
+907,30,Prefer Not to Say,High,Rarely,Coke,Neutral,Online,Other,Other,Other,Other,3,1,2,4,3,1,4,1
+908,46,Female,High,Never,RC Cola,Dissatisfied,Supermarket,Other,Home,Coke,With Colleagues,0,3,4,4,5,3,2,3
+909,22,Male,Middle,Never,Coke,Satisfied,Vending Machine,Availability,Parties,Pepsi,With Colleagues,8,4,3,1,4,5,3,4
+910,39,Female,High,Rarely,Other,Satisfied,Convenience Store,Brand Loyalty,Work,Other,With Colleagues,2,2,5,5,1,4,4,5
+911,64,Male,High,Never,Coke,Neutral,Vending Machine,Brand Loyalty,Parties,Coke,With Colleagues,0,4,3,1,3,3,5,5
+912,19,Male,High,Rarely,Pepsi,Very Dissatisfied,Other,Other,Sports Events,Other,Alone,8,1,3,1,5,3,4,1
+913,49,Female,Low,Never,Other,Satisfied,Other,Availability,Sports Events,RC Cola,Other,5,1,3,4,5,2,2,1
+914,22,Female,High,Monthly,RC Cola,Satisfied,Online,Price,Other,Other,Other,7,3,4,5,5,2,4,1
+915,53,Non-Binary,High,Weekly,Pepsi,Neutral,Online,Availability,Restaurants,Other,With Friends,4,1,4,1,1,2,4,3
+916,52,Female,Middle,Weekly,Other,Dissatisfied,Other,Brand Loyalty,Sports Events,Pepsi,Other,2,2,1,1,2,5,1,5
+917,51,Non-Binary,Middle,Monthly,Coke,Neutral,Other,Other,Home,Pepsi,Alone,10,1,1,5,1,5,4,3
+918,46,Male,Low,Daily,Other,Very Satisfied,Vending Machine,Taste,Other,Store Brand,Other,0,4,5,5,2,3,1,3
+919,62,Male,Low,Monthly,Coke,Very Dissatisfied,Vending Machine,Taste,Travel,Store Brand,With Colleagues,1,1,1,2,4,2,1,1
+920,44,Female,Low,Never,Store Brand,Satisfied,Online,Price,Work,Store Brand,With Friends,3,1,5,5,4,2,2,1
+921,53,Male,High,Rarely,Coke,Satisfied,Supermarket,Taste,Work,RC Cola,With Friends,10,3,3,1,2,4,5,4
+922,24,Prefer Not to Say,Low,Weekly,Coke,Dissatisfied,Online,Brand Loyalty,Travel,Coke,Alone,8,2,1,3,1,1,3,4
+923,23,Female,High,Monthly,RC Cola,Satisfied,Vending Machine,Other,Restaurants,RC Cola,With Friends,2,5,5,3,1,1,3,3
+924,28,Female,Middle,Rarely,Other,Neutral,Convenience Store,Availability,Work,Pepsi,Other,10,1,1,2,1,3,1,2
+925,44,Non-Binary,Low,Never,RC Cola,Neutral,Online,Other,Travel,Store Brand,With Friends,8,1,1,3,3,5,3,1
+926,32,Female,High,Monthly,Coke,Dissatisfied,Convenience Store,Price,Restaurants,Coke,With Friends,3,2,5,3,2,4,3,4
+927,62,Prefer Not to Say,Low,Rarely,RC Cola,Very Satisfied,Supermarket,Brand Loyalty,Home,Store Brand,Other,3,4,4,4,3,1,1,2
+928,28,Non-Binary,High,Never,Pepsi,Neutral,Supermarket,Taste,Work,Coke,With Friends,8,2,3,3,2,2,3,5
+929,61,Non-Binary,Middle,Never,RC Cola,Very Dissatisfied,Supermarket,Price,Work,Store Brand,With Colleagues,9,1,2,1,1,4,2,5
+930,61,Female,High,Weekly,Store Brand,Neutral,Supermarket,Price,Parties,RC Cola,With Friends,8,2,2,5,1,1,1,5
+931,51,Non-Binary,High,Weekly,Pepsi,Neutral,Online,Price,Sports Events,Coke,With Friends,4,4,3,4,2,3,4,1
+932,36,Prefer Not to Say,Middle,Never,Other,Very Satisfied,Other,Taste,Sports Events,Pepsi,Other,10,2,5,3,1,2,1,5
+933,43,Non-Binary,Middle,Never,RC Cola,Neutral,Online,Availability,Restaurants,Store Brand,With Family,7,3,3,3,1,1,5,5
+934,56,Female,Middle,Weekly,Pepsi,Very Dissatisfied,Supermarket,Other,Work,RC Cola,Alone,10,3,5,1,5,1,3,4
+935,63,Non-Binary,Low,Rarely,Pepsi,Dissatisfied,Supermarket,Brand Loyalty,Travel,Pepsi,Other,1,2,1,5,5,2,5,3
+936,58,Male,Low,Monthly,RC Cola,Neutral,Vending Machine,Taste,Travel,Store Brand,Alone,4,5,2,5,1,1,1,2
+937,58,Female,Middle,Daily,Other,Dissatisfied,Other,Availability,Restaurants,Other,Other,5,5,2,5,4,5,5,2
+938,22,Prefer Not to Say,Middle,Weekly,Store Brand,Satisfied,Vending Machine,Taste,Travel,Coke,With Family,8,3,4,2,5,4,5,1
+939,52,Non-Binary,High,Weekly,Coke,Satisfied,Vending Machine,Other,Other,RC Cola,Other,9,4,2,4,1,5,2,3
+940,26,Male,High,Rarely,Coke,Very Dissatisfied,Online,Price,Travel,Coke,Alone,6,1,3,4,1,1,2,3
+941,38,Non-Binary,High,Daily,Coke,Satisfied,Convenience Store,Taste,Travel,Other,With Family,3,2,1,2,4,1,5,3
+942,56,Prefer Not to Say,High,Rarely,Other,Very Satisfied,Vending Machine,Taste,Sports Events,RC Cola,Other,8,1,2,5,1,2,5,5
+943,57,Prefer Not to Say,High,Daily,Pepsi,Neutral,Supermarket,Other,Other,RC Cola,With Colleagues,2,4,3,4,5,5,1,3
+944,47,Non-Binary,Middle,Rarely,Other,Satisfied,Convenience Store,Price,Travel,Coke,With Friends,6,5,3,5,3,1,3,2
+945,57,Non-Binary,High,Rarely,Store Brand,Very Dissatisfied,Vending Machine,Taste,Sports Events,Store Brand,With Colleagues,10,3,2,1,4,5,3,5
+946,57,Prefer Not to Say,Middle,Never,Pepsi,Very Satisfied,Convenience Store,Taste,Home,RC Cola,Other,0,5,1,4,4,1,2,1
+947,26,Non-Binary,Low,Weekly,Store Brand,Satisfied,Convenience Store,Availability,Work,RC Cola,With Family,7,5,2,1,1,5,3,4
+948,52,Female,Low,Never,Coke,Neutral,Online,Availability,Travel,Coke,With Family,0,2,3,5,3,1,3,4
+949,45,Female,High,Daily,Pepsi,Very Satisfied,Vending Machine,Other,Restaurants,Pepsi,With Family,8,2,4,3,1,3,1,1
+950,19,Male,Middle,Never,RC Cola,Dissatisfied,Online,Brand Loyalty,Work,Other,With Family,7,4,2,3,2,4,5,5
+951,62,Non-Binary,Middle,Weekly,Pepsi,Dissatisfied,Vending Machine,Availability,Restaurants,Pepsi,With Colleagues,7,3,5,5,5,1,4,5
+952,45,Female,Middle,Rarely,Pepsi,Very Satisfied,Supermarket,Availability,Home,RC Cola,Other,2,5,1,4,4,4,3,4
+953,28,Male,Low,Monthly,RC Cola,Very Satisfied,Other,Brand Loyalty,Home,Coke,With Friends,7,4,3,2,1,5,2,4
+954,20,Male,Low,Monthly,Store Brand,Very Dissatisfied,Online,Price,Sports Events,Other,With Friends,0,3,5,2,2,1,3,1
+955,42,Non-Binary,Low,Rarely,RC Cola,Satisfied,Vending Machine,Price,Sports Events,Store Brand,Alone,4,4,1,5,1,1,1,1
+956,54,Prefer Not to Say,Low,Monthly,Coke,Dissatisfied,Supermarket,Taste,Work,RC Cola,With Friends,8,1,3,2,5,3,2,4
+957,40,Non-Binary,Middle,Never,RC Cola,Very Satisfied,Supermarket,Price,Work,RC Cola,Alone,8,3,4,1,5,1,2,2
+958,43,Male,High,Monthly,Store Brand,Very Dissatisfied,Other,Other,Parties,RC Cola,Other,10,2,4,3,1,1,3,2
+959,35,Male,High,Rarely,Coke,Very Satisfied,Online,Brand Loyalty,Home,Pepsi,With Friends,2,4,1,1,4,2,2,5
+960,46,Male,Low,Never,Store Brand,Satisfied,Online,Price,Work,Other,With Family,2,4,5,4,4,3,3,5
+961,53,Female,High,Weekly,RC Cola,Satisfied,Vending Machine,Price,Sports Events,Store Brand,Alone,6,5,3,4,5,4,3,4
+962,24,Prefer Not to Say,High,Daily,Pepsi,Dissatisfied,Supermarket,Other,Parties,Other,Alone,0,2,3,1,4,4,2,5
+963,39,Non-Binary,High,Never,Pepsi,Satisfied,Supermarket,Price,Home,Pepsi,With Colleagues,8,4,2,5,5,4,2,5
+964,35,Male,Middle,Weekly,Coke,Satisfied,Other,Other,Other,Coke,With Friends,5,1,5,1,3,5,5,3
+965,51,Female,High,Weekly,Pepsi,Very Satisfied,Supermarket,Price,Restaurants,Coke,With Family,4,5,4,3,5,4,5,1
+966,23,Female,Middle,Daily,Store Brand,Satisfied,Supermarket,Other,Other,Coke,With Friends,8,5,1,4,1,3,5,2
+967,19,Female,Middle,Rarely,Pepsi,Very Dissatisfied,Other,Taste,Travel,RC Cola,With Colleagues,4,3,2,3,5,3,1,1
+968,21,Female,High,Daily,Store Brand,Very Satisfied,Convenience Store,Availability,Parties,Pepsi,Other,6,1,4,5,5,3,2,2
+969,64,Non-Binary,Low,Rarely,Store Brand,Very Dissatisfied,Vending Machine,Taste,Sports Events,Other,With Colleagues,10,5,4,3,4,1,2,3
+970,57,Prefer Not to Say,Middle,Monthly,Pepsi,Very Satisfied,Supermarket,Brand Loyalty,Travel,Store Brand,With Colleagues,2,3,5,5,2,5,2,1
+971,43,Prefer Not to Say,High,Daily,Other,Very Dissatisfied,Convenience Store,Other,Work,Store Brand,With Colleagues,5,5,4,2,1,2,3,2
+972,26,Prefer Not to Say,Middle,Never,Pepsi,Very Dissatisfied,Supermarket,Availability,Restaurants,Coke,Alone,5,3,2,1,2,5,1,5
+973,42,Female,High,Rarely,Coke,Neutral,Supermarket,Price,Parties,RC Cola,With Family,2,5,2,5,3,4,2,2
+974,59,Female,Middle,Weekly,Store Brand,Dissatisfied,Vending Machine,Price,Other,Other,Other,0,4,5,3,3,5,5,2
+975,21,Prefer Not to Say,Low,Never,RC Cola,Very Satisfied,Supermarket,Brand Loyalty,Other,Other,With Friends,2,4,2,3,1,1,2,2
+976,50,Prefer Not to Say,High,Rarely,Store Brand,Satisfied,Vending Machine,Price,Restaurants,RC Cola,Alone,6,4,3,2,3,5,4,4
+977,20,Non-Binary,Middle,Weekly,Other,Very Dissatisfied,Vending Machine,Price,Work,Store Brand,With Family,0,5,2,4,5,4,2,1
+978,37,Non-Binary,Middle,Rarely,Store Brand,Very Satisfied,Online,Availability,Restaurants,Store Brand,With Family,6,1,1,2,5,2,1,4
+979,21,Female,Low,Never,Coke,Satisfied,Online,Taste,Sports Events,Other,With Family,7,2,3,5,2,3,1,2
+980,53,Male,Low,Never,Other,Very Satisfied,Online,Other,Other,Pepsi,With Friends,2,1,4,3,3,1,3,4
+981,40,Female,High,Monthly,Store Brand,Neutral,Online,Price,Sports Events,Other,With Friends,6,3,4,4,4,2,3,2
+982,46,Male,Middle,Rarely,Other,Very Dissatisfied,Convenience Store,Availability,Restaurants,Coke,With Friends,10,5,3,5,1,1,4,3
+983,31,Male,Middle,Monthly,Coke,Very Dissatisfied,Convenience Store,Other,Other,Pepsi,With Colleagues,8,2,3,2,5,1,2,5
+984,51,Prefer Not to Say,High,Monthly,Coke,Satisfied,Convenience Store,Taste,Home,Other,Alone,9,2,2,4,5,1,5,4
+985,56,Prefer Not to Say,High,Weekly,Coke,Neutral,Other,Taste,Sports Events,Other,With Colleagues,10,1,5,3,4,2,5,5
+986,54,Female,Middle,Monthly,Pepsi,Satisfied,Vending Machine,Taste,Travel,Coke,Alone,8,1,1,4,3,4,3,5
+987,54,Prefer Not to Say,Low,Rarely,Store Brand,Dissatisfied,Vending Machine,Availability,Sports Events,Coke,With Colleagues,9,2,1,4,2,3,5,3
+988,24,Male,High,Daily,Pepsi,Very Satisfied,Other,Price,Parties,Store Brand,Alone,5,2,5,5,4,4,5,1
+989,55,Female,Middle,Monthly,Coke,Neutral,Other,Brand Loyalty,Parties,Pepsi,Other,6,5,3,2,5,4,2,1
+990,23,Prefer Not to Say,Low,Daily,Pepsi,Neutral,Convenience Store,Brand Loyalty,Parties,RC Cola,Other,9,5,3,5,3,1,5,2
+991,22,Prefer Not to Say,Low,Weekly,RC Cola,Satisfied,Convenience Store,Price,Other,Coke,With Colleagues,2,1,4,5,2,3,1,4
+992,51,Female,Middle,Daily,Other,Very Satisfied,Online,Price,Travel,Other,With Friends,9,4,3,4,3,4,1,2
+993,41,Non-Binary,Low,Weekly,Store Brand,Dissatisfied,Supermarket,Other,Sports Events,RC Cola,With Colleagues,0,1,5,3,2,2,2,1
+994,20,Prefer Not to Say,Middle,Rarely,RC Cola,Very Satisfied,Other,Other,Other,RC Cola,Other,9,1,3,5,5,4,1,4
+995,39,Non-Binary,High,Daily,Other,Very Satisfied,Other,Taste,Travel,Pepsi,With Colleagues,4,1,5,3,5,5,1,4
+996,21,Female,Middle,Monthly,Pepsi,Very Dissatisfied,Supermarket,Price,Sports Events,Pepsi,With Friends,2,2,3,5,4,1,4,1
+997,47,Non-Binary,Middle,Weekly,Coke,Very Satisfied,Other,Price,Parties,Other,Other,7,5,3,4,5,5,2,4
+998,33,Non-Binary,High,Weekly,Other,Very Satisfied,Other,Brand Loyalty,Sports Events,Coke,With Friends,10,5,2,3,3,2,2,5
+999,61,Prefer Not to Say,Low,Daily,RC Cola,Very Satisfied,Other,Taste,Travel,RC Cola,With Family,10,4,5,2,5,1,2,4
+1000,37,Male,Middle,Daily,Other,Very Satisfied,Online,Price,Sports Events,Other,Other,1,5,1,2,3,5,1,3
