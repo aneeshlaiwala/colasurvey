@@ -73,8 +73,8 @@ elif section == "Brand Metrics":
         st.plotly_chart(fig)
     
     if 'Occasions_Of_Buying' in filtered_df.columns:
-        occasions_counts = filtered_df['Occasions_Of_Buying'].value_counts()
-        fig = px.pie(occasions_counts, names=occasions_counts.index, title='Buying Occasions Distribution')
+        occasions_counts = filtered_df['Occasions_Of_Buying'].value_counts(normalize=True) * 100
+        fig = px.bar(x=occasions_counts.index, y=occasions_counts.values, text=occasions_counts.values.round(1), title='Buying Occasions Distribution')
         st.plotly_chart(fig)
 
 elif section == "Basic Attribute Scores":
@@ -109,8 +109,8 @@ cluster_mobile = st.selectbox("Cluster", [None] + list(df["Cluster_Name"].dropna
 col1, col2 = st.columns(2)
 with col1:
     if st.button("Apply Filter (for Mobile)"):
-        st.experimental_rerun()
+        st.rerun()
 
 with col2:
     if st.button("Clear Filters"):
-        st.experimental_rerun()
+        st.rerun()
