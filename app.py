@@ -30,21 +30,21 @@ df['Cluster_Name'] = df['Cluster'].map({0: 'Fizz-Lovers', 1: 'Brand-Conscious Co
 
 # Sidebar Filters
 with st.sidebar:
-    brand_filter = st.selectbox("Select a Brand", [None] + list(df["Brand_Preference"].unique()))
-    gender_filter = st.selectbox("Select Gender", [None] + list(df["Gender"].unique()))
-    income_filter = st.selectbox("Select Income Level", [None] + list(df["Income_Level"].unique()))
-    cluster_filter = st.selectbox("Select Cluster", [None] + list(df["Cluster_Name"].unique()))
+    brand = st.selectbox("Select a Brand", [None] + list(df["Brand_Preference"].unique()))
+    gender = st.selectbox("Select Gender", [None] + list(df["Gender"].unique()))
+    income = st.selectbox("Select Income Level", [None] + list(df["Income_Level"].unique()))
+    cluster = st.selectbox("Select Cluster", [None] + list(df["Cluster_Name"].unique()))
 
-# Apply selected filters
+# Filter Data
 filtered_df = df.copy()
-if brand_filter:
-    filtered_df = filtered_df[filtered_df["Brand_Preference"] == brand_filter]
-if gender_filter:
-    filtered_df = filtered_df[filtered_df["Gender"] == gender_filter]
-if income_filter:
-    filtered_df = filtered_df[filtered_df["Income_Level"] == income_filter]
-if cluster_filter:
-    filtered_df = filtered_df[filtered_df["Cluster_Name"] == cluster_filter]
+if brand:
+    filtered_df = filtered_df[filtered_df["Brand_Preference"] == brand]
+if gender:
+    filtered_df = filtered_df[filtered_df["Gender"] == gender]
+if income:
+    filtered_df = filtered_df[filtered_df["Income_Level"] == income]
+if cluster:
+    filtered_df = filtered_df[filtered_df["Cluster_Name"] == cluster]
 
 # Section Selection using Radio Buttons
 section = st.radio("Select Analysis Section", [
@@ -83,33 +83,33 @@ elif section == "Regression Analysis":
     model = sm.OLS(y, sm.add_constant(X)).fit()
     st.text(model.summary())
 
+elif section == "Decision Tree Analysis":
+    st.subheader("Decision Tree Analysis")
+    X_tree = filtered_df[['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 'Brand_Reputation_Rating', 'Availability_Rating', 'Sweetness_Rating', 'Fizziness_Rating']]
+    y_tree = filtered_df['NPS_Score'].apply(lambda x: 1 if x >= 9 else 0)
+    clf = DecisionTreeClassifier(max_depth=3, random_state=42)
+    clf.fit(X_tree, y_tree)
+    fig, ax = plt.subplots(figsize=(12, 6))
+    tree.plot_tree(clf, feature_names=X_tree.columns, class_names=['Detractor/Passive', 'Promoter'], filled=True, fontsize=8, ax=ax)
+    st.pyplot(fig)
+
+elif section == "Cluster Analysis":
+    st.subheader("Customer Segmentation")
+    cluster_counts = filtered_df['Cluster_Name'].value_counts(normalize=True) * 100
+    fig = px.bar(x=cluster_counts.index, y=cluster_counts.values.round(2), text=cluster_counts.values.round(2), title='Cluster Distribution (%)')
+    st.plotly_chart(fig)
+
 elif section == "View & Download Full Dataset":
     st.subheader("Full Dataset")
     st.dataframe(filtered_df)
     csv = filtered_df.to_csv(index=False)
     st.download_button(label="Download CSV", data=csv, file_name="cola_survey_data.csv", mime="text/csv")
 
-# Apply and Clear Filters at the Bottom
-st.subheader("Apply Filters (for Mobile)")
-brand_mobile = st.selectbox("Brand", [None] + list(df["Brand_Preference"].unique()), key='brand_mobile')
-gender_mobile = st.selectbox("Gender", [None] + list(df["Gender"].unique()), key='gender_mobile')
-income_mobile = st.selectbox("Income Level", [None] + list(df["Income_Level"].unique()), key='income_mobile')
-cluster_mobile = st.selectbox("Cluster", [None] + list(df["Cluster_Name"].unique()), key='cluster_mobile')
-
+# Apply and Clear Filters
 col1, col2 = st.columns(2)
 with col1:
     if st.button("Apply Filter (for Mobile)"):
-        filtered_df = df.copy()
-        if brand_mobile:
-            filtered_df = filtered_df[filtered_df["Brand_Preference"] == brand_mobile]
-        if gender_mobile:
-            filtered_df = filtered_df[filtered_df["Gender"] == gender_mobile]
-        if income_mobile:
-            filtered_df = filtered_df[filtered_df["Income_Level"] == income_mobile]
-        if cluster_mobile:
-            filtered_df = filtered_df[filtered_df["Cluster_Name"] == cluster_mobile]
         st.rerun()
-
 with col2:
     if st.button("Clear Filters"):
         st.rerun()
