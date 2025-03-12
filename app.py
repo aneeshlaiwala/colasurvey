@@ -1,5 +1,6 @@
-st.set_page_config(layout="wide")
-import streamlit as st
+import streamlit as st  # Import Streamlit first
+st.set_page_config(layout="wide")  # Then set the page configuration
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
