@@ -30,21 +30,25 @@ df['Cluster_Name'] = df['Cluster'].map({0: 'Fizz-Lovers', 1: 'Brand-Conscious Co
 
 # Sidebar Filters
 with st.sidebar:
-    brand = st.selectbox("Select a Brand", [None] + list(df["Brand_Preference"].unique()))
-    gender = st.selectbox("Select Gender", [None] + list(df["Gender"].unique()))
-    income = st.selectbox("Select Income Level", [None] + list(df["Income_Level"].unique()))
-    cluster = st.selectbox("Select Cluster", [None] + list(df["Cluster_Name"].unique()))
+    brand = st.selectbox("Select a Brand", [None] + list(df["Brand_Preference"].unique()), key='brand_sidebar')
+    gender = st.selectbox("Select Gender", [None] + list(df["Gender"].unique()), key='gender_sidebar')
+    income = st.selectbox("Select Income Level", [None] + list(df["Income_Level"].unique()), key='income_sidebar')
+    cluster = st.selectbox("Select Cluster", [None] + list(df["Cluster_Name"].unique()), key='cluster_sidebar')
 
-# Filter Data
+# Store filter selections in session state
+if 'filters' not in st.session_state:
+    st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
+
+# Apply selected filters
 filtered_df = df.copy()
-if brand:
-    filtered_df = filtered_df[filtered_df["Brand_Preference"] == brand]
-if gender:
-    filtered_df = filtered_df[filtered_df["Gender"] == gender]
-if income:
-    filtered_df = filtered_df[filtered_df["Income_Level"] == income]
-if cluster:
-    filtered_df = filtered_df[filtered_df["Cluster_Name"] == cluster]
+if st.session_state.filters['brand']:
+    filtered_df = filtered_df[filtered_df["Brand_Preference"] == st.session_state.filters['brand']]
+if st.session_state.filters['gender']:
+    filtered_df = filtered_df[filtered_df["Gender"] == st.session_state.filters['gender']]
+if st.session_state.filters['income']:
+    filtered_df = filtered_df[filtered_df["Income_Level"] == st.session_state.filters['income']]
+if st.session_state.filters['cluster']:
+    filtered_df = filtered_df[filtered_df["Cluster_Name"] == st.session_state.filters['cluster']]
 
 # Section Selection using Radio Buttons
 section = st.radio("Select Analysis Section", [
@@ -76,29 +80,6 @@ elif section == "Basic Attribute Scores":
     fig = px.bar(x=avg_scores.index, y=avg_scores.values, text=avg_scores.values.round(2), title='Basic Attribute Scores')
     st.plotly_chart(fig)
 
-elif section == "Regression Analysis":
-    st.subheader("Regression Analysis")
-    X = filtered_df[['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 'Brand_Reputation_Rating', 'Availability_Rating', 'Sweetness_Rating', 'Fizziness_Rating']]
-    y = filtered_df['NPS_Score']
-    model = sm.OLS(y, sm.add_constant(X)).fit()
-    st.text(model.summary())
-
-elif section == "Decision Tree Analysis":
-    st.subheader("Decision Tree Analysis")
-    X_tree = filtered_df[['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 'Brand_Reputation_Rating', 'Availability_Rating', 'Sweetness_Rating', 'Fizziness_Rating']]
-    y_tree = filtered_df['NPS_Score'].apply(lambda x: 1 if x >= 9 else 0)
-    clf = DecisionTreeClassifier(max_depth=3, random_state=42)
-    clf.fit(X_tree, y_tree)
-    fig, ax = plt.subplots(figsize=(12, 6))
-    tree.plot_tree(clf, feature_names=X_tree.columns, class_names=['Detractor/Passive', 'Promoter'], filled=True, fontsize=8, ax=ax)
-    st.pyplot(fig)
-
-elif section == "Cluster Analysis":
-    st.subheader("Customer Segmentation")
-    cluster_counts = filtered_df['Cluster_Name'].value_counts(normalize=True) * 100
-    fig = px.bar(x=cluster_counts.index, y=cluster_counts.values.round(2), text=cluster_counts.values.round(2), title='Cluster Distribution (%)')
-    st.plotly_chart(fig)
-
 elif section == "View & Download Full Dataset":
     st.subheader("Full Dataset")
     st.dataframe(filtered_df)
@@ -109,7 +90,13 @@ elif section == "View & Download Full Dataset":
 col1, col2 = st.columns(2)
 with col1:
     if st.button("Apply Filter (for Mobile)"):
+        st.session_state.filters['brand'] = brand
+        st.session_state.filters['gender'] = gender
+        st.session_state.filters['income'] = income
+        st.session_state.filters['cluster'] = cluster
         st.rerun()
+
 with col2:
     if st.button("Clear Filters"):
+        st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
         st.rerun()
