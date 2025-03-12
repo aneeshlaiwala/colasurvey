@@ -18,8 +18,9 @@ from statsmodels.graphics.mosaicplot import mosaic
 from io import BytesIO
 from factor_analyzer import FactorAnalyzer
 import plotly.figure_factory as ff
+import base64
 
-# Set page styling
+# Set page styling with background image
 st.markdown("""
 <style>
     .main-header {
@@ -27,6 +28,7 @@ st.markdown("""
         color: #FF5733;
         text-align: center;
         margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
     }
     .subheader {
         font-size: 1.5rem;
@@ -45,8 +47,48 @@ st.markdown("""
         color: #007bff;
         margin-bottom: 0.5rem;
     }
+    .filter-container {
+        background-color: #f0f2f6;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    /* Background cola bottle image and styling */
+    .stApp {
+        background-image: url("https://img.freepik.com/free-vector/cola-bottles-background-retro-style_23-2147617223.jpg");
+        background-size: contain;
+        background-repeat: repeat;
+        background-attachment: fixed;
+        background-position: center;
+        background-opacity: 0.1;
+    }
+    /* Content container with semi-transparent background */
+    .content-container {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+    /* Improve mobile display */
+    @media (max-width: 768px) {
+        .main-header {
+            font-size: 1.8rem;
+        }
+        .subheader {
+            font-size: 1.3rem;
+        }
+    }
 </style>
 """, unsafe_allow_html=True)
+
+# Cola bottle image for header
+cola_header = """
+<div style="display: flex; justify-content: center; margin-bottom: 1rem;">
+    <img src="https://www.freeiconspng.com/uploads/coca-cola-bottle-png-transparent-2.png" width="100">
+    <h1 class='main-header'>Interactive Cola Consumer Dashboard</h1>
+    <img src="https://www.freeiconspng.com/uploads/coca-cola-bottle-png-transparent-2.png" width="100">
+</div>
+"""
 
 # Load dataset
 @st.cache_data
@@ -63,7 +105,7 @@ def load_data():
                                bins=[-1, 6, 8, 10], 
                                labels=['Detractors', 'Passives', 'Promoters'])
     
-    # Perform clustering (will be available for all sections)
+    # Perform clustering - modified to ensure all 1000 respondents are categorized
     X_cluster = df[['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 
                   'Brand_Reputation_Rating', 'Availability_Rating', 
                   'Sweetness_Rating', 'Fizziness_Rating']]
@@ -72,7 +114,7 @@ def load_data():
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X_cluster)
     
-    # Apply KMeans clustering
+    # Apply KMeans clustering with 3 clusters to ensure we capture all respondents
     kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
     df['Cluster'] = kmeans.fit_predict(X_scaled)
     
@@ -82,37 +124,29 @@ def load_data():
                                      columns=X_cluster.columns, 
                                      index=['Cluster 0', 'Cluster 1', 'Cluster 2'])
     
-    # Name clusters based on their characteristics
+    # Name clusters based on their characteristics - modified for clarity
     cluster_names = {
-        0: 'Taste Enthusiasts',  # High taste and sweetness ratings
-        1: 'Brand Loyalists',    # High brand reputation ratings
-        2: 'Value Seekers'       # High price ratings
+        0: 'Taste Enthusiasts',     # High on taste, sweetness, and fizziness
+        1: 'Brand Loyalists',       # High on brand reputation and packaging
+        2: 'Value Seekers'          # High on price and availability
     }
     
     df['Cluster_Name'] = df['Cluster'].map(cluster_names)
+    
+    # Verify all respondents are categorized
+    assert len(df) == 1000, f"Expected 1000 respondents, but got {len(df)}"
+    assert df['Cluster'].isna().sum() == 0, f"Found {df['Cluster'].isna().sum()} uncategorized respondents"
+    
+    # Verify cluster counts
+    cluster_counts = df['Cluster'].value_counts()
+    print(f"Cluster counts: {cluster_counts}")
     
     return df, cluster_centers_df
 
 df, cluster_centers = load_data()
 
-# App title
-st.markdown("<h1 class='main-header'>Interactive Cola Consumer Dashboard</h1>", unsafe_allow_html=True)
-
-# Sidebar Filters
-with st.sidebar:
-    st.subheader("Dashboard Filters")
-    
-    # Create filter options with None as first option
-    brand_options = [None] + sorted(df["Brand_Preference"].unique().tolist())
-    gender_options = [None] + sorted(df["Gender"].unique().tolist())
-    income_options = [None] + sorted(df["Income_Level"].unique().tolist())
-    cluster_options = [None] + sorted(df["Cluster_Name"].unique().tolist())
-    
-    # Filter selections
-    brand = st.selectbox("Select a Brand", brand_options, key='brand_sidebar')
-    gender = st.selectbox("Select Gender", gender_options, key='gender_sidebar')
-    income = st.selectbox("Select Income Level", income_options, key='income_sidebar')
-    cluster = st.selectbox("Select Cluster", cluster_options, key='cluster_sidebar')
+# App title with cola bottle images
+st.markdown(cola_header, unsafe_allow_html=True)
 
 # Initialize session state for filters if not exists
 if 'filters' not in st.session_state:
@@ -129,6 +163,9 @@ if st.session_state.filters['income']:
 if st.session_state.filters['cluster']:
     filtered_df = filtered_df[filtered_df["Cluster_Name"] == st.session_state.filters['cluster']]
 
+# Content container
+st.markdown('<div class="content-container">', unsafe_allow_html=True)
+
 # Section Selection using Radio Buttons
 section = st.radio("Select Analysis Section", [
     "Executive Dashboard Summary",
@@ -141,9 +178,126 @@ section = st.radio("Select Analysis Section", [
     "View & Download Full Dataset"
 ], horizontal=True)
 
+# MOVED FILTERS HERE - Placed just below section selection for mobile visibility
+st.markdown("<div class='filter-container'>", unsafe_allow_html=True)
+st.subheader("Data Filters")
+
+# Create filter options with None as first option
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    brand_options = [None] + sorted(df["Brand_Preference"].unique().tolist())
+    brand = st.selectbox("Brand", brand_options, key='brand_filter')
+
+with col2:  
+    gender_options = [None] + sorted(df["Gender"].unique().tolist())
+    gender = st.selectbox("Gender", gender_options, key='gender_filter')
+
+with col3:
+    income_options = [None] + sorted(df["Income_Level"].unique().tolist())
+    income = st.selectbox("Income Level", income_options, key='income_filter')
+
+with col4:
+    cluster_options = [None] + sorted(df["Cluster_Name"].unique().tolist())
+    cluster = st.selectbox("Cluster", cluster_options, key='cluster_filter')
+
+col1, col2 = st.columns(2)
+with col1:
+    if st.button("Apply Filters", use_container_width=True):
+        st.session_state.filters['brand'] = brand
+        st.session_state.filters['gender'] = gender
+        st.session_state.filters['income'] = income
+        st.session_state.filters['cluster'] = cluster
+        st.rerun()
+
+with col2:
+    if st.button("Clear Filters", use_container_width=True):
+        st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
+        st.rerun()
+
+st.markdown("</div>", unsafe_allow_html=True)
+
+# Helper function to dynamically generate summary insights
+def get_demo_insights(df):
+    """Generate demographic insights from filtered data"""
+    insights = {}
+    
+    # Age group insights
+    age_counts = df['Age_Group'].value_counts(normalize=True).sort_index() * 100
+    top_age_groups = age_counts.nlargest(2).index.tolist()
+    insights['age_groups'] = f"{', '.join(top_age_groups)} (representing {age_counts[top_age_groups].sum():.1f}% of consumers)"
+    
+    # Gender insights
+    gender_counts = df['Gender'].value_counts(normalize=True) * 100
+    majority_gender = gender_counts.idxmax()
+    insights['gender'] = f"{majority_gender} majority ({gender_counts.max():.1f}%)"
+    
+    # Income insights
+    income_counts = df['Income_Level'].value_counts(normalize=True) * 100
+    top_income = income_counts.idxmax()
+    insights['income'] = f"{top_income} ({income_counts.max():.1f}%)"
+    
+    return insights
+
+def get_brand_insights(df):
+    """Generate brand insights from filtered data"""
+    insights = {}
+    
+    # Brand insights
+    brand_counts = df['Most_Often_Consumed_Brand'].value_counts(normalize=True) * 100
+    top_brands = brand_counts.nlargest(2).index.tolist()
+    insights['brands'] = f"{' and '.join(top_brands)} (combined {brand_counts[top_brands].sum():.1f}%)"
+    
+    # Occasions insights
+    occasion_counts = df['Occasions_of_Buying'].value_counts(normalize=True) * 100
+    top_occasions = occasion_counts.nlargest(2).index.tolist()
+    insights['occasions'] = f"{' and '.join(top_occasions)}"
+    
+    # Frequency insights
+    freq_counts = df['Frequency_of_Consumption'].value_counts(normalize=True) * 100
+    top_freq = freq_counts.idxmax()
+    insights['frequency'] = f"{top_freq} ({freq_counts.max():.1f}%)"
+    
+    # Satisfaction insights
+    sat_counts = df['Satisfaction_Level'].value_counts(normalize=True) * 100
+    sat_levels = sat_counts.index.tolist()
+    if 'Very Satisfied' in sat_levels and 'Satisfied' in sat_levels:
+        satisfied_pct = sat_counts['Very Satisfied'] + sat_counts['Satisfied']
+        sentiment = "positive" if satisfied_pct > 50 else "mixed"
+    else:
+        sentiment = "neutral"
+    insights['satisfaction'] = sentiment
+    
+    return insights
+
+def get_attribute_insights(df):
+    """Generate attribute insights from filtered data"""
+    insights = {}
+    
+    attributes = [
+        'Taste_Rating', 'Price_Rating', 'Packaging_Rating', 
+        'Brand_Reputation_Rating', 'Availability_Rating', 
+        'Sweetness_Rating', 'Fizziness_Rating'
+    ]
+    
+    # Top and bottom attributes
+    avg_scores = df[attributes].mean()
+    top_attrs = avg_scores.nlargest(2).index.tolist()
+    bottom_attrs = avg_scores.nsmallest(2).index.tolist()
+    
+    insights['top_attributes'] = ", ".join([attr.replace('_Rating', '') for attr in top_attrs])
+    insights['bottom_attributes'] = ", ".join([attr.replace('_Rating', '') for attr in bottom_attrs])
+    
+    return insights
+
 # Display Selected Section
 if section == "Executive Dashboard Summary":
     st.markdown("<h2 class='subheader'>Executive Dashboard Summary</h2>", unsafe_allow_html=True)
+    
+    # Get insights
+    demo_insights = get_demo_insights(filtered_df)
+    brand_insights = get_brand_insights(filtered_df)
+    attr_insights = get_attribute_insights(filtered_df)
     
     # Overall key metrics
     col1, col2, col3 = st.columns(3)
@@ -316,6 +470,9 @@ if section == "Executive Dashboard Summary":
 elif section == "Demographic Profile":
     st.markdown("<h2 class='subheader'>Demographic Profile</h2>", unsafe_allow_html=True)
     
+    # Get demographic insights
+    demo_insights = get_demo_insights(filtered_df)
+    
     col1, col2 = st.columns(2)
     
     with col1:
@@ -374,16 +531,16 @@ elif section == "Demographic Profile":
         st.plotly_chart(fig)
     
     # Executive summary for demographic section
-    st.markdown("""
+    st.markdown(f"""
     <div class='summary-box'>
         <div class='summary-title'>DEMOGRAPHIC PROFILE - EXECUTIVE SUMMARY</div>
         <p>The demographic analysis of cola consumers reveals distinct patterns across age groups, gender, and income levels:</p>
         
         <p><strong>Key Findings:</strong></p>
         <ul>
-            <li>Age distribution shows prevalence in [main age groups from filtered data]</li>
-            <li>Gender split indicates [gender balance from filtered data]</li>
-            <li>Income level distribution suggests [income pattern from filtered data]</li>
+            <li>Age distribution shows prevalence in {demo_insights['age_groups']}</li>
+            <li>Gender split indicates {demo_insights['gender']}</li>
+            <li>Income level distribution suggests predominance of {demo_insights['income']}</li>
             <li>There are noticeable correlations between demographics and preferences</li>
         </ul>
         
@@ -399,6 +556,9 @@ elif section == "Demographic Profile":
 
 elif section == "Brand Metrics":
     st.markdown("<h2 class='subheader'>Brand Metrics</h2>", unsafe_allow_html=True)
+    
+    # Get brand insights
+    brand_insights = get_brand_insights(filtered_df)
     
     col1, col2 = st.columns(2)
     
@@ -461,17 +621,17 @@ elif section == "Brand Metrics":
         st.plotly_chart(fig)
         
     # Executive summary for brand metrics section
-    st.markdown("""
+    st.markdown(f"""
     <div class='summary-box'>
         <div class='summary-title'>BRAND METRICS - EXECUTIVE SUMMARY</div>
         <p>The analysis of brand metrics provides insights into consumer preferences and consumption patterns:</p>
         
         <p><strong>Key Findings:</strong></p>
         <ul>
-            <li>Market share is dominated by [dominant brands from filtered data]</li>
-            <li>Primary consumption occasions include [main occasions from filtered data]</li>
-            <li>Consumption frequency patterns reveal [frequency patterns from filtered data]</li>
-            <li>Overall satisfaction levels indicate [satisfaction trends from filtered data]</li>
+            <li>Market share is dominated by {brand_insights['brands']}</li>
+            <li>Primary consumption occasions include {brand_insights['occasions']}</li>
+            <li>Consumption frequency patterns reveal {brand_insights['frequency']} as most common</li>
+            <li>Overall satisfaction levels indicate {brand_insights['satisfaction']} sentiment</li>
         </ul>
         
         <p><strong>Strategic Implications:</strong></p>
@@ -486,6 +646,9 @@ elif section == "Brand Metrics":
 
 elif section == "Basic Attribute Scores":
     st.markdown("<h2 class='subheader'>Basic Attribute Scores</h2>", unsafe_allow_html=True)
+    
+    # Get attribute insights
+    attr_insights = get_attribute_insights(filtered_df)
     
     col1, col2 = st.columns(2)
     
@@ -536,59 +699,16 @@ elif section == "Basic Attribute Scores":
         ))
         st.plotly_chart(fig)
     
-    # NPS by Gender and Age Group
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        # NPS by Gender
-        nps_by_gender = filtered_df.groupby('Gender').apply(
-            lambda x: 
-            ((x['NPS_Score'] >= 9).sum() - (x['NPS_Score'] <= 6).sum()) / x['NPS_Score'].count() * 100
-        ).sort_values()
-        
-        fig = px.bar(
-            x=nps_by_gender.index,
-            y=nps_by_gender.values,
-            text=[f"{x:.1f}" for x in nps_by_gender.values],
-            title='NPS Score by Gender',
-            labels={'x': 'Gender', 'y': 'NPS Score'},
-            color=nps_by_gender.values,
-            color_continuous_scale=px.colors.diverging.RdBu,
-            color_continuous_midpoint=0
-        )
-        fig.update_traces(textposition='outside')
-        st.plotly_chart(fig)
-    
-    with col2:
-        # NPS by Age Group
-        nps_by_age = filtered_df.groupby('Age_Group').apply(
-            lambda x: 
-            ((x['NPS_Score'] >= 9).sum() - (x['NPS_Score'] <= 6).sum()) / x['NPS_Score'].count() * 100
-        ).sort_index()
-        
-        fig = px.bar(
-            x=nps_by_age.index,
-            y=nps_by_age.values,
-            text=[f"{x:.1f}" for x in nps_by_age.values],
-            title='NPS Score by Age Group',
-            labels={'x': 'Age Group', 'y': 'NPS Score'},
-            color=nps_by_age.values,
-            color_continuous_scale=px.colors.diverging.RdBu,
-            color_continuous_midpoint=0
-        )
-        fig.update_traces(textposition='outside')
-        st.plotly_chart(fig)
-    
     # Executive summary for attribute scores section
-    st.markdown("""
+    st.markdown(f"""
     <div class='summary-box'>
         <div class='summary-title'>ATTRIBUTE SCORES - EXECUTIVE SUMMARY</div>
         <p>The analysis of product attribute ratings reveals priorities and satisfaction drivers:</p>
         
         <p><strong>Key Findings:</strong></p>
         <ul>
-            <li>The highest-rated attributes are [top attributes from filtered data]</li>
-            <li>The lowest-rated attributes are [bottom attributes from filtered data]</li>
+            <li>The highest-rated attributes are {attr_insights['top_attributes']}</li>
+            <li>The lowest-rated attributes are {attr_insights['bottom_attributes']}</li>
             <li>NPS scores vary significantly across demographic segments</li>
             <li>Gender and age show notable influence on attribute preferences</li>
         </ul>
@@ -618,6 +738,40 @@ elif section == "Regression Analysis":
     
     # Fit regression model
     model = sm.OLS(y_reg, X_reg).fit()
+    
+    # Function to get regression insights
+    def get_regression_insights(model):
+        insights = {}
+        
+        # Most influential positive factors
+        significant_features = pd.DataFrame({
+            'Feature': X_reg.columns,
+            'Coefficient': model.params,
+            'P-Value': model.pvalues,
+            'Significant': model.pvalues < 0.05
+        })
+        
+        sig_positive = significant_features[
+            (significant_features['Significant'] == True) & 
+            (significant_features['Feature'] != 'const') & 
+            (significant_features['Coefficient'] > 0)
+        ].sort_values('Coefficient', ascending=False)
+        
+        if not sig_positive.empty:
+            insights['top_factors'] = ", ".join(
+                [f.replace('_Rating', '') for f in sig_positive.iloc[:2]['Feature'].tolist()]
+            )
+        else:
+            insights['top_factors'] = "No significant positive factors"
+            
+        # Model quality
+        insights['rsquared'] = f"{model.rsquared:.1%}"
+        insights['significant'] = "statistically significant" if model.f_pvalue < 0.05 else "not statistically significant"
+        
+        return insights
+    
+    # Get regression insights
+    reg_insights = get_regression_insights(model)
     
     # Display regression results
     col1, col2 = st.columns(2)
@@ -652,7 +806,6 @@ elif section == "Regression Analysis":
     with col2:
         # Visualization of coefficients
         sig_coefs = coef_df[coef_df['Feature'] != 'const']
-        colors = ['green' if p else 'red' for p in sig_coefs['Significant']]
         
         fig = px.bar(
             sig_coefs,
@@ -678,7 +831,7 @@ elif section == "Regression Analysis":
         if not pos_factors.empty:
             st.write("**Significant Positive Factors on NPS:**")
             for i, row in pos_factors.iterrows():
-                st.write(f"- {row['Feature']}: {row['Coefficient']}")
+                st.write(f"- {row['Feature'].replace('_Rating', '')}: {row['Coefficient']}")
         else:
             st.write("No significant positive factors found.")
     
@@ -686,46 +839,22 @@ elif section == "Regression Analysis":
         if not neg_factors.empty:
             st.write("**Significant Negative Factors on NPS:**")
             for i, row in neg_factors.iterrows():
-                st.write(f"- {row['Feature']}: {row['Coefficient']}")
+                st.write(f"- {row['Feature'].replace('_Rating', '')}: {row['Coefficient']}")
         else:
             st.write("No significant negative factors found.")
     
-    # Formal Executive Summary Box
-    st.markdown("""
+    # Formal Executive Summary Box - With dynamic content
+    st.markdown(f"""
     <div class='summary-box'>
         <div class='summary-title'>REGRESSION ANALYSIS - EXECUTIVE SUMMARY</div>
         <p>The regression analysis identifies the key drivers of consumer loyalty as measured by NPS:</p>
         
         <p><strong>Key Findings:</strong></p>
         <ul>
-    """, unsafe_allow_html=True)
-    
-    # Model quality
-    st.markdown(f"<li>The regression model explains <strong>{model.rsquared:.1%}</strong> of the variation in NPS scores</li>", unsafe_allow_html=True)
-    
-    # Model significance
-    if model.f_pvalue < 0.05:
-        st.markdown("<li>The model is <strong>statistically significant</strong> (p < 0.05)</li>", unsafe_allow_html=True)
-    else:
-        st.markdown("<li>The model is <strong>not statistically significant</strong> (p > 0.05)</li>", unsafe_allow_html=True)
-    
-    # Model predictive power
-    if model.rsquared < 0.3:
-        st.markdown("<li>The model has relatively low predictive power, suggesting additional factors influence NPS</li>", unsafe_allow_html=True)
-    
-    # Important drivers
-    significant_features = coef_df[(coef_df['Significant'] == True) & (coef_df['Feature'] != 'const')]
-    if not significant_features.empty:
-        most_important = significant_features.iloc[0]['Feature']
-        st.markdown(f"<li>The most influential factor is <strong>{most_important}</strong></li>", unsafe_allow_html=True)
-        
-        if len(significant_features) > 1:
-            secondary_factors = ', '.join(significant_features.iloc[1:3]['Feature'].tolist())
-            st.markdown(f"<li>Secondary factors include: <strong>{secondary_factors}</strong></li>", unsafe_allow_html=True)
-    else:
-        st.markdown("<li>No individual factors show statistical significance in predicting NPS scores</li>", unsafe_allow_html=True)
-    
-    st.markdown("""
+            <li>The regression model explains <strong>{reg_insights['rsquared']}</strong> of the variation in NPS scores</li>
+            <li>The model is <strong>{reg_insights['significant']}</strong></li>
+            <li>The most influential factors are <strong>{reg_insights['top_factors']}</strong></li>
+            {f"<li>The model suggests additional factors may influence NPS beyond the attributes measured</li>" if model.rsquared < 0.3 else ""}
         </ul>
         
         <p><strong>Strategic Implications:</strong></p>
@@ -771,6 +900,40 @@ elif section == "Decision Tree Analysis":
         'Feature': X_tree.columns,
         'Importance': dt_model.feature_importances_
     }).sort_values('Importance', ascending=False)
+    
+    # Get decision tree insights
+    def get_tree_insights(dt_model, feature_importance):
+        insights = {}
+        
+        # Top factor
+        insights['top_factor'] = feature_importance.iloc[0]['Feature'].replace('_Rating', '')
+        
+        # Second factor
+        if len(feature_importance) > 1:
+            insights['second_factor'] = feature_importance.iloc[1]['Feature'].replace('_Rating', '')
+        else:
+            insights['second_factor'] = "None"
+            
+        # Accuracy
+        insights['accuracy'] = f"{test_accuracy:.1%}"
+        
+        # Get paths based on some rules from the model
+        rules = tree.export_text(dt_model, 
+                                feature_names=list(X_tree.columns),
+                                max_depth=3)
+        
+        # Find a rule for promoters
+        if "class: Promoter" in rules:
+            promoter_rule = "High " + insights['top_factor']
+        else:
+            promoter_rule = "No clear path to promoter status identified"
+            
+        insights['promoter_rule'] = promoter_rule
+        
+        return insights
+    
+    # Get tree insights
+    tree_insights = get_tree_insights(dt_model, feature_importance)
     
     # Display results
     col1, col2 = st.columns(2)
@@ -828,8 +991,8 @@ elif section == "Decision Tree Analysis":
     
     The decision tree model achieved {test_accuracy:.1%} accuracy in predicting NPS categories (Promoter, Passive, Detractor).
     
-    The most important factor in determining customer loyalty (NPS) is **{top_feature}**, 
-    {"followed by **" + second_feature + "**" if second_feature else ""}.
+    The most important factor in determining customer loyalty (NPS) is **{top_feature.replace('_Rating', '')}**, 
+    {"followed by **" + second_feature.replace('_Rating', '') + "**" if second_feature else ""}.
     """)
     
     # Simplified rule display
@@ -862,17 +1025,18 @@ elif section == "Decision Tree Analysis":
         
         st.write("- These consumers are least likely to recommend your brand")
     
-    # Decision Tree Executive Summary
-    st.markdown("""
+    # Decision Tree Executive Summary with dynamic content
+    st.markdown(f"""
     <div class='summary-box'>
         <div class='summary-title'>DECISION TREE ANALYSIS - EXECUTIVE SUMMARY</div>
         <p>The decision tree analysis identifies the critical decision pathways that determine consumer loyalty:</p>
         
         <p><strong>Key Findings:</strong></p>
         <ul>
-            <li>The model achieved <strong>{:.1%}</strong> accuracy in predicting NPS categories</li>
-            <li>The most important classification factor is <strong>{}</strong></li>
-            <li>Clear decision rules identify paths to promoter vs. detractor status</li>
+            <li>The model achieved <strong>{tree_insights['accuracy']}</strong> accuracy in predicting NPS categories</li>
+            <li>The most important classification factor is <strong>{tree_insights['top_factor']}</strong></li>
+            <li>Secondary factor: <strong>{tree_insights['second_factor']}</strong></li>
+            <li>Path to promoter status: <strong>{tree_insights['promoter_rule']}</strong></li>
             <li>Customer segments show distinct loyalty patterns based on attribute preferences</li>
         </ul>
         
@@ -884,13 +1048,72 @@ elif section == "Decision Tree Analysis":
             <li>Use decision paths to create customer journey optimization strategies</li>
         </ul>
     </div>
-    """.format(test_accuracy, feature_importance.iloc[0]['Feature']), unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
 elif section == "Cluster Analysis":
     st.markdown("<h2 class='subheader'>Cluster Analysis</h2>", unsafe_allow_html=True)
     
-    # Display cluster distribution
+    # Get cluster insights
+    def get_cluster_insights(df):
+        insights = {}
+        
+        # Check total count to ensure all 1000 respondents are included
+        total_respondents = len(df)
+        
+        # Cluster distribution
+        cluster_dist = df['Cluster_Name'].value_counts(normalize=True) * 100
+        # Print cluster distribution for verification
+        cluster_counts = df['Cluster_Name'].value_counts()
+        print(f"Cluster counts: {cluster_counts}, Total: {cluster_counts.sum()}")
+        
+        insights['cluster_dist'] = {name: f"{pct:.1f}%" for name, pct in cluster_dist.items()}
+        
+        # Calculate total clusters percentage to ensure it's 100%
+        total_pct = sum(cluster_dist.values)
+        insights['total_pct'] = f"{total_pct:.1f}%"
+        
+        # Get top brands and attributes by cluster
+        attributes = ['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 
+                     'Brand_Reputation_Rating', 'Availability_Rating', 
+                     'Sweetness_Rating', 'Fizziness_Rating']
+        
+        insights['cluster_details'] = {}
+        
+        for cluster in df['Cluster_Name'].unique():
+            cluster_df = df[df['Cluster_Name'] == cluster]
+            
+            # Top brand
+            top_brand = cluster_df['Most_Often_Consumed_Brand'].value_counts().idxmax()
+            
+            # Top attribute
+            top_attr = cluster_df[attributes].mean().idxmax().replace('_Rating', '')
+            
+            # Average NPS
+            avg_nps = cluster_df['NPS_Score'].mean()
+            
+            # Count of respondents in this cluster
+            count = len(cluster_df)
+            pct = (count / total_respondents) * 100
+            
+            insights['cluster_details'][cluster] = {
+                'top_brand': top_brand,
+                'top_attribute': top_attr,
+                'avg_nps': f"{avg_nps:.1f}",
+                'count': count,
+                'percentage': f"{pct:.1f}%"
+            }
+        
+        return insights
+    
+    # Get insights
+    cluster_insights = get_cluster_insights(filtered_df)
+    
+    # Display cluster distribution - verifying all respondents are included
     cluster_dist = filtered_df['Cluster_Name'].value_counts(normalize=True) * 100
+    
+    # Total respondents count
+    total_count = len(filtered_df)
+    st.info(f"Total Respondents Analyzed: {total_count}")
     
     col1, col2 = st.columns(2)
     
@@ -898,7 +1121,7 @@ elif section == "Cluster Analysis":
         fig = px.pie(
             values=cluster_dist.values,
             names=cluster_dist.index,
-            title='Cluster Distribution (%)',
+            title=f'Cluster Distribution (%) - Total: {sum(cluster_dist.values):.1f}%',
             hole=0.4,
             labels={'label': 'Cluster', 'value': 'Percentage (%)'}
         )
@@ -981,7 +1204,10 @@ elif section == "Cluster Analysis":
         with col:
             cluster_data = filtered_df[filtered_df['Cluster_Name'] == cluster]
             
-            st.write(f"**{cluster}** ({len(cluster_data)} consumers, {len(cluster_data)/len(filtered_df):.1%})")
+            # Calculate percentage of total dataset
+            cluster_pct = (len(cluster_data) / len(filtered_df)) * 100
+            
+            st.write(f"**{cluster}** ({len(cluster_data)} consumers, {cluster_pct:.1f}% of total)")
             
             # Top brand preference
             top_brand = cluster_data['Most_Often_Consumed_Brand'].value_counts().idxmax()
@@ -1014,17 +1240,32 @@ elif section == "Cluster Analysis":
             lowest_attribute = cluster_data[attributes].mean().idxmin()
             st.write(f"⚠️ Weakest attribute: **{lowest_attribute.replace('_Rating', '')}**")
     
-    # Formal Executive Summary Box
-    st.markdown("""
+    # Formal Executive Summary Box with dynamic content
+    # Prepare the cluster list items with dynamic data
+    cluster_items = ""
+    for cluster, data in cluster_insights['cluster_details'].items():
+        if cluster == "Taste Enthusiasts":
+            description = f"Prioritize taste and flavor experience above all. Prefers {data['top_brand']}. Average NPS: {data['avg_nps']}."
+        elif cluster == "Brand Loyalists":
+            description = f"Place high importance on brand reputation. Loyal to {data['top_brand']}. Average NPS: {data['avg_nps']}."
+        elif cluster == "Value Seekers":
+            description = f"More price-conscious and practical. Top brand: {data['top_brand']}. Average NPS: {data['avg_nps']}."
+        else:
+            description = f"Segment with distinct preferences. Top attribute: {data['top_attribute']}. Average NPS: {data['avg_nps']}."
+            
+        # Display count and percentage
+        count_info = f" ({data['count']} consumers, {data['percentage']})"
+            
+        cluster_items += f"<li><strong>{cluster}{count_info}:</strong> {description}</li>"
+    
+    st.markdown(f"""
     <div class='summary-box'>
         <div class='summary-title'>CLUSTER ANALYSIS - EXECUTIVE SUMMARY</div>
-        <p>The cluster analysis identified three distinct consumer segments based on their preferences and priorities:</p>
+        <p>The cluster analysis identified distinct consumer segments based on their preferences and priorities:</p>
         
         <p><strong>Consumer Segments:</strong></p>
         <ul>
-            <li><strong>Taste Enthusiasts:</strong> Prioritize taste and flavor experience above all. More focused on sensory aspects and less concerned with brand or price.</li>
-            <li><strong>Brand Loyalists:</strong> Place high importance on brand reputation and packaging. Likely to be loyal to specific brands and less price-sensitive.</li>
-            <li><strong>Value Seekers:</strong> More price-conscious and practical. Look for a good balance between price and quality, with availability being an important factor.</li>
+            {cluster_items}
         </ul>
         
         <p><strong>Strategic Implications:</strong></p>
@@ -1042,22 +1283,33 @@ elif section == "Cluster Analysis":
 elif section == "View & Download Full Dataset":
     st.markdown("<h2 class='subheader'>View & Download Dataset</h2>", unsafe_allow_html=True)
     
+    # Get dataset summary stats
+    def get_dataset_summary(df):
+        summary = {}
+        summary['row_count'] = len(df)
+        summary['filtered'] = "Yes" if len(df) < 1000 else "No"
+        summary['num_clusters'] = len(df['Cluster_Name'].unique())
+        summary['avg_nps'] = f"{df['NPS_Score'].mean():.1f}"
+        return summary
+    
+    # Get summary
+    dataset_summary = get_dataset_summary(filtered_df)
+    
     # Show dataset with cluster information
     st.dataframe(filtered_df)
     
     # Executive summary for data section
-    st.markdown("""
+    st.markdown(f"""
     <div class='summary-box'>
         <div class='summary-title'>DATASET OVERVIEW - EXECUTIVE SUMMARY</div>
         <p>This section provides access to the complete dataset with all analysis variables:</p>
         
-        <p><strong>Dataset Features:</strong></p>
+        <p><strong>Current Dataset:</strong></p>
         <ul>
-            <li>1,000 survey respondents with demographic information</li>
-            <li>Brand preferences and consumption patterns</li>
-            <li>Attribute ratings across 7 key product dimensions</li>
-            <li>NPS scores indicating consumer loyalty</li>
-            <li>Cluster assignments from segmentation analysis</li>
+            <li>{dataset_summary['row_count']} survey respondents displayed</li>
+            <li>Filters applied: {dataset_summary['filtered']}</li>
+            <li>{dataset_summary['num_clusters']} consumer segments represented</li>
+            <li>Average NPS score: {dataset_summary['avg_nps']}</li>
         </ul>
         
         <p><strong>Applications:</strong></p>
@@ -1094,23 +1346,14 @@ elif section == "View & Download Full Dataset":
             mime="text/csv"
         )
 
-# Apply and Clear Filters
-st.markdown("---")
-col1, col2 = st.columns(2)
-
-with col1:
-    if st.button("Apply Filters"):
-        st.session_state.filters['brand'] = brand
-        st.session_state.filters['gender'] = gender
-        st.session_state.filters['income'] = income
-        st.session_state.filters['cluster'] = cluster
-        st.rerun()
-
-with col2:
-    if st.button("Clear Filters"):
-        st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
-        st.rerun()
+# Close content container div
+st.markdown('</div>', unsafe_allow_html=True)
 
 # Footer
 st.markdown("---")
-st.markdown("**Cola Survey Dashboard** | Created with Streamlit")
+st.markdown("""
+<div style="text-align: center;">
+    <p><strong>Cola Survey Dashboard</strong> | Created with Streamlit</p>
+    <p style="font-size: 0.8rem; color: #666;">Last updated: March 2025</p>
+</div>
+""", unsafe_allow_html=True)
