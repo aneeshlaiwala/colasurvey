@@ -28,27 +28,23 @@ kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
 df['Cluster'] = kmeans.fit_predict(X_cluster)
 df['Cluster_Name'] = df['Cluster'].map({0: 'Fizz-Lovers', 1: 'Brand-Conscious Consumers', 2: 'Budget-Friendly Drinkers'})
 
-# Initialize session state for filters
-if 'filters' not in st.session_state:
-    st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
-
 # Sidebar Filters
 with st.sidebar:
-    st.session_state.filters['brand'] = st.selectbox("Select a Brand", [None] + list(df["Brand_Preference"].unique()))
-    st.session_state.filters['gender'] = st.selectbox("Select Gender", [None] + list(df["Gender"].unique()))
-    st.session_state.filters['income'] = st.selectbox("Select Income Level", [None] + list(df["Income_Level"].unique()))
-    st.session_state.filters['cluster'] = st.selectbox("Select Cluster", [None] + list(df["Cluster_Name"].unique()))
+    brand_filter = st.selectbox("Select a Brand", [None] + list(df["Brand_Preference"].unique()))
+    gender_filter = st.selectbox("Select Gender", [None] + list(df["Gender"].unique()))
+    income_filter = st.selectbox("Select Income Level", [None] + list(df["Income_Level"].unique()))
+    cluster_filter = st.selectbox("Select Cluster", [None] + list(df["Cluster_Name"].unique()))
 
 # Apply selected filters
 filtered_df = df.copy()
-if st.session_state.filters['brand']:
-    filtered_df = filtered_df[filtered_df["Brand_Preference"] == st.session_state.filters['brand']]
-if st.session_state.filters['gender']:
-    filtered_df = filtered_df[filtered_df["Gender"] == st.session_state.filters['gender']]
-if st.session_state.filters['income']:
-    filtered_df = filtered_df[filtered_df["Income_Level"] == st.session_state.filters['income']]
-if st.session_state.filters['cluster']:
-    filtered_df = filtered_df[filtered_df["Cluster_Name"] == st.session_state.filters['cluster']]
+if brand_filter:
+    filtered_df = filtered_df[filtered_df["Brand_Preference"] == brand_filter]
+if gender_filter:
+    filtered_df = filtered_df[filtered_df["Gender"] == gender_filter]
+if income_filter:
+    filtered_df = filtered_df[filtered_df["Income_Level"] == income_filter]
+if cluster_filter:
+    filtered_df = filtered_df[filtered_df["Cluster_Name"] == cluster_filter]
 
 # Section Selection using Radio Buttons
 section = st.radio("Select Analysis Section", [
@@ -80,6 +76,13 @@ elif section == "Basic Attribute Scores":
     fig = px.bar(x=avg_scores.index, y=avg_scores.values, text=avg_scores.values.round(2), title='Basic Attribute Scores')
     st.plotly_chart(fig)
 
+elif section == "Regression Analysis":
+    st.subheader("Regression Analysis")
+    X = filtered_df[['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 'Brand_Reputation_Rating', 'Availability_Rating', 'Sweetness_Rating', 'Fizziness_Rating']]
+    y = filtered_df['NPS_Score']
+    model = sm.OLS(y, sm.add_constant(X)).fit()
+    st.text(model.summary())
+
 elif section == "View & Download Full Dataset":
     st.subheader("Full Dataset")
     st.dataframe(filtered_df)
@@ -87,17 +90,26 @@ elif section == "View & Download Full Dataset":
     st.download_button(label="Download CSV", data=csv, file_name="cola_survey_data.csv", mime="text/csv")
 
 # Apply and Clear Filters at the Bottom
+st.subheader("Apply Filters (for Mobile)")
+brand_mobile = st.selectbox("Brand", [None] + list(df["Brand_Preference"].unique()), key='brand_mobile')
+gender_mobile = st.selectbox("Gender", [None] + list(df["Gender"].unique()), key='gender_mobile')
+income_mobile = st.selectbox("Income Level", [None] + list(df["Income_Level"].unique()), key='income_mobile')
+cluster_mobile = st.selectbox("Cluster", [None] + list(df["Cluster_Name"].unique()), key='cluster_mobile')
+
 col1, col2 = st.columns(2)
 with col1:
-    st.subheader("Apply Filters")
-    st.session_state.filters['brand'] = st.selectbox("Brand", [None] + list(df["Brand_Preference"].unique()), key='brand_mobile')
-    st.session_state.filters['gender'] = st.selectbox("Gender", [None] + list(df["Gender"].unique()), key='gender_mobile')
-    st.session_state.filters['income'] = st.selectbox("Income Level", [None] + list(df["Income_Level"].unique()), key='income_mobile')
-    st.session_state.filters['cluster'] = st.selectbox("Cluster", [None] + list(df["Cluster_Name"].unique()), key='cluster_mobile')
     if st.button("Apply Filter (for Mobile)"):
+        filtered_df = df.copy()
+        if brand_mobile:
+            filtered_df = filtered_df[filtered_df["Brand_Preference"] == brand_mobile]
+        if gender_mobile:
+            filtered_df = filtered_df[filtered_df["Gender"] == gender_mobile]
+        if income_mobile:
+            filtered_df = filtered_df[filtered_df["Income_Level"] == income_mobile]
+        if cluster_mobile:
+            filtered_df = filtered_df[filtered_df["Cluster_Name"] == cluster_mobile]
         st.rerun()
 
 with col2:
     if st.button("Clear Filters"):
-        st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
         st.rerun()
