@@ -1,6 +1,4 @@
-import streamlit as st  # Import Streamlit first
-st.set_page_config(layout="wide")  # Then set the page configuration
-
+import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -9,6 +7,9 @@ from sklearn.cluster import KMeans
 from sklearn.tree import DecisionTreeClassifier
 from sklearn import tree
 import statsmodels.api as sm
+
+# Set Page Configuration
+st.set_page_config(layout="wide")
 
 # Load dataset
 @st.cache_data
@@ -35,7 +36,7 @@ with st.sidebar:
     income = st.selectbox("Select Income Level", [None] + list(df["Income_Level"].unique()))
     cluster = st.selectbox("Select Cluster", [None] + list(df["Cluster_Name"].unique()))
 
-# Filter Data
+# Apply Filters Dynamically
 filtered_df = df.copy()
 if brand:
     filtered_df = filtered_df[filtered_df["Brand_Preference"] == brand]
@@ -83,33 +84,33 @@ elif section == "Regression Analysis":
     model = sm.OLS(y, sm.add_constant(X)).fit()
     st.text(model.summary())
 
-elif section == "Decision Tree Analysis":
-    st.subheader("Decision Tree Analysis")
-    X_tree = filtered_df[['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 'Brand_Reputation_Rating', 'Availability_Rating', 'Sweetness_Rating', 'Fizziness_Rating']]
-    y_tree = filtered_df['NPS_Score'].apply(lambda x: 1 if x >= 9 else 0)
-    clf = DecisionTreeClassifier(max_depth=3, random_state=42)
-    clf.fit(X_tree, y_tree)
-    fig, ax = plt.subplots(figsize=(12, 6))
-    tree.plot_tree(clf, feature_names=X_tree.columns, class_names=['Detractor/Passive', 'Promoter'], filled=True, fontsize=8, ax=ax)
-    st.pyplot(fig)
-
-elif section == "Cluster Analysis":
-    st.subheader("Customer Segmentation")
-    cluster_counts = filtered_df['Cluster_Name'].value_counts(normalize=True) * 100
-    fig = px.bar(x=cluster_counts.index, y=cluster_counts.values.round(2), text=cluster_counts.values.round(2), title='Cluster Distribution (%)')
-    st.plotly_chart(fig)
-
 elif section == "View & Download Full Dataset":
     st.subheader("Full Dataset")
     st.dataframe(filtered_df)
     csv = filtered_df.to_csv(index=False)
     st.download_button(label="Download CSV", data=csv, file_name="cola_survey_data.csv", mime="text/csv")
 
-# Apply and Clear Filters
+# Apply Filters at the Bottom
+st.subheader("Apply Filters (for Mobile)")
+brand_mobile = st.selectbox("Brand", [None] + list(df["Brand_Preference"].unique()), key='brand_mobile')
+gender_mobile = st.selectbox("Gender", [None] + list(df["Gender"].unique()), key='gender_mobile')
+income_mobile = st.selectbox("Income Level", [None] + list(df["Income_Level"].unique()), key='income_mobile')
+cluster_mobile = st.selectbox("Cluster", [None] + list(df["Cluster_Name"].unique()), key='cluster_mobile')
+
 col1, col2 = st.columns(2)
 with col1:
     if st.button("Apply Filter (for Mobile)"):
+        filtered_df = df.copy()
+        if brand_mobile:
+            filtered_df = filtered_df[filtered_df["Brand_Preference"] == brand_mobile]
+        if gender_mobile:
+            filtered_df = filtered_df[filtered_df["Gender"] == gender_mobile]
+        if income_mobile:
+            filtered_df = filtered_df[filtered_df["Income_Level"] == income_mobile]
+        if cluster_mobile:
+            filtered_df = filtered_df[filtered_df["Cluster_Name"] == cluster_mobile]
         st.rerun()
+
 with col2:
     if st.button("Clear Filters"):
         st.rerun()
