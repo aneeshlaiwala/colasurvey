@@ -45,6 +45,21 @@ st.markdown("""
         color: #007bff;
         margin-bottom: 0.5rem;
     }
+    .filter-container {
+        background-color: #f0f2f6;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+    }
+    /* Improve mobile display */
+    @media (max-width: 768px) {
+        .main-header {
+            font-size: 1.8rem;
+        }
+        .subheader {
+            font-size: 1.3rem;
+        }
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -98,22 +113,6 @@ df, cluster_centers = load_data()
 # App title
 st.markdown("<h1 class='main-header'>Interactive Cola Consumer Dashboard</h1>", unsafe_allow_html=True)
 
-# Sidebar Filters
-with st.sidebar:
-    st.subheader("Dashboard Filters")
-    
-    # Create filter options with None as first option
-    brand_options = [None] + sorted(df["Brand_Preference"].unique().tolist())
-    gender_options = [None] + sorted(df["Gender"].unique().tolist())
-    income_options = [None] + sorted(df["Income_Level"].unique().tolist())
-    cluster_options = [None] + sorted(df["Cluster_Name"].unique().tolist())
-    
-    # Filter selections
-    brand = st.selectbox("Select a Brand", brand_options, key='brand_sidebar')
-    gender = st.selectbox("Select Gender", gender_options, key='gender_sidebar')
-    income = st.selectbox("Select Income Level", income_options, key='income_sidebar')
-    cluster = st.selectbox("Select Cluster", cluster_options, key='cluster_sidebar')
-
 # Initialize session state for filters if not exists
 if 'filters' not in st.session_state:
     st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
@@ -141,9 +140,126 @@ section = st.radio("Select Analysis Section", [
     "View & Download Full Dataset"
 ], horizontal=True)
 
+# MOVED FILTERS HERE - Placed just below section selection for mobile visibility
+st.markdown("<div class='filter-container'>", unsafe_allow_html=True)
+st.subheader("Data Filters")
+
+# Create filter options with None as first option
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    brand_options = [None] + sorted(df["Brand_Preference"].unique().tolist())
+    brand = st.selectbox("Brand", brand_options, key='brand_filter')
+
+with col2:  
+    gender_options = [None] + sorted(df["Gender"].unique().tolist())
+    gender = st.selectbox("Gender", gender_options, key='gender_filter')
+
+with col3:
+    income_options = [None] + sorted(df["Income_Level"].unique().tolist())
+    income = st.selectbox("Income Level", income_options, key='income_filter')
+
+with col4:
+    cluster_options = [None] + sorted(df["Cluster_Name"].unique().tolist())
+    cluster = st.selectbox("Cluster", cluster_options, key='cluster_filter')
+
+col1, col2 = st.columns(2)
+with col1:
+    if st.button("Apply Filters", use_container_width=True):
+        st.session_state.filters['brand'] = brand
+        st.session_state.filters['gender'] = gender
+        st.session_state.filters['income'] = income
+        st.session_state.filters['cluster'] = cluster
+        st.rerun()
+
+with col2:
+    if st.button("Clear Filters", use_container_width=True):
+        st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
+        st.rerun()
+
+st.markdown("</div>", unsafe_allow_html=True)
+
+# Helper function to dynamically generate summary insights
+def get_demo_insights(df):
+    """Generate demographic insights from filtered data"""
+    insights = {}
+    
+    # Age group insights
+    age_counts = df['Age_Group'].value_counts(normalize=True).sort_index() * 100
+    top_age_groups = age_counts.nlargest(2).index.tolist()
+    insights['age_groups'] = f"{', '.join(top_age_groups)} (representing {age_counts[top_age_groups].sum():.1f}% of consumers)"
+    
+    # Gender insights
+    gender_counts = df['Gender'].value_counts(normalize=True) * 100
+    majority_gender = gender_counts.idxmax()
+    insights['gender'] = f"{majority_gender} majority ({gender_counts.max():.1f}%)"
+    
+    # Income insights
+    income_counts = df['Income_Level'].value_counts(normalize=True) * 100
+    top_income = income_counts.idxmax()
+    insights['income'] = f"{top_income} ({income_counts.max():.1f}%)"
+    
+    return insights
+
+def get_brand_insights(df):
+    """Generate brand insights from filtered data"""
+    insights = {}
+    
+    # Brand insights
+    brand_counts = df['Most_Often_Consumed_Brand'].value_counts(normalize=True) * 100
+    top_brands = brand_counts.nlargest(2).index.tolist()
+    insights['brands'] = f"{' and '.join(top_brands)} (combined {brand_counts[top_brands].sum():.1f}%)"
+    
+    # Occasions insights
+    occasion_counts = df['Occasions_of_Buying'].value_counts(normalize=True) * 100
+    top_occasions = occasion_counts.nlargest(2).index.tolist()
+    insights['occasions'] = f"{' and '.join(top_occasions)}"
+    
+    # Frequency insights
+    freq_counts = df['Frequency_of_Consumption'].value_counts(normalize=True) * 100
+    top_freq = freq_counts.idxmax()
+    insights['frequency'] = f"{top_freq} ({freq_counts.max():.1f}%)"
+    
+    # Satisfaction insights
+    sat_counts = df['Satisfaction_Level'].value_counts(normalize=True) * 100
+    sat_levels = sat_counts.index.tolist()
+    if 'Very Satisfied' in sat_levels and 'Satisfied' in sat_levels:
+        satisfied_pct = sat_counts['Very Satisfied'] + sat_counts['Satisfied']
+        sentiment = "positive" if satisfied_pct > 50 else "mixed"
+    else:
+        sentiment = "neutral"
+    insights['satisfaction'] = sentiment
+    
+    return insights
+
+def get_attribute_insights(df):
+    """Generate attribute insights from filtered data"""
+    insights = {}
+    
+    attributes = [
+        'Taste_Rating', 'Price_Rating', 'Packaging_Rating', 
+        'Brand_Reputation_Rating', 'Availability_Rating', 
+        'Sweetness_Rating', 'Fizziness_Rating'
+    ]
+    
+    # Top and bottom attributes
+    avg_scores = df[attributes].mean()
+    top_attrs = avg_scores.nlargest(2).index.tolist()
+    bottom_attrs = avg_scores.nsmallest(2).index.tolist()
+    
+    insights['top_attributes'] = ", ".join([attr.replace('_Rating', '') for attr in top_attrs])
+    insights['bottom_attributes'] = ", ".join([attr.replace('_Rating', '') for attr in bottom_attrs])
+    
+    return insights
+
 # Display Selected Section
 if section == "Executive Dashboard Summary":
     st.markdown("<h2 class='subheader'>Executive Dashboard Summary</h2>", unsafe_allow_html=True)
+    
+    # Get insights
+    demo_insights = get_demo_insights(filtered_df)
+    brand_insights = get_brand_insights(filtered_df)
+    attr_insights = get_attribute_insights(filtered_df)
     
     # Overall key metrics
     col1, col2, col3 = st.columns(3)
@@ -220,7 +336,7 @@ if section == "Executive Dashboard Summary":
     col1, col2 = st.columns(2)
     
     with col1:
-        st.markdown("""
+        st.markdown(f"""
         <div class='summary-box'>
             <div class='summary-title'>DEMOGRAPHIC INSIGHTS</div>
             <p>The cola consumer base shows distinct preferences by age group and gender:</p>
@@ -232,7 +348,7 @@ if section == "Executive Dashboard Summary":
         </div>
         """, unsafe_allow_html=True)
         
-        st.markdown("""
+        st.markdown(f"""
         <div class='summary-box'>
             <div class='summary-title'>BRAND METRICS INSIGHTS</div>
             <p>Brand performance shows clear patterns in consumer behavior:</p>
@@ -244,7 +360,7 @@ if section == "Executive Dashboard Summary":
         </div>
         """, unsafe_allow_html=True)
         
-        st.markdown("""
+        st.markdown(f"""
         <div class='summary-box'>
             <div class='summary-title'>ATTRIBUTE RATING INSIGHTS</div>
             <p>Product attributes show varying importance to consumers:</p>
@@ -257,7 +373,7 @@ if section == "Executive Dashboard Summary":
         """, unsafe_allow_html=True)
     
     with col2:
-        st.markdown("""
+        st.markdown(f"""
         <div class='summary-box'>
             <div class='summary-title'>REGRESSION ANALYSIS INSIGHTS</div>
             <p>The drivers of NPS (loyalty) are clearly identified:</p>
@@ -269,7 +385,7 @@ if section == "Executive Dashboard Summary":
         </div>
         """, unsafe_allow_html=True)
         
-        st.markdown("""
+        st.markdown(f"""
         <div class='summary-box'>
             <div class='summary-title'>DECISION TREE INSIGHTS</div>
             <p>Consumer loyalty can be predicted by key decision factors:</p>
@@ -281,7 +397,7 @@ if section == "Executive Dashboard Summary":
         </div>
         """, unsafe_allow_html=True)
         
-        st.markdown("""
+        st.markdown(f"""
         <div class='summary-box'>
             <div class='summary-title'>CLUSTER ANALYSIS INSIGHTS</div>
             <p>Three distinct consumer segments with different priorities:</p>
@@ -296,7 +412,7 @@ if section == "Executive Dashboard Summary":
     # Strategic recommendations
     st.subheader("Strategic Recommendations")
     
-    st.markdown("""
+    st.markdown(f"""
     <div class='summary-box'>
         <p><strong>Product Development:</strong> Focus on taste improvement as the primary driver of satisfaction.
         Consider different sweetness/fizziness profiles for different segments.</p>
@@ -315,6 +431,9 @@ if section == "Executive Dashboard Summary":
 
 elif section == "Demographic Profile":
     st.markdown("<h2 class='subheader'>Demographic Profile</h2>", unsafe_allow_html=True)
+    
+    # Get demographic insights
+    demo_insights = get_demo_insights(filtered_df)
     
     col1, col2 = st.columns(2)
     
@@ -374,16 +493,16 @@ elif section == "Demographic Profile":
         st.plotly_chart(fig)
     
     # Executive summary for demographic section
-    st.markdown("""
+    st.markdown(f"""
     <div class='summary-box'>
         <div class='summary-title'>DEMOGRAPHIC PROFILE - EXECUTIVE SUMMARY</div>
         <p>The demographic analysis of cola consumers reveals distinct patterns across age groups, gender, and income levels:</p>
         
         <p><strong>Key Findings:</strong></p>
         <ul>
-            <li>Age distribution shows prevalence in [main age groups from filtered data]</li>
-            <li>Gender split indicates [gender balance from filtered data]</li>
-            <li>Income level distribution suggests [income pattern from filtered data]</li>
+            <li>Age distribution shows prevalence in {demo_insights['age_groups']}</li>
+            <li>Gender split indicates {demo_insights['gender']}</li>
+            <li>Income level distribution suggests predominance of {demo_insights['income']}</li>
             <li>There are noticeable correlations between demographics and preferences</li>
         </ul>
         
@@ -399,6 +518,9 @@ elif section == "Demographic Profile":
 
 elif section == "Brand Metrics":
     st.markdown("<h2 class='subheader'>Brand Metrics</h2>", unsafe_allow_html=True)
+    
+    # Get brand insights
+    brand_insights = get_brand_insights(filtered_df)
     
     col1, col2 = st.columns(2)
     
@@ -461,17 +583,17 @@ elif section == "Brand Metrics":
         st.plotly_chart(fig)
         
     # Executive summary for brand metrics section
-    st.markdown("""
+    st.markdown(f"""
     <div class='summary-box'>
         <div class='summary-title'>BRAND METRICS - EXECUTIVE SUMMARY</div>
         <p>The analysis of brand metrics provides insights into consumer preferences and consumption patterns:</p>
         
         <p><strong>Key Findings:</strong></p>
         <ul>
-            <li>Market share is dominated by [dominant brands from filtered data]</li>
-            <li>Primary consumption occasions include [main occasions from filtered data]</li>
-            <li>Consumption frequency patterns reveal [frequency patterns from filtered data]</li>
-            <li>Overall satisfaction levels indicate [satisfaction trends from filtered data]</li>
+            <li>Market share is dominated by {brand_insights['brands']}</li>
+            <li>Primary consumption occasions include {brand_insights['occasions']}</li>
+            <li>Consumption frequency patterns reveal {brand_insights['frequency']} as most common</li>
+            <li>Overall satisfaction levels indicate {brand_insights['satisfaction']} sentiment</li>
         </ul>
         
         <p><strong>Strategic Implications:</strong></p>
@@ -486,6 +608,9 @@ elif section == "Brand Metrics":
 
 elif section == "Basic Attribute Scores":
     st.markdown("<h2 class='subheader'>Basic Attribute Scores</h2>", unsafe_allow_html=True)
+    
+    # Get attribute insights
+    attr_insights = get_attribute_insights(filtered_df)
     
     col1, col2 = st.columns(2)
     
@@ -580,15 +705,15 @@ elif section == "Basic Attribute Scores":
         st.plotly_chart(fig)
     
     # Executive summary for attribute scores section
-    st.markdown("""
+    st.markdown(f"""
     <div class='summary-box'>
         <div class='summary-title'>ATTRIBUTE SCORES - EXECUTIVE SUMMARY</div>
         <p>The analysis of product attribute ratings reveals priorities and satisfaction drivers:</p>
         
         <p><strong>Key Findings:</strong></p>
         <ul>
-            <li>The highest-rated attributes are [top attributes from filtered data]</li>
-            <li>The lowest-rated attributes are [bottom attributes from filtered data]</li>
+            <li>The highest-rated attributes are {attr_insights['top_attributes']}</li>
+            <li>The lowest-rated attributes are {attr_insights['bottom_attributes']}</li>
             <li>NPS scores vary significantly across demographic segments</li>
             <li>Gender and age show notable influence on attribute preferences</li>
         </ul>
@@ -602,517 +727,3 @@ elif section == "Basic Attribute Scores":
         </ul>
     </div>
     """, unsafe_allow_html=True)
-
-elif section == "Regression Analysis":
-    st.markdown("<h2 class='subheader'>Regression Analysis</h2>", unsafe_allow_html=True)
-    
-    # Prepare data for regression
-    X_reg = filtered_df[['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 
-                       'Brand_Reputation_Rating', 'Availability_Rating', 
-                       'Sweetness_Rating', 'Fizziness_Rating']]
-    
-    y_reg = filtered_df['NPS_Score']
-    
-    # Add constant to predictor variables
-    X_reg = sm.add_constant(X_reg)
-    
-    # Fit regression model
-    model = sm.OLS(y_reg, X_reg).fit()
-    
-    # Display regression results
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.subheader("Regression Summary")
-        
-        # Create a dataframe for coefficients
-        coef_df = pd.DataFrame({
-            'Feature': X_reg.columns,
-            'Coefficient': model.params,
-            'P-Value': model.pvalues,
-            'Significant': model.pvalues < 0.05
-        })
-        
-        # Sort by absolute coefficient value
-        coef_df = coef_df.sort_values(by='Coefficient', key=abs, ascending=False)
-        
-        # Format p-values
-        coef_df['P-Value'] = coef_df['P-Value'].apply(lambda x: f"{x:.4f}")
-        coef_df['Coefficient'] = coef_df['Coefficient'].apply(lambda x: f"{x:.4f}")
-        
-        # Display table
-        st.dataframe(coef_df, use_container_width=True)
-        
-        # Display key metrics
-        st.write(f"**R-squared:** {model.rsquared:.4f}")
-        st.write(f"**Adjusted R-squared:** {model.rsquared_adj:.4f}")
-        st.write(f"**F-statistic:** {model.fvalue:.4f}")
-        st.write(f"**Prob (F-statistic):** {model.f_pvalue:.4f}")
-    
-    with col2:
-        # Visualization of coefficients
-        sig_coefs = coef_df[coef_df['Feature'] != 'const']
-        colors = ['green' if p else 'red' for p in sig_coefs['Significant']]
-        
-        fig = px.bar(
-            sig_coefs,
-            x='Feature', 
-            y='Coefficient',
-            title='Feature Importance (Coefficient Values)',
-            color='Significant',
-            color_discrete_map={True: 'green', False: 'red'},
-            labels={'Coefficient': 'Impact on NPS Score', 'Feature': 'Attribute'}
-        )
-        st.plotly_chart(fig)
-    
-    # Key findings summary
-    st.subheader("Key Regression Findings")
-    
-    # Identify significant positive and negative factors
-    pos_factors = coef_df[(coef_df['Significant'] == True) & (coef_df['Feature'] != 'const') & (coef_df['Coefficient'].astype(float) > 0)]
-    neg_factors = coef_df[(coef_df['Significant'] == True) & (coef_df['Feature'] != 'const') & (coef_df['Coefficient'].astype(float) < 0)]
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        if not pos_factors.empty:
-            st.write("**Significant Positive Factors on NPS:**")
-            for i, row in pos_factors.iterrows():
-                st.write(f"- {row['Feature']}: {row['Coefficient']}")
-        else:
-            st.write("No significant positive factors found.")
-    
-    with col2:
-        if not neg_factors.empty:
-            st.write("**Significant Negative Factors on NPS:**")
-            for i, row in neg_factors.iterrows():
-                st.write(f"- {row['Feature']}: {row['Coefficient']}")
-        else:
-            st.write("No significant negative factors found.")
-    
-    # Formal Executive Summary Box
-    st.markdown("""
-    <div class='summary-box'>
-        <div class='summary-title'>REGRESSION ANALYSIS - EXECUTIVE SUMMARY</div>
-        <p>The regression analysis identifies the key drivers of consumer loyalty as measured by NPS:</p>
-        
-        <p><strong>Key Findings:</strong></p>
-        <ul>
-    """, unsafe_allow_html=True)
-    
-    # Model quality
-    st.markdown(f"<li>The regression model explains <strong>{model.rsquared:.1%}</strong> of the variation in NPS scores</li>", unsafe_allow_html=True)
-    
-    # Model significance
-    if model.f_pvalue < 0.05:
-        st.markdown("<li>The model is <strong>statistically significant</strong> (p < 0.05)</li>", unsafe_allow_html=True)
-    else:
-        st.markdown("<li>The model is <strong>not statistically significant</strong> (p > 0.05)</li>", unsafe_allow_html=True)
-    
-    # Model predictive power
-    if model.rsquared < 0.3:
-        st.markdown("<li>The model has relatively low predictive power, suggesting additional factors influence NPS</li>", unsafe_allow_html=True)
-    
-    # Important drivers
-    significant_features = coef_df[(coef_df['Significant'] == True) & (coef_df['Feature'] != 'const')]
-    if not significant_features.empty:
-        most_important = significant_features.iloc[0]['Feature']
-        st.markdown(f"<li>The most influential factor is <strong>{most_important}</strong></li>", unsafe_allow_html=True)
-        
-        if len(significant_features) > 1:
-            secondary_factors = ', '.join(significant_features.iloc[1:3]['Feature'].tolist())
-            st.markdown(f"<li>Secondary factors include: <strong>{secondary_factors}</strong></li>", unsafe_allow_html=True)
-    else:
-        st.markdown("<li>No individual factors show statistical significance in predicting NPS scores</li>", unsafe_allow_html=True)
-    
-    st.markdown("""
-        </ul>
-        
-        <p><strong>Strategic Implications:</strong></p>
-        <ul>
-            <li>Focus improvement efforts on the attributes with strongest positive coefficients</li>
-            <li>Address negative drivers to minimize their impact on consumer loyalty</li>
-            <li>Use regression insights to prioritize product development initiatives</li>
-            <li>Consider the balance of attribute improvements against implementation costs</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
-
-elif section == "Decision Tree Analysis":
-    st.markdown("<h2 class='subheader'>Decision Tree Analysis</h2>", unsafe_allow_html=True)
-    
-    # Define NPS categories for classification
-    filtered_df['NPS_Category'] = pd.cut(
-        filtered_df['NPS_Score'],
-        bins=[-1, 6, 8, 10],
-        labels=['Detractor', 'Passive', 'Promoter']
-    )
-    
-    # Prepare data for decision tree
-    X_tree = filtered_df[['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 
-                        'Brand_Reputation_Rating', 'Availability_Rating', 
-                        'Sweetness_Rating', 'Fizziness_Rating', 'Age']]
-    
-    y_tree = filtered_df['NPS_Category']
-    
-    # Split the data
-    X_train, X_test, y_train, y_test = train_test_split(X_tree, y_tree, test_size=0.25, random_state=42)
-    
-    # Train decision tree
-    dt_model = DecisionTreeClassifier(max_depth=4, random_state=42)
-    dt_model.fit(X_train, y_train)
-    
-    # Calculate accuracy
-    train_accuracy = dt_model.score(X_train, y_train)
-    test_accuracy = dt_model.score(X_test, y_test)
-    
-    # Feature importance
-    feature_importance = pd.DataFrame({
-        'Feature': X_tree.columns,
-        'Importance': dt_model.feature_importances_
-    }).sort_values('Importance', ascending=False)
-    
-    # Display results
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.subheader("Decision Tree Performance")
-        st.write(f"**Training Accuracy:** {train_accuracy:.2%}")
-        st.write(f"**Testing Accuracy:** {test_accuracy:.2%}")
-        
-        # Feature importance chart
-        fig = px.bar(
-            feature_importance,
-            x='Feature',
-            y='Importance',
-            title='Feature Importance in NPS Classification',
-            labels={'Importance': 'Importance Score', 'Feature': 'Attribute'}
-        )
-        fig.update_layout(xaxis={'categoryorder': 'total descending'})
-        st.plotly_chart(fig)
-    
-    with col2:
-        st.subheader("Decision Tree Visualization")
-        
-        # Create decision tree plot
-        plt.figure(figsize=(12, 8))
-        plot_tree(dt_model, 
-                 filled=True, 
-                 feature_names=X_tree.columns, 
-                 class_names=dt_model.classes_,
-                 rounded=True,
-                 fontsize=10)
-        
-        # Save plot to buffer
-        buf = BytesIO()
-        plt.savefig(buf, format="png", dpi=150, bbox_inches='tight')
-        plt.close()
-        
-        # Display the image
-        st.image(buf)
-    
-    # Decision path analysis
-    st.subheader("Key Decision Rules")
-    
-    # Extract and display key decision paths for promoters
-    rules = tree.export_text(dt_model, 
-                            feature_names=list(X_tree.columns),
-                            max_depth=3)
-    
-    # Create a more user-friendly summary
-    top_feature = feature_importance.iloc[0]['Feature']
-    second_feature = feature_importance.iloc[1]['Feature'] if len(feature_importance) > 1 else None
-    
-    st.write(f"""
-    **Decision Tree Analysis Summary:**
-    
-    The decision tree model achieved {test_accuracy:.1%} accuracy in predicting NPS categories (Promoter, Passive, Detractor).
-    
-    The most important factor in determining customer loyalty (NPS) is **{top_feature}**, 
-    {"followed by **" + second_feature + "**" if second_feature else ""}.
-    """)
-    
-    # Simplified rule display
-    st.code(rules, language='text')
-    
-    # Consumer insights based on tree
-    st.subheader("Consumer Insights from Decision Tree")
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.write("**Promoter Profile:**")
-        
-        # Logic for promoters based on top features
-        if top_feature in ['Taste_Rating', 'Brand_Reputation_Rating']:
-            st.write(f"- Consumers with high {top_feature.replace('_Rating', '')} satisfaction")
-        if second_feature:
-            st.write(f"- Secondary importance: {second_feature.replace('_Rating', '')}")
-        
-        st.write("- These consumers are most likely to recommend your brand")
-    
-    with col2:
-        st.write("**Detractor Profile:**")
-        
-        # Logic for detractors based on top features
-        if top_feature in ['Taste_Rating', 'Brand_Reputation_Rating', 'Price_Rating']:
-            st.write(f"- Consumers with low {top_feature.replace('_Rating', '')} satisfaction")
-        if second_feature:
-            st.write(f"- Also influenced by: {second_feature.replace('_Rating', '')}")
-        
-        st.write("- These consumers are least likely to recommend your brand")
-    
-    # Decision Tree Executive Summary
-    st.markdown("""
-    <div class='summary-box'>
-        <div class='summary-title'>DECISION TREE ANALYSIS - EXECUTIVE SUMMARY</div>
-        <p>The decision tree analysis identifies the critical decision pathways that determine consumer loyalty:</p>
-        
-        <p><strong>Key Findings:</strong></p>
-        <ul>
-            <li>The model achieved <strong>{:.1%}</strong> accuracy in predicting NPS categories</li>
-            <li>The most important classification factor is <strong>{}</strong></li>
-            <li>Clear decision rules identify paths to promoter vs. detractor status</li>
-            <li>Customer segments show distinct loyalty patterns based on attribute preferences</li>
-        </ul>
-        
-        <p><strong>Strategic Implications:</strong></p>
-        <ul>
-            <li>Focus improvement efforts on the top decision factors identified in the tree</li>
-            <li>Segment customers based on these decision rules for targeted marketing</li>
-            <li>Address specific pain points for potential detractors</li>
-            <li>Use decision paths to create customer journey optimization strategies</li>
-        </ul>
-    </div>
-    """.format(test_accuracy, feature_importance.iloc[0]['Feature']), unsafe_allow_html=True)
-
-elif section == "Cluster Analysis":
-    st.markdown("<h2 class='subheader'>Cluster Analysis</h2>", unsafe_allow_html=True)
-    
-    # Display cluster distribution
-    cluster_dist = filtered_df['Cluster_Name'].value_counts(normalize=True) * 100
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        fig = px.pie(
-            values=cluster_dist.values,
-            names=cluster_dist.index,
-            title='Cluster Distribution (%)',
-            hole=0.4,
-            labels={'label': 'Cluster', 'value': 'Percentage (%)'}
-        )
-        fig.update_traces(textinfo='label+percent', textposition='inside')
-        st.plotly_chart(fig)
-        
-        # Display Factor Analysis
-        st.subheader("Factor Analysis")
-        
-        # Perform factor analysis
-        attributes = ['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 
-                    'Brand_Reputation_Rating', 'Availability_Rating', 
-                    'Sweetness_Rating', 'Fizziness_Rating']
-        
-        fa = FactorAnalyzer(n_factors=2, rotation='varimax')
-        fa.fit(filtered_df[attributes])
-        
-        # Get factor loadings
-        loadings = pd.DataFrame(
-            fa.loadings_,
-            index=attributes,
-            columns=['Factor 1', 'Factor 2']
-        )
-        
-        # Display loadings
-        st.dataframe(loadings.round(3), use_container_width=True)
-    
-    with col2:
-        # Cluster centers
-        st.subheader("Cluster Centers (Average Ratings)")
-        
-        # Generate radar chart for cluster centers
-        categories = ['Taste', 'Price', 'Packaging', 'Brand_Reputation', 'Availability', 'Sweetness', 'Fizziness']
-        
-        # Get cluster centers and reshape for radar chart
-        centers_data = []
-        cluster_names = filtered_df['Cluster_Name'].unique()
-        
-        for i, name in enumerate(cluster_names):
-            cluster_id = filtered_df[filtered_df['Cluster_Name'] == name]['Cluster'].iloc[0]
-            values = cluster_centers.iloc[cluster_id].values.tolist()
-            centers_data.append({
-                'Cluster': name,
-                **{cat: val for cat, val in zip(categories, values)}
-            })
-        
-        # Create radar chart
-        df_radar = pd.DataFrame(centers_data)
-        fig = go.Figure()
-        
-        for i, row in df_radar.iterrows():
-            fig.add_trace(go.Scatterpolar(
-                r=row[categories].values,
-                theta=categories,
-                fill='toself',
-                name=row['Cluster']
-            ))
-        
-        fig.update_layout(
-            polar=dict(
-                radialaxis=dict(
-                    visible=True,
-                    range=[0, 5]
-                )
-            ),
-            title="Cluster Profiles - Average Ratings"
-        )
-        st.plotly_chart(fig)
-    
-    # Cluster profiles
-    st.subheader("Cluster Profiles Analysis")
-    
-    col1, col2, col3 = st.columns(3)
-    
-    # Most common demographic and preference characteristics per cluster
-    clusters = filtered_df['Cluster_Name'].unique()
-    
-    for i, cluster in enumerate([clusters[i] for i in range(min(3, len(clusters)))]):
-        col = [col1, col2, col3][i]
-        with col:
-            cluster_data = filtered_df[filtered_df['Cluster_Name'] == cluster]
-            
-            st.write(f"**{cluster}** ({len(cluster_data)} consumers, {len(cluster_data)/len(filtered_df):.1%})")
-            
-            # Top brand preference
-            top_brand = cluster_data['Most_Often_Consumed_Brand'].value_counts().idxmax()
-            brand_pct = cluster_data['Most_Often_Consumed_Brand'].value_counts(normalize=True).max() * 100
-            
-            # Top occasion
-            top_occasion = cluster_data['Occasions_of_Buying'].value_counts().idxmax()
-            occasion_pct = cluster_data['Occasions_of_Buying'].value_counts(normalize=True).max() * 100
-            
-            # Demographics
-            top_gender = cluster_data['Gender'].value_counts().idxmax()
-            gender_pct = cluster_data['Gender'].value_counts(normalize=True).max() * 100
-            
-            top_age = cluster_data['Age_Group'].value_counts().idxmax()
-            age_pct = cluster_data['Age_Group'].value_counts(normalize=True).max() * 100
-            
-            # Average NPS
-            avg_nps = cluster_data['NPS_Score'].mean()
-            
-            st.write(f"🥤 Prefers: **{top_brand}** ({brand_pct:.1f}%)")
-            st.write(f"🛒 Typically buys for: **{top_occasion}** ({occasion_pct:.1f}%)")
-            st.write(f"👤 Demographics: **{top_gender}** ({gender_pct:.1f}%), **{top_age}** ({age_pct:.1f}%)")
-            st.write(f"⭐ Avg. NPS: **{avg_nps:.1f}**")
-            
-            # Top attributes (highest rated)
-            top_attribute = cluster_data[attributes].mean().idxmax()
-            st.write(f"💪 Strongest attribute: **{top_attribute.replace('_Rating', '')}**")
-            
-            # Lowest attributes (lowest rated)
-            lowest_attribute = cluster_data[attributes].mean().idxmin()
-            st.write(f"⚠️ Weakest attribute: **{lowest_attribute.replace('_Rating', '')}**")
-    
-    # Formal Executive Summary Box
-    st.markdown("""
-    <div class='summary-box'>
-        <div class='summary-title'>CLUSTER ANALYSIS - EXECUTIVE SUMMARY</div>
-        <p>The cluster analysis identified three distinct consumer segments based on their preferences and priorities:</p>
-        
-        <p><strong>Consumer Segments:</strong></p>
-        <ul>
-            <li><strong>Taste Enthusiasts:</strong> Prioritize taste and flavor experience above all. More focused on sensory aspects and less concerned with brand or price.</li>
-            <li><strong>Brand Loyalists:</strong> Place high importance on brand reputation and packaging. Likely to be loyal to specific brands and less price-sensitive.</li>
-            <li><strong>Value Seekers:</strong> More price-conscious and practical. Look for a good balance between price and quality, with availability being an important factor.</li>
-        </ul>
-        
-        <p><strong>Strategic Implications:</strong></p>
-        <ul>
-            <li>Develop targeted product offerings for each segment</li>
-            <li>Customize marketing messages to address segment-specific priorities</li>
-            <li>Allocate marketing resources based on segment size and potential</li>
-            <li>Monitor segment evolution over time to adapt strategies</li>
-        </ul>
-        
-        <p>Each segment has distinct demographic characteristics and consumption patterns, offering opportunities for targeted marketing and product development strategies.</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-elif section == "View & Download Full Dataset":
-    st.markdown("<h2 class='subheader'>View & Download Dataset</h2>", unsafe_allow_html=True)
-    
-    # Show dataset with cluster information
-    st.dataframe(filtered_df)
-    
-    # Executive summary for data section
-    st.markdown("""
-    <div class='summary-box'>
-        <div class='summary-title'>DATASET OVERVIEW - EXECUTIVE SUMMARY</div>
-        <p>This section provides access to the complete dataset with all analysis variables:</p>
-        
-        <p><strong>Dataset Features:</strong></p>
-        <ul>
-            <li>1,000 survey respondents with demographic information</li>
-            <li>Brand preferences and consumption patterns</li>
-            <li>Attribute ratings across 7 key product dimensions</li>
-            <li>NPS scores indicating consumer loyalty</li>
-            <li>Cluster assignments from segmentation analysis</li>
-        </ul>
-        
-        <p><strong>Applications:</strong></p>
-        <ul>
-            <li>Download data for further custom analysis</li>
-            <li>Export filtered segments for targeted marketing initiatives</li>
-            <li>Use cluster information for consumer targeting</li>
-            <li>Analyze raw data to identify additional insights</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Download options
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        # Full dataset
-        csv = filtered_df.to_csv(index=False)
-        st.download_button(
-            label="Download Full Dataset (CSV)",
-            data=csv,
-            file_name="cola_survey_data.csv",
-            mime="text/csv"
-        )
-    
-    with col2:
-        # Summary statistics
-        summary_stats = filtered_df.describe().transpose()
-        csv_summary = summary_stats.to_csv()
-        st.download_button(
-            label="Download Summary Statistics (CSV)",
-            data=csv_summary,
-            file_name="cola_survey_summary.csv",
-            mime="text/csv"
-        )
-
-# Apply and Clear Filters
-st.markdown("---")
-col1, col2 = st.columns(2)
-
-with col1:
-    if st.button("Apply Filters"):
-        st.session_state.filters['brand'] = brand
-        st.session_state.filters['gender'] = gender
-        st.session_state.filters['income'] = income
-        st.session_state.filters['cluster'] = cluster
-        st.rerun()
-
-with col2:
-    if st.button("Clear Filters"):
-        st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
-        st.rerun()
-
-# Footer
-st.markdown("---")
-st.markdown("**Cola Survey Dashboard** | Created with Streamlit")
-
-    
