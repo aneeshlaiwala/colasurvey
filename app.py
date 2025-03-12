@@ -19,9 +19,6 @@ def load_data():
 
 df = load_data()
 
-# Set wide layout for better mobile visibility
-
-
 # Streamlit App Title
 st.title("Interactive Cola Consumer Dashboard")
 
@@ -49,7 +46,7 @@ if income:
 if cluster:
     filtered_df = filtered_df[filtered_df["Cluster_Name"] == cluster]
 
-# Button States for Toggle Functionality
+# Toggle Button States for Sections
 if 'toggle_state' not in st.session_state:
     st.session_state.toggle_state = {section: False for section in [
         "Demographic Profile", "Brand Metrics", "Basic Attribute Scores", "Regression Analysis", 
@@ -59,15 +56,12 @@ if 'toggle_state' not in st.session_state:
 def toggle_section(section_name):
     st.session_state.toggle_state[section_name] = not st.session_state.toggle_state[section_name]
 
-# Arrange buttons in two columns ensuring proper execution
-col1, col2 = st.columns(2)
+# Arrange buttons in a single column
 button_sections = list(st.session_state.toggle_state.keys())
-
 buttons = {}
 for index, section in enumerate(button_sections):
     key_name = f"button_{index}"  # Unique key for each button
-    with col1 if index % 2 == 0 else col2:
-        buttons[section] = st.button(section, key=key_name)
+    buttons[section] = st.button(section, key=key_name)
 
 # Ensure proper toggling of sections
 for section, button_pressed in buttons.items():
@@ -101,14 +95,14 @@ for section, button_pressed in buttons.items():
             st.download_button(label="Download CSV", data=csv, file_name="cola_survey_data.csv", mime="text/csv")
 
 # Apply and Clear Filters
-col3, col4 = st.columns(2)
-with col3:
+col1, col2 = st.columns(2)
+with col1:
     if st.button("Apply Filter (for Mobile)"):
         brand = st.selectbox("Select a Brand", [None] + list(df["Brand_Preference"].unique()), key='brand_mobile')
         gender = st.selectbox("Select Gender", [None] + list(df["Gender"].unique()), key='gender_mobile')
         income = st.selectbox("Select Income Level", [None] + list(df["Income_Level"].unique()), key='income_mobile')
         cluster = st.selectbox("Select Cluster", [None] + list(df["Cluster_Name"].unique()), key='cluster_mobile')
 
-with col4:
+with col2:
     if st.button("Clear Filters"):
         st.session_state.toggle_state = {section: False for section in st.session_state.toggle_state.keys()}
