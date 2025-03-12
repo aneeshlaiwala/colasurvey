@@ -1,3 +1,4 @@
+st.set_page_config(layout="wide")
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -18,7 +19,7 @@ def load_data():
 df = load_data()
 
 # Set wide layout for better mobile visibility
-st.set_page_config(layout="wide")
+
 
 # Streamlit App Title
 st.title("Interactive Cola Consumer Dashboard")
