@@ -46,53 +46,40 @@ if income:
 if cluster:
     filtered_df = filtered_df[filtered_df["Cluster_Name"] == cluster]
 
-# Toggle Button States for Sections
-if 'toggle_state' not in st.session_state:
-    st.session_state.toggle_state = {section: False for section in [
-        "Demographic Profile", "Brand Metrics", "Basic Attribute Scores", "Regression Analysis", 
-        "Decision Tree Analysis", "Cluster Analysis", "View & Download Full Dataset"
-    ]}
+# Section Selection using Radio Buttons
+section = st.radio("Select Analysis Section", [
+    "Demographic Profile", "Brand Metrics", "Basic Attribute Scores", "Regression Analysis", 
+    "Decision Tree Analysis", "Cluster Analysis", "View & Download Full Dataset"
+])
 
-def toggle_section(section_name):
-    st.session_state.toggle_state[section_name] = not st.session_state.toggle_state[section_name]
+# Display Selected Section
+if section == "Demographic Profile":
+    st.subheader("Demographic Profile")
+    age_counts = filtered_df['Age_Group'].value_counts(normalize=True).sort_index() * 100
+    fig = px.bar(x=age_counts.index, y=age_counts.values, text=age_counts.values.round(2), title='Age Group Distribution (%)')
+    st.plotly_chart(fig)
+    fig = px.pie(filtered_df, names='Gender', title='Gender Distribution')
+    st.plotly_chart(fig)
+    fig = px.pie(filtered_df, names='Income_Level', title='Income Level Distribution')
+    st.plotly_chart(fig)
 
-# Arrange buttons in a single column
-button_sections = list(st.session_state.toggle_state.keys())
-buttons = {}
-for index, section in enumerate(button_sections):
-    key_name = f"button_{index}"  # Unique key for each button
-    buttons[section] = st.button(section, key=key_name)
+elif section == "Brand Metrics":
+    st.subheader("Brand Metrics")
+    brand_counts = filtered_df['Most_Often_Consumed_Brand'].value_counts(normalize=True) * 100
+    fig = px.bar(x=brand_counts.index, y=brand_counts.values.round(2), text=brand_counts.values.round(2), title='Most Often Used Brand')
+    st.plotly_chart(fig)
+    occasions_counts = filtered_df['Occasions_of_Buying'].value_counts(normalize=True) * 100
+    fig = px.bar(x=occasions_counts.index, y=occasions_counts.values.round(2), text=occasions_counts.values.round(2), title='Occasions of Buying')
+    st.plotly_chart(fig)
+    freq_counts = filtered_df['Frequency_of_Consumption'].value_counts(normalize=True) * 100
+    fig = px.bar(x=freq_counts.index, y=freq_counts.values.round(2), text=freq_counts.values.round(2), title='Frequency of Consumption')
+    st.plotly_chart(fig)
 
-# Ensure proper toggling of sections
-for section, button_pressed in buttons.items():
-    if button_pressed:
-        toggle_section(section)
-    if st.session_state.toggle_state[section]:
-        st.subheader(section)
-        if section == "Demographic Profile":
-            age_counts = filtered_df['Age_Group'].value_counts(normalize=True).sort_index() * 100
-            fig = px.bar(x=age_counts.index, y=age_counts.values, text=age_counts.values.round(2), title='Age Group Distribution (%)')
-            st.plotly_chart(fig)
-            fig = px.pie(filtered_df, names='Gender', title='Gender Distribution')
-            st.plotly_chart(fig)
-            fig = px.pie(filtered_df, names='Income_Level', title='Income Level Distribution')
-            st.plotly_chart(fig)
-        
-        if section == "Brand Metrics":
-            brand_counts = filtered_df['Most_Often_Consumed_Brand'].value_counts(normalize=True) * 100
-            fig = px.bar(x=brand_counts.index, y=brand_counts.values.round(2), text=brand_counts.values.round(2), title='Most Often Used Brand')
-            st.plotly_chart(fig)
-            occasions_counts = filtered_df['Occasions_of_Buying'].value_counts(normalize=True) * 100
-            fig = px.bar(x=occasions_counts.index, y=occasions_counts.values.round(2), text=occasions_counts.values.round(2), title='Occasions of Buying')
-            st.plotly_chart(fig)
-            freq_counts = filtered_df['Frequency_of_Consumption'].value_counts(normalize=True) * 100
-            fig = px.bar(x=freq_counts.index, y=freq_counts.values.round(2), text=freq_counts.values.round(2), title='Frequency of Consumption')
-            st.plotly_chart(fig)
-        
-        if section == "View & Download Full Dataset":
-            st.dataframe(filtered_df)
-            csv = filtered_df.to_csv(index=False)
-            st.download_button(label="Download CSV", data=csv, file_name="cola_survey_data.csv", mime="text/csv")
+elif section == "View & Download Full Dataset":
+    st.subheader("Full Dataset")
+    st.dataframe(filtered_df)
+    csv = filtered_df.to_csv(index=False)
+    st.download_button(label="Download CSV", data=csv, file_name="cola_survey_data.csv", mime="text/csv")
 
 # Apply and Clear Filters
 col1, col2 = st.columns(2)
@@ -105,4 +92,4 @@ with col1:
 
 with col2:
     if st.button("Clear Filters"):
-        st.session_state.toggle_state = {section: False for section in st.session_state.toggle_state.keys()}
+        st.experimental_rerun()
