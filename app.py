@@ -160,16 +160,7 @@ if 'filters' not in st.session_state:
         'income': None, 
         'cluster': None
     }
-##########################################
-if st.button("Clear Filters"):
-        # Reset all filters to None
-        st.session_state.filters = {
-            'brand': None, 
-            'gender': None, 
-            'income': None, 
-            'cluster': None
-        }
-############################################33
+
 # Move Filters to main page, below section selection
 st.markdown("<div class='filter-box'>", unsafe_allow_html=True)
 st.subheader("Dashboard Filters")
