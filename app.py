@@ -1035,9 +1035,25 @@ elif section == "Cluster Analysis":
 elif section == "Advanced Analytics Explained":
     st.markdown("<h2 class='subheader'>Advanced Analytics Explained</h2>", unsafe_allow_html=True)
 
-    # Regression Analysis
-    st.markdown("""
-    <div style='border-left: 5px solid #0078D4; padding-left: 10px;'>
+    html_code = """
+    <style>
+        .insight-box {
+            border-left: 5px solid #0078D4; 
+            padding-left: 10px; 
+            margin-bottom: 20px;
+        }
+        .example-box {
+            background-color: #f0f0f0; 
+            padding: 1rem; 
+            border-radius: 0.5rem; 
+            margin: 0.8rem 0;
+        }
+        .example-box p {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+
+    <div class="insight-box">
         <h3>1. Regression Analysis: Predicting Outcomes Based on Factors</h3>
         <p>Regression analysis helps us understand how different factors (e.g., taste, price, fizziness) 
         influence the Net Promoter Score (NPS). It identifies key drivers of customer satisfaction and brand loyalty.</p>
@@ -1046,8 +1062,8 @@ elif section == "Advanced Analytics Explained":
         how <strong>cola attribute ratings</strong> (Taste, Price, Packaging, Brand Reputation, Availability, 
         Sweetness, and Fizziness) impact the <strong>Net Promoter Score (NPS)</strong>.</p>
 
-        <div style="background-color: #f0f0f0; padding: 1rem; border-radius: 0.5rem; margin: 0.8rem 0;">
-            <p style="font-weight: bold; margin-bottom: 0.5rem;">Example: Coffee Shop Sales</p>
+        <div class="example-box">
+            <p style="font-weight: bold;">Example: Coffee Shop Sales</p>
 
             <p>Imagine you own a <strong>coffee shop</strong> and want to know what <strong>affects your daily sales</strong>. 
             You suspect that sales depend on factors like:</p>
@@ -1070,8 +1086,9 @@ elif section == "Advanced Analytics Explained":
             factors (e.g., <strong>taste, price, fizziness</strong>) affect <strong>customer loyalty (Net Promoter Score - NPS)</strong>.</p>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """
 
+    components.html(html_code, height=600)
 # =======================
 # VIEW & DOWNLOAD FULL DATASET
 # =======================
