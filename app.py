@@ -1,4 +1,5 @@
 import streamlit as st  # Import Streamlit first
+import streamlit.components.v1 as components
 st.set_page_config(layout="wide", page_title="Cola Consumer Dashboard", page_icon="🥤")  # Then set the page configuration
 
 import pandas as pd
