@@ -317,73 +317,65 @@ with filter_col1:
     brand_options = [None] + sorted(df["Brand_Preference"].unique().tolist())
     brand = st.selectbox("Select a Brand", 
                          options=brand_options, 
-                         index=0,  # Always start at 0 (None) when clearing filters
-                         key='brand_filter')
+                         index=0)
 
 with filter_col2:
     gender_options = [None] + sorted(df["Gender"].unique().tolist())
     gender = st.selectbox("Select Gender", 
                           options=gender_options, 
-                          index=0,  # Always start at 0 (None) when clearing filters
-                          key='gender_filter')
+                          index=0)
 
 with filter_col3:
     income_options = [None] + sorted(df["Income_Level"].unique().tolist())
     income = st.selectbox("Select Income Level", 
                           options=income_options, 
-                          index=0,  # Always start at 0 (None) when clearing filters
-                          key='income_filter')
+                          index=0)
 
 with filter_col4:
     cluster_options = [None] + sorted(df["Cluster_Name"].unique().tolist())
     cluster = st.selectbox("Select Cluster", 
                            options=cluster_options, 
-                           index=0,  # Always start at 0 (None) when clearing filters
-                           key='cluster_filter')
+                           index=0)
 
 # Filter action buttons in two columns
 fcol1, fcol2 = st.columns(2)
 
 with fcol1:
-    apply_button = st.button("Apply Filters", key='apply_filters_btn')
+    apply_button = st.button("Apply Filters")
     if apply_button:
         # Update filters in session state
-        st.session_state.filters['brand'] = brand
-        st.session_state.filters['gender'] = gender
-        st.session_state.filters['income'] = income
-        st.session_state.filters['cluster'] = cluster
+        st.session_state.filters = {
+            'brand': brand, 
+            'gender': gender, 
+            'income': income, 
+            'cluster': cluster
+        }
         st.experimental_rerun()
 
 with fcol2:
-    clear_button = st.button("Clear Filters", key='clear_filters_btn')
+    clear_button = st.button("Clear Filters")
     if clear_button:
         # Reset all filters to None in session state
         st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
-        
-        # Force selectboxes to reset to None by clearing their keys
-        st.session_state.brand_filter = None
-        st.session_state.gender_filter = None
-        st.session_state.income_filter = None
-        st.session_state.cluster_filter = None
-        
         st.experimental_rerun()
 
 # Apply selected filters to the dataframe
 filtered_df = df.copy()
-if st.session_state.filters['brand']:
-    filtered_df = filtered_df[filtered_df["Brand_Preference"] == st.session_state.filters['brand']]
-if st.session_state.filters['gender']:
-    filtered_df = filtered_df[filtered_df["Gender"] == st.session_state.filters['gender']]
-if st.session_state.filters['income']:
-    filtered_df = filtered_df[filtered_df["Income_Level"] == st.session_state.filters['income']]
-if st.session_state.filters['cluster']:
-    filtered_df = filtered_df[filtered_df["Cluster_Name"] == st.session_state.filters['cluster']]
+for key, value in st.session_state.filters.items():
+    if value is not None:
+        column_map = {
+            'brand': 'Brand_Preference',
+            'gender': 'Gender',
+            'income': 'Income_Level',
+            'cluster': 'Cluster_Name'
+        }
+        filtered_df = filtered_df[filtered_df[column_map[key]] == value]
 
 # Show active filters
 active_filters = [f"{k}: {v}" for k, v in st.session_state.filters.items() if v is not None]
 if active_filters:
     st.info(f"Active filters: {', '.join(active_filters)} (Total records: {len(filtered_df)})")
-
+    
 # FILTER SECTION UNTIL HERE
 
 # =======================
