@@ -161,6 +161,10 @@ if 'filters' not in st.session_state:
         'cluster': None
     }
 
+# Check for clear filters button action
+if 'clear_filters' not in st.session_state:
+    st.session_state.clear_filters = False
+
 # Move Filters to main page, below section selection
 st.markdown("<div class='filter-box'>", unsafe_allow_html=True)
 st.subheader("Dashboard Filters")
@@ -204,7 +208,8 @@ with filter_col4:
         index=0 if st.session_state.filters['cluster'] is None 
         else cluster_options.index(st.session_state.filters['cluster'])
     )
-    # Filter action buttons in two columns
+
+# Filter action buttons in two columns
 fcol1, fcol2 = st.columns(2)
 
 with fcol1:
@@ -216,19 +221,17 @@ with fcol1:
             'income': selected_income, 
             'cluster': selected_cluster
         }
-        # Don't use experimental_rerun() as it's causing issues
-        # We'll just let Streamlit naturally update based on session state changes
 
 with fcol2:
     if st.button("Clear Filters"):
-        # Reset all filters to None
+        # Reset all filters to None and set flag to trigger rerun
         st.session_state.filters = {
             'brand': None, 
             'gender': None, 
             'income': None, 
             'cluster': None
         }
-        # Don't use experimental_rerun() as it's causing issues
+        st.rerun()  # Use st.rerun() for Streamlit versions >= 1.18.0
 
 st.markdown("</div>", unsafe_allow_html=True)
 
@@ -392,7 +395,8 @@ if section == "Executive Dashboard Summary":
             </ul>
         </div>
         """, unsafe_allow_html=True)
-        # =======================
+
+# =======================
 # DEMOGRAPHIC PROFILE
 # =======================
 elif section == "Demographic Profile":
@@ -545,7 +549,7 @@ elif section == "Brand Metrics":
         else:
             st.info("No data available for Satisfaction analysis with current filters.")
 
-        # =======================
+# =======================
 # BASIC ATTRIBUTE SCORES
 # =======================
 elif section == "Basic Attribute Scores":
@@ -697,7 +701,7 @@ elif section == "Basic Attribute Scores":
                     color_continuous_scale=px.colors.diverging.RdBu,
                     color_continuous_midpoint=0
                 )
-                fig.update_tracesfig.update_traces(textposition='outside')
+                fig.update_traces(textposition='outside')
                 st.plotly_chart(fig)
 
 # =======================
@@ -741,6 +745,7 @@ elif section == "Regression Analysis":
             coef_df = coef_df.sort_values(by='Coefficient', key=abs, ascending=False)
             
             # Format p-values
+            coef_df['P-Value'] = coef_df['P-Value'].apply(lambda# Format p-values
             coef_df['P-Value'] = coef_df['P-Value'].apply(lambda x: f"{x:.4f}")
             coef_df['Coefficient'] = coef_df['Coefficient'].apply(lambda x: f"{x:.4f}")
             
@@ -791,7 +796,9 @@ elif section == "Regression Analysis":
                 for i, row in neg_factors.iterrows():
                     st.write(f"- {row['Feature'].replace('_Rating', '')}: {row['Coefficient']}")
             else:
-                st.write("No significant negative factors found.")# =======================
+                st.write("No significant negative factors found.")
+
+# =======================
 # DECISION TREE ANALYSIS
 # =======================
 elif section == "Decision Tree Analysis":
@@ -1060,7 +1067,9 @@ elif section == "Cluster Analysis":
                     lowest_attribute = cluster_data[attributes].mean().idxmin()
                     st.write(f"⚠️ Weakest attribute: **{lowest_attribute.replace('_Rating', '')}**")
                 else:
-                    st.write("No data available for this cluster with current filters.")# =======================
+                    st.write("No data available for this cluster with current filters.")
+
+# =======================
 # ADVANCED ANALYTICS EXPLAINED
 # =======================
 elif section == "Advanced Analytics Explained":
