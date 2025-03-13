@@ -42,23 +42,15 @@ def create_advanced_analytics_pdf():
     section_title_style.fontSize = 16
     section_title_style.textColor = darkgreen
     
-    subtitle_style = styles['Heading3'].clone('Subtitle')
-    subtitle_style.fontSize = 14
-    subtitle_style.textColor = darkgreen
-    
     body_style = styles['Normal'].clone('BodyText')
     body_style.fontSize = 10
     body_style.alignment = TA_JUSTIFY
-    
-    example_style = styles['Normal'].clone('ExampleText')
-    example_style.fontSize = 10
-    example_style.textColor = darkblue
     
     # Title
     story.append(Paragraph("ADVANCED ANALYTICS EXPLAINED", title_style))
     story.append(Spacer(1, 12))
     
-    # Sections with detailed content
+    # Sections
     sections = [
         {
             'title': "1. Regression Analysis: Predicting Outcomes Based on Factors",
@@ -71,26 +63,83 @@ def create_advanced_analytics_pdf():
                 'title': "Example: Coffee Shop Sales",
                 'content': [
                     "Imagine you own a coffee shop and want to know what affects your daily sales. You suspect that sales depend on factors like:",
-                    "☀️ Weather (Hot or Cold)",
-                    "💰 Price of Coffee (Higher prices might reduce sales)",
-                    "📢 Advertising Spend (More ads might increase sales)",
+                    "• Weather (Hot or Cold)",
+                    "• Price of Coffee (Higher prices might reduce sales)",
+                    "• Advertising Spend (More ads might increase sales)",
                     "",
                     "If you collect data for a month and run Regression Analysis, it will tell you:",
-                    "✅ How much each factor (weather, price, ads) influences sales",
-                    "✅ If raising prices decreases sales significantly",
-                    "✅ Whether advertising is actually helping or not",
+                    "• How much each factor (weather, price, ads) influences sales",
+                    "• If raising prices decreases sales significantly",
+                    "• Whether advertising is actually helping or not",
                     "",
                     "In the Cola Market Study:",
                     "We used Regression Analysis to see which factors (e.g., taste, price, fizziness) affect customer loyalty (Net Promoter Score - NPS)."
                 ]
             }
         },
-        # ... (rest of the content remains the same as in the previous artifact)
+        {
+            'title': "2. Decision Tree Analysis: Making Decisions Like a Flowchart",
+            'content': [
+                "A decision tree is a visual model that helps us determine how different variables influence customer loyalty.",
+                "It works by splitting the data into branches based on key decision points, showing the most influential factors in predicting whether a consumer is a promoter or a detractor."
+            ],
+            'example': {
+                'title': "Example: Choosing a Movie to Watch",
+                'content': [
+                    "Let's say you're trying to decide which movie to watch. You might ask yourself:",
+                    "1. Do I want an action movie? → If YES, then choose John Wick",
+                    "2. If NO, do I want a comedy? → If YES, then choose The Hangover",
+                    "3. If NO, do I want a drama? → If YES, then choose The Shawshank Redemption",
+                    "4. If NO, then I won't watch a movie!",
+                    "",
+                    "A Decision Tree does the same thing but with data-driven logic.",
+                    "",
+                    "In the Cola Market Study:",
+                    "The Decision Tree showed that Fizziness and Taste were the biggest factors in whether a customer is a promoter or detractor of a cola brand."
+                ]
+            }
+        },
+        {
+            'title': "3. Factor & Cluster Analysis: Grouping Similar Things Together",
+            'content': [
+                "Factor analysis reduces a large number of attributes into a smaller set of underlying factors that explain consumer preferences.",
+                "This helps identify key themes such as Taste & Fizziness, Brand Reputation, and Pricing Sensitivity.",
+                "We conducted Factor Analysis to extract key consumer preference dimensions and K-Means Clustering to identify distinct customer segments."
+            ],
+            'example': {
+                'title': "Factor Analysis Example: Organizing Your Closet",
+                'content': [
+                    "Imagine your closet is messy, and you decide to organize it into categories:",
+                    "• Work Clothes (Shirts, Trousers, Formal Shoes)",
+                    "• Casual Clothes (T-Shirts, Jeans, Sneakers)",
+                    "• Gym Clothes (Sportswear, Running Shoes)",
+                    "",
+                    "You group your clothes based on their purpose rather than sorting each item individually.",
+                    "",
+                    "Factor Analysis (Finding Underlying Factors)",
+                    "Now, let's say you notice that Work Clothes and Casual Clothes have a common theme:",
+                    "• \"Style Factor\" (Formal vs. Casual)",
+                    "• \"Comfort Factor\" (Sneakers vs. Dress Shoes)",
+                    "",
+                    "Factor Analysis does this with customer preferences by identifying hidden relationships between choices.",
+                    "",
+                    "Cluster Analysis (Grouping People Based on Similarity)",
+                    "Cluster analysis groups consumers into meaningful segments based on similar behaviour patterns.",
+                    "",
+                    "In the Cola Market Study:",
+                    "We identified three customer groups:",
+                    "• Fizz-Lovers → People who prefer high carbonation",
+                    "• Brand-Conscious Consumers → People who choose based on branding",
+                    "• Budget-Friendly Drinkers → People who prefer low-cost options"
+                ]
+            }
+        }
     ]
     
     # Add sections to the story
     for section in sections:
         story.append(Paragraph(section['title'], section_title_style))
+        story.append(Spacer(1, 6))
         
         # Main content
         for paragraph in section['content']:
@@ -99,18 +148,18 @@ def create_advanced_analytics_pdf():
         story.append(Spacer(1, 6))
         
         # Example section
-        story.append(Paragraph(section['example']['title'], subtitle_style))
+        story.append(Paragraph(section['example']['title'], section_title_style))
         for paragraph in section['example']['content']:
-            story.append(Paragraph(paragraph, example_style))
+            story.append(Paragraph(paragraph, body_style))
         
         story.append(Spacer(1, 12))
     
     # Final Takeaway
     story.append(Paragraph("Final Takeaway", section_title_style))
     takeaways = [
-        "📊 Regression Analysis helps us understand cause & effect (e.g., what affects sales).",
-        "🌳 Decision Trees help us visually map out decision-making processes.",
-        "🛍️ Factor & Cluster Analysis help us group related behaviors & consumers."
+        "• Regression Analysis helps us understand cause & effect (e.g., what affects sales).",
+        "• Decision Trees help us visually map out decision-making processes.",
+        "• Factor & Cluster Analysis help us group related behaviors & consumers."
     ]
     for takeaway in takeaways:
         story.append(Paragraph(takeaway, body_style))
@@ -122,8 +171,7 @@ def create_advanced_analytics_pdf():
     pdf_content = buffer.getvalue()
     buffer.close()
     
-    return pdf_content
-    
+    return pdf_content    
 # COPIED TILL HERE
 
 import streamlit as st  # Import Streamlit first
