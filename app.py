@@ -123,14 +123,8 @@ def create_advanced_analytics_pdf():
                     "",
                     "Factor Analysis does this with customer preferences by identifying hidden relationships between choices.",
                     "",
-                    "Cluster Analysis (Grouping People Based on Similarity)",
-                    "Cluster analysis groups consumers into meaningful segments based on similar behaviour patterns.",
-                    "",
-                    "In the Cola Market Study:",
-                    "We identified three customer groups:",
-                    "• Fizz-Lovers → People who prefer high carbonation",
-                    "• Brand-Conscious Consumers → People who choose based on branding",
-                    "• Budget-Friendly Drinkers → People who prefer low-cost options"
+                    "",  # Extra blank line
+                    "Cluster Analysis (Grouping People Based on Similarity)"
                 ]
             }
         }
@@ -149,8 +143,15 @@ def create_advanced_analytics_pdf():
         
         # Example section
         story.append(Paragraph(section['example']['title'], section_title_style))
+        
         for paragraph in section['example']['content']:
-            story.append(Paragraph(paragraph, body_style))
+            # Special handling for Cluster Analysis header
+            if paragraph == "Cluster Analysis (Grouping People Based on Similarity)":
+                story.append(Spacer(1, 12))
+                story.append(Paragraph(paragraph, section_title_style))
+                story.append(Spacer(1, 6))
+            else:
+                story.append(Paragraph(paragraph, body_style))
         
         story.append(Spacer(1, 12))
     
@@ -171,7 +172,8 @@ def create_advanced_analytics_pdf():
     pdf_content = buffer.getvalue()
     buffer.close()
     
-    return pdf_content    
+    return pdf_content
+    
 # COPIED TILL HERE
 
 import streamlit as st  # Import Streamlit first
