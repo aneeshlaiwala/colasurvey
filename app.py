@@ -1201,13 +1201,13 @@ elif section == "Advanced Analytics Explained":
             Download PDF
         </a>
         
-        <p>The PDF covers:</p>
-        <ul>
-            <li>Regression Analysis</li>
-            <li>Decision Tree Analysis</li>
-            <li>Factor & Cluster Analysis</li>
-        </ul>
-        <p>Each technique is explained with real-world analogies to help you understand the insights derived from the data.</p>
+        #<p>The PDF covers:</p>
+        #<ul>
+         #   <li>Regression Analysis</li>
+          #  <li>Decision Tree Analysis</li>
+           # <li>Factor & Cluster Analysis</li>
+        # </ul>
+        # <p>Each technique is explained with real-world analogies to help you understand the insights derived from the data.</p>
     </div>
     """, unsafe_allow_html=True)
 
