@@ -1,5 +1,6 @@
 # Add these imports at the top of your script, with the other imports
 import io
+import streamlit as st
 from reportlab.lib.pagesizes import letter
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -92,7 +93,8 @@ def create_advanced_analytics_pdf():
     buffer.close()
     
     return pdf_content
-    # COPIED TILL HERE
+    
+# COPIED TILL HERE
 
 import streamlit as st  # Import Streamlit first
 st.set_page_config(layout="wide", page_title="Cola Consumer Dashboard", page_icon="🥤")  # Then set the page configuration
@@ -1126,31 +1128,44 @@ elif section == "Cluster Analysis":
 
 # =======================
 # ADVANCED ANALYTICS EXPLAINED
-# =======================elif section == "Advanced Analytics Explained":
+# =======================
+    elif section == "Advanced Analytics Explained":
     st.markdown("<h2 class='subheader'>Advanced Analytics Explained</h2>", unsafe_allow_html=True)
     
-    # Create download button with the PDF content
-    st.download_button(
-        label="Download Advanced Analytics Explanation (PDF)",
-        data=create_advanced_analytics_pdf(),
-        file_name="advanced_analytics_explained.pdf",
-        mime="application/pdf",
-        help="Click to download the detailed explanation of advanced analytics techniques used in this dashboard"
-    )
+    # Debug print
+    print("Advanced Analytics Explained section selected")
     
-    # Add some additional context
-    st.markdown("""
-    <div class='explained-box'>
-        <div class='explained-title'>Advanced Analytics Overview</div>
-        <p>The attached PDF provides a comprehensive explanation of the advanced analytics techniques used in this Cola Consumer Dashboard:</p>
-        <ul>
-            <li>Regression Analysis</li>
-            <li>Decision Tree Analysis</li>
-            <li>Factor & Cluster Analysis</li>
-        </ul>
-        <p>Each technique is explained with real-world analogies to help you understand the insights derived from the data.</p>
-    </div>
-    """, unsafe_allow_html=True)
+    try:
+        # Attempt to generate PDF
+        pdf_content = create_advanced_analytics_pdf()
+        
+        # Create download button
+        st.download_button(
+            label="Download Advanced Analytics Explanation (PDF)",
+            data=pdf_content,
+            file_name="advanced_analytics_explained.pdf",
+            mime="application/pdf",
+            help="Click to download the detailed explanation of advanced analytics techniques used in this dashboard"
+        )
+        
+        # Additional context
+        st.markdown("""
+        <div class='explained-box'>
+            <div class='explained-title'>Advanced Analytics Overview</div>
+            <p>The attached PDF provides a comprehensive explanation of the advanced analytics techniques used in this Cola Consumer Dashboard:</p>
+            <ul>
+                <li>Regression Analysis</li>
+                <li>Decision Tree Analysis</li>
+                <li>Factor & Cluster Analysis</li>
+            </ul>
+            <p>Each technique is explained with real-world analogies to help you understand the insights derived from the data.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    except Exception as e:
+        # Error handling
+        st.error(f"An error occurred: {e}")
+        print(f"Error in Advanced Analytics Explained section: {e}")
 
 # =======================
 # VIEW & DOWNLOAD FULL DATASET
