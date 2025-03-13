@@ -1,156 +1,4 @@
-# Add these imports at the TOP of your script, before any other code
-import io
-try:
-    from reportlab.lib.pagesizes import letter
-    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
-    from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-    from reportlab.lib.enums import TA_JUSTIFY, TA_CENTER, TA_LEFT
-    from reportlab.lib.units import inch
-    from reportlab.lib.colors import darkblue, darkgreen, black
-    from reportlab.pdfbase import pdfmetrics
-    from reportlab.pdfbase.ttfonts import TTFont
-    REPORTLAB_IMPORTED = True
-except ImportError:
-    REPORTLAB_IMPORTED = False
-    print("ReportLab library is not installed. Please install it using 'pip install reportlab'")
-
-def create_advanced_analytics_pdf():
-    """Generate PDF explaining advanced analytics techniques"""
-    # Check if ReportLab is imported
-    if not REPORTLAB_IMPORTED:
-        raise ImportError("ReportLab library is required to generate the PDF. Please install it.")
-    
-    # Create a buffer to store the PDF
-    buffer = io.BytesIO()
-    
-    # Create the PDF document
-    doc = SimpleDocTemplate(buffer, pagesize=letter,
-                            rightMargin=72, leftMargin=72,
-                            topMargin=72, bottomMargin=18)
-    
-    # Create story (content to add to PDF)
-    story = []
-    
-    # Get styles
-    styles = getSampleStyleSheet()
-    
-    # Custom styles
-    title_style = styles['Title'].clone('Title')
-    title_style.fontSize = 18
-    title_style.textColor = darkblue
-    title_style.alignment = TA_CENTER
-    title_style.fontName = 'Helvetica-Bold'
-    
-    section_title_style = styles['Heading2'].clone('SectionTitle')
-    section_title_style.fontSize = 16
-    section_title_style.textColor = darkgreen
-    section_title_style.fontName = 'Helvetica-Bold'
-    
-    body_style = styles['Normal'].clone('BodyText')
-    body_style.fontSize = 11
-    body_style.alignment = TA_JUSTIFY
-    body_style.fontName = 'Helvetica'
-    body_style.textColor = black
-    
-    # Title
-    story.append(Paragraph("ADVANCED ANALYTICS EXPLAINED", title_style))
-    story.append(Spacer(1, 12))
-    
-    # Full content sections
-    full_content = [
-        {
-            'section': "1. Regression Analysis: Predicting Outcomes Based on Factors",
-            'paragraphs': [
-                "Regression analysis helps us understand how different factors (e.g., taste, price, fizziness) influence the Net Promoter Score (NPS). The analysis determines which attributes are significant drivers of customer satisfaction and brand loyalty.",
-                "We performed an <b>Ordinary Least Squares (OLS) regression analysis</b> to examine how <b>cola attribute ratings</b> (Taste, Price, Packaging, Brand Reputation, Availability, Sweetness, and Fizziness) impact the <b>Net Promoter Score (NPS)</b>.",
-                "<b>[Example: Coffee Shop Sales]</b>",
-                "Imagine you own a <b>coffee shop</b> and want to know what <b>affects your daily sales</b>. You suspect that sales depend on factors like:",
-                "<b>Weather</b> (Hot or Cold)",
-                "<b>Price of Coffee</b> (Higher prices might reduce sales)",
-                "<b>Advertising Spend</b> (More ads might increase sales)",
-                "If you collect data for a month and run <b>Regression Analysis</b>, it will tell you:",
-                "1. How much <b>each factor</b> (weather, price, ads) influences sales",
-                "2. If <b>raising prices decreases sales</b> significantly",
-                "3. Whether <b>advertising is actually helping or not</b>",
-                "<b>In the Cola Market Study:</b>",
-                "We used <b>Regression Analysis</b> to see which factors (e.g., <b>taste, price, fizziness</b>) affect <b>customer loyalty (Net Promoter Score - NPS)</b>."
-            ]
-        },
-        {
-            'section': "2. Decision Tree Analysis: Making Decisions Like a Flowchart",
-            'paragraphs': [
-                "A decision tree is a visual model that helps us determine how different variables influence customer loyalty. It works by splitting the data into branches based on key decision points, showing the most influential factors in predicting whether a consumer is a promoter or a detractor.",
-                "<b>[Example: Choosing a Movie to Watch]</b>",
-                "Let's say you're trying to <b>decide which movie to watch</b>. You might ask yourself:",
-                "1. <b>Do I want an action movie?</b> → If YES, then <b>choose John Wick</b>",
-                "2. <b>If NO, do I want a comedy?</b> → If YES, then <b>choose The Hangover</b>",
-                "3. <b>If NO, do I want a drama?</b> → If YES, then <b>choose The Shawshank Redemption</b>",
-                "4. <b>If NO, then I won't watch a movie!</b>",
-                "A <b>Decision Tree</b> does the same thing but with <b>data-driven logic</b>.",
-                "<b>In the Cola Market Study:</b>",
-                "The <b>Decision Tree</b> showed that <b>Fizziness and Taste</b> were the <b>biggest factors</b> in whether a customer is a <b>promoter</b> or <b>detractor</b> of a cola brand."
-            ]
-        },
-        {
-            'section': "3. Factor & Cluster Analysis: Grouping Similar Things Together",
-            'paragraphs': [
-                "<b>Factor analysis</b> is used to reduce a large number of attributes into a smaller set of underlying factors that explain consumer preferences. This helps us identify key themes such as Taste & Fizziness, Brand Reputation, and Pricing Sensitivity.",
-                "We conducted <b>Factor Analysis</b> to extract key consumer preference dimensions and <b>K-Means Clustering</b> to identify distinct customer segments.",
-                "<b>[Factor Analysis Example: Organizing Your Closet]</b>",
-                "Imagine your closet is messy, and you decide to <b>organize it into categories</b>:",
-                "<b>Work Clothes</b> (Shirts, Trousers, Formal Shoes)",
-                "<b>Casual Clothes</b> (T-Shirts, Jeans, Sneakers)",
-                "<b>Gym Clothes</b> (Sportswear, Running Shoes)",
-                "You <b>group</b> your clothes based on their <b>purpose</b> rather than sorting each item individually.",
-                "<b>Factor Analysis (Finding Underlying Factors)</b>",
-                "Now, let's say you notice that <b>Work Clothes and Casual Clothes</b> have a common theme:",
-                "<b>\"Style Factor\"</b> (Formal vs. Casual)",
-                "<b>\"Comfort Factor\"</b> (Sneakers vs. Dress Shoes)",
-                "Factor Analysis does this with <b>customer preferences</b> by identifying <b>hidden relationships</b> between choices.",
-                "<b>Cluster Analysis (Grouping People Based on Similarity)</b>",
-                "<b>Cluster analysis</b> groups consumers into meaningful segments based on similar behaviour patterns. By identifying these clusters, brands can tailor their marketing strategies and product offerings to specific target audiences.",
-                "Once the clothes are categorized, imagine <b>grouping people</b> based on what they wear most:",
-                "<b>Professionals</b> → Mostly Work Clothes",
-                "<b>Gamers</b> → Mostly Casual Clothes",
-                "<b>Athletes</b> → Mostly Gym Clothes",
-                "Cluster Analysis does the same thing with <b>customer data</b>, grouping similar consumers together.",
-                "<b>In the Cola Market Study:</b>",
-                "We identified <b>three customer groups</b>:",
-                "<b>Fizz-Lovers</b> → People who prefer high carbonation",
-                "<b>Brand-Conscious Consumers</b> → People who choose based on branding",
-                "<b>Budget-Friendly Drinkers</b> → People who prefer low-cost options"
-            ]
-        },
-        {
-            'section': "Final Takeaway",
-            'paragraphs': [
-                "<b>Regression Analysis</b> helps us understand <b>cause & effect</b> (e.g., what affects sales). <b>Decision Trees</b> help us <b>visually map out decision-making processes</b>.",
-                "<b>Factor & Cluster Analysis</b> help us <b>group related behaviors & consumers</b>."
-            ]
-        }
-    ]
-    
-    # Add content to the story
-    for section in full_content:
-        story.append(Paragraph(section['section'], section_title_style))
-        story.append(Spacer(1, 6))
-        
-        for paragraph in section['paragraphs']:
-            story.append(Paragraph(paragraph, body_style))
-        
-        story.append(Spacer(1, 12))
-    
-    # Build PDF
-    doc.build(story)
-    
-    # Get the value of the BytesIO buffer and write it to a variable
-    pdf_content = buffer.getvalue()
-    buffer.close()
-    
-    return pdf_content
-    
-# COPIED TILL HERE
-
+# Add these imports at the TOP of your script, before any other code   
 import streamlit as st  # Import Streamlit first
 st.set_page_config(layout="wide", page_title="Cola Consumer Dashboard", page_icon="🥤")  # Then set the page configuration
 
@@ -308,6 +156,12 @@ section = st.radio("Select Analysis Section", [
 st.markdown("<div class='filter-box'>", unsafe_allow_html=True)
 st.subheader("Dashboard Filters")
 
+##############################
+# Ensure session state for filters exists and is properly initialized
+if 'filters' not in st.session_state:
+    st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
+
+################################
 # Create a 4-column layout for filters
 # Create a 4-column layout for filters
 filter_col1, filter_col2, filter_col3, filter_col4 = st.columns(4)
@@ -315,61 +169,77 @@ filter_col1, filter_col2, filter_col3, filter_col4 = st.columns(4)
 with filter_col1:
     # Create filter options with None as first option
     brand_options = [None] + sorted(df["Brand_Preference"].unique().tolist())
-    brand = st.selectbox("Select a Brand", 
-                         options=brand_options, 
-                         index=0)
+    selected_brand = st.selectbox(
+        "Select a Brand", 
+        options=brand_options, 
+        index=brand_options.index(st.session_state.filters['brand']) if st.session_state.filters['brand'] in brand_options else 0
+    )
 
 with filter_col2:
     gender_options = [None] + sorted(df["Gender"].unique().tolist())
-    gender = st.selectbox("Select Gender", 
-                          options=gender_options, 
-                          index=0)
+    selected_gender = st.selectbox(
+        "Select Gender", 
+        options=gender_options, 
+        index=gender_options.index(st.session_state.filters['gender']) if st.session_state.filters['gender'] in gender_options else 0
+    )
 
 with filter_col3:
     income_options = [None] + sorted(df["Income_Level"].unique().tolist())
-    income = st.selectbox("Select Income Level", 
-                          options=income_options, 
-                          index=0)
+    selected_income = st.selectbox(
+        "Select Income Level", 
+        options=income_options, 
+        index=income_options.index(st.session_state.filters['income']) if st.session_state.filters['income'] in income_options else 0
+    )
 
 with filter_col4:
     cluster_options = [None] + sorted(df["Cluster_Name"].unique().tolist())
-    cluster = st.selectbox("Select Cluster", 
-                           options=cluster_options, 
-                           index=0)
+    selected_cluster = st.selectbox(
+        "Select Cluster", 
+        options=cluster_options, 
+        index=cluster_options.index(st.session_state.filters['cluster']) if st.session_state.filters['cluster'] in cluster_options else 0
+    )
 
 # Filter action buttons in two columns
 fcol1, fcol2 = st.columns(2)
 
 with fcol1:
-    apply_button = st.button("Apply Filters")
-    if apply_button:
+    if st.button("Apply Filters"):
         # Update filters in session state
         st.session_state.filters = {
-            'brand': brand, 
-            'gender': gender, 
-            'income': income, 
-            'cluster': cluster
+            'brand': selected_brand, 
+            'gender': selected_gender, 
+            'income': selected_income, 
+            'cluster': selected_cluster
         }
         st.experimental_rerun()
 
 with fcol2:
-    clear_button = st.button("Clear Filters")
-    if clear_button:
-        # Reset all filters to None in session state
-        st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
+    if st.button("Clear Filters"):
+        # Reset all filters to None
+        st.session_state.filters = {
+            'brand': None, 
+            'gender': None, 
+            'income': None, 
+            'cluster': None
+        }
         st.experimental_rerun()
+
+st.markdown("</div>", unsafe_allow_html=True)
 
 # Apply selected filters to the dataframe
 filtered_df = df.copy()
-for key, value in st.session_state.filters.items():
-    if value is not None:
-        column_map = {
-            'brand': 'Brand_Preference',
-            'gender': 'Gender',
-            'income': 'Income_Level',
-            'cluster': 'Cluster_Name'
-        }
-        filtered_df = filtered_df[filtered_df[column_map[key]] == value]
+filter_columns = {
+    'brand': 'Brand_Preference',
+    'gender': 'Gender',
+    'income': 'Income_Level',
+    'cluster': 'Cluster_Name'
+}
+
+# Apply filters dynamically
+for filter_key, column in filter_columns.items():
+    filter_value = st.session_state.filters.get(filter_key)
+    if filter_value is not None:
+        filtered_df = filtered_df[filtered_df[column] == filter_value]
 
 # Show active filters
 active_filters = [f"{k}: {v}" for k, v in st.session_state.filters.items() if v is not None]
