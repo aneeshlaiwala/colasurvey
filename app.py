@@ -172,6 +172,12 @@ from io import BytesIO
 from factor_analyzer import FactorAnalyzer
 import plotly.figure_factory as ff
 
+#ADDED THE FILTER DEFINATION HERE
+# Ensure session state for filters exists
+if 'filters' not in st.session_state:
+    st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
+#UNTIL HERE
+
 # Set page styling
 st.markdown("""
 <style>
@@ -310,38 +316,41 @@ st.subheader("Dashboard Filters")
 
 # Modify the filter section in the script FILER COPIED FROM HERE
 # Initialize session state for filters if not exists
-if 'filters' not in st.session_state:
-    st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
-
 # Create a 4-column layout for filters
 filter_col1, filter_col2, filter_col3, filter_col4 = st.columns(4)
 
 with filter_col1:
     # Create filter options with None as first option
     brand_options = [None] + sorted(df["Brand_Preference"].unique().tolist())
-    brand = st.selectbox("Select a Brand", brand_options, 
-                         index=0 if st.session_state.filters['brand'] is None else brand_options.index(st.session_state.filters['brand']))
+    brand = st.selectbox("Select a Brand", 
+                         options=brand_options, 
+                         index=brand_options.index(st.session_state.filters['brand']) if st.session_state.filters['brand'] in brand_options else 0)
 
 with filter_col2:
     gender_options = [None] + sorted(df["Gender"].unique().tolist())
-    gender = st.selectbox("Select Gender", gender_options, 
-                          index=0 if st.session_state.filters['gender'] is None else gender_options.index(st.session_state.filters['gender']))
+    gender = st.selectbox("Select Gender", 
+                          options=gender_options, 
+                          index=gender_options.index(st.session_state.filters['gender']) if st.session_state.filters['gender'] in gender_options else 0)
 
 with filter_col3:
     income_options = [None] + sorted(df["Income_Level"].unique().tolist())
-    income = st.selectbox("Select Income Level", income_options, 
-                          index=0 if st.session_state.filters['income'] is None else income_options.index(st.session_state.filters['income']))
+    income = st.selectbox("Select Income Level", 
+                          options=income_options, 
+                          index=income_options.index(st.session_state.filters['income']) if st.session_state.filters['income'] in income_options else 0)
 
 with filter_col4:
     cluster_options = [None] + sorted(df["Cluster_Name"].unique().tolist())
-    cluster = st.selectbox("Select Cluster", cluster_options, 
-                           index=0 if st.session_state.filters['cluster'] is None else cluster_options.index(st.session_state.filters['cluster']))
+    cluster = st.selectbox("Select Cluster", 
+                           options=cluster_options, 
+                           index=cluster_options.index(st.session_state.filters['cluster']) if st.session_state.filters['cluster'] in cluster_options else 0)
 
 # Filter action buttons in two columns
 fcol1, fcol2 = st.columns(2)
 
 with fcol1:
-    if st.button("Apply Filters"):
+    apply_filters = st.button("Apply Filters")
+    if apply_filters:
+        # Update filters in session state
         st.session_state.filters['brand'] = brand
         st.session_state.filters['gender'] = gender
         st.session_state.filters['income'] = income
@@ -349,18 +358,17 @@ with fcol1:
         st.experimental_rerun()
 
 with fcol2:
-    if st.button("Clear Filters"):
-        # Safely reset filters
-        for key in ['brand', 'gender', 'income', 'cluster']:
+    clear_filters = st.button("Clear Filters")
+    if clear_filters:
+        # Reset all filters to None
+        for key in st.session_state.filters:
             st.session_state.filters[key] = None
-
-        # Force Streamlit to rerun without manual key manipulation
         st.experimental_rerun()
 
 # Show active filters
 active_filters = [f"{k}: {v}" for k, v in st.session_state.filters.items() if v is not None]
 if active_filters:
-    st.info(f"Active filters: {', '.join(active_filters)} (Total records: {len(filtered_df)})")
+    st.info(f"Active filters: {', '.join(active_filters)}")
 
 # Apply selected filters to the dataframe
 filtered_df = df.copy()
@@ -372,7 +380,10 @@ if st.session_state.filters['income']:
     filtered_df = filtered_df[filtered_df["Income_Level"] == st.session_state.filters['income']]
 if st.session_state.filters['cluster']:
     filtered_df = filtered_df[filtered_df["Cluster_Name"] == st.session_state.filters['cluster']]
-    
+
+# Optional: Add total records information
+if active_filters:
+    st.info(f"Total records after filtering: {len(filtered_df)}")    
 # filter till here replaced
 
 st.markdown("</div>", unsafe_allow_html=True)
