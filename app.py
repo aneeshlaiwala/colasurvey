@@ -1034,11 +1034,12 @@ elif section == "Cluster Analysis":
 elif section == "Advanced Analytics Explained":
     st.markdown("<h2 class='subheader'>Advanced Analytics Explained</h2>", unsafe_allow_html=True)
     
+    # Use HTML directly to create a more controlled layout
     st.markdown("""
     <div class="explained-box">
-        <div class="explained-title">ADVANCED ANALYTICS EXPLAINED</div>
+        <h1 style="color: #4CAF50; text-align: center; font-size: 1.8rem; margin-bottom: 1.5rem;">ADVANCED ANALYTICS EXPLAINED</h1>
         
-        <div class="explained-subtitle">1. Regression Analysis: Predicting Outcomes Based on Factors</div>
+        <h2 style="color: #2E7D32; font-size: 1.4rem; margin-top: 1.5rem; margin-bottom: 1rem;">1. Regression Analysis: Predicting Outcomes Based on Factors</h2>
         
         <p>Regression analysis helps us understand how different factors (e.g.,
         taste, price, fizziness) influence the Net Promoter Score (NPS). The
@@ -1050,18 +1051,18 @@ elif section == "Advanced Analytics Explained":
         Reputation, Availability, Sweetness, and Fizziness) impact the <strong>Net
         Promoter Score (NPS)</strong>.</p>
         
-        <div class="example-box">
-            <p class="example-title">Example: Coffee Shop Sales</p>
+        <div style="background-color: #e8f5e9; padding: 1.2rem; margin: 1rem 0; border-radius: 0.5rem;">
+            <p style="font-weight: bold; color: #2E7D32; font-style: italic; margin-bottom: 0.5rem;">Example: Coffee Shop Sales</p>
             
             <p>Imagine you own a <strong>coffee shop</strong> and want to know what <strong>affects your
-            daily sales</strong>. You suspect that sales depend on factors like:<br>
-            ☀️ <strong>Weather</strong> (Hot or Cold)<br>
+            daily sales</strong>. You suspect that sales depend on factors like:</p>
+            <p>☀️ <strong>Weather</strong> (Hot or Cold)<br>
             💰 <strong>Price of Coffee</strong> (Higher prices might reduce sales)<br>
             📢 <strong>Advertising Spend</strong> (More ads might increase sales)</p>
             
             <p>If you collect data for a month and run <strong>Regression Analysis</strong>, it will
-            tell you:<br>
-            ✅ How much <strong>each factor</strong> (weather, price, ads) influences sales<br>
+            tell you:</p>
+            <p>✅ How much <strong>each factor</strong> (weather, price, ads) influences sales<br>
             ✅ If <strong>raising prices decreases sales</strong> significantly<br>
             ✅ Whether <strong>advertising is actually helping or not</strong></p>
             
@@ -1071,15 +1072,15 @@ elif section == "Advanced Analytics Explained":
             NPS)</strong>.</p>
         </div>
         
-        <div class="explained-subtitle">2. Decision Tree Analysis: Making Decisions Like a Flowchart</div>
+        <h2 style="color: #2E7D32; font-size: 1.4rem; margin-top: 1.5rem; margin-bottom: 1rem;">2. Decision Tree Analysis: Making Decisions Like a Flowchart</h2>
         
         <p>A decision tree is a visual model that helps us determine how different
         variables influence customer loyalty. It works by splitting the data
         into branches based on key decision points, showing the most influential
         factors in predicting whether a consumer is a promoter or a detractor.</p>
         
-        <div class="example-box">
-            <p class="example-title">Example: Choosing a Movie to Watch</p>
+        <div style="background-color: #e8f5e9; padding: 1.2rem; margin: 1rem 0; border-radius: 0.5rem;">
+            <p style="font-weight: bold; color: #2E7D32; font-style: italic; margin-bottom: 0.5rem;">Example: Choosing a Movie to Watch</p>
             
             <p>Let's say you're trying to <strong>decide which movie to watch</strong>. You might
             ask yourself:</p>
@@ -1099,7 +1100,7 @@ elif section == "Advanced Analytics Explained":
             <strong>detractor</strong> of a cola brand.</p>
         </div>
         
-        <div class="explained-subtitle">3. Factor & Cluster Analysis: Grouping Similar Things Together</div>
+        <h2 style="color: #2E7D32; font-size: 1.4rem; margin-top: 1.5rem; margin-bottom: 1rem;">3. Factor & Cluster Analysis: Grouping Similar Things Together</h2>
         
         <p><strong>Factor analysis</strong> is used to reduce a large number of attributes into
         a smaller set of underlying factors that explain consumer preferences.
@@ -1110,12 +1111,12 @@ elif section == "Advanced Analytics Explained":
         dimensions and <strong>K-Means Clustering</strong> to identify distinct customer
         segments.</p>
         
-        <div class="example-box">
-            <p class="example-title">Factor Analysis Example: Organizing Your Closet</p>
+        <div style="background-color: #e8f5e9; padding: 1.2rem; margin: 1rem 0; border-radius: 0.5rem;">
+            <p style="font-weight: bold; color: #2E7D32; font-style: italic; margin-bottom: 0.5rem;">Factor Analysis Example: Organizing Your Closet</p>
             
             <p>Imagine your closet is messy, and you decide to <strong>organize it into
-            categories</strong>:<br>
-            👔 <strong>Work Clothes</strong> (Shirts, Trousers, Formal Shoes)<br>
+            categories</strong>:</p>
+            <p>👔 <strong>Work Clothes</strong> (Shirts, Trousers, Formal Shoes)<br>
             👕 <strong>Casual Clothes</strong> (T-Shirts, Jeans, Sneakers)<br>
             🎽 <strong>Gym Clothes</strong> (Sportswear, Running Shoes)</p>
             
@@ -1125,8 +1126,8 @@ elif section == "Advanced Analytics Explained":
             <p><strong>Factor Analysis (Finding Underlying Factors)</strong></p>
             
             <p>Now, let's say you notice that <strong>Work Clothes and Casual Clothes</strong> have
-            a common theme:<br>
-            👕👔 → <strong>"Style Factor"</strong> (Formal vs. Casual)<br>
+            a common theme:</p>
+            <p>👕👔 → <strong>"Style Factor"</strong> (Formal vs. Casual)<br>
             👟🥾 → <strong>"Comfort Factor"</strong> (Sneakers vs. Dress Shoes)</p>
             
             <p>Factor Analysis does this with <strong>customer preferences</strong> by identifying
@@ -1140,8 +1141,8 @@ elif section == "Advanced Analytics Explained":
             target audiences.</p>
             
             <p>Once the clothes are categorized, imagine <strong>grouping people</strong> based on
-            what they wear most:<br>
-            🧑‍💼 <strong>Professionals</strong> → Mostly Work Clothes<br>
+            what they wear most:</p>
+            <p>🧑‍💼 <strong>Professionals</strong> → Mostly Work Clothes<br>
             🎮 <strong>Gamers</strong> → Mostly Casual Clothes<br>
             🏃 <strong>Athletes</strong> → Mostly Gym Clothes</p>
             
@@ -1149,13 +1150,13 @@ elif section == "Advanced Analytics Explained":
             similar consumers together.</p>
             
             <p><strong>In the Cola Market Study:</strong><br>
-            We identified <strong>three customer groups</strong>:<br>
-            🥤 <strong>Fizz-Lovers</strong> → People who prefer high carbonation<br>
+            We identified <strong>three customer groups</strong>:</p>
+            <p>🥤 <strong>Fizz-Lovers</strong> → People who prefer high carbonation<br>
             🏷️ <strong>Brand-Conscious Consumers</strong> → People who choose based on branding<br>
             💰 <strong>Budget-Friendly Drinkers</strong> → People who prefer low-cost options</p>
         </div>
         
-        <div class="explained-subtitle">Final Takeaway</div>
+        <h2 style="color: #2E7D32; font-size: 1.4rem; margin-top: 1.5rem; margin-bottom: 1rem;">Final Takeaway</h2>
         
         <p>
         📊 <strong>Regression Analysis</strong> helps us understand <strong>cause & effect</strong> (e.g., what affects sales).<br>
