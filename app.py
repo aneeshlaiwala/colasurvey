@@ -216,6 +216,10 @@ with fcol1:
 with fcol2:
     if st.button("Clear Filters"):
         # Reset all filters to None
+        st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
+        st.experimental_rerun()
+
+        # Reset all filters to None
         st.session_state.filters = {
             'brand': None, 
             'gender': None, 
@@ -1069,6 +1073,23 @@ elif section == "Cluster Analysis":
 # Then replace the existing elif block for Advanced Analytics Explained with this:
 # Remember to indent this correctly within your existing code structure
 elif section == "Advanced Analytics Explained":
+    st.markdown("<h2 class='subheader'>Advanced Analytics Explained</h2>", unsafe_allow_html=True)
+
+    # Provide a download button for the PDF file
+    pdf_path = "/mnt/data/Advanced Statistics explained.pdf"
+
+    with open(pdf_path, "rb") as pdf_file:
+        pdf_bytes = pdf_file.read()
+
+    st.download_button(
+        label="📥 Download Advanced Analytics Explained (PDF)",
+        data=pdf_bytes,
+        file_name="Advanced_Analytics_Explained.pdf",
+        mime="application/pdf"
+    )
+
+    st.info("Click the button above to download the document and read the full details.")
+
     st.markdown("<h2 class='subheader'>Advanced Analytics Explained</h2>", unsafe_allow_html=True)
     
     # Create download button with external PDF link
