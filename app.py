@@ -317,6 +317,8 @@ st.subheader("Dashboard Filters")
 # Modify the filter section in the script FILER COPIED FROM HERE
 # Initialize session state for filters if not exists
 # Create a 4-column layout for filters
+
+# Create a 4-column layout for filters
 filter_col1, filter_col2, filter_col3, filter_col4 = st.columns(4)
 
 with filter_col1:
@@ -324,69 +326,58 @@ with filter_col1:
     brand_options = [None] + sorted(df["Brand_Preference"].unique().tolist())
     brand = st.selectbox("Select a Brand", 
                          options=brand_options, 
-                         index=brand_options.index(st.session_state.filters['brand']) if st.session_state.filters['brand'] in brand_options else 0)
+                         index=brand_options.index(st.session_state.filters['brand']) if st.session_state.filters['brand'] in brand_options else 0,
+                         key='brand_filter')
 
 with filter_col2:
     gender_options = [None] + sorted(df["Gender"].unique().tolist())
     gender = st.selectbox("Select Gender", 
                           options=gender_options, 
-                          index=gender_options.index(st.session_state.filters['gender']) if st.session_state.filters['gender'] in gender_options else 0)
+                          index=gender_options.index(st.session_state.filters['gender']) if st.session_state.filters['gender'] in gender_options else 0,
+                          key='gender_filter')
 
 with filter_col3:
     income_options = [None] + sorted(df["Income_Level"].unique().tolist())
     income = st.selectbox("Select Income Level", 
                           options=income_options, 
-                          index=income_options.index(st.session_state.filters['income']) if st.session_state.filters['income'] in income_options else 0)
+                          index=income_options.index(st.session_state.filters['income']) if st.session_state.filters['income'] in income_options else 0,
+                          key='income_filter')
 
 with filter_col4:
     cluster_options = [None] + sorted(df["Cluster_Name"].unique().tolist())
     cluster = st.selectbox("Select Cluster", 
                            options=cluster_options, 
-                           index=cluster_options.index(st.session_state.filters['cluster']) if st.session_state.filters['cluster'] in cluster_options else 0)
+                           index=cluster_options.index(st.session_state.filters['cluster']) if st.session_state.filters['cluster'] in cluster_options else 0,
+                           key='cluster_filter')
 
 # Filter action buttons in two columns
 fcol1, fcol2 = st.columns(2)
 
 with fcol1:
-    apply_filters = st.button("Apply Filters")
-    if apply_filters:
+    apply_button = st.button("Apply Filters", key='apply_filters_btn')
+    if apply_button:
         # Update filters in session state
         st.session_state.filters['brand'] = brand
         st.session_state.filters['gender'] = gender
         st.session_state.filters['income'] = income
         st.session_state.filters['cluster'] = cluster
+        # Use a safer rerun method
         st.experimental_rerun()
 
 with fcol2:
-    clear_filters = st.button("Clear Filters")
-    if clear_filters:
+    clear_button = st.button("Clear Filters", key='clear_filters_btn')
+    if clear_button:
         # Reset all filters to None
-        for key in st.session_state.filters:
-            st.session_state.filters[key] = None
+        st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
+        
+        # Reset selectbox keys to force update
+        keys_to_reset = ['brand_filter', 'gender_filter', 'income_filter', 'cluster_filter']
+        for key in keys_to_reset:
+            if key in st.session_state:
+                del st.session_state[key]
+        
+        # Use a safer rerun method
         st.experimental_rerun()
-
-# Show active filters
-active_filters = [f"{k}: {v}" for k, v in st.session_state.filters.items() if v is not None]
-if active_filters:
-    st.info(f"Active filters: {', '.join(active_filters)}")
-
-# Apply selected filters to the dataframe
-filtered_df = df.copy()
-if st.session_state.filters['brand']:
-    filtered_df = filtered_df[filtered_df["Brand_Preference"] == st.session_state.filters['brand']]
-if st.session_state.filters['gender']:
-    filtered_df = filtered_df[filtered_df["Gender"] == st.session_state.filters['gender']]
-if st.session_state.filters['income']:
-    filtered_df = filtered_df[filtered_df["Income_Level"] == st.session_state.filters['income']]
-if st.session_state.filters['cluster']:
-    filtered_df = filtered_df[filtered_df["Cluster_Name"] == st.session_state.filters['cluster']]
-
-# Optional: Add total records information
-if active_filters:
-    st.info(f"Total records after filtering: {len(filtered_df)}")    
-# filter till here replaced
-
-st.markdown("</div>", unsafe_allow_html=True)
 
 # Apply selected filters to the dataframe
 filtered_df = df.copy()
@@ -403,6 +394,8 @@ if st.session_state.filters['cluster']:
 active_filters = [f"{k}: {v}" for k, v in st.session_state.filters.items() if v is not None]
 if active_filters:
     st.info(f"Active filters: {', '.join(active_filters)} (Total records: {len(filtered_df)})")
+
+#FILTERS UNTIL HERE
 
 # =======================
 # EXECUTIVE DASHBOARD SUMMARY
