@@ -215,8 +215,10 @@ with fcol1:
 
 with fcol2:
     if st.button("Clear Filters"):
-        # Reset all filters to None
+        # Reset all filters to None in session state
         st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
+        
+        # Trigger a UI refresh
         st.experimental_rerun()
 
         # Reset all filters to None
@@ -1078,17 +1080,21 @@ elif section == "Advanced Analytics Explained":
     # Provide a download button for the PDF file
     pdf_path = "/mnt/data/Advanced Statistics explained.pdf"
 
-    with open(pdf_path, "rb") as pdf_file:
-        pdf_bytes = pdf_file.read()
+    try:
+        with open(pdf_path, "rb") as pdf_file:
+            pdf_bytes = pdf_file.read()
 
-    st.download_button(
-        label="📥 Download Advanced Analytics Explained (PDF)",
-        data=pdf_bytes,
-        file_name="Advanced_Analytics_Explained.pdf",
-        mime="application/pdf"
-    )
+        st.download_button(
+            label="📥 Download Advanced Analytics Explained (PDF)",
+            data=pdf_bytes,
+            file_name="Advanced_Analytics_Explained.pdf",
+            mime="application/pdf"
+        )
 
-    st.info("Click the button above to download the document and read the full details.")
+        st.info("Click the button above to download the document and read the full details.")
+
+    except FileNotFoundError:
+        st.error("The PDF file could not be found. Please ensure it is correctly uploaded.")    
 
     st.markdown("<h2 class='subheader'>Advanced Analytics Explained</h2>", unsafe_allow_html=True)
     
