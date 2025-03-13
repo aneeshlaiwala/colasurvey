@@ -6,7 +6,9 @@ try:
     from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
     from reportlab.lib.enums import TA_JUSTIFY, TA_CENTER, TA_LEFT
     from reportlab.lib.units import inch
-    from reportlab.lib.colors import darkblue, darkgreen
+    from reportlab.lib.colors import darkblue, darkgreen, black
+    from reportlab.pdfbase import pdfmetrics
+    from reportlab.pdfbase.ttfonts import TTFont
     REPORTLAB_IMPORTED = True
 except ImportError:
     REPORTLAB_IMPORTED = False
@@ -17,6 +19,9 @@ def create_advanced_analytics_pdf():
     # Check if ReportLab is imported
     if not REPORTLAB_IMPORTED:
         raise ImportError("ReportLab library is required to generate the PDF. Please install it.")
+    
+    # Register a better font
+    pdfmetrics.registerFont(TTFont('Arial', 'Arial.ttf'))
     
     # Create a buffer to store the PDF
     buffer = io.BytesIO()
@@ -32,25 +37,32 @@ def create_advanced_analytics_pdf():
     # Get styles
     styles = getSampleStyleSheet()
     
-    # Custom styles
+    # Custom styles with improved typography
     title_style = styles['Title'].clone('Title')
-    title_style.fontSize = 18
+    title_style.fontSize = 20
     title_style.textColor = darkblue
     title_style.alignment = TA_CENTER
+    title_style.fontName = 'Arial'
     
     section_title_style = styles['Heading2'].clone('SectionTitle')
     section_title_style.fontSize = 16
     section_title_style.textColor = darkgreen
+    section_title_style.fontName = 'Arial'
     
     body_style = styles['Normal'].clone('BodyText')
-    body_style.fontSize = 10
+    body_style.fontSize = 11
     body_style.alignment = TA_JUSTIFY
+    body_style.fontName = 'Arial'
+    body_style.textColor = black
+    
+    example_style = body_style.clone('ExampleText')
+    example_style.fontSize = 11
     
     # Title
     story.append(Paragraph("ADVANCED ANALYTICS EXPLAINED", title_style))
     story.append(Spacer(1, 12))
     
-    # Sections
+    # Sections with detailed content from the Word document
     sections = [
         {
             'title': "1. Regression Analysis: Predicting Outcomes Based on Factors",
@@ -68,9 +80,9 @@ def create_advanced_analytics_pdf():
                     "• Advertising Spend (More ads might increase sales)",
                     "",
                     "If you collect data for a month and run Regression Analysis, it will tell you:",
-                    "• How much each factor (weather, price, ads) influences sales",
-                    "• If raising prices decreases sales significantly",
-                    "• Whether advertising is actually helping or not",
+                    "1. How much each factor (weather, price, ads) influences sales",
+                    "2. If raising prices decreases sales significantly",
+                    "3. Whether advertising is actually helping or not",
                     "",
                     "In the Cola Market Study:",
                     "We used Regression Analysis to see which factors (e.g., taste, price, fizziness) affect customer loyalty (Net Promoter Score - NPS)."
@@ -123,8 +135,22 @@ def create_advanced_analytics_pdf():
                     "",
                     "Factor Analysis does this with customer preferences by identifying hidden relationships between choices.",
                     "",
-                    "",  # Extra blank line
-                    "Cluster Analysis (Grouping People Based on Similarity)"
+                    "Cluster Analysis (Grouping People Based on Similarity)",
+                    "",
+                    "Cluster analysis groups consumers into meaningful segments based on similar behaviour patterns. By identifying these clusters, brands can tailor their marketing strategies and product offerings to specific target audiences.",
+                    "",
+                    "Once the clothes are categorized, imagine grouping people based on what they wear most:",
+                    "• Professionals → Mostly Work Clothes",
+                    "• Gamers → Mostly Casual Clothes",
+                    "• Athletes → Mostly Gym Clothes",
+                    "",
+                    "Cluster Analysis does the same thing with customer data, grouping similar consumers together.",
+                    "",
+                    "In the Cola Market Study:",
+                    "We identified three customer groups:",
+                    "• Fizz-Lovers → People who prefer high carbonation",
+                    "• Brand-Conscious Consumers → People who choose based on branding",
+                    "• Budget-Friendly Drinkers → People who prefer low-cost options"
                 ]
             }
         }
@@ -145,18 +171,13 @@ def create_advanced_analytics_pdf():
         story.append(Paragraph(section['example']['title'], section_title_style))
         
         for paragraph in section['example']['content']:
-            # Special handling for Cluster Analysis header
-            if paragraph == "Cluster Analysis (Grouping People Based on Similarity)":
-                story.append(Spacer(1, 12))
-                story.append(Paragraph(paragraph, section_title_style))
-                story.append(Spacer(1, 6))
-            else:
-                story.append(Paragraph(paragraph, body_style))
+            story.append(Paragraph(paragraph, example_style))
         
         story.append(Spacer(1, 12))
     
     # Final Takeaway
     story.append(Paragraph("Final Takeaway", section_title_style))
+    story.append(Spacer(1, 6))
     takeaways = [
         "• Regression Analysis helps us understand cause & effect (e.g., what affects sales).",
         "• Decision Trees help us visually map out decision-making processes.",
