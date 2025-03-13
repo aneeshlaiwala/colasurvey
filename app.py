@@ -308,25 +308,34 @@ section = st.radio("Select Analysis Section", [
 st.markdown("<div class='filter-box'>", unsafe_allow_html=True)
 st.subheader("Dashboard Filters")
 
+# Modify the filter section in the script
 # Create a 4-column layout for filters
 filter_col1, filter_col2, filter_col3, filter_col4 = st.columns(4)
 
 with filter_col1:
     # Create filter options with None as first option
     brand_options = [None] + sorted(df["Brand_Preference"].unique().tolist())
-    brand = st.selectbox("Select a Brand", brand_options, key='brand_main')
+    brand = st.selectbox("Select a Brand", brand_options, 
+                         index=0 if st.session_state.filters['brand'] is None else brand_options.index(st.session_state.filters['brand']), 
+                         key='brand_main')
 
 with filter_col2:
     gender_options = [None] + sorted(df["Gender"].unique().tolist())
-    gender = st.selectbox("Select Gender", gender_options, key='gender_main')
+    gender = st.selectbox("Select Gender", gender_options, 
+                          index=0 if st.session_state.filters['gender'] is None else gender_options.index(st.session_state.filters['gender']), 
+                          key='gender_main')
 
 with filter_col3:
     income_options = [None] + sorted(df["Income_Level"].unique().tolist())
-    income = st.selectbox("Select Income Level", income_options, key='income_main')
+    income = st.selectbox("Select Income Level", income_options, 
+                          index=0 if st.session_state.filters['income'] is None else income_options.index(st.session_state.filters['income']), 
+                          key='income_main')
 
 with filter_col4:
     cluster_options = [None] + sorted(df["Cluster_Name"].unique().tolist())
-    cluster = st.selectbox("Select Cluster", cluster_options, key='cluster_main')
+    cluster = st.selectbox("Select Cluster", cluster_options, 
+                           index=0 if st.session_state.filters['cluster'] is None else cluster_options.index(st.session_state.filters['cluster']), 
+                           key='cluster_main')
 
 # Initialize session state for filters if not exists
 if 'filters' not in st.session_state:
@@ -345,8 +354,17 @@ with fcol1:
 
 with fcol2:
     if st.button("Clear Filters"):
+        # Reset all filters to None in session state
         st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
+        
+        # Manually reset the selectbox widgets to their default (None) state
+        st.session_state['brand_main'] = None
+        st.session_state['gender_main'] = None
+        st.session_state['income_main'] = None
+        st.session_state['cluster_main'] = None
+        
         st.rerun()
+# filter till here replaced
 
 st.markdown("</div>", unsafe_allow_html=True)
 
