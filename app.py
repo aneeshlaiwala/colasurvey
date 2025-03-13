@@ -152,17 +152,19 @@ section = st.radio("Select Analysis Section", [
     "View & Download Full Dataset"
 ], horizontal=True)
 
+# Initialize session state for filters if not exists
+if 'filters' not in st.session_state:
+    st.session_state.filters = {
+        'brand': None, 
+        'gender': None, 
+        'income': None, 
+        'cluster': None
+    }
+
 # Move Filters to main page, below section selection
 st.markdown("<div class='filter-box'>", unsafe_allow_html=True)
 st.subheader("Dashboard Filters")
 
-##############################
-# Ensure session state for filters exists and is properly initialized
-if 'filters' not in st.session_state:
-    st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
-
-################################
-# Create a 4-column layout for filters
 # Create a 4-column layout for filters
 filter_col1, filter_col2, filter_col3, filter_col4 = st.columns(4)
 
@@ -172,7 +174,8 @@ with filter_col1:
     selected_brand = st.selectbox(
         "Select a Brand", 
         options=brand_options, 
-        index=brand_options.index(st.session_state.filters['brand']) if st.session_state.filters['brand'] in brand_options else 0
+        index=0 if st.session_state.filters['brand'] is None 
+        else brand_options.index(st.session_state.filters['brand'])
     )
 
 with filter_col2:
@@ -180,7 +183,8 @@ with filter_col2:
     selected_gender = st.selectbox(
         "Select Gender", 
         options=gender_options, 
-        index=gender_options.index(st.session_state.filters['gender']) if st.session_state.filters['gender'] in gender_options else 0
+        index=0 if st.session_state.filters['gender'] is None 
+        else gender_options.index(st.session_state.filters['gender'])
     )
 
 with filter_col3:
@@ -188,7 +192,8 @@ with filter_col3:
     selected_income = st.selectbox(
         "Select Income Level", 
         options=income_options, 
-        index=income_options.index(st.session_state.filters['income']) if st.session_state.filters['income'] in income_options else 0
+        index=0 if st.session_state.filters['income'] is None 
+        else income_options.index(st.session_state.filters['income'])
     )
 
 with filter_col4:
@@ -196,10 +201,10 @@ with filter_col4:
     selected_cluster = st.selectbox(
         "Select Cluster", 
         options=cluster_options, 
-        index=cluster_options.index(st.session_state.filters['cluster']) if st.session_state.filters['cluster'] in cluster_options else 0
+        index=0 if st.session_state.filters['cluster'] is None 
+        else cluster_options.index(st.session_state.filters['cluster'])
     )
-
-# Filter action buttons in two columns
+    # Filter action buttons in two columns
 fcol1, fcol2 = st.columns(2)
 
 with fcol1:
@@ -211,16 +216,11 @@ with fcol1:
             'income': selected_income, 
             'cluster': selected_cluster
         }
-        st.experimental_rerun()
+        # Don't use experimental_rerun() as it's causing issues
+        # We'll just let Streamlit naturally update based on session state changes
 
 with fcol2:
     if st.button("Clear Filters"):
-        # Reset all filters to None in session state
-        st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
-        
-        # Trigger a UI refresh
-        st.experimental_rerun()
-
         # Reset all filters to None
         st.session_state.filters = {
             'brand': None, 
@@ -228,7 +228,7 @@ with fcol2:
             'income': None, 
             'cluster': None
         }
-        st.experimental_rerun()
+        # Don't use experimental_rerun() as it's causing issues
 
 st.markdown("</div>", unsafe_allow_html=True)
 
@@ -252,8 +252,6 @@ active_filters = [f"{k}: {v}" for k, v in st.session_state.filters.items() if v 
 if active_filters:
     st.info(f"Active filters: {', '.join(active_filters)} (Total records: {len(filtered_df)})")
     
-# FILTER SECTION UNTIL HERE
-
 # =======================
 # EXECUTIVE DASHBOARD SUMMARY
 # =======================
@@ -316,7 +314,7 @@ if section == "Executive Dashboard Summary":
         else:
             st.metric(label="Highest Rated Attribute", value="No data", delta=None)
     
-    # Top insights from each section - THIS IS THE WORKING SECTION TO KEEP
+    # Top insights from each section
     st.subheader("Key Insights by Analysis Section")
     
     col1, col2 = st.columns(2)
@@ -394,8 +392,7 @@ if section == "Executive Dashboard Summary":
             </ul>
         </div>
         """, unsafe_allow_html=True)
-
-# =======================
+        # =======================
 # DEMOGRAPHIC PROFILE
 # =======================
 elif section == "Demographic Profile":
@@ -548,7 +545,7 @@ elif section == "Brand Metrics":
         else:
             st.info("No data available for Satisfaction analysis with current filters.")
 
-# =======================
+        # =======================
 # BASIC ATTRIBUTE SCORES
 # =======================
 elif section == "Basic Attribute Scores":
@@ -700,7 +697,7 @@ elif section == "Basic Attribute Scores":
                     color_continuous_scale=px.colors.diverging.RdBu,
                     color_continuous_midpoint=0
                 )
-                fig.update_traces(textposition='outside')
+                fig.update_tracesfig.update_traces(textposition='outside')
                 st.plotly_chart(fig)
 
 # =======================
@@ -794,9 +791,7 @@ elif section == "Regression Analysis":
                 for i, row in neg_factors.iterrows():
                     st.write(f"- {row['Feature'].replace('_Rating', '')}: {row['Coefficient']}")
             else:
-                st.write("No significant negative factors found.")
-
-# =======================
+                st.write("No significant negative factors found.")# =======================
 # DECISION TREE ANALYSIS
 # =======================
 elif section == "Decision Tree Analysis":
@@ -925,9 +920,7 @@ elif section == "Decision Tree Analysis":
             if second_feature:
                 st.write(f"- Also influenced by: {second_feature.replace('_Rating', '')}")
             
-            st.write("- These consumers are least likely to recommend your brand")
-
-# =======================
+            st.write("- These consumers are least likely to recommend your brand")# =======================
 # CLUSTER ANALYSIS
 # =======================
 elif section == "Cluster Analysis":
@@ -1067,35 +1060,10 @@ elif section == "Cluster Analysis":
                     lowest_attribute = cluster_data[attributes].mean().idxmin()
                     st.write(f"⚠️ Weakest attribute: **{lowest_attribute.replace('_Rating', '')}**")
                 else:
-                    st.write("No data available for this cluster with current filters.")
-
-# =======================
+                    st.write("No data available for this cluster with current filters.")# =======================
 # ADVANCED ANALYTICS EXPLAINED
 # =======================
-# Then replace the existing elif block for Advanced Analytics Explained with this:
-# Remember to indent this correctly within your existing code structure
 elif section == "Advanced Analytics Explained":
-    st.markdown("<h2 class='subheader'>Advanced Analytics Explained</h2>", unsafe_allow_html=True)
-
-    # Provide a download button for the PDF file
-    pdf_path = "/mnt/data/Advanced Statistics explained.pdf"
-
-    try:
-        with open(pdf_path, "rb") as pdf_file:
-            pdf_bytes = pdf_file.read()
-
-        st.download_button(
-            label="📥 Download Advanced Analytics Explained (PDF)",
-            data=pdf_bytes,
-            file_name="Advanced_Analytics_Explained.pdf",
-            mime="application/pdf"
-        )
-
-        st.info("Click the button above to download the document and read the full details.")
-
-    except FileNotFoundError:
-        st.error("The PDF file could not be found. Please ensure it is correctly uploaded.")    
-
     st.markdown("<h2 class='subheader'>Advanced Analytics Explained</h2>", unsafe_allow_html=True)
     
     # Create download button with external PDF link
