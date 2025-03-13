@@ -1033,145 +1033,41 @@ elif section == "Cluster Analysis":
 # =======================
 elif section == "Advanced Analytics Explained":
     st.markdown("<h2 class='subheader'>Advanced Analytics Explained</h2>", unsafe_allow_html=True)
-    
-    # First section: Regression Analysis
+
+    # Regression Analysis
     st.markdown("""
-    <div class='insight-box'>
-        <div class='insight-title'>1. Regression Analysis: Predicting Outcomes Based on Factors</div>
-        <p>Regression analysis helps us understand how different factors (e.g.,
-        taste, price, fizziness) influence the Net Promoter Score (NPS). The
-        analysis determines which attributes are significant drivers of customer
-        satisfaction and brand loyalty.</p>
+    <div style='border-left: 5px solid #0078D4; padding-left: 10px;'>
+        <h3>1. Regression Analysis: Predicting Outcomes Based on Factors</h3>
+        <p>Regression analysis helps us understand how different factors (e.g., taste, price, fizziness) 
+        influence the Net Promoter Score (NPS). It identifies key drivers of customer satisfaction and brand loyalty.</p>
         
-        <p>We performed an <strong>Ordinary Least Squares (OLS) regression analysis</strong> to
-        examine how <strong>cola attribute ratings</strong> (Taste, Price, Packaging, Brand
-        Reputation, Availability, Sweetness, and Fizziness) impact the <strong>Net
-        Promoter Score (NPS)</strong>.</p>
-        
+        <p>We performed an <strong>Ordinary Least Squares (OLS) regression analysis</strong> to examine 
+        how <strong>cola attribute ratings</strong> (Taste, Price, Packaging, Brand Reputation, Availability, 
+        Sweetness, and Fizziness) impact the <strong>Net Promoter Score (NPS)</strong>.</p>
+
         <div style="background-color: #f0f0f0; padding: 1rem; border-radius: 0.5rem; margin: 0.8rem 0;">
             <p style="font-weight: bold; margin-bottom: 0.5rem;">Example: Coffee Shop Sales</p>
+
+            <p>Imagine you own a <strong>coffee shop</strong> and want to know what <strong>affects your daily sales</strong>. 
+            You suspect that sales depend on factors like:</p>
+
+            <ul>
+                <li>☀️ <strong>Weather</strong> (Hot or Cold)</li>
+                <li>💰 <strong>Price of Coffee</strong> (Higher prices might reduce sales)</li>
+                <li>📢 <strong>Advertising Spend</strong> (More ads might increase sales)</li>
+            </ul>
+
+            <p>If you collect data for a month and run <strong>Regression Analysis</strong>, it will tell you:</p>
             
-            <p>Imagine you own a <strong>coffee shop</strong> and want to know what <strong>affects your
-            daily sales</strong>. You suspect that sales depend on factors like:</p>
-            <p>☀️ <strong>Weather</strong> (Hot or Cold)<br>
-            💰 <strong>Price of Coffee</strong> (Higher prices might reduce sales)<br>
-            📢 <strong>Advertising Spend</strong> (More ads might increase sales)</p>
-            
-            <p>If you collect data for a month and run <strong>Regression Analysis</strong>, it will
-            tell you:</p>
-            <p>✅ How much <strong>each factor</strong> (weather, price, ads) influences sales<br>
-            ✅ If <strong>raising prices decreases sales</strong> significantly<br>
-            ✅ Whether <strong>advertising is actually helping or not</strong></p>
-            
-            <p><strong>In the Cola Market Study:</strong><br>
-            We used <strong>Regression Analysis</strong> to see which factors (e.g., <strong>taste,
-            price, fizziness</strong>) affect <strong>customer loyalty (Net Promoter Score -
-            NPS)</strong>.</p>
+            <ul>
+                <li>✅ How much <strong>each factor</strong> (weather, price, ads) influences sales</li>
+                <li>✅ If <strong>raising prices decreases sales</strong> significantly</li>
+                <li>✅ Whether <strong>advertising is actually helping or not</strong></li>
+            </ul>
+
+            <p><strong>In the Cola Market Study:</strong> We used <strong>Regression Analysis</strong> to see which 
+            factors (e.g., <strong>taste, price, fizziness</strong>) affect <strong>customer loyalty (Net Promoter Score - NPS)</strong>.</p>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Second section: Decision Tree Analysis
-    st.markdown("""
-    <div class='insight-box'>
-        <div class='insight-title'>2. Decision Tree Analysis: Making Decisions Like a Flowchart</div>
-        <p>A decision tree is a visual model that helps us determine how different
-        variables influence customer loyalty. It works by splitting the data
-        into branches based on key decision points, showing the most influential
-        factors in predicting whether a consumer is a promoter or a detractor.</p>
-        
-        <div style="background-color: #f0f0f0; padding: 1rem; border-radius: 0.5rem; margin: 0.8rem 0;">
-            <p style="font-weight: bold; margin-bottom: 0.5rem;">Example: Choosing a Movie to Watch</p>
-            
-            <p>Let's say you're trying to <strong>decide which movie to watch</strong>. You might
-            ask yourself:</p>
-            
-            <p>1. <strong>Do I want an action movie?</strong> → If YES, then <strong>choose John Wick</strong><br>
-            2. <strong>If NO, do I want a comedy?</strong> → If YES, then <strong>choose The
-            Hangover</strong><br>
-            3. <strong>If NO, do I want a drama?</strong> → If YES, then <strong>choose The Shawshank
-            Redemption</strong><br>
-            4. <strong>If NO, then I won't watch a movie!</strong></p>
-            
-            <p>A <strong>Decision Tree</strong> does the same thing but with <strong>data-driven logic</strong>.</p>
-            
-            <p><strong>In the Cola Market Study:</strong><br>
-            The <strong>Decision Tree</strong> showed that <strong>Fizziness and Taste</strong> were the
-            <strong>biggest factors</strong> in whether a customer is a <strong>promoter</strong> or
-            <strong>detractor</strong> of a cola brand.</p>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Third section: Factor & Cluster Analysis
-    st.markdown("""
-    <div class='insight-box'>
-        <div class='insight-title'>3. Factor & Cluster Analysis: Grouping Similar Things Together</div>
-        <p><strong>Factor analysis</strong> is used to reduce a large number of attributes into
-        a smaller set of underlying factors that explain consumer preferences.
-        This helps us identify key themes such as Taste & Fizziness, Brand
-        Reputation, and Pricing Sensitivity.</p>
-        
-        <p>We conducted <strong>Factor Analysis</strong> to extract key consumer preference
-        dimensions and <strong>K-Means Clustering</strong> to identify distinct customer
-        segments.</p>
-        
-        <div style="background-color: #f0f0f0; padding: 1rem; border-radius: 0.5rem; margin: 0.8rem 0;">
-            <p style="font-weight: bold; margin-bottom: 0.5rem;">Factor Analysis Example: Organizing Your Closet</p>
-            
-            <p>Imagine your closet is messy, and you decide to <strong>organize it into
-            categories</strong>:</p>
-            <p>👔 <strong>Work Clothes</strong> (Shirts, Trousers, Formal Shoes)<br>
-            👕 <strong>Casual Clothes</strong> (T-Shirts, Jeans, Sneakers)<br>
-            🎽 <strong>Gym Clothes</strong> (Sportswear, Running Shoes)</p>
-            
-            <p>You <strong>group</strong> your clothes based on their <strong>purpose</strong> rather than
-            sorting each item individually.</p>
-            
-            <p><strong>Factor Analysis (Finding Underlying Factors)</strong></p>
-            
-            <p>Now, let's say you notice that <strong>Work Clothes and Casual Clothes</strong> have
-            a common theme:</p>
-            <p>👕👔 → <strong>"Style Factor"</strong> (Formal vs. Casual)<br>
-            👟🥾 → <strong>"Comfort Factor"</strong> (Sneakers vs. Dress Shoes)</p>
-            
-            <p>Factor Analysis does this with <strong>customer preferences</strong> by identifying
-            <strong>hidden relationships</strong> between choices.</p>
-            
-            <p><strong>Cluster Analysis (Grouping People Based on Similarity)</strong></p>
-            
-            <p><strong>Cluster analysis</strong> groups consumers into meaningful segments based on
-            similar behaviour patterns. By identifying these clusters, brands can
-            tailor their marketing strategies and product offerings to specific
-            target audiences.</p>
-            
-            <p>Once the clothes are categorized, imagine <strong>grouping people</strong> based on
-            what they wear most:</p>
-            <p>🧑‍💼 <strong>Professionals</strong> → Mostly Work Clothes<br>
-            🎮 <strong>Gamers</strong> → Mostly Casual Clothes<br>
-            🏃 <strong>Athletes</strong> → Mostly Gym Clothes</p>
-            
-            <p>Cluster Analysis does the same thing with <strong>customer data</strong>, grouping
-            similar consumers together.</p>
-            
-            <p><strong>In the Cola Market Study:</strong><br>
-            We identified <strong>three customer groups</strong>:</p>
-            <p>🥤 <strong>Fizz-Lovers</strong> → People who prefer high carbonation<br>
-            🏷️ <strong>Brand-Conscious Consumers</strong> → People who choose based on branding<br>
-            💰 <strong>Budget-Friendly Drinkers</strong> → People who prefer low-cost options</p>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Final takeaway section
-    st.markdown("""
-    <div class='insight-box'>
-        <div class='insight-title'>Final Takeaway</div>
-        <p>
-        📊 <strong>Regression Analysis</strong> helps us understand <strong>cause & effect</strong> (e.g., what affects sales).<br>
-        🌳 <strong>Decision Trees</strong> help us <strong>visually map out decision-making processes</strong>.<br>
-        🛍️ <strong>Factor & Cluster Analysis</strong> help us <strong>group related behaviors & consumers</strong>.
-        </p>
     </div>
     """, unsafe_allow_html=True)
 
