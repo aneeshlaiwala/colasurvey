@@ -1186,23 +1186,22 @@ elif section == "Cluster Analysis":
 # =======================
 # Then replace the existing elif block for Advanced Analytics Explained with this:
 # Remember to indent this correctly within your existing code structure
-if section == "Advanced Analytics Explained":
+elif section == "Advanced Analytics Explained":
     st.markdown("<h2 class='subheader'>Advanced Analytics Explained</h2>", unsafe_allow_html=True)
     
-    # Create download button with the PDF content
-    st.download_button(
-        label="Download Advanced Analytics Explanation (PDF)",
-        data=create_advanced_analytics_pdf(),
-        file_name="advanced_analytics_explained.pdf",
-        mime="application/pdf",
-        help="Click to download the detailed explanation of advanced analytics techniques used in this dashboard"
-    )
-    
-    # Add some additional context
+    # Create download button with external PDF link
     st.markdown("""
     <div class='explained-box'>
         <div class='explained-title'>Advanced Analytics Overview</div>
-        <p>The attached PDF provides a comprehensive explanation of the advanced analytics techniques used in this Cola Consumer Dashboard:</p>
+        <p>Download the comprehensive PDF explaining advanced analytics techniques:</p>
+        <a href="https://1drv.ms/b/s!AjvUTGyNS16HjZV-BJeBvloAgSeXOQ?e=oWofYC" 
+           target="_blank" 
+           download="Advanced_Analytics_Explained.pdf" 
+           class="btn btn-primary">
+            Download PDF
+        </a>
+        
+        <p>The PDF covers:</p>
         <ul>
             <li>Regression Analysis</li>
             <li>Decision Tree Analysis</li>
