@@ -33,13 +33,6 @@ st.markdown("""
         color: #3366FF;
         margin-bottom: 0.5rem;
     }
-    .summary-box {
-        background-color: #f8f9fa;
-        border-left: 5px solid #007bff;
-        padding: 1rem;
-        margin: 1rem 0;
-        border-radius: 0.5rem;
-    }
     .insight-box {
         background-color: #f8f9fa;
         border-left: 5px solid #0066cc;
@@ -52,12 +45,6 @@ st.markdown("""
         color: #0066cc;
         font-size: 1.2rem;
         margin-bottom: 0.8rem;
-    }
-    .summary-title {
-        font-weight: bold;
-        color: #007bff;
-        margin-bottom: 0.5rem;
-        font-size: 1.2rem;
     }
     .filter-box {
         background-color: #f0f0f0;
@@ -113,6 +100,7 @@ def load_data():
     
     return df, cluster_centers_df
 
+# Load the data
 df, cluster_centers = load_data()
 
 # App title
@@ -192,7 +180,9 @@ active_filters = [f"{k}: {v}" for k, v in st.session_state.filters.items() if v 
 if active_filters:
     st.info(f"Active filters: {', '.join(active_filters)} (Total records: {len(filtered_df)})")
 
-# Display Selected Section
+# =======================
+# EXECUTIVE DASHBOARD SUMMARY
+# =======================
 if section == "Executive Dashboard Summary":
     st.markdown("<h2 class='subheader'>Executive Dashboard Summary</h2>", unsafe_allow_html=True)
     
@@ -378,6 +368,9 @@ if section == "Executive Dashboard Summary":
     </div>
     """, unsafe_allow_html=True)
 
+# =======================
+# DEMOGRAPHIC PROFILE
+# =======================
 elif section == "Demographic Profile":
     st.markdown("<h2 class='subheader'>Demographic Profile</h2>", unsafe_allow_html=True)
     
@@ -498,6 +491,9 @@ elif section == "Demographic Profile":
     </div>
     """, unsafe_allow_html=True)
 
+# =======================
+# BRAND METRICS
+# =======================
 elif section == "Brand Metrics":
     st.markdown("<h2 class='subheader'>Brand Metrics</h2>", unsafe_allow_html=True)
     
@@ -638,6 +634,9 @@ elif section == "Brand Metrics":
     </div>
     """, unsafe_allow_html=True)
 
+# =======================
+# BASIC ATTRIBUTE SCORES
+# =======================
 elif section == "Basic Attribute Scores":
     st.markdown("<h2 class='subheader'>Basic Attribute Scores</h2>", unsafe_allow_html=True)
     
@@ -674,7 +673,10 @@ elif section == "Basic Attribute Scores":
             detractors = filtered_df[filtered_df['NPS_Score'] <= 6].shape[0]
             total = filtered_df['NPS_Score'].count()
             
-            nps_score = int(((promoters / total) - (detractors / total)) * 100)
+            # Get percentages before calculating NPS
+            promoters_pct = (promoters / total) if total > 0 else 0
+            detractors_pct = (detractors / total) if total > 0 else 0 
+            nps_score = int((promoters_pct - detractors_pct) * 100)
             
             # Display NPS gauge chart
             fig = go.Figure(go.Indicator(
@@ -696,56 +698,96 @@ elif section == "Basic Attribute Scores":
         else:
             st.info("No data available for NPS Score with current filters.")
     
-    # NPS by Gender and Age Group
+    # NPS by Demographics section
+    st.subheader("NPS by Demographics")
+    
     col1, col2 = st.columns(2)
     
+    # Gender Analysis
     with col1:
-        # NPS by Gender
-        if not filtered_df.empty:
-        # Calculate NPS by Gender
-        if len(filtered_df['Gender'].unique()) > 1:
-            nps_by_gender = filtered_df.groupby('Gender').apply(
-                lambda x: 
-                ((x['NPS_Score'] >= 9).sum() / len(x) - (x['NPS_Score'] <= 6).sum() / len(x)) * 100
-            ).sort_values()
-            
-            fig = px.bar(
-                x=nps_by_gender.index,
-                y=nps_by_gender.values,
-                text=[f"{x:.1f}" for x in nps_by_gender.values],
-                title='NPS Score by Gender',
-                labels={'x': 'Gender', 'y': 'NPS Score'},
-                color=nps_by_gender.values,
-                color_continuous_scale=px.colors.diverging.RdBu,
-                color_continuous_midpoint=0
-            )
-            fig.update_traces(textposition='outside')
-            st.plotly_chart(fig)
+        if filtered_df.empty:
+            st.info("No data available for NPS Gender analysis.")
         else:
-            st.info("Insufficient data for NPS by Gender analysis with current filters.")
+            if len(filtered_df['Gender'].unique()) <= 1:
+                st.info("Insufficient unique gender data for comparison.")
+            else:
+                # Calculate NPS by gender
+                gender_results = []
+                for gender in filtered_df['Gender'].unique():
+                    gender_df = filtered_df[filtered_df['Gender'] == gender]
+                    promoters = gender_df[gender_df['NPS_Score'] >= 9].shape[0]
+                    detractors = gender_df[gender_df['NPS_Score'] <= 6].shape[0]
+                    total = gender_df.shape[0]
+                    
+                    # Calculate NPS
+                    promoters_pct = promoters / total if total > 0 else 0
+                    detractors_pct = detractors / total if total > 0 else 0
+                    nps = (promoters_pct - detractors_pct) * 100
+                    
+                    gender_results.append({
+                        'Gender': gender,
+                        'NPS': nps
+                    })
+                
+                # Create dataframe for plotting
+                gender_df = pd.DataFrame(gender_results)
+                
+                # Create bar chart
+                fig = px.bar(
+                    gender_df,
+                    x='Gender',
+                    y='NPS',
+                    title='NPS Score by Gender',
+                    text=[f"{x:.1f}" for x in gender_df['NPS']],
+                    color='NPS',
+                    color_continuous_scale=px.colors.diverging.RdBu,
+                    color_continuous_midpoint=0
+                )
+                fig.update_traces(textposition='outside')
+                st.plotly_chart(fig)
     
+    # Age Group Analysis
     with col2:
-        # NPS by Age Group
-        if not filtered_df.empty and len(filtered_df['Age_Group'].unique()) > 1:
-            nps_by_age = filtered_df.groupby('Age_Group').apply(
-                lambda x: 
-                ((x['NPS_Score'] >= 9).sum() / len(x) - (x['NPS_Score'] <= 6).sum() / len(x)) * 100
-            ).sort_index()
-            
-            fig = px.bar(
-                x=nps_by_age.index,
-                y=nps_by_age.values,
-                text=[f"{x:.1f}" for x in nps_by_age.values],
-                title='NPS Score by Age Group',
-                labels={'x': 'Age Group', 'y': 'NPS Score'},
-                color=nps_by_age.values,
-                color_continuous_scale=px.colors.diverging.RdBu,
-                color_continuous_midpoint=0
-            )
-            fig.update_traces(textposition='outside')
-            st.plotly_chart(fig)
+        if filtered_df.empty:
+            st.info("No data available for NPS Age Group analysis.")
         else:
-            st.info("Insufficient data for NPS by Age Group analysis with current filters.")
+            if len(filtered_df['Age_Group'].unique()) <= 1:
+                st.info("Insufficient unique age group data for comparison.")
+            else:
+                # Calculate NPS by age group
+                age_results = []
+                for age_group in sorted(filtered_df['Age_Group'].unique()):
+                    age_df = filtered_df[filtered_df['Age_Group'] == age_group]
+                    promoters = age_df[age_df['NPS_Score'] >= 9].shape[0]
+                    detractors = age_df[age_df['NPS_Score'] <= 6].shape[0]
+                    total = age_df.shape[0]
+                    
+                    # Calculate NPS
+                    promoters_pct = promoters / total if total > 0 else 0
+                    detractors_pct = detractors / total if total > 0 else 0
+                    nps = (promoters_pct - detractors_pct) * 100
+                    
+                    age_results.append({
+                        'Age_Group': age_group,
+                        'NPS': nps
+                    })
+                
+                # Create dataframe for plotting
+                age_df = pd.DataFrame(age_results)
+                
+                # Create bar chart
+                fig = px.bar(
+                    age_df,
+                    x='Age_Group',
+                    y='NPS',
+                    title='NPS Score by Age Group',
+                    text=[f"{x:.1f}" for x in age_df['NPS']],
+                    color='NPS',
+                    color_continuous_scale=px.colors.diverging.RdBu,
+                    color_continuous_midpoint=0
+                )
+                fig.update_traces(textposition='outside')
+                st.plotly_chart(fig)
     
     # Prepare dynamic summary
     top_attributes = "N/A"
@@ -785,6 +827,9 @@ elif section == "Basic Attribute Scores":
     </div>
     """, unsafe_allow_html=True)
 
+# =======================
+# REGRESSION ANALYSIS
+# =======================
 elif section == "Regression Analysis":
     st.markdown("<h2 class='subheader'>Regression Analysis</h2>", unsafe_allow_html=True)
     
@@ -924,6 +969,9 @@ elif section == "Regression Analysis":
         </div>
         """, unsafe_allow_html=True)
 
+# =======================
+# DECISION TREE ANALYSIS
+# =======================
 elif section == "Decision Tree Analysis":
     st.markdown("<h2 class='subheader'>Decision Tree Analysis</h2>", unsafe_allow_html=True)
     
@@ -1076,6 +1124,9 @@ elif section == "Decision Tree Analysis":
         </div>
         """, unsafe_allow_html=True)
 
+# =======================
+# CLUSTER ANALYSIS
+# =======================
 elif section == "Cluster Analysis":
     st.markdown("<h2 class='subheader'>Cluster Analysis</h2>", unsafe_allow_html=True)
     
@@ -1240,6 +1291,9 @@ elif section == "Cluster Analysis":
         </div>
         """, unsafe_allow_html=True)
 
+# =======================
+# VIEW & DOWNLOAD FULL DATASET
+# =======================
 elif section == "View & Download Full Dataset":
     st.markdown("<h2 class='subheader'>View & Download Dataset</h2>", unsafe_allow_html=True)
     
