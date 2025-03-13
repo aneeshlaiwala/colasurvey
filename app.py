@@ -140,7 +140,7 @@ st.markdown("<h1 class='main-header'>Interactive Cola Consumer Dashboard</h1>", 
 
 # Section Selection using Radio Buttons
 section = st.radio("Select Analysis Section", [
-    "Executive Dashboard Summary",
+    "Executive Summary",
     "Demographic Profile", 
     "Brand Metrics", 
     "Basic Attribute Scores", 
@@ -214,10 +214,10 @@ if active_filters:
     st.info(f"Active filters: {', '.join(active_filters)} (Total records: {len(filtered_df)})")
 
 # =======================
-# EXECUTIVE DASHBOARD SUMMARY
+# EXECUTIVE SUMMARY
 # =======================
-if section == "Executive Dashboard Summary":
-    st.markdown("<h2 class='subheader'>Executive Dashboard Summary</h2>", unsafe_allow_html=True)
+if section == "Executive Summary":
+    st.markdown("<h2 class='subheader'>Executive Summary</h2>", unsafe_allow_html=True)
     
     # Overall key metrics
     col1, col2, col3 = st.columns(3)
@@ -1034,13 +1034,10 @@ elif section == "Cluster Analysis":
 elif section == "Advanced Analytics Explained":
     st.markdown("<h2 class='subheader'>Advanced Analytics Explained</h2>", unsafe_allow_html=True)
     
-    # Use HTML directly to create a more controlled layout
+    # First section: Regression Analysis
     st.markdown("""
-    <div class="explained-box">
-        <h1 style="color: #4CAF50; text-align: center; font-size: 1.8rem; margin-bottom: 1.5rem;">ADVANCED ANALYTICS EXPLAINED</h1>
-        
-        <h2 style="color: #2E7D32; font-size: 1.4rem; margin-top: 1.5rem; margin-bottom: 1rem;">1. Regression Analysis: Predicting Outcomes Based on Factors</h2>
-        
+    <div class='insight-box'>
+        <div class='insight-title'>1. Regression Analysis: Predicting Outcomes Based on Factors</div>
         <p>Regression analysis helps us understand how different factors (e.g.,
         taste, price, fizziness) influence the Net Promoter Score (NPS). The
         analysis determines which attributes are significant drivers of customer
@@ -1051,8 +1048,8 @@ elif section == "Advanced Analytics Explained":
         Reputation, Availability, Sweetness, and Fizziness) impact the <strong>Net
         Promoter Score (NPS)</strong>.</p>
         
-        <div style="background-color: #e8f5e9; padding: 1.2rem; margin: 1rem 0; border-radius: 0.5rem;">
-            <p style="font-weight: bold; color: #2E7D32; font-style: italic; margin-bottom: 0.5rem;">Example: Coffee Shop Sales</p>
+        <div style="background-color: #f0f0f0; padding: 1rem; border-radius: 0.5rem; margin: 0.8rem 0;">
+            <p style="font-weight: bold; margin-bottom: 0.5rem;">Example: Coffee Shop Sales</p>
             
             <p>Imagine you own a <strong>coffee shop</strong> and want to know what <strong>affects your
             daily sales</strong>. You suspect that sales depend on factors like:</p>
@@ -1071,16 +1068,20 @@ elif section == "Advanced Analytics Explained":
             price, fizziness</strong>) affect <strong>customer loyalty (Net Promoter Score -
             NPS)</strong>.</p>
         </div>
-        
-        <h2 style="color: #2E7D32; font-size: 1.4rem; margin-top: 1.5rem; margin-bottom: 1rem;">2. Decision Tree Analysis: Making Decisions Like a Flowchart</h2>
-        
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Second section: Decision Tree Analysis
+    st.markdown("""
+    <div class='insight-box'>
+        <div class='insight-title'>2. Decision Tree Analysis: Making Decisions Like a Flowchart</div>
         <p>A decision tree is a visual model that helps us determine how different
         variables influence customer loyalty. It works by splitting the data
         into branches based on key decision points, showing the most influential
         factors in predicting whether a consumer is a promoter or a detractor.</p>
         
-        <div style="background-color: #e8f5e9; padding: 1.2rem; margin: 1rem 0; border-radius: 0.5rem;">
-            <p style="font-weight: bold; color: #2E7D32; font-style: italic; margin-bottom: 0.5rem;">Example: Choosing a Movie to Watch</p>
+        <div style="background-color: #f0f0f0; padding: 1rem; border-radius: 0.5rem; margin: 0.8rem 0;">
+            <p style="font-weight: bold; margin-bottom: 0.5rem;">Example: Choosing a Movie to Watch</p>
             
             <p>Let's say you're trying to <strong>decide which movie to watch</strong>. You might
             ask yourself:</p>
@@ -1099,9 +1100,13 @@ elif section == "Advanced Analytics Explained":
             <strong>biggest factors</strong> in whether a customer is a <strong>promoter</strong> or
             <strong>detractor</strong> of a cola brand.</p>
         </div>
-        
-        <h2 style="color: #2E7D32; font-size: 1.4rem; margin-top: 1.5rem; margin-bottom: 1rem;">3. Factor & Cluster Analysis: Grouping Similar Things Together</h2>
-        
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Third section: Factor & Cluster Analysis
+    st.markdown("""
+    <div class='insight-box'>
+        <div class='insight-title'>3. Factor & Cluster Analysis: Grouping Similar Things Together</div>
         <p><strong>Factor analysis</strong> is used to reduce a large number of attributes into
         a smaller set of underlying factors that explain consumer preferences.
         This helps us identify key themes such as Taste & Fizziness, Brand
@@ -1111,8 +1116,8 @@ elif section == "Advanced Analytics Explained":
         dimensions and <strong>K-Means Clustering</strong> to identify distinct customer
         segments.</p>
         
-        <div style="background-color: #e8f5e9; padding: 1.2rem; margin: 1rem 0; border-radius: 0.5rem;">
-            <p style="font-weight: bold; color: #2E7D32; font-style: italic; margin-bottom: 0.5rem;">Factor Analysis Example: Organizing Your Closet</p>
+        <div style="background-color: #f0f0f0; padding: 1rem; border-radius: 0.5rem; margin: 0.8rem 0;">
+            <p style="font-weight: bold; margin-bottom: 0.5rem;">Factor Analysis Example: Organizing Your Closet</p>
             
             <p>Imagine your closet is messy, and you decide to <strong>organize it into
             categories</strong>:</p>
@@ -1155,9 +1160,13 @@ elif section == "Advanced Analytics Explained":
             🏷️ <strong>Brand-Conscious Consumers</strong> → People who choose based on branding<br>
             💰 <strong>Budget-Friendly Drinkers</strong> → People who prefer low-cost options</p>
         </div>
-        
-        <h2 style="color: #2E7D32; font-size: 1.4rem; margin-top: 1.5rem; margin-bottom: 1rem;">Final Takeaway</h2>
-        
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Final takeaway section
+    st.markdown("""
+    <div class='insight-box'>
+        <div class='insight-title'>Final Takeaway</div>
         <p>
         📊 <strong>Regression Analysis</strong> helps us understand <strong>cause & effect</strong> (e.g., what affects sales).<br>
         🌳 <strong>Decision Trees</strong> help us <strong>visually map out decision-making processes</strong>.<br>
