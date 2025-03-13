@@ -718,702 +718,6 @@ elif section == "Regression Analysis":
         with col2:
             # Visualization of coefficients
             sig_coefs = coef_df[coef_df['Feature'] != 'const']
-            colors = ['green' if p else 'red' for p in sig_coefs['Significant']]
-            
-            fig = px.bar(
-                sig_coefs,
-                x='Feature', 
-                y='Coefficient',
-                title='Feature Importance (Coefficient Values)',
-                color='Significant',
-                color_discrete_map={True: 'green', False: import streamlit as st  # Import Streamlit first
-st.set_page_config(layout="wide", page_title="Cola Consumer Dashboard", page_icon="🥤")  # Then set the page configuration
-
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-import plotly.express as px
-import plotly.graph_objects as go
-from sklearn.cluster import KMeans
-from sklearn.preprocessing import StandardScaler
-from sklearn.tree import DecisionTreeClassifier, plot_tree
-from sklearn import tree
-from sklearn.model_selection import train_test_split
-import statsmodels.api as sm
-from sklearn.decomposition import FactorAnalysis
-from statsmodels.graphics.mosaicplot import mosaic
-from io import BytesIO
-from factor_analyzer import FactorAnalyzer
-import plotly.figure_factory as ff
-
-# Set page styling
-st.markdown("""
-<style>
-    .main-header {
-        font-size: 2.5rem;
-        color: #FF5733;
-        text-align: center;
-        margin-bottom: 1rem;
-    }
-    .subheader {
-        font-size: 1.5rem;
-        color: #3366FF;
-        margin-bottom: 0.5rem;
-    }
-    .insight-box {
-        background-color: #f8f9fa;
-        border-left: 5px solid #0066cc;
-        padding: 1.2rem;
-        margin: 1rem 0;
-        border-radius: 0.5rem;
-    }
-    .insight-title {
-        font-weight: bold;
-        color: #0066cc;
-        font-size: 1.2rem;
-        margin-bottom: 0.8rem;
-    }
-    .filter-box {
-        background-color: #f0f0f0;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        margin: 1rem 0;
-    }
-</style>
-""", unsafe_allow_html=True)
-
-# Load dataset
-@st.cache_data
-def load_data():
-    df = pd.read_csv("cola_survey.csv")
-    # Create age groups
-    df['Age_Group'] = pd.cut(df['Age'], 
-                            bins=[18, 25, 35, 45, 55, 65], 
-                            labels=['18-24', '25-34', '35-44', '45-54', '55+'], 
-                            right=False)
-    
-    # Calculate NPS categories
-    df['NPS_Category'] = pd.cut(df['NPS_Score'], 
-                               bins=[-1, 6, 8, 10], 
-                               labels=['Detractors', 'Passives', 'Promoters'])
-    
-    # Perform clustering (will be available for all sections)
-    X_cluster = df[['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 
-                  'Brand_Reputation_Rating', 'Availability_Rating', 
-                  'Sweetness_Rating', 'Fizziness_Rating']]
-    
-    # Standardize data for clustering
-    scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(X_cluster)
-    
-    # Apply KMeans clustering
-    kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)
-    df['Cluster'] = kmeans.fit_predict(X_scaled)
-    
-    # Get cluster centers and interpret
-    centers = scaler.inverse_transform(kmeans.cluster_centers_)
-    cluster_centers_df = pd.DataFrame(centers, 
-                                     columns=X_cluster.columns, 
-                                     index=['Cluster 0', 'Cluster 1', 'Cluster 2'])
-    
-    # Name clusters based on their characteristics
-    cluster_names = {
-        0: 'Taste Enthusiasts',  # High taste and sweetness ratings
-        1: 'Brand Loyalists',    # High brand reputation ratings
-        2: 'Value Seekers'       # High price ratings
-    }
-    
-    df['Cluster_Name'] = df['Cluster'].map(cluster_names)
-    
-    return df, cluster_centers_df
-
-# Load the data
-df, cluster_centers = load_data()
-
-# App title
-st.markdown("<h1 class='main-header'>Interactive Cola Consumer Dashboard</h1>", unsafe_allow_html=True)
-
-# Section Selection using Radio Buttons
-section = st.radio("Select Analysis Section", [
-    "Executive Dashboard Summary",
-    "Demographic Profile", 
-    "Brand Metrics", 
-    "Basic Attribute Scores", 
-    "Regression Analysis", 
-    "Decision Tree Analysis", 
-    "Cluster Analysis", 
-    "View & Download Full Dataset"
-], horizontal=True)
-
-# Move Filters to main page, below section selection
-st.markdown("<div class='filter-box'>", unsafe_allow_html=True)
-st.subheader("Dashboard Filters")
-
-# Create a 4-column layout for filters
-filter_col1, filter_col2, filter_col3, filter_col4 = st.columns(4)
-
-with filter_col1:
-    # Create filter options with None as first option
-    brand_options = [None] + sorted(df["Brand_Preference"].unique().tolist())
-    brand = st.selectbox("Select a Brand", brand_options, key='brand_main')
-
-with filter_col2:
-    gender_options = [None] + sorted(df["Gender"].unique().tolist())
-    gender = st.selectbox("Select Gender", gender_options, key='gender_main')
-
-with filter_col3:
-    income_options = [None] + sorted(df["Income_Level"].unique().tolist())
-    income = st.selectbox("Select Income Level", income_options, key='income_main')
-
-with filter_col4:
-    cluster_options = [None] + sorted(df["Cluster_Name"].unique().tolist())
-    cluster = st.selectbox("Select Cluster", cluster_options, key='cluster_main')
-
-# Initialize session state for filters if not exists
-if 'filters' not in st.session_state:
-    st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
-
-# Filter action buttons in two columns
-fcol1, fcol2 = st.columns(2)
-
-with fcol1:
-    if st.button("Apply Filters"):
-        st.session_state.filters['brand'] = brand
-        st.session_state.filters['gender'] = gender
-        st.session_state.filters['income'] = income
-        st.session_state.filters['cluster'] = cluster
-        st.rerun()
-
-with fcol2:
-    if st.button("Clear Filters"):
-        st.session_state.filters = {'brand': None, 'gender': None, 'income': None, 'cluster': None}
-        st.rerun()
-
-st.markdown("</div>", unsafe_allow_html=True)
-
-# Apply selected filters to the dataframe
-filtered_df = df.copy()
-if st.session_state.filters['brand']:
-    filtered_df = filtered_df[filtered_df["Brand_Preference"] == st.session_state.filters['brand']]
-if st.session_state.filters['gender']:
-    filtered_df = filtered_df[filtered_df["Gender"] == st.session_state.filters['gender']]
-if st.session_state.filters['income']:
-    filtered_df = filtered_df[filtered_df["Income_Level"] == st.session_state.filters['income']]
-if st.session_state.filters['cluster']:
-    filtered_df = filtered_df[filtered_df["Cluster_Name"] == st.session_state.filters['cluster']]
-
-# Show active filters
-active_filters = [f"{k}: {v}" for k, v in st.session_state.filters.items() if v is not None]
-if active_filters:
-    st.info(f"Active filters: {', '.join(active_filters)} (Total records: {len(filtered_df)})")
-
-# =======================
-# EXECUTIVE DASHBOARD SUMMARY
-# =======================
-if section == "Executive Dashboard Summary":
-    st.markdown("<h2 class='subheader'>Executive Dashboard Summary</h2>", unsafe_allow_html=True)
-    
-    # Overall key metrics
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        # Calculate NPS - Correct formula: % Promoters - % Detractors
-        if not filtered_df.empty:
-            promoters = filtered_df[filtered_df['NPS_Score'] >= 9].shape[0]
-            detractors = filtered_df[filtered_df['NPS_Score'] <= 6].shape[0]
-            total = filtered_df['NPS_Score'].count()
-            
-            # Calculate percentages first, then subtract
-            promoters_pct = (promoters / total) if total > 0 else 0
-            detractors_pct = (detractors / total) if total > 0 else 0
-            nps_score = int((promoters_pct - detractors_pct) * 100)
-            
-            # Display NPS metric
-            st.metric(
-                label="Overall NPS Score",
-                value=nps_score,
-                delta=None
-            )
-        else:
-            st.metric(label="Overall NPS Score", value="No data", delta=None)
-    
-    with col2:
-        # Top brand
-        if not filtered_df.empty:
-            top_brand = filtered_df['Most_Often_Consumed_Brand'].value_counts().idxmax()
-            top_brand_pct = filtered_df['Most_Often_Consumed_Brand'].value_counts(normalize=True).max() * 100
-            
-            st.metric(
-                label="Top Brand",
-                value=top_brand,
-                delta=f"{top_brand_pct:.1f}% Market Share"
-            )
-        else:
-            st.metric(label="Top Brand", value="No data", delta=None)
-    
-    with col3:
-        # Top attribute
-        attributes = ['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 
-                     'Brand_Reputation_Rating', 'Availability_Rating', 
-                     'Sweetness_Rating', 'Fizziness_Rating']
-        
-        if not filtered_df.empty:
-            top_attr = filtered_df[attributes].mean().idxmax()
-            top_attr_score = filtered_df[attributes].mean().max()
-            
-            st.metric(
-                label="Highest Rated Attribute",
-                value=top_attr.replace('_Rating', ''),
-                delta=f"{top_attr_score:.2f}/5"
-            )
-        else:
-            st.metric(label="Highest Rated Attribute", value="No data", delta=None)
-    
-    # Top insights from each section - THIS IS THE WORKING SECTION TO KEEP
-    st.subheader("Key Insights by Analysis Section")
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown("""
-        <div class='insight-box'>
-            <div class='insight-title'>DEMOGRAPHIC INSIGHTS</div>
-            <p>The cola consumer base shows distinct preferences by age group and gender:</p>
-            <ul>
-                <li>Younger consumers (18-34) show higher preference for major brands</li>
-                <li>Gender differences exist in consumption frequency and occasion preferences</li>
-                <li>Income level correlates with brand preference and price sensitivity</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("""
-        <div class='insight-box'>
-            <div class='insight-title'>BRAND METRICS INSIGHTS</div>
-            <p>Brand performance shows clear patterns in consumer behavior:</p>
-            <ul>
-                <li>Major brands dominate market share with loyal consumer bases</li>
-                <li>Home consumption and parties are primary occasions for cola purchase</li>
-                <li>Weekly consumption is most common frequency pattern</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("""
-        <div class='insight-box'>
-            <div class='insight-title'>ATTRIBUTE RATING INSIGHTS</div>
-            <p>Product attributes show varying importance to consumers:</p>
-            <ul>
-                <li>Taste remains the most critical attribute across all segments</li>
-                <li>Price sensitivity varies significantly across demographic groups</li>
-                <li>Brand reputation has strong correlation with overall satisfaction</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-        <div class='insight-box'>
-            <div class='insight-title'>REGRESSION ANALYSIS INSIGHTS</div>
-            <p>The drivers of NPS (loyalty) are clearly identified:</p>
-            <ul>
-                <li>Taste is the strongest predictor of consumer loyalty</li>
-                <li>Brand reputation is the second most influential factor</li>
-                <li>The attributes explain over 50% of variation in NPS scores</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("""
-        <div class='insight-box'>
-            <div class='insight-title'>DECISION TREE INSIGHTS</div>
-            <p>Consumer loyalty can be predicted by key decision factors:</p>
-            <ul>
-                <li>High taste ratings are the primary predictor of promoters</li>
-                <li>Low brand reputation typically indicates detractors</li>
-                <li>The model identifies clear paths to improving NPS scores</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("""
-        <div class='insight-box'>
-            <div class='insight-title'>CLUSTER ANALYSIS INSIGHTS</div>
-            <p>Three distinct consumer segments with different priorities:</p>
-            <ul>
-                <li>Taste Enthusiasts (32%): Focus on sensory experience</li>
-                <li>Brand Loyalists (41%): Value reputation and consistency</li>
-                <li>Value Seekers (27%): Prioritize price and availability</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
-
-# =======================
-# DEMOGRAPHIC PROFILE
-# =======================
-elif section == "Demographic Profile":
-    st.markdown("<h2 class='subheader'>Demographic Profile</h2>", unsafe_allow_html=True)
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        # Age Group Distribution
-        if not filtered_df.empty:
-            age_counts = filtered_df['Age_Group'].value_counts(normalize=True).sort_index() * 100
-            fig = px.bar(
-                x=age_counts.index, 
-                y=age_counts.values, 
-                text=[f"{x:.1f}%" for x in age_counts.values],
-                title='Age Group Distribution (%)',
-                labels={'x': 'Age Group', 'y': 'Percentage (%)'}
-            )
-            fig.update_traces(textposition='outside')
-            st.plotly_chart(fig)
-        else:
-            st.info("No data available for Age Group Distribution with current filters.")
-        
-        # Income Level Distribution
-        if not filtered_df.empty:
-            income_counts = filtered_df['Income_Level'].value_counts(normalize=True) * 100
-            fig = px.pie(
-                values=income_counts.values,
-                names=income_counts.index,
-                title='Income Level Distribution (%)',
-                hole=0.4,
-                labels={'label': 'Income Level', 'value': 'Percentage (%)'}
-            )
-            fig.update_traces(textinfo='label+percent', textposition='inside')
-            st.plotly_chart(fig)
-        else:
-            st.info("No data available for Income Level Distribution with current filters.")
-        
-    with col2:
-        # Gender Distribution
-        if not filtered_df.empty:
-            gender_counts = filtered_df['Gender'].value_counts(normalize=True) * 100
-            fig = px.pie(
-                values=gender_counts.values,
-                names=gender_counts.index,
-                title='Gender Distribution (%)',
-                hole=0.4,
-                labels={'label': 'Gender', 'value': 'Percentage (%)'}
-            )
-            fig.update_traces(textinfo='label+percent', textposition='inside')
-            st.plotly_chart(fig)
-        else:
-            st.info("No data available for Gender Distribution with current filters.")
-        
-        # Age Group by Gender
-        if not filtered_df.empty and len(filtered_df['Gender'].unique()) > 1:
-            age_gender = pd.crosstab(
-                filtered_df['Age_Group'], 
-                filtered_df['Gender'], 
-                normalize='columns'
-            ) * 100
-            
-            fig = px.bar(
-                age_gender, 
-                barmode='group',
-                title='Age Group by Gender (%)',
-                labels={'value': 'Percentage (%)', 'index': 'Age Group'},
-                text_auto='.1f'
-            )
-            fig.update_traces(textposition='outside')
-            st.plotly_chart(fig)
-        else:
-            st.info("Insufficient data for Age Group by Gender analysis with current filters.")
-
-# =======================
-# BRAND METRICS
-# =======================
-elif section == "Brand Metrics":
-    st.markdown("<h2 class='subheader'>Brand Metrics</h2>", unsafe_allow_html=True)
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        # Most Often Consumed Brand
-        if not filtered_df.empty:
-            brand_counts = filtered_df['Most_Often_Consumed_Brand'].value_counts(normalize=True) * 100
-            fig = px.bar(
-                x=brand_counts.index, 
-                y=brand_counts.values,
-                text=[f"{x:.1f}%" for x in brand_counts.values],
-                title='Most Often Consumed Brand (%)',
-                labels={'x': 'Brand', 'y': 'Percentage (%)'}
-            )
-            fig.update_traces(textposition='outside')
-            st.plotly_chart(fig)
-        else:
-            st.info("No data available for Brand analysis with current filters.")
-        
-        # Occasions of Buying
-        if not filtered_df.empty:
-            occasions_counts = filtered_df['Occasions_of_Buying'].value_counts(normalize=True) * 100
-            fig = px.bar(
-                x=occasions_counts.index, 
-                y=occasions_counts.values,
-                text=[f"{x:.1f}%" for x in occasions_counts.values],
-                title='Occasions of Buying (%)',
-                labels={'x': 'Occasion', 'y': 'Percentage (%)'}
-            )
-            fig.update_traces(textposition='outside')
-            st.plotly_chart(fig)
-        else:
-            st.info("No data available for Occasions analysis with current filters.")
-    
-    with col2:
-        # Frequency of Consumption
-        if not filtered_df.empty:
-            freq_counts = filtered_df['Frequency_of_Consumption'].value_counts(normalize=True) * 100
-            # Sort by frequency (not alphabetically)
-            freq_order = ['Daily', 'Weekly', 'Monthly', 'Rarely', 'Never']
-            freq_counts = freq_counts.reindex([f for f in freq_order if f in freq_counts.index])
-            
-            fig = px.bar(
-                x=freq_counts.index,
-                y=freq_counts.values,
-                text=[f"{x:.1f}%" for x in freq_counts.values],
-                title='Frequency of Consumption (%)',
-                labels={'x': 'Frequency', 'y': 'Percentage (%)'}
-            )
-            fig.update_traces(textposition='outside')
-            st.plotly_chart(fig)
-        else:
-            st.info("No data available for Frequency analysis with current filters.")
-        
-        # Satisfaction Level
-        if not filtered_df.empty:
-            sat_counts = filtered_df['Satisfaction_Level'].value_counts(normalize=True) * 100
-            # Sort by satisfaction level
-            sat_order = ['Very Satisfied', 'Satisfied', 'Neutral', 'Dissatisfied', 'Very Dissatisfied']
-            sat_counts = sat_counts.reindex([x for x in sat_order if x in sat_counts.index])
-            
-            fig = px.bar(
-                x=sat_counts.index,
-                y=sat_counts.values,
-                text=[f"{x:.1f}%" for x in sat_counts.values],
-                title='Satisfaction Level (%)',
-                labels={'x': 'Satisfaction Level', 'y': 'Percentage (%)'}
-            )
-            fig.update_traces(textposition='outside')
-            st.plotly_chart(fig)
-        else:
-            st.info("No data available for Satisfaction analysis with current filters.")
-
-# =======================
-# BASIC ATTRIBUTE SCORES
-# =======================
-elif section == "Basic Attribute Scores":
-    st.markdown("<h2 class='subheader'>Basic Attribute Scores</h2>", unsafe_allow_html=True)
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        # All attribute ratings
-        attributes = [
-            'Taste_Rating', 'Price_Rating', 'Packaging_Rating', 
-            'Brand_Reputation_Rating', 'Availability_Rating', 
-            'Sweetness_Rating', 'Fizziness_Rating'
-        ]
-        
-        if not filtered_df.empty:
-            avg_scores = filtered_df[attributes].mean().sort_values(ascending=False)
-            
-            fig = px.bar(
-                x=avg_scores.index,
-                y=avg_scores.values,
-                text=[f"{x:.2f}" for x in avg_scores.values],
-                title='Average Attribute Ratings',
-                labels={'x': 'Attribute', 'y': 'Average Rating (1-5)'}
-            )
-            fig.update_traces(textposition='outside')
-            fig.update_layout(xaxis={'categoryorder': 'total descending'})
-            st.plotly_chart(fig)
-        else:
-            st.info("No data available for Attribute Ratings with current filters.")
-    
-    with col2:
-        # Calculate NPS score
-        if not filtered_df.empty:
-            promoters = filtered_df[filtered_df['NPS_Score'] >= 9].shape[0]
-            detractors = filtered_df[filtered_df['NPS_Score'] <= 6].shape[0]
-            total = filtered_df['NPS_Score'].count()
-            
-            # Get percentages before calculating NPS
-            promoters_pct = (promoters / total) if total > 0 else 0
-            detractors_pct = (detractors / total) if total > 0 else 0 
-            nps_score = int((promoters_pct - detractors_pct) * 100)
-            
-            # Display NPS gauge chart
-            fig = go.Figure(go.Indicator(
-                mode="gauge+number",
-                value=nps_score,
-                title={'text': "Net Promoter Score (NPS)"},
-                gauge={
-                    'axis': {'range': [-100, 100]},
-                    'bar': {'color': "darkblue"},
-                    'steps': [
-                        {'range': [-100, 0], 'color': "red"},
-                        {'range': [0, 30], 'color': "orange"},
-                        {'range': [30, 70], 'color': "yellow"},
-                        {'range': [70, 100], 'color': "green"}
-                    ]
-                }
-            ))
-            st.plotly_chart(fig)
-        else:
-            st.info("No data available for NPS Score with current filters.")
-    
-    # NPS by Demographics section
-    st.subheader("NPS by Demographics")
-    
-    col1, col2 = st.columns(2)
-    
-    # Gender Analysis
-    with col1:
-        if filtered_df.empty:
-            st.info("No data available for NPS Gender analysis.")
-        else:
-            if len(filtered_df['Gender'].unique()) <= 1:
-                st.info("Insufficient unique gender data for comparison.")
-            else:
-                # Calculate NPS by gender
-                gender_results = []
-                for gender in filtered_df['Gender'].unique():
-                    gender_df = filtered_df[filtered_df['Gender'] == gender]
-                    promoters = gender_df[gender_df['NPS_Score'] >= 9].shape[0]
-                    detractors = gender_df[gender_df['NPS_Score'] <= 6].shape[0]
-                    total = gender_df.shape[0]
-                    
-                    # Calculate NPS
-                    promoters_pct = promoters / total if total > 0 else 0
-                    detractors_pct = detractors / total if total > 0 else 0
-                    nps = (promoters_pct - detractors_pct) * 100
-                    
-                    gender_results.append({
-                        'Gender': gender,
-                        'NPS': nps
-                    })
-                
-                # Create dataframe for plotting
-                gender_df = pd.DataFrame(gender_results)
-                
-                # Create bar chart
-                fig = px.bar(
-                    gender_df,
-                    x='Gender',
-                    y='NPS',
-                    title='NPS Score by Gender',
-                    text=[f"{x:.1f}" for x in gender_df['NPS']],
-                    color='NPS',
-                    color_continuous_scale=px.colors.diverging.RdBu,
-                    color_continuous_midpoint=0
-                )
-                fig.update_traces(textposition='outside')
-                st.plotly_chart(fig)
-    
-    # Age Group Analysis
-    with col2:
-        if filtered_df.empty:
-            st.info("No data available for NPS Age Group analysis.")
-        else:
-            if len(filtered_df['Age_Group'].unique()) <= 1:
-                st.info("Insufficient unique age group data for comparison.")
-            else:
-                # Calculate NPS by age group
-                age_results = []
-                for age_group in sorted(filtered_df['Age_Group'].unique()):
-                    age_df = filtered_df[filtered_df['Age_Group'] == age_group]
-                    promoters = age_df[age_df['NPS_Score'] >= 9].shape[0]
-                    detractors = age_df[age_df['NPS_Score'] <= 6].shape[0]
-                    total = age_df.shape[0]
-                    
-                    # Calculate NPS
-                    promoters_pct = promoters / total if total > 0 else 0
-                    detractors_pct = detractors / total if total > 0 else 0
-                    nps = (promoters_pct - detractors_pct) * 100
-                    
-                    age_results.append({
-                        'Age_Group': age_group,
-                        'NPS': nps
-                    })
-                
-                # Create dataframe for plotting
-                age_df = pd.DataFrame(age_results)
-                
-                # Create bar chart
-                fig = px.bar(
-                    age_df,
-                    x='Age_Group',
-                    y='NPS',
-                    title='NPS Score by Age Group',
-                    text=[f"{x:.1f}" for x in age_df['NPS']],
-                    color='NPS',
-                    color_continuous_scale=px.colors.diverging.RdBu,
-                    color_continuous_midpoint=0
-                )
-                fig.update_traces(textposition='outside')
-                st.plotly_chart(fig)
-
-# =======================
-# REGRESSION ANALYSIS
-# =======================
-elif section == "Regression Analysis":
-    st.markdown("<h2 class='subheader'>Regression Analysis</h2>", unsafe_allow_html=True)
-    
-    # Check if we have enough data
-    if len(filtered_df) < 10:
-        st.warning("Insufficient data for regression analysis. Please adjust your filters.")
-    else:
-        # Prepare data for regression
-        X_reg = filtered_df[['Taste_Rating', 'Price_Rating', 'Packaging_Rating', 
-                           'Brand_Reputation_Rating', 'Availability_Rating', 
-                           'Sweetness_Rating', 'Fizziness_Rating']]
-        
-        y_reg = filtered_df['NPS_Score']
-        
-        # Add constant to predictor variables
-        X_reg = sm.add_constant(X_reg)
-        
-        # Fit regression model
-        model = sm.OLS(y_reg, X_reg).fit()
-        
-        # Display regression results
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            st.subheader("Regression Summary")
-            
-            # Create a dataframe for coefficients
-            coef_df = pd.DataFrame({
-                'Feature': X_reg.columns,
-                'Coefficient': model.params,
-                'P-Value': model.pvalues,
-                'Significant': model.pvalues < 0.05
-            })
-            
-            # Sort by absolute coefficient value
-            coef_df = coef_df.sort_values(by='Coefficient', key=abs, ascending=False)
-            
-            # Format p-values
-            coef_df['P-Value'] = coef_df['P-Value'].apply(lambda x: f"{x:.4f}")
-            coef_df['Coefficient'] = coef_df['Coefficient'].apply(lambda x: f"{x:.4f}")
-            
-            # Display table
-            st.dataframe(coef_df, use_container_width=True)
-            
-            # Display key metrics
-            st.write(f"**R-squared:** {model.rsquared:.4f}")
-            st.write(f"**Adjusted R-squared:** {model.rsquared_adj:.4f}")
-            st.write(f"**F-statistic:** {model.fvalue:.4f}")
-            st.write(f"**Prob (F-statistic):** {model.f_pvalue:.4f}")
-        
-        with col2:
-            # Visualization of coefficients
-            sig_coefs = coef_df[coef_df['Feature'] != 'const']
-            colors = ['green' if p else 'red' for p in sig_coefs['Significant']]
             
             fig = px.bar(
                 sig_coefs,
@@ -1631,7 +935,7 @@ elif section == "Cluster Analysis":
                 # Display loadings
                 st.dataframe(loadings.round(3), use_container_width=True)
             else:
-                st.info("Insufficient data for factor analysis. Minimum of 50 records required.")
+                st.info("Insufficient data for factor analysis. Minimum of a few hundred records required (minimum 50).")
         
         with col2:
             # Cluster centers
@@ -1725,6 +1029,143 @@ elif section == "Cluster Analysis":
                     st.write("No data available for this cluster with current filters.")
 
 # =======================
+# ADVANCED ANALYTICS EXPLAINED
+# =======================
+elif section == "Advanced Analytics Explained":
+    st.markdown("<h2 class='subheader'>Advanced Analytics Explained</h2>", unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class="explained-box">
+        <div class="explained-title">ADVANCED ANALYTICS EXPLAINED</div>
+        
+        <div class="explained-subtitle">1. Regression Analysis: Predicting Outcomes Based on Factors</div>
+        
+        <p>Regression analysis helps us understand how different factors (e.g.,
+        taste, price, fizziness) influence the Net Promoter Score (NPS). The
+        analysis determines which attributes are significant drivers of customer
+        satisfaction and brand loyalty.</p>
+        
+        <p>We performed an <strong>Ordinary Least Squares (OLS) regression analysis</strong> to
+        examine how <strong>cola attribute ratings</strong> (Taste, Price, Packaging, Brand
+        Reputation, Availability, Sweetness, and Fizziness) impact the <strong>Net
+        Promoter Score (NPS)</strong>.</p>
+        
+        <div class="example-box">
+            <p class="example-title">Example: Coffee Shop Sales</p>
+            
+            <p>Imagine you own a <strong>coffee shop</strong> and want to know what <strong>affects your
+            daily sales</strong>. You suspect that sales depend on factors like:<br>
+            ☀️ <strong>Weather</strong> (Hot or Cold)<br>
+            💰 <strong>Price of Coffee</strong> (Higher prices might reduce sales)<br>
+            📢 <strong>Advertising Spend</strong> (More ads might increase sales)</p>
+            
+            <p>If you collect data for a month and run <strong>Regression Analysis</strong>, it will
+            tell you:<br>
+            ✅ How much <strong>each factor</strong> (weather, price, ads) influences sales<br>
+            ✅ If <strong>raising prices decreases sales</strong> significantly<br>
+            ✅ Whether <strong>advertising is actually helping or not</strong></p>
+            
+            <p><strong>In the Cola Market Study:</strong><br>
+            We used <strong>Regression Analysis</strong> to see which factors (e.g., <strong>taste,
+            price, fizziness</strong>) affect <strong>customer loyalty (Net Promoter Score -
+            NPS)</strong>.</p>
+        </div>
+        
+        <div class="explained-subtitle">2. Decision Tree Analysis: Making Decisions Like a Flowchart</div>
+        
+        <p>A decision tree is a visual model that helps us determine how different
+        variables influence customer loyalty. It works by splitting the data
+        into branches based on key decision points, showing the most influential
+        factors in predicting whether a consumer is a promoter or a detractor.</p>
+        
+        <div class="example-box">
+            <p class="example-title">Example: Choosing a Movie to Watch</p>
+            
+            <p>Let's say you're trying to <strong>decide which movie to watch</strong>. You might
+            ask yourself:</p>
+            
+            <p>1. <strong>Do I want an action movie?</strong> → If YES, then <strong>choose John Wick</strong><br>
+            2. <strong>If NO, do I want a comedy?</strong> → If YES, then <strong>choose The
+            Hangover</strong><br>
+            3. <strong>If NO, do I want a drama?</strong> → If YES, then <strong>choose The Shawshank
+            Redemption</strong><br>
+            4. <strong>If NO, then I won't watch a movie!</strong></p>
+            
+            <p>A <strong>Decision Tree</strong> does the same thing but with <strong>data-driven logic</strong>.</p>
+            
+            <p><strong>In the Cola Market Study:</strong><br>
+            The <strong>Decision Tree</strong> showed that <strong>Fizziness and Taste</strong> were the
+            <strong>biggest factors</strong> in whether a customer is a <strong>promoter</strong> or
+            <strong>detractor</strong> of a cola brand.</p>
+        </div>
+        
+        <div class="explained-subtitle">3. Factor & Cluster Analysis: Grouping Similar Things Together</div>
+        
+        <p><strong>Factor analysis</strong> is used to reduce a large number of attributes into
+        a smaller set of underlying factors that explain consumer preferences.
+        This helps us identify key themes such as Taste & Fizziness, Brand
+        Reputation, and Pricing Sensitivity.</p>
+        
+        <p>We conducted <strong>Factor Analysis</strong> to extract key consumer preference
+        dimensions and <strong>K-Means Clustering</strong> to identify distinct customer
+        segments.</p>
+        
+        <div class="example-box">
+            <p class="example-title">Factor Analysis Example: Organizing Your Closet</p>
+            
+            <p>Imagine your closet is messy, and you decide to <strong>organize it into
+            categories</strong>:<br>
+            👔 <strong>Work Clothes</strong> (Shirts, Trousers, Formal Shoes)<br>
+            👕 <strong>Casual Clothes</strong> (T-Shirts, Jeans, Sneakers)<br>
+            🎽 <strong>Gym Clothes</strong> (Sportswear, Running Shoes)</p>
+            
+            <p>You <strong>group</strong> your clothes based on their <strong>purpose</strong> rather than
+            sorting each item individually.</p>
+            
+            <p><strong>Factor Analysis (Finding Underlying Factors)</strong></p>
+            
+            <p>Now, let's say you notice that <strong>Work Clothes and Casual Clothes</strong> have
+            a common theme:<br>
+            👕👔 → <strong>"Style Factor"</strong> (Formal vs. Casual)<br>
+            👟🥾 → <strong>"Comfort Factor"</strong> (Sneakers vs. Dress Shoes)</p>
+            
+            <p>Factor Analysis does this with <strong>customer preferences</strong> by identifying
+            <strong>hidden relationships</strong> between choices.</p>
+            
+            <p><strong>Cluster Analysis (Grouping People Based on Similarity)</strong></p>
+            
+            <p><strong>Cluster analysis</strong> groups consumers into meaningful segments based on
+            similar behaviour patterns. By identifying these clusters, brands can
+            tailor their marketing strategies and product offerings to specific
+            target audiences.</p>
+            
+            <p>Once the clothes are categorized, imagine <strong>grouping people</strong> based on
+            what they wear most:<br>
+            🧑‍💼 <strong>Professionals</strong> → Mostly Work Clothes<br>
+            🎮 <strong>Gamers</strong> → Mostly Casual Clothes<br>
+            🏃 <strong>Athletes</strong> → Mostly Gym Clothes</p>
+            
+            <p>Cluster Analysis does the same thing with <strong>customer data</strong>, grouping
+            similar consumers together.</p>
+            
+            <p><strong>In the Cola Market Study:</strong><br>
+            We identified <strong>three customer groups</strong>:<br>
+            🥤 <strong>Fizz-Lovers</strong> → People who prefer high carbonation<br>
+            🏷️ <strong>Brand-Conscious Consumers</strong> → People who choose based on branding<br>
+            💰 <strong>Budget-Friendly Drinkers</strong> → People who prefer low-cost options</p>
+        </div>
+        
+        <div class="explained-subtitle">Final Takeaway</div>
+        
+        <p>
+        📊 <strong>Regression Analysis</strong> helps us understand <strong>cause & effect</strong> (e.g., what affects sales).<br>
+        🌳 <strong>Decision Trees</strong> help us <strong>visually map out decision-making processes</strong>.<br>
+        🛍️ <strong>Factor & Cluster Analysis</strong> help us <strong>group related behaviors & consumers</strong>.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+# =======================
 # VIEW & DOWNLOAD FULL DATASET
 # =======================
 elif section == "View & Download Full Dataset":
@@ -1757,6 +1198,6 @@ elif section == "View & Download Full Dataset":
             mime="text/csv"
         )
 
-# Footer
+# Footer with contact email as a clickable link
 st.markdown("---")
-st.markdown("**Cola Survey Dashboard** | Created with Streamlit")
+st.markdown("<div style='text-align: center;'>Cola Survey Dashboard | Created by <a href='mailto:aneesh@insights3d.com'>Aneesh Laiwala (aneesh@insights3d.com)</a></div>", unsafe_allow_html=True)
