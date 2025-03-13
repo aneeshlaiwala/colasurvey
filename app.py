@@ -1,38 +1,88 @@
+# Add these imports at the top of your script, with the other imports
+import io
+from reportlab.lib.pagesizes import letter
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.enums import TA_JUSTIFY, TA_CENTER, TA_LEFT
 
-    story.append(Paragraph("Advanced Analytics Explained", styles['Title']))
+def create_advanced_analytics_pdf():
+    """Generate PDF explaining advanced analytics techniques"""
+    # Create a buffer to store the PDF
+    buffer = io.BytesIO()
+    
+    # Create the PDF document
+    doc = SimpleDocTemplate(buffer, pagesize=letter,
+                            rightMargin=72, leftMargin=72,
+                            topMargin=72, bottomMargin=18)
+    
+    # Create story (content to add to PDF)
+    story = []
+    
+    # Get styles
+    styles = getSampleStyleSheet()
+    
+    # Custom styles
+    title_style = styles['Title'].clone('Title')
+    title_style.fontSize = 16
+    title_style.textColor = 'darkblue'
+    title_style.alignment = TA_CENTER
+    
+    subtitle_style = styles['Heading2'].clone('Subtitle')
+    subtitle_style.fontSize = 14
+    subtitle_style.textColor = 'darkgreen'
+    
+    body_style = styles['Normal'].clone('BodyText')
+    body_style.fontSize = 10
+    body_style.alignment = TA_JUSTIFY
+    
+    # Title
+    story.append(Paragraph("Advanced Analytics Explained", title_style))
     story.append(Spacer(1, 12))
     
-    # Section 1: Regression Analysis
-    story.append(Paragraph("1. Regression Analysis: Predicting Outcomes Based on Factors", styles['Subtitle']))
-    story.append(Paragraph("Regression analysis helps us understand how different factors (e.g., taste, price, fizziness) influence the Net Promoter Score (NPS). The analysis determines which attributes are significant drivers of customer satisfaction and brand loyalty.", styles['BodyText']))
-    story.append(Spacer(1, 6))
+    # Sections
+    sections = [
+        {
+            'title': "1. Regression Analysis: Predicting Outcomes Based on Factors",
+            'content': [
+                "Regression analysis helps us understand how different factors (e.g., taste, price, fizziness) influence the Net Promoter Score (NPS).",
+                "The analysis determines which attributes are significant drivers of customer satisfaction and brand loyalty.",
+                "We performed an Ordinary Least Squares (OLS) regression analysis to examine how cola attribute ratings impact the Net Promoter Score (NPS)."
+            ]
+        },
+        {
+            'title': "2. Decision Tree Analysis: Making Decisions Like a Flowchart",
+            'content': [
+                "A decision tree is a visual model that helps us determine how different variables influence customer loyalty.",
+                "It works by splitting the data into branches based on key decision points.",
+                "This shows the most influential factors in predicting whether a consumer is a promoter or a detractor."
+            ]
+        },
+        {
+            'title': "3. Factor & Cluster Analysis: Grouping Similar Things Together",
+            'content': [
+                "Factor analysis reduces a large number of attributes into a smaller set of underlying factors that explain consumer preferences.",
+                "This helps identify key themes such as Taste & Fizziness, Brand Reputation, and Pricing Sensitivity.",
+                "Cluster analysis groups consumers into meaningful segments based on similar behaviour patterns."
+            ]
+        }
+    ]
     
-    story.append(Paragraph("We performed an Ordinary Least Squares (OLS) regression analysis to examine how cola attribute ratings (Taste, Price, Packaging, Brand Reputation, Availability, Sweetness, and Fizziness) impact the Net Promoter Score (NPS).", styles['BodyText']))
-    story.append(Spacer(1, 12))
-    
-    # Example: Coffee Shop Sales
-    story.append(Paragraph("Example: Coffee Shop Sales", styles['Subtitle']))
-    story.append(Paragraph("Imagine you own a coffee shop and want to know what affects your daily sales. You suspect that sales depend on factors like:", styles['BodyText']))
-    story.append(Paragraph("• Weather (Hot or Cold)", styles['BodyText']))
-    story.append(Paragraph("• Price of Coffee (Higher prices might reduce sales)", styles['BodyText']))
-    story.append(Paragraph("• Advertising Spend (More ads might increase sales)", styles['BodyText']))
-    story.append(Spacer(1, 6))
-    
-    # Section 2: Decision Tree Analysis
-    story.append(Paragraph("2. Decision Tree Analysis: Making Decisions Like a Flowchart", styles['Subtitle']))
-    story.append(Paragraph("A decision tree is a visual model that helps us determine how different variables influence customer loyalty. It works by splitting the data into branches based on key decision points, showing the most influential factors in predicting whether a consumer is a promoter or a detractor.", styles['BodyText']))
-    story.append(Spacer(1, 12))
-    
-    # Section 3: Factor & Cluster Analysis
-    story.append(Paragraph("3. Factor & Cluster Analysis: Grouping Similar Things Together", styles['Subtitle']))
-    story.append(Paragraph("Factor analysis is used to reduce a large number of attributes into a smaller set of underlying factors that explain consumer preferences. This helps us identify key themes such as Taste & Fizziness, Brand Reputation, and Pricing Sensitivity.", styles['BodyText']))
-    story.append(Spacer(1, 12))
+    # Add sections to the story
+    for section in sections:
+        story.append(Paragraph(section['title'], subtitle_style))
+        for paragraph in section['content']:
+            story.append(Paragraph(paragraph, body_style))
+        story.append(Spacer(1, 12))
     
     # Final Takeaway
-    story.append(Paragraph("Final Takeaway", styles['Subtitle']))
-    story.append(Paragraph("• Regression Analysis helps us understand cause & effect (e.g., what affects sales).", styles['BodyText']))
-    story.append(Paragraph("• Decision Trees help us visually map out decision-making processes.", styles['BodyText']))
-    story.append(Paragraph("• Factor & Cluster Analysis help us group related behaviors & consumers.", styles['BodyText']))
+    story.append(Paragraph("Final Takeaway", subtitle_style))
+    takeaways = [
+        "Regression Analysis helps us understand cause & effect (e.g., what affects sales).",
+        "Decision Trees help us visually map out decision-making processes.",
+        "Factor & Cluster Analysis help us group related behaviors & consumers."
+    ]
+    for takeaway in takeaways:
+        story.append(Paragraph(f"• {takeaway}", body_style))
     
     # Build PDF
     doc.build(story)
@@ -42,7 +92,7 @@
     buffer.close()
     
     return pdf_content
-# COPIED TILL HERE
+    # COPIED TILL HERE
 
 import streamlit as st  # Import Streamlit first
 st.set_page_config(layout="wide", page_title="Cola Consumer Dashboard", page_icon="🥤")  # Then set the page configuration
@@ -1076,17 +1126,13 @@ elif section == "Cluster Analysis":
 
 # =======================
 # ADVANCED ANALYTICS EXPLAINED
-# =======================
-elif section == "Advanced Analytics Explained":
+# =======================elif section == "Advanced Analytics Explained":
     st.markdown("<h2 class='subheader'>Advanced Analytics Explained</h2>", unsafe_allow_html=True)
-    
-    # Generate the PDF content
-    advanced_analytics_pdf_content = create_advanced_analytics_pdf()
     
     # Create download button with the PDF content
     st.download_button(
         label="Download Advanced Analytics Explanation (PDF)",
-        data=advanced_analytics_pdf_content,
+        data=create_advanced_analytics_pdf(),
         file_name="advanced_analytics_explained.pdf",
         mime="application/pdf",
         help="Click to download the detailed explanation of advanced analytics techniques used in this dashboard"
