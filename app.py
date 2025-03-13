@@ -1,3 +1,49 @@
+
+    story.append(Paragraph("Advanced Analytics Explained", styles['Title']))
+    story.append(Spacer(1, 12))
+    
+    # Section 1: Regression Analysis
+    story.append(Paragraph("1. Regression Analysis: Predicting Outcomes Based on Factors", styles['Subtitle']))
+    story.append(Paragraph("Regression analysis helps us understand how different factors (e.g., taste, price, fizziness) influence the Net Promoter Score (NPS). The analysis determines which attributes are significant drivers of customer satisfaction and brand loyalty.", styles['BodyText']))
+    story.append(Spacer(1, 6))
+    
+    story.append(Paragraph("We performed an Ordinary Least Squares (OLS) regression analysis to examine how cola attribute ratings (Taste, Price, Packaging, Brand Reputation, Availability, Sweetness, and Fizziness) impact the Net Promoter Score (NPS).", styles['BodyText']))
+    story.append(Spacer(1, 12))
+    
+    # Example: Coffee Shop Sales
+    story.append(Paragraph("Example: Coffee Shop Sales", styles['Subtitle']))
+    story.append(Paragraph("Imagine you own a coffee shop and want to know what affects your daily sales. You suspect that sales depend on factors like:", styles['BodyText']))
+    story.append(Paragraph("• Weather (Hot or Cold)", styles['BodyText']))
+    story.append(Paragraph("• Price of Coffee (Higher prices might reduce sales)", styles['BodyText']))
+    story.append(Paragraph("• Advertising Spend (More ads might increase sales)", styles['BodyText']))
+    story.append(Spacer(1, 6))
+    
+    # Section 2: Decision Tree Analysis
+    story.append(Paragraph("2. Decision Tree Analysis: Making Decisions Like a Flowchart", styles['Subtitle']))
+    story.append(Paragraph("A decision tree is a visual model that helps us determine how different variables influence customer loyalty. It works by splitting the data into branches based on key decision points, showing the most influential factors in predicting whether a consumer is a promoter or a detractor.", styles['BodyText']))
+    story.append(Spacer(1, 12))
+    
+    # Section 3: Factor & Cluster Analysis
+    story.append(Paragraph("3. Factor & Cluster Analysis: Grouping Similar Things Together", styles['Subtitle']))
+    story.append(Paragraph("Factor analysis is used to reduce a large number of attributes into a smaller set of underlying factors that explain consumer preferences. This helps us identify key themes such as Taste & Fizziness, Brand Reputation, and Pricing Sensitivity.", styles['BodyText']))
+    story.append(Spacer(1, 12))
+    
+    # Final Takeaway
+    story.append(Paragraph("Final Takeaway", styles['Subtitle']))
+    story.append(Paragraph("• Regression Analysis helps us understand cause & effect (e.g., what affects sales).", styles['BodyText']))
+    story.append(Paragraph("• Decision Trees help us visually map out decision-making processes.", styles['BodyText']))
+    story.append(Paragraph("• Factor & Cluster Analysis help us group related behaviors & consumers.", styles['BodyText']))
+    
+    # Build PDF
+    doc.build(story)
+    
+    # Get the value of the BytesIO buffer and write it to a variable
+    pdf_content = buffer.getvalue()
+    buffer.close()
+    
+    return pdf_content
+# COPIED TILL HERE
+
 import streamlit as st  # Import Streamlit first
 st.set_page_config(layout="wide", page_title="Cola Consumer Dashboard", page_icon="🥤")  # Then set the page configuration
 
@@ -1031,18 +1077,16 @@ elif section == "Cluster Analysis":
 # =======================
 # ADVANCED ANALYTICS EXPLAINED
 # =======================
-# Previous code remains the same, but replace the elif block for "Advanced Analytics Explained" with:
 elif section == "Advanced Analytics Explained":
     st.markdown("<h2 class='subheader'>Advanced Analytics Explained</h2>", unsafe_allow_html=True)
     
-    # Read the PDF file
-    with open("advanced_analytics_explained.pdf", "rb") as pdf_file:
-        pdf_bytes = pdf_file.read()
+    # Generate the PDF content
+    advanced_analytics_pdf_content = create_advanced_analytics_pdf()
     
-    # Create download button for the PDF
+    # Create download button with the PDF content
     st.download_button(
         label="Download Advanced Analytics Explanation (PDF)",
-        data=pdf_bytes,
+        data=advanced_analytics_pdf_content,
         file_name="advanced_analytics_explained.pdf",
         mime="application/pdf",
         help="Click to download the detailed explanation of advanced analytics techniques used in this dashboard"
@@ -1061,6 +1105,7 @@ elif section == "Advanced Analytics Explained":
         <p>Each technique is explained with real-world analogies to help you understand the insights derived from the data.</p>
     </div>
     """, unsafe_allow_html=True)
+
 # =======================
 # VIEW & DOWNLOAD FULL DATASET
 # =======================
