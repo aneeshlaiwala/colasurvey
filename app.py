@@ -32,9 +32,9 @@ def create_advanced_analytics_pdf():
     # Get styles
     styles = getSampleStyleSheet()
     
-    # Custom styles with improved typography
+    # Custom styles
     title_style = styles['Title'].clone('Title')
-    title_style.fontSize = 20
+    title_style.fontSize = 18
     title_style.textColor = darkblue
     title_style.alignment = TA_CENTER
     title_style.fontName = 'Helvetica-Bold'
@@ -50,69 +50,62 @@ def create_advanced_analytics_pdf():
     body_style.fontName = 'Helvetica'
     body_style.textColor = black
     
-    example_style = body_style.clone('ExampleText')
-    example_style.fontSize = 11
+    bold_style = body_style.clone('BoldText')
+    bold_style.fontName = 'Helvetica-Bold'
     
     # Title
     story.append(Paragraph("ADVANCED ANALYTICS EXPLAINED", title_style))
     story.append(Spacer(1, 12))
     
-    # Sections with detailed content from the Word document
-    sections = [
-        {
-            'title': "1. Regression Analysis: Predicting Outcomes Based on Factors",
-            'content': [
-                "Regression analysis helps us understand how different factors (e.g., taste, price, fizziness) influence the Net Promoter Score (NPS).",
-                "The analysis determines which attributes are significant drivers of customer satisfaction and brand loyalty.",
-                "We performed an Ordinary Least Squares (OLS) regression analysis to examine how cola attribute ratings (Taste, Price, Packaging, Brand Reputation, Availability, Sweetness, and Fizziness) impact the Net Promoter Score (NPS)."
-            ],
-            'example': {
-                'title': "Example: Coffee Shop Sales",
-                'content': [
-                    "Imagine you own a coffee shop and want to know what affects your daily sales. You suspect that sales depend on factors like:",
-                    "• Weather (Hot or Cold)",
-                    "• Price of Coffee (Higher prices might reduce sales)",
-                    "• Advertising Spend (More ads might increase sales)",
-                    "",
-                    "If you collect data for a month and run Regression Analysis, it will tell you:",
-                    "1. How much each factor (weather, price, ads) influences sales",
-                    "2. If raising prices decreases sales significantly",
-                    "3. Whether advertising is actually helping or not",
-                    "",
-                    "In the Cola Market Study:",
-                    "We used Regression Analysis to see which factors (e.g., taste, price, fizziness) affect customer loyalty (Net Promoter Score - NPS)."
-                ]
-            }
-        },
-        # ... [rest of the sections remain the same as in the previous version]
-    ]
+    # Regression Analysis Section
+    story.append(Paragraph("1. Regression Analysis: Predicting Outcomes Based on Factors", section_title_style))
+    story.append(Spacer(1, 6))
     
-    # Add sections to the story
-    for section in sections:
-        story.append(Paragraph(section['title'], section_title_style))
-        story.append(Spacer(1, 6))
-        
-        # Main content
-        for paragraph in section['content']:
-            story.append(Paragraph(paragraph, body_style))
-        
-        story.append(Spacer(1, 6))
-        
-        # Example section
-        story.append(Paragraph(section['example']['title'], section_title_style))
-        
-        for paragraph in section['example']['content']:
-            story.append(Paragraph(paragraph, example_style))
-        
-        story.append(Spacer(1, 12))
+    story.append(Paragraph("Regression analysis helps us understand how different factors (e.g., taste, price, fizziness) influence the Net Promoter Score (NPS). The analysis determines which attributes are significant drivers of customer satisfaction and brand loyalty.", body_style))
+    
+    story.append(Paragraph("We performed an <b>Ordinary Least Squares (OLS) regression analysis</b> to examine how <b>cola attribute ratings</b> (Taste, Price, Packaging, Brand Reputation, Availability, Sweetness, and Fizziness) impact the <b>Net Promoter Score (NPS)</b>.", body_style))
+    
+    story.append(Spacer(1, 6))
+    
+    # Example Section
+    story.append(Paragraph("Example: Coffee Shop Sales", section_title_style))
+    story.append(Spacer(1, 6))
+    
+    story.append(Paragraph("Imagine you own a <b>coffee shop</b> and want to know what <b>affects your daily sales</b>. You suspect that sales depend on factors like:", body_style))
+    
+    example_items = [
+        "<b>Weather</b> (Hot or Cold)",
+        "<b>Price of Coffee</b> (Higher prices might reduce sales)",
+        "<b>Advertising Spend</b> (More ads might increase sales)"
+    ]
+    for item in example_items:
+        story.append(Paragraph(item, body_style))
+    
+    story.append(Paragraph("If you collect data for a month and run <b>Regression Analysis</b>, it will tell you:", body_style))
+    
+    analysis_points = [
+        "1. How much <b>each factor</b> (weather, price, ads) influences sales",
+        "2. If <b>raising prices decreases sales</b> significantly",
+        "3. Whether <b>advertising is actually helping or not</b>"
+    ]
+    for point in analysis_points:
+        story.append(Paragraph(point, body_style))
+    
+    story.append(Spacer(1, 6))
+    
+    story.append(Paragraph("In the Cola Market Study:", body_style))
+    story.append(Paragraph("We used <b>Regression Analysis</b> to see which factors (e.g., <b>taste, price, fizziness</b>) affect <b>customer loyalty (Net Promoter Score - NPS)</b>.", body_style))
+    
+    story.append(Spacer(1, 12))
     
     # Final Takeaway
     story.append(Paragraph("Final Takeaway", section_title_style))
     story.append(Spacer(1, 6))
+    
     takeaways = [
-        "• Regression Analysis helps us understand cause & effect (e.g., what affects sales).",
-        "• Decision Trees help us visually map out decision-making processes.",
-        "• Factor & Cluster Analysis help us group related behaviors & consumers."
+        "<b>Regression Analysis</b> helps us understand <b>cause & effect</b> (e.g., what affects sales).",
+        "<b>Decision Trees</b> help us <b>visually map out decision-making processes</b>.",
+        "<b>Factor & Cluster Analysis</b> help us <b>group related behaviors & consumers</b>."
     ]
     for takeaway in takeaways:
         story.append(Paragraph(takeaway, body_style))
