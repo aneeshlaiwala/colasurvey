@@ -166,7 +166,23 @@ st.markdown("<div class='filter-box'>", unsafe_allow_html=True)
 st.subheader("Dashboard Filters")
 
 # Create a 4-column layout for filters
+# Create a 4-column layout for filters
 filter_col1, filter_col2, filter_col3, filter_col4 = st.columns(4)
+
+# Handle clear filter button click first
+if st.session_state.clear_clicked:
+    selected_brand = None
+    selected_gender = None
+    selected_income = None
+    selected_cluster = None
+    # Reset the flag after using it
+    st.session_state.clear_clicked = False
+else:
+    # Use existing values if not clearing
+    selected_brand = st.session_state.filters['brand']
+    selected_gender = st.session_state.filters['gender']
+    selected_income = st.session_state.filters['income']
+    selected_cluster = st.session_state.filters['cluster']
 
 with filter_col1:
     # Create filter options with None as first option
@@ -174,8 +190,7 @@ with filter_col1:
     selected_brand = st.selectbox(
         "Select a Brand", 
         options=brand_options, 
-        index=0 if st.session_state.filters['brand'] is None 
-        else brand_options.index(st.session_state.filters['brand'])
+        index=0 if selected_brand is None else brand_options.index(selected_brand)
     )
 
 with filter_col2:
@@ -183,8 +198,7 @@ with filter_col2:
     selected_gender = st.selectbox(
         "Select Gender", 
         options=gender_options, 
-        index=0 if st.session_state.filters['gender'] is None 
-        else gender_options.index(st.session_state.filters['gender'])
+        index=0 if selected_gender is None else gender_options.index(selected_gender)
     )
 
 with filter_col3:
@@ -192,8 +206,7 @@ with filter_col3:
     selected_income = st.selectbox(
         "Select Income Level", 
         options=income_options, 
-        index=0 if st.session_state.filters['income'] is None 
-        else income_options.index(st.session_state.filters['income'])
+        index=0 if selected_income is None else income_options.index(selected_income)
     )
 
 with filter_col4:
@@ -201,8 +214,7 @@ with filter_col4:
     selected_cluster = st.selectbox(
         "Select Cluster", 
         options=cluster_options, 
-        index=0 if st.session_state.filters['cluster'] is None 
-        else cluster_options.index(st.session_state.filters['cluster'])
+        index=0 if selected_cluster is None else cluster_options.index(selected_cluster)
     )
 
 # Filter action buttons in two columns
@@ -227,7 +239,10 @@ with fcol2:
             'income': None, 
             'cluster': None
         }
-        st.rerun()  # Use st.rerun() for Streamlit versions >= 1.18.0
+        # Set flag to indicate clear button was clicked
+        st.session_state.clear_clicked = True
+        # Force a refresh of the page
+        st.rerun()
 
 st.markdown("</div>", unsafe_allow_html=True)
 
