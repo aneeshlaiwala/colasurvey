@@ -40,10 +40,24 @@ st.markdown("""
         margin: 1rem 0;
         border-radius: 0.5rem;
     }
+    .insight-box {
+        background-color: #f8f9fa;
+        border-left: 5px solid #0066cc;
+        padding: 1.2rem;
+        margin: 1rem 0;
+        border-radius: 0.5rem;
+    }
+    .insight-title {
+        font-weight: bold;
+        color: #0066cc;
+        font-size: 1.2rem;
+        margin-bottom: 0.8rem;
+    }
     .summary-title {
         font-weight: bold;
         color: #007bff;
         margin-bottom: 0.5rem;
+        font-size: 1.2rem;
     }
     .filter-box {
         background-color: #f0f0f0;
@@ -186,18 +200,25 @@ if section == "Executive Dashboard Summary":
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        # Calculate NPS
-        promoters = filtered_df[filtered_df['NPS_Score'] >= 9].shape[0]
-        detractors = filtered_df[filtered_df['NPS_Score'] <= 6].shape[0]
-        total = filtered_df['NPS_Score'].count()
-        nps_score = int(((promoters / total) - (detractors / total)) * 100) if total > 0 else 0
-        
-        # Display NPS metric
-        st.metric(
-            label="Overall NPS Score",
-            value=nps_score,
-            delta=None
-        )
+        # Calculate NPS - Correct formula: % Promoters - % Detractors
+        if not filtered_df.empty:
+            promoters = filtered_df[filtered_df['NPS_Score'] >= 9].shape[0]
+            detractors = filtered_df[filtered_df['NPS_Score'] <= 6].shape[0]
+            total = filtered_df['NPS_Score'].count()
+            
+            # Calculate percentages first, then subtract
+            promoters_pct = (promoters / total) if total > 0 else 0
+            detractors_pct = (detractors / total) if total > 0 else 0
+            nps_score = int((promoters_pct - detractors_pct) * 100)
+            
+            # Display NPS metric
+            st.metric(
+                label="Overall NPS Score",
+                value=nps_score,
+                delta=None
+            )
+        else:
+            st.metric(label="Overall NPS Score", value="No data", delta=None)
     
     with col2:
         # Top brand
@@ -233,8 +254,8 @@ if section == "Executive Dashboard Summary":
     
     # Executive Summary Box
     st.markdown("""
-    <div class='summary-box'>
-        <div class='summary-title'>EXECUTIVE SUMMARY</div>
+    <div class='insight-box'>
+        <div class='insight-title'>EXECUTIVE SUMMARY</div>
         <p>This analysis examines preferences, behaviors, and satisfaction levels of 1,000 cola consumers. 
         The survey captured demographic information, consumption patterns, brand preferences, and ratings across 
         various product attributes.</p>
@@ -264,8 +285,8 @@ if section == "Executive Dashboard Summary":
     
     with col1:
         st.markdown("""
-        <div class='summary-box'>
-            <div class='summary-title'>DEMOGRAPHIC INSIGHTS</div>
+        <div class='insight-box'>
+            <div class='insight-title'>DEMOGRAPHIC INSIGHTS</div>
             <p>The cola consumer base shows distinct preferences by age group and gender:</p>
             <ul>
                 <li>Younger consumers (18-34) show higher preference for major brands</li>
@@ -276,8 +297,8 @@ if section == "Executive Dashboard Summary":
         """, unsafe_allow_html=True)
         
         st.markdown("""
-        <div class='summary-box'>
-            <div class='summary-title'>BRAND METRICS INSIGHTS</div>
+        <div class='insight-box'>
+            <div class='insight-title'>BRAND METRICS INSIGHTS</div>
             <p>Brand performance shows clear patterns in consumer behavior:</p>
             <ul>
                 <li>Major brands dominate market share with loyal consumer bases</li>
@@ -288,8 +309,8 @@ if section == "Executive Dashboard Summary":
         """, unsafe_allow_html=True)
         
         st.markdown("""
-        <div class='summary-box'>
-            <div class='summary-title'>ATTRIBUTE RATING INSIGHTS</div>
+        <div class='insight-box'>
+            <div class='insight-title'>ATTRIBUTE RATING INSIGHTS</div>
             <p>Product attributes show varying importance to consumers:</p>
             <ul>
                 <li>Taste remains the most critical attribute across all segments</li>
@@ -301,8 +322,8 @@ if section == "Executive Dashboard Summary":
     
     with col2:
         st.markdown("""
-        <div class='summary-box'>
-            <div class='summary-title'>REGRESSION ANALYSIS INSIGHTS</div>
+        <div class='insight-box'>
+            <div class='insight-title'>REGRESSION ANALYSIS INSIGHTS</div>
             <p>The drivers of NPS (loyalty) are clearly identified:</p>
             <ul>
                 <li>Taste is the strongest predictor of consumer loyalty</li>
@@ -313,8 +334,8 @@ if section == "Executive Dashboard Summary":
         """, unsafe_allow_html=True)
         
         st.markdown("""
-        <div class='summary-box'>
-            <div class='summary-title'>DECISION TREE INSIGHTS</div>
+        <div class='insight-box'>
+            <div class='insight-title'>DECISION TREE INSIGHTS</div>
             <p>Consumer loyalty can be predicted by key decision factors:</p>
             <ul>
                 <li>High taste ratings are the primary predictor of promoters</li>
@@ -325,8 +346,8 @@ if section == "Executive Dashboard Summary":
         """, unsafe_allow_html=True)
         
         st.markdown("""
-        <div class='summary-box'>
-            <div class='summary-title'>CLUSTER ANALYSIS INSIGHTS</div>
+        <div class='insight-box'>
+            <div class='insight-title'>CLUSTER ANALYSIS INSIGHTS</div>
             <p>Three distinct consumer segments with different priorities:</p>
             <ul>
                 <li>Taste Enthusiasts (32%): Focus on sensory experience</li>
@@ -340,7 +361,8 @@ if section == "Executive Dashboard Summary":
     st.subheader("Strategic Recommendations")
     
     st.markdown("""
-    <div class='summary-box'>
+    <div class='insight-box'>
+        <div class='insight-title'>STRATEGIC RECOMMENDATIONS</div>
         <p><strong>Product Development:</strong> Focus on taste improvement as the primary driver of satisfaction.
         Consider different sweetness/fizziness profiles for different segments.</p>
         
@@ -454,8 +476,8 @@ elif section == "Demographic Profile":
     
     # Executive summary for demographic section with dynamic content
     st.markdown(f"""
-    <div class='summary-box'>
-        <div class='summary-title'>DEMOGRAPHIC PROFILE - EXECUTIVE SUMMARY</div>
+    <div class='insight-box'>
+        <div class='insight-title'>DEMOGRAPHIC PROFILE - EXECUTIVE SUMMARY</div>
         <p>The demographic analysis of cola consumers reveals distinct patterns across age groups, gender, and income levels:</p>
         
         <p><strong>Key Findings:</strong></p>
@@ -594,8 +616,8 @@ elif section == "Brand Metrics":
     
     # Executive summary for brand metrics section with dynamic content
     st.markdown(f"""
-    <div class='summary-box'>
-        <div class='summary-title'>BRAND METRICS - EXECUTIVE SUMMARY</div>
+    <div class='insight-box'>
+        <div class='insight-title'>BRAND METRICS - EXECUTIVE SUMMARY</div>
         <p>The analysis of brand metrics provides insights into consumer preferences and consumption patterns:</p>
         
         <p><strong>Key Findings:</strong></p>
@@ -679,10 +701,12 @@ elif section == "Basic Attribute Scores":
     
     with col1:
         # NPS by Gender
-        if not filtered_df.empty and len(filtered_df['Gender'].unique()) > 1:
+        if not filtered_df.empty:
+        # Calculate NPS by Gender
+        if len(filtered_df['Gender'].unique()) > 1:
             nps_by_gender = filtered_df.groupby('Gender').apply(
                 lambda x: 
-                ((x['NPS_Score'] >= 9).sum() - (x['NPS_Score'] <= 6).sum()) / x['NPS_Score'].count() * 100
+                ((x['NPS_Score'] >= 9).sum() / len(x) - (x['NPS_Score'] <= 6).sum() / len(x)) * 100
             ).sort_values()
             
             fig = px.bar(
@@ -705,7 +729,7 @@ elif section == "Basic Attribute Scores":
         if not filtered_df.empty and len(filtered_df['Age_Group'].unique()) > 1:
             nps_by_age = filtered_df.groupby('Age_Group').apply(
                 lambda x: 
-                ((x['NPS_Score'] >= 9).sum() - (x['NPS_Score'] <= 6).sum()) / x['NPS_Score'].count() * 100
+                ((x['NPS_Score'] >= 9).sum() / len(x) - (x['NPS_Score'] <= 6).sum() / len(x)) * 100
             ).sort_index()
             
             fig = px.bar(
@@ -739,8 +763,8 @@ elif section == "Basic Attribute Scores":
     
     # Executive summary for attribute scores section with dynamic content
     st.markdown(f"""
-    <div class='summary-box'>
-        <div class='summary-title'>ATTRIBUTE SCORES - EXECUTIVE SUMMARY</div>
+    <div class='insight-box'>
+        <div class='insight-title'>ATTRIBUTE SCORES - EXECUTIVE SUMMARY</div>
         <p>The analysis of product attribute ratings reveals priorities and satisfaction drivers:</p>
         
         <p><strong>Key Findings:</strong></p>
@@ -854,8 +878,8 @@ elif section == "Regression Analysis":
         
         # Formal Executive Summary Box
         st.markdown("""
-        <div class='summary-box'>
-            <div class='summary-title'>REGRESSION ANALYSIS - EXECUTIVE SUMMARY</div>
+        <div class='insight-box'>
+            <div class='insight-title'>REGRESSION ANALYSIS - EXECUTIVE SUMMARY</div>
             <p>The regression analysis identifies the key drivers of consumer loyalty as measured by NPS:</p>
             
             <p><strong>Key Findings:</strong></p>
@@ -1030,8 +1054,8 @@ elif section == "Decision Tree Analysis":
         
         # Decision Tree Executive Summary
         st.markdown(f"""
-        <div class='summary-box'>
-            <div class='summary-title'>DECISION TREE ANALYSIS - EXECUTIVE SUMMARY</div>
+        <div class='insight-box'>
+            <div class='insight-title'>DECISION TREE ANALYSIS - EXECUTIVE SUMMARY</div>
             <p>The decision tree analysis identifies the critical decision pathways that determine consumer loyalty:</p>
             
             <p><strong>Key Findings:</strong></p>
@@ -1193,8 +1217,8 @@ elif section == "Cluster Analysis":
         
         # Formal Executive Summary Box
         st.markdown("""
-        <div class='summary-box'>
-            <div class='summary-title'>CLUSTER ANALYSIS - EXECUTIVE SUMMARY</div>
+        <div class='insight-box'>
+            <div class='insight-title'>CLUSTER ANALYSIS - EXECUTIVE SUMMARY</div>
             <p>The cluster analysis identified three distinct consumer segments based on their preferences and priorities:</p>
             
             <p><strong>Consumer Segments:</strong></p>
@@ -1224,8 +1248,8 @@ elif section == "View & Download Full Dataset":
     
     # Executive summary for data section
     st.markdown("""
-    <div class='summary-box'>
-        <div class='summary-title'>DATASET OVERVIEW - EXECUTIVE SUMMARY</div>
+    <div class='insight-box'>
+        <div class='insight-title'>DATASET OVERVIEW - EXECUTIVE SUMMARY</div>
         <p>This section provides access to the complete dataset with all analysis variables:</p>
         
         <p><strong>Dataset Features:</strong></p>
