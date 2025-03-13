@@ -159,7 +159,8 @@ if 'filters' not in st.session_state:
         'gender': None, 
         'income': None, 
         'cluster': None
-########################################3    }
+    }
+##########################################
 if st.button("Clear Filters"):
         # Reset all filters to None
         st.session_state.filters = {
