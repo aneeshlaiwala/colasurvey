@@ -242,33 +242,7 @@ if section == "Executive Dashboard Summary":
         else:
             st.metric(label="Highest Rated Attribute", value="No data", delta=None)
     
-    # Executive Summary Box
-    st.markdown("""
-    <div class='insight-box'>
-        <div class='insight-title'>EXECUTIVE SUMMARY</div>
-        <p>This analysis examines preferences, behaviors, and satisfaction levels of 1,000 cola consumers. 
-        The survey captured demographic information, consumption patterns, brand preferences, and ratings across 
-        various product attributes.</p>
-        
-        <p><strong>Key Findings:</strong></p>
-        <ul>
-            <li>Market is dominated by major brands with varying loyalty across segments</li>
-            <li>Three distinct consumer segments identified: Taste Enthusiasts, Brand Loyalists, and Value Seekers</li>
-            <li>Taste and Brand Reputation are the strongest drivers of consumer loyalty (NPS)</li>
-            <li>Overall NPS score indicates room for improvement in consumer satisfaction</li>
-        </ul>
-        
-        <p><strong>Strategic Recommendations:</strong></p>
-        <ul>
-            <li>Focus product development on taste improvement as the primary satisfaction driver</li>
-            <li>Develop targeted marketing for each consumer segment based on their priorities</li>
-            <li>Invest in brand reputation building to drive long-term loyalty</li>
-            <li>Monitor NPS by segment to track loyalty improvements over time</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Top insights from each section
+    # Top insights from each section - THIS IS THE WORKING SECTION TO KEEP
     st.subheader("Key Insights by Analysis Section")
     
     col1, col2 = st.columns(2)
@@ -346,27 +320,6 @@ if section == "Executive Dashboard Summary":
             </ul>
         </div>
         """, unsafe_allow_html=True)
-    
-    # Strategic recommendations
-    st.subheader("Strategic Recommendations")
-    
-    st.markdown("""
-    <div class='insight-box'>
-        <div class='insight-title'>STRATEGIC RECOMMENDATIONS</div>
-        <p><strong>Product Development:</strong> Focus on taste improvement as the primary driver of satisfaction.
-        Consider different sweetness/fizziness profiles for different segments.</p>
-        
-        <p><strong>Marketing Strategy:</strong> Develop targeted messaging for each consumer segment:
-        emphasize sensory experience for Taste Enthusiasts, leverage brand heritage for Brand Loyalists,
-        and highlight value proposition for Value Seekers.</p>
-        
-        <p><strong>Brand Management:</strong> Invest in brand reputation as it strongly influences loyalty.
-        Address key satisfaction drivers for each segment to improve overall NPS.</p>
-        
-        <p><strong>Customer Experience:</strong> Monitor NPS by segment to track loyalty improvements.
-        Use decision tree insights to identify consumers at risk of becoming detractors.</p>
-    </div>
-    """, unsafe_allow_html=True)
 
 # =======================
 # DEMOGRAPHIC PROFILE
@@ -442,54 +395,6 @@ elif section == "Demographic Profile":
             st.plotly_chart(fig)
         else:
             st.info("Insufficient data for Age Group by Gender analysis with current filters.")
-    
-    # Prepare dynamic summary
-    age_insight = "N/A"
-    gender_insight = "N/A"
-    income_insight = "N/A"
-    
-    if not filtered_df.empty:
-        # Get top age group
-        top_age_group = filtered_df['Age_Group'].value_counts(normalize=True).idxmax()
-        top_age_pct = filtered_df['Age_Group'].value_counts(normalize=True).max() * 100
-        age_insight = f"{top_age_group} ({top_age_pct:.1f}%)"
-        
-        # Get gender distribution
-        if len(filtered_df['Gender'].unique()) > 1:
-            top_gender = filtered_df['Gender'].value_counts(normalize=True).idxmax()
-            top_gender_pct = filtered_df['Gender'].value_counts(normalize=True).max() * 100
-            gender_insight = f"predominately {top_gender} ({top_gender_pct:.1f}%)"
-        else:
-            gender_insight = f"exclusively {filtered_df['Gender'].iloc[0]}"
-        
-        # Get income pattern
-        top_income = filtered_df['Income_Level'].value_counts(normalize=True).idxmax()
-        top_income_pct = filtered_df['Income_Level'].value_counts(normalize=True).max() * 100
-        income_insight = f"{top_income} ({top_income_pct:.1f}%)"
-    
-    # Executive summary for demographic section with dynamic content
-    st.markdown(f"""
-    <div class='insight-box'>
-        <div class='insight-title'>DEMOGRAPHIC PROFILE - EXECUTIVE SUMMARY</div>
-        <p>The demographic analysis of cola consumers reveals distinct patterns across age groups, gender, and income levels:</p>
-        
-        <p><strong>Key Findings:</strong></p>
-        <ul>
-            <li>Age distribution shows prevalence in {age_insight}</li>
-            <li>Gender split indicates {gender_insight}</li>
-            <li>Income level distribution suggests predominance of {income_insight}</li>
-            <li>There are noticeable correlations between demographics and preferences</li>
-        </ul>
-        
-        <p><strong>Strategic Implications:</strong></p>
-        <ul>
-            <li>Target marketing efforts to align with demographic composition</li>
-            <li>Consider demographic factors in product development and positioning</li>
-            <li>Address potential gaps in market penetration across demographic segments</li>
-            <li>Monitor demographic shifts for early identification of market trends</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
 
 # =======================
 # BRAND METRICS
@@ -568,71 +473,6 @@ elif section == "Brand Metrics":
             st.plotly_chart(fig)
         else:
             st.info("No data available for Satisfaction analysis with current filters.")
-    
-    # Prepare dynamic summary
-    dominant_brands = "N/A"
-    main_occasions = "N/A"
-    frequency_patterns = "N/A"
-    satisfaction_trends = "N/A"
-    
-    if not filtered_df.empty:
-        # Get dominant brands
-        top_brands = filtered_df['Most_Often_Consumed_Brand'].value_counts(normalize=True).nlargest(2)
-        dominant_brands = ", ".join([f"{idx} ({val:.1f}%)" for idx, val in top_brands.items()])
-        
-        # Get main occasions
-        top_occasions = filtered_df['Occasions_of_Buying'].value_counts(normalize=True).nlargest(2)
-        main_occasions = ", ".join([f"{idx} ({val:.1f}%)" for idx, val in top_occasions.items()])
-        
-        # Get frequency patterns
-        top_frequency = filtered_df['Frequency_of_Consumption'].value_counts(normalize=True).nlargest(1).index[0]
-        top_freq_pct = filtered_df['Frequency_of_Consumption'].value_counts(normalize=True).max() * 100
-        frequency_patterns = f"primarily {top_frequency} consumption ({top_freq_pct:.1f}%)"
-        
-        # Get satisfaction trends
-        satisfaction_dict = {'Very Satisfied': 5, 'Satisfied': 4, 'Neutral': 3, 'Dissatisfied': 2, 'Very Dissatisfied': 1}
-        try:
-            # Map satisfaction to numeric values for calculating average
-            filtered_df['Satisfaction_Numeric'] = filtered_df['Satisfaction_Level'].map(satisfaction_dict)
-            avg_satisfaction = filtered_df['Satisfaction_Numeric'].mean()
-            
-            # Categorize average satisfaction
-            if avg_satisfaction >= 4.5:
-                satisfaction_trends = "very high satisfaction"
-            elif avg_satisfaction >= 3.5:
-                satisfaction_trends = "positive satisfaction"
-            elif avg_satisfaction >= 2.5:
-                satisfaction_trends = "neutral satisfaction"
-            else:
-                satisfaction_trends = "low satisfaction"
-                
-            satisfaction_trends += f" (average score: {avg_satisfaction:.2f}/5)"
-        except:
-            satisfaction_trends = "varied satisfaction levels"
-    
-    # Executive summary for brand metrics section with dynamic content
-    st.markdown(f"""
-    <div class='insight-box'>
-        <div class='insight-title'>BRAND METRICS - EXECUTIVE SUMMARY</div>
-        <p>The analysis of brand metrics provides insights into consumer preferences and consumption patterns:</p>
-        
-        <p><strong>Key Findings:</strong></p>
-        <ul>
-            <li>Market share is dominated by {dominant_brands}</li>
-            <li>Primary consumption occasions include {main_occasions}</li>
-            <li>Consumption frequency patterns reveal {frequency_patterns}</li>
-            <li>Overall satisfaction levels indicate {satisfaction_trends}</li>
-        </ul>
-        
-        <p><strong>Strategic Implications:</strong></p>
-        <ul>
-            <li>Focus marketing on key consumption occasions to maximize relevance</li>
-            <li>Address frequency patterns in product packaging and distribution</li>
-            <li>Leverage satisfaction drivers to strengthen brand positioning</li>
-            <li>Consider occasion-specific product variants or marketing campaigns</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
 
 # =======================
 # BASIC ATTRIBUTE SCORES
@@ -788,44 +628,6 @@ elif section == "Basic Attribute Scores":
                 )
                 fig.update_traces(textposition='outside')
                 st.plotly_chart(fig)
-    
-    # Prepare dynamic summary
-    top_attributes = "N/A"
-    bottom_attributes = "N/A"
-    
-    if not filtered_df.empty:
-        # Get top attributes
-        sorted_attrs = filtered_df[attributes].mean().sort_values(ascending=False)
-        top_attributes = ", ".join([f"{attr.replace('_Rating', '')} ({val:.2f}/5)" 
-                                  for attr, val in sorted_attrs.head(2).items()])
-        
-        # Get bottom attributes
-        bottom_attributes = ", ".join([f"{attr.replace('_Rating', '')} ({val:.2f}/5)" 
-                                     for attr, val in sorted_attrs.tail(2).items()])
-    
-    # Executive summary for attribute scores section with dynamic content
-    st.markdown(f"""
-    <div class='insight-box'>
-        <div class='insight-title'>ATTRIBUTE SCORES - EXECUTIVE SUMMARY</div>
-        <p>The analysis of product attribute ratings reveals priorities and satisfaction drivers:</p>
-        
-        <p><strong>Key Findings:</strong></p>
-        <ul>
-            <li>The highest-rated attributes are {top_attributes}</li>
-            <li>The lowest-rated attributes are {bottom_attributes}</li>
-            <li>NPS scores vary significantly across demographic segments</li>
-            <li>Gender and age show notable influence on attribute preferences</li>
-        </ul>
-        
-        <p><strong>Strategic Implications:</strong></p>
-        <ul>
-            <li>Focus product improvement efforts on lower-rated attributes</li>
-            <li>Leverage strengths in marketing communications</li>
-            <li>Address NPS variations with targeted loyalty initiatives</li>
-            <li>Consider segment-specific product variants to address preference variations</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
 
 # =======================
 # REGRESSION ANALYSIS
@@ -920,54 +722,6 @@ elif section == "Regression Analysis":
                     st.write(f"- {row['Feature'].replace('_Rating', '')}: {row['Coefficient']}")
             else:
                 st.write("No significant negative factors found.")
-        
-        # Formal Executive Summary Box
-        st.markdown("""
-        <div class='insight-box'>
-            <div class='insight-title'>REGRESSION ANALYSIS - EXECUTIVE SUMMARY</div>
-            <p>The regression analysis identifies the key drivers of consumer loyalty as measured by NPS:</p>
-            
-            <p><strong>Key Findings:</strong></p>
-            <ul>
-        """, unsafe_allow_html=True)
-        
-        # Model quality
-        st.markdown(f"<li>The regression model explains <strong>{model.rsquared:.1%}</strong> of the variation in NPS scores</li>", unsafe_allow_html=True)
-        
-        # Model significance
-        if model.f_pvalue < 0.05:
-            st.markdown("<li>The model is <strong>statistically significant</strong> (p < 0.05)</li>", unsafe_allow_html=True)
-        else:
-            st.markdown("<li>The model is <strong>not statistically significant</strong> (p > 0.05)</li>", unsafe_allow_html=True)
-        
-        # Model predictive power
-        if model.rsquared < 0.3:
-            st.markdown("<li>The model has relatively low predictive power, suggesting additional factors influence NPS</li>", unsafe_allow_html=True)
-        
-        # Important drivers
-        significant_features = coef_df[(coef_df['Significant'] == True) & (coef_df['Feature'] != 'const')]
-        if not significant_features.empty:
-            most_important = significant_features.iloc[0]['Feature'].replace('_Rating', '')
-            st.markdown(f"<li>The most influential factor is <strong>{most_important}</strong></li>", unsafe_allow_html=True)
-            
-            if len(significant_features) > 1:
-                secondary_factors = ', '.join([f.replace('_Rating', '') for f in significant_features.iloc[1:3]['Feature'].tolist()])
-                st.markdown(f"<li>Secondary factors include: <strong>{secondary_factors}</strong></li>", unsafe_allow_html=True)
-        else:
-            st.markdown("<li>No individual factors show statistical significance in predicting NPS scores</li>", unsafe_allow_html=True)
-        
-        st.markdown("""
-            </ul>
-            
-            <p><strong>Strategic Implications:</strong></p>
-            <ul>
-                <li>Focus improvement efforts on the attributes with strongest positive coefficients</li>
-                <li>Address negative drivers to minimize their impact on consumer loyalty</li>
-                <li>Use regression insights to prioritize product development initiatives</li>
-                <li>Consider the balance of attribute improvements against implementation costs</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
 
 # =======================
 # DECISION TREE ANALYSIS
@@ -1099,30 +853,6 @@ elif section == "Decision Tree Analysis":
                 st.write(f"- Also influenced by: {second_feature.replace('_Rating', '')}")
             
             st.write("- These consumers are least likely to recommend your brand")
-        
-        # Decision Tree Executive Summary
-        st.markdown(f"""
-        <div class='insight-box'>
-            <div class='insight-title'>DECISION TREE ANALYSIS - EXECUTIVE SUMMARY</div>
-            <p>The decision tree analysis identifies the critical decision pathways that determine consumer loyalty:</p>
-            
-            <p><strong>Key Findings:</strong></p>
-            <ul>
-                <li>The model achieved <strong>{test_accuracy:.1%}</strong> accuracy in predicting NPS categories</li>
-                <li>The most important classification factor is <strong>{top_feature.replace('_Rating', '')}</strong></li>
-                <li>Clear decision rules identify paths to promoter vs. detractor status</li>
-                <li>Customer segments show distinct loyalty patterns based on attribute preferences</li>
-            </ul>
-            
-            <p><strong>Strategic Implications:</strong></p>
-            <ul>
-                <li>Focus improvement efforts on the top decision factors identified in the tree</li>
-                <li>Segment customers based on these decision rules for targeted marketing</li>
-                <li>Address specific pain points for potential detractors</li>
-                <li>Use decision paths to create customer journey optimization strategies</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
 
 # =======================
 # CLUSTER ANALYSIS
@@ -1265,31 +995,6 @@ elif section == "Cluster Analysis":
                     st.write(f"⚠️ Weakest attribute: **{lowest_attribute.replace('_Rating', '')}**")
                 else:
                     st.write("No data available for this cluster with current filters.")
-        
-        # Formal Executive Summary Box
-        st.markdown("""
-        <div class='insight-box'>
-            <div class='insight-title'>CLUSTER ANALYSIS - EXECUTIVE SUMMARY</div>
-            <p>The cluster analysis identified three distinct consumer segments based on their preferences and priorities:</p>
-            
-            <p><strong>Consumer Segments:</strong></p>
-            <ul>
-                <li><strong>Taste Enthusiasts:</strong> Prioritize taste and flavor experience above all. More focused on sensory aspects and less concerned with brand or price.</li>
-                <li><strong>Brand Loyalists:</strong> Place high importance on brand reputation and packaging. Likely to be loyal to specific brands and less price-sensitive.</li>
-                <li><strong>Value Seekers:</strong> More price-conscious and practical. Look for a good balance between price and quality, with availability being an important factor.</li>
-            </ul>
-            
-            <p><strong>Strategic Implications:</strong></p>
-            <ul>
-                <li>Develop targeted product offerings for each segment</li>
-                <li>Customize marketing messages to address segment-specific priorities</li>
-                <li>Allocate marketing resources based on segment size and potential</li>
-                <li>Monitor segment evolution over time to adapt strategies</li>
-            </ul>
-            
-            <p>Each segment has distinct demographic characteristics and consumption patterns, offering opportunities for targeted marketing and product development strategies.</p>
-        </div>
-        """, unsafe_allow_html=True)
 
 # =======================
 # VIEW & DOWNLOAD FULL DATASET
@@ -1299,31 +1004,6 @@ elif section == "View & Download Full Dataset":
     
     # Show dataset with cluster information
     st.dataframe(filtered_df)
-    
-    # Executive summary for data section
-    st.markdown("""
-    <div class='insight-box'>
-        <div class='insight-title'>DATASET OVERVIEW - EXECUTIVE SUMMARY</div>
-        <p>This section provides access to the complete dataset with all analysis variables:</p>
-        
-        <p><strong>Dataset Features:</strong></p>
-        <ul>
-            <li>1,000 survey respondents with demographic information</li>
-            <li>Brand preferences and consumption patterns</li>
-            <li>Attribute ratings across 7 key product dimensions</li>
-            <li>NPS scores indicating consumer loyalty</li>
-            <li>Cluster assignments from segmentation analysis</li>
-        </ul>
-        
-        <p><strong>Applications:</strong></p>
-        <ul>
-            <li>Download data for further custom analysis</li>
-            <li>Export filtered segments for targeted marketing initiatives</li>
-            <li>Use cluster information for consumer targeting</li>
-            <li>Analyze raw data to identify additional insights</li>
-        </ul>
-    </div>
-    """, unsafe_allow_html=True)
     
     # Download options
     col1, col2 = st.columns(2)
